@@ -20,13 +20,21 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
     "babel-jest": "23.4.2",
     "babel-plugin-flow-react-proptypes": "^24.1.1",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-react-native": "4.0.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
     "flow-bin": "^0.67.1",
     "jest": "23.5.0",
+    "prettier": "^1.14.2",
     "react-test-renderer": "16.3.1"
   },
   "jest": {
