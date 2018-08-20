@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 import { Home } from 'screens';
 import { Settings } from 'screens';

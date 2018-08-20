@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 import { StackViewTransitionConfigs } from 'react-navigation';
 import type { NavigationTransitionProps } from 'react-navigation';

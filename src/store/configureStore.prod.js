@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 import { createStore } from 'redux';
 import { compose } from 'redux';

@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 import { createStackNavigator } from 'react-navigation';
 import { routes } from './routes';

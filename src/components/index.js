@@ -3,4 +3,3 @@
  *
  * @flow
  */
-'use strict';

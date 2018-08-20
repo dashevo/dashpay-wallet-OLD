@@ -3,6 +3,5 @@
  *
  * @flow
  */
-'use strict';
 
 export { default as Settings } from './Settings';

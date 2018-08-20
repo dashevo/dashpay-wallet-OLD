@@ -1,7 +1,6 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
-'use strict';
 
 import React from 'react';
 import { Provider } from 'react-redux';

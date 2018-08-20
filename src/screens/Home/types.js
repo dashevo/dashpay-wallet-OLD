@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 import type { Element } from 'react';
 import type { NavigationScreenProp } from 'react-navigation';

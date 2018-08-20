@@ -3,7 +3,6 @@
  *
  * @flow
  */
-'use strict';
 
 export * from './Home';
 export * from './Settings';
