@@ -4,9 +4,11 @@
  * @flow
  */
 
-import { StackViewTransitionConfigs } from 'react-navigation';
-import type { NavigationTransitionProps } from 'react-navigation';
-import type { TransitionConfig } from 'react-navigation';
+import {
+  StackViewTransitionConfigs,
+  NavigationTransitionProps,
+  TransitionConfig
+} from 'react-navigation';
 
 const SlideFromRight = StackViewTransitionConfigs.SlideFromRightIOS;
 const SlideFromBottom = StackViewTransitionConfigs.ModalSlideFromBottomIOS;
@@ -19,7 +21,9 @@ function transitionConfig(
   return isModal ? SlideFromBottom : SlideFromRight;
 }
 
-export const config = {
+const config = {
   headerMode: 'none',
   transitionConfig
 };
+
+export default config;

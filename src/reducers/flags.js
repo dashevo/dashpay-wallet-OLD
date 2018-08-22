@@ -4,4 +4,6 @@
  * @flow
  */
 
-export const flags = () => ({});
+const flags = () => ({});
+
+export default flags;

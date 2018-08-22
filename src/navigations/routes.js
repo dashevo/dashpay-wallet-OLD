@@ -4,10 +4,9 @@
  * @flow
  */
 
-import { Home } from 'screens';
-import { Settings } from 'screens';
+import { Home, Settings } from 'screens';
 
-export const routes = {
+const routes = {
   Home: {
     screen: Home
   },
@@ -15,3 +14,5 @@ export const routes = {
     screen: Settings
   }
 };
+
+export default routes;

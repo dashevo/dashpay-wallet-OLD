@@ -5,8 +5,8 @@
  */
 
 import { createStackNavigator } from 'react-navigation';
-import { routes } from './routes';
-import { config } from './config';
+import routes from './routes';
+import config from './config';
 
 const Navigator = createStackNavigator(routes, config);
 

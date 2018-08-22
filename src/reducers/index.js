@@ -5,6 +5,8 @@
  */
 
 import { combineReducers } from 'redux';
-import { flags } from './flags';
+import flags from './flags';
 
-export const reducers = combineReducers({ flags });
+const reducers = combineReducers({ flags });
+
+export default reducers;

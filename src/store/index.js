@@ -4,4 +4,4 @@
  * @flow
  */
 
-export { default as configureStore } from './configureStore';
+export { default } from './configureStore';
