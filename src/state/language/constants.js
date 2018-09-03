@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export * from './defaults';
+export const CHANGE_LOCALE = 'CHANGE_LOCALE';

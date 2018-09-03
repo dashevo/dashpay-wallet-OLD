@@ -3,7 +3,13 @@
  *
  * @flow
  */
+import 'intl'; // TEMP: polyfill
+import 'intl/locale-data/jsonp/en';
 import React from 'react';
+import { StoreProvider } from 'containers';
+import { LanguageProvider } from 'containers';
+import configureStore from 'state';
+import translations from 'translations';
 import Navigator from 'navigator';
 
 export default function DashPay() {
@@ -11,7 +17,13 @@ export default function DashPay() {
 
   return class Setup extends React.Component {
     render() {
-      return <Navigator />;
+      return (
+        <StoreProvider store={configureStore()}>
+          <LanguageProvider translations={translations}>
+            <Navigator />
+          </LanguageProvider>
+        </StoreProvider>
+      );
     }
   };
 }

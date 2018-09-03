@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export * from './defaults';
+export { default as StoreProvider } from './StoreProvider';

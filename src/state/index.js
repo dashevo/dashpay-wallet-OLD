@@ -3,5 +3,15 @@
  *
  * @flow
  */
+import { combineReducers } from 'redux';
+import { createStore } from 'redux';
+import language from './language';
+export * from './language';
 
-export { default } from './configureStore';
+const rootReducer = combineReducers({
+  language
+});
+
+const configureStore = () => createStore(rootReducer);
+
+export default configureStore;

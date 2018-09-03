@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export * from './defaults';
+export const selectLanguage = state => state.language;
