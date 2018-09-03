@@ -3,6 +3,4 @@
  *
  * @flow
  */
-import DashPay from './app';
-
-export default DashPay;
+export { default } from './Navigator';

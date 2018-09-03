@@ -3,5 +3,5 @@
  *
  * @flow
  */
-
-export { default as Settings } from './Settings';
+export * from './SplashScreen';
+export * from './HomeScreen';

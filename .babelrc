@@ -23,14 +23,12 @@
         "root": ["./src"],
         "alias": {
           "actions": "./src/actions",
-          "api": "./src/api",
-          "assets": "./src/assets",
           "components": "./src/components",
           "constants": "./src/constants",
-          "navigations": "./src/navigations",
-          "reducers": "./src/reducers",
-          "screens": "./src/screens",
-          "store": "./src/store",
+          "containers": "./src/containers",
+          "navigator": "./src/navigator",
+          "state": "./src/state",
+          "translations": "./src/translations",
           "utilities": "./src/utilities"
         }
       }

@@ -3,7 +3,6 @@
  *
  * @flow
  */
-
 import {
   StackViewTransitionConfigs,
   NavigationTransitionProps,

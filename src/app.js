@@ -1,11 +1,17 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
  */
-
 import React from 'react';
-import Navigator from 'navigations';
+import Navigator from 'navigator';
 
-const App = (props) =>
-  <Navigator {...props} />
+export default function DashPay() {
+  // TODO: We have a lot to do here.
 
-export default App;
+  return class Setup extends React.Component {
+    render() {
+      return <Navigator />;
+    }
+  };
+}

@@ -3,7 +3,4 @@
  *
  * @flow
  */
-
-const flags = () => ({});
-
-export default flags;
+export { default as SplashScreen } from './SplashScreen';

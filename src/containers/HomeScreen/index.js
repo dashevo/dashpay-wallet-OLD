@@ -3,5 +3,4 @@
  *
  * @flow
  */
-
-export { default } from './Navigator';
+export { default as HomeScreen } from './HomeScreen';

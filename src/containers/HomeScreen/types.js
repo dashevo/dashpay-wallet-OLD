@@ -3,13 +3,8 @@
  *
  * @flow
  */
-
 import type { Element } from 'react';
-import type { NavigationScreenProp } from 'react-navigation';
-
 export type ReactElement = Element<*>;
 
-export type Props = {
-  navigation: NavigationScreenProp
-};
+export type Props = {};
 export type State = {};
