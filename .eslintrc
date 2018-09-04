@@ -8,7 +8,7 @@
     "react"
   ],
   "extends": [
-    "airbnb",
+    "eslint:recommended",
     "prettier",
     "prettier/flowtype",
     "prettier/react"
