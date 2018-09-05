@@ -8,11 +8,11 @@ import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 
 const routes = {
-  Splash: {
-    screen: SplashScreen
-  },
   Home: {
     screen: HomeScreen
+  },
+  Splash: {
+    screen: SplashScreen
   }
 };
 

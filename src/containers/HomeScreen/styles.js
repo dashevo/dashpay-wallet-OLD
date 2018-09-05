@@ -10,8 +10,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: THEMES.vivid.background,
+    justifyContent: 'flex-start',
+    backgroundColor: THEMES.vivid.background
+  },
+  logo: {
+    width: '40%',
+    height: '20%',
+    resizeMode: 'contain',
   },
   heading: {
     color: THEMES.vivid.foreground,
