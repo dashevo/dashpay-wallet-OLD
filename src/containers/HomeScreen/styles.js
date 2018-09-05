@@ -18,10 +18,13 @@ const styles = StyleSheet.create({
     height: '20%',
     resizeMode: 'contain',
   },
-  heading: {
-    color: THEMES.vivid.foreground,
-    fontSize: 24,
-    textAlign: 'center'
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 50,
+    width: 300,
+    minWidth: '50%'
   }
 });
 
