@@ -4,3 +4,4 @@
  * @flow
  */
 export * from './defaults';
+export * from './theming';

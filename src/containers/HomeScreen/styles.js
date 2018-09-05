@@ -4,15 +4,17 @@
  * @flow
  */
 import { StyleSheet } from 'react-native';
+import { THEMES } from 'constants/theming';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: THEMES.vivid.background,
   },
   heading: {
-    color: '#333333',
+    color: THEMES.vivid.foreground,
     fontSize: 24,
     textAlign: 'center'
   }
