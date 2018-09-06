@@ -9,14 +9,14 @@ import { THEMES } from 'constants/theming';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'flex-start',
-    backgroundColor: THEMES.vivid.background
+    backgroundColor: THEMES.vivid.background,
+    justifyContent: 'center',
+    flex: 1
   },
   logo: {
-    width: '40%',
     height: '20%',
     resizeMode: 'contain',
+    width: '40%'
   },
   buttonContainer: {
     flexDirection: 'row',

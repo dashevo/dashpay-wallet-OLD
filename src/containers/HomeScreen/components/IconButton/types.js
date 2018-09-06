@@ -4,13 +4,10 @@
  * @flow
  */
 import type { Element } from 'react';
-import type { Image } from 'react-native';
-
 export type ReactElement = Element<*>;
 
 export type Props = {
-  source: Image.propTypes.source,
+  source: number,
   text: string,
-  action: () => void
+  action: Function
 };
-export type State = {};
