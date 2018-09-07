@@ -10,6 +10,6 @@ import type { Props } from './types';
 import type { ReactElement } from './types';
 
 const Avatar = ({ source }: Props): ReactElement =>
-  <Image source={{ uri:source }} style={ styles.Avatar } />;
+  <Image source={ source } style={ styles.Avatar } />;
 
 export default Avatar;
