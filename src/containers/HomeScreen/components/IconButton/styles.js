@@ -7,20 +7,20 @@ import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants/theming';
 
 const styles = StyleSheet.create({
-  Highlight: {
+  highlight: {
     padding: '5%',
     flexBasis: 0,
     flexGrow: 1
   },
-  Container: {
+  container: {
     alignItems: 'center'
   },
-  Image: {
+  image: {
     height: 25,
     width: 35,
     resizeMode: 'contain'
   },
-  Text: {
+  text: {
     color: THEMES.vivid.foreground
   }
 });

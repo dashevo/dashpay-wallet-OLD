@@ -3,27 +3,43 @@
  *
  * @flow
  */
-import 'intl'; // TEMP: polyfill
-import 'intl/locale-data/jsonp/en';
-import React from 'react';
-import { StoreProvider } from 'containers';
-import { LanguageProvider } from 'containers';
-import configureStore from 'state';
-import translations from 'translations';
-import Navigator from 'navigator';
+import { Navigation } from 'react-native-navigation';
+import { SplashScreen } from 'containers';
+import { HomeScreen } from 'containers';
 
-export default function DashPay() {
-  // TODO: We have a lot to do here.
+Navigation.registerComponent('SplashScreen', () => SplashScreen);
+Navigation.registerComponent('HomeScreen', () => HomeScreen);
 
-  return class Setup extends React.Component {
-    render() {
-      return (
-        <StoreProvider store={configureStore()}>
-          <LanguageProvider translations={translations}>
-            <Navigator />
-          </LanguageProvider>
-        </StoreProvider>
-      );
+Navigation.setRoot({
+  root: {
+    stack: {
+      id: 'DashPay',
+      options: {
+        statusBar: {
+          style: 'light',
+          backgroundColor: '#0D47A1'
+        },
+        layout: {
+          orientation: ['portrait'],
+          backgroundColor: '#0182E1'
+        },
+        topBar: {
+          visible: false,
+          animate: false,
+          hideOnScroll: false,
+          drawBehind: false,
+          background: {
+            color: '#00ff00'
+          }
+        }
+      },
+      children: [
+        {
+          component: {
+            name: 'SplashScreen'
+          }
+        }
+      ]
     }
-  };
-}
+  }
+});

@@ -12,12 +12,16 @@ import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';
 
-const IconButton = ({ source, text, action }: Props): ReactElement =>
-  <TouchableHighlight style={ styles.Highlight } underlayColor='transparent' onPress={ action }>
-    <View style={ styles.Container }>
-      <Image source={ source } style={ styles.Image } />
-      <Text style={ styles.Text }>{ text }</Text>
+const IconButton = ({ source, text, action }: Props): ReactElement => (
+  <TouchableHighlight
+    style={styles.highlight}
+    underlayColor="transparent"
+    onPress={action}>
+    <View style={styles.container}>
+      <Image source={source} style={styles.image} />
+      <Text style={styles.text}>{text}</Text>
     </View>
-  </TouchableHighlight>;
+  </TouchableHighlight>
+);
 
 export default IconButton;

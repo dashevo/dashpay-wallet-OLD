@@ -6,11 +6,11 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  Avatar: {
+  avatar: {
     width: 100,
     height: 100,
     resizeMode: 'cover',
-    borderRadius: 50,
+    borderRadius: 50
   }
 });
 

@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export { default } from './Avatar';
+export { default as IconButton } from './IconButton';
