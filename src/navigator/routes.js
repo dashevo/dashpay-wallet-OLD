@@ -6,6 +6,9 @@
 
 import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
+import { SendScreen } from 'containers';
+import { ReceiveScreen } from 'containers';
+import { ContactsScreen } from 'containers';
 
 const routes = {
   Home: {
@@ -13,6 +16,15 @@ const routes = {
   },
   Splash: {
     screen: SplashScreen
+  },
+  Send: {
+    screen: SendScreen
+  },
+  Receive: {
+    screen: ReceiveScreen
+  },
+  Contacts: {
+    screen: ContactsScreen
   }
 };
 
