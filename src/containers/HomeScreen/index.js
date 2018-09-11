@@ -61,6 +61,17 @@ class HomeScreen extends React.Component<Props, State> {
     this.subscription.remove();
   }
 
+  navigate(destination) {
+    return async () => Navigation.push(this.props.componentId, {
+      component: {
+        name: destination,
+        options: {
+          //TODO specify nav animation for this transition
+        }
+      }
+    });
+  }
+
   render(): ReactElement {
     return (
       <View style={styles.container}>
@@ -87,17 +98,17 @@ class HomeScreen extends React.Component<Props, State> {
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
-              action={() => {}}
+              action={this.navigate('SendScreen')}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}
               text="Receive"
-              action={() => {}}
+              action={this.navigate('ReceiveScreen')}
             />
             <IconButton
               source={require('assets/images/icon-people.png')}
               text="Contacts"
-              action={() => {}}
+              action={this.navigate('ContactsScreen')}
             />
           </View>
         </Animatable>

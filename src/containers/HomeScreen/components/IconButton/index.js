@@ -24,4 +24,4 @@ const IconButton = ({ source, text, action }: Props): ReactElement => (
   </TouchableHighlight>
 );
 
-export default IconButton;
+export { IconButton };
