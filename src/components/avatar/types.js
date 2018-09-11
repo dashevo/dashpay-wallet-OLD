@@ -4,7 +4,6 @@
  * @flow
  */
 import type { Element } from 'react';
-export type ReactElement = Element<*>;
 
+export type ReactElement = Element<*>;
 export type Props = { source: number | { uri: string } };
-export type State = {};

@@ -5,7 +5,7 @@
  */
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   avatar: {
     width: 100,
     height: 100,
@@ -13,5 +13,3 @@ const styles = StyleSheet.create({
     borderRadius: 50
   }
 });
-
-export default styles;
