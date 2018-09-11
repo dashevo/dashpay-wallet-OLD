@@ -4,8 +4,15 @@
  * @flow
  */
 import * as React from 'react';
-import * as Animatable from 'react-native-animatable';
+import { View } from 'react-native';
+import { createAnimatableComponent } from 'react-native-animatable';
+import defaultProps from './props';
 
-export default React.forwardRef((props, ref) => (
-  <Animatable.View {...props} ref={ref} style={{ opacity: 0 }} />
-));
+// This library has great API, but inside is mess.
+// JS thread in some cases suffers much from this library.
+// We have to create our tiny library based on these APIs.
+const Animatable = createAnimatableComponent(View);
+
+Animatable.defaultProps = defaultProps;
+
+export default Animatable;
