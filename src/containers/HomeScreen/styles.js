@@ -9,8 +9,9 @@ import { THEMES } from 'constants/theming';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
+    backgroundColor: THEMES.vivid.background,
+    justifyContent: 'center',
+    flex: 1
   },
   logo: {
     resizeMode: 'contain',
@@ -19,24 +20,20 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 0
   },
-  buttonGroup: {
+  buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginBottom: 0,
-    marginTop: 0,
+    marginTop: 50,
     width: 300,
     minWidth: '50%'
   },
   avatar: {
-    position: 'relative',
-    width: 100,
-    height: 100,
     marginBottom: 32,
     marginTop: 32
   },
-  // Tmp
   badgeWrapper: {
+    opacity: 1,
     position: 'absolute',
     right: 0,
     bottom: 0,
@@ -58,6 +55,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     textAlign: 'center'
+  },
+  buttonGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 0,
+    width: 300,
+    minWidth: '50%'
   }
 });
 
