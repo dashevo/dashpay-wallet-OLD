@@ -3,4 +3,21 @@
  *
  * @flow
  */
-export { default as ContactsScreen } from './ContactsScreen';
+import * as React from 'react';
+import { View } from 'react-native';
+import { Text } from 'react-native';
+// import { Image } from 'react-native';
+// import { Avatar } from 'components/avatar';
+
+import styles from './styles';
+
+import type { ReactElement } from './types';
+import type { Props } from './types';
+import type { State } from './types';
+
+const ContactsScreen = ({ }: Props): ReactElement =>
+  <View style={styles.container}>
+    <Text style={styles.text}>Send</Text>
+  </View>
+
+export { ContactsScreen };
