@@ -110,6 +110,11 @@ class HomeScreen extends React.Component<Props, State> {
               text="Contacts"
               action={this.navigate('ContactsScreen')}
             />
+            <IconButton
+              source={require('assets/images/icon-settings.png')}
+              text="Settings"
+              action={this.navigate('SettingsScreen')}
+            />
           </View>
         </Animatable>
       </View>

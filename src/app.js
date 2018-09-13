@@ -9,12 +9,14 @@ import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
 import { ContactsScreen } from 'containers';
+import { SettingsScreen } from 'containers';
 
 Navigation.registerComponent('SplashScreen', () => SplashScreen);
 Navigation.registerComponent('HomeScreen', () => HomeScreen);
 Navigation.registerComponent('SendScreen', () => SendScreen);
 Navigation.registerComponent('ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('ContactsScreen', () => ContactsScreen);
+Navigation.registerComponent('SettingsScreen', () => SettingsScreen);
 
 Navigation.setRoot({
   root: {
