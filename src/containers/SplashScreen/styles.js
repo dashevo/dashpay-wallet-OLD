@@ -15,6 +15,19 @@ const styles = StyleSheet.create({
     color: '#333333',
     fontSize: 24,
     textAlign: 'center'
+  },
+  logo: {
+    resizeMode: 'contain',
+    height: 64,
+    width: 320,
+    marginBottom: 0,
+    marginTop: 0
+  },
+  progressBar: {
+    marginBottom: 32,
+    marginTop: 32,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export { default } from './Navigator';
+export * from './IconButton';

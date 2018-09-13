@@ -3,4 +3,7 @@
  *
  * @flow
  */
-export { default as StoreProvider } from './StoreProvider';
+import { Provider } from 'react-redux';
+
+// TODO: Save and load the Redux state.
+export { Provider as StoreProvider };

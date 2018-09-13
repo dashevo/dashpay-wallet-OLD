@@ -6,5 +6,5 @@
 import type { Element } from 'react';
 export type ReactElement = Element<*>;
 
-export type Props = { source: string };
+export type Props = {};
 export type State = {};
