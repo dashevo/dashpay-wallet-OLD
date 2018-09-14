@@ -3,6 +3,8 @@
  *
  * @flow
  */
+
+import state from 'state';
 import { Navigation } from 'react-native-navigation';
 import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
@@ -10,13 +12,14 @@ import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { SettingsScreen } from 'containers';
+import { StoreProvider } from 'containers';
 
 Navigation.registerComponent('SplashScreen', () => SplashScreen);
 Navigation.registerComponent('HomeScreen', () => HomeScreen);
 Navigation.registerComponent('SendScreen', () => SendScreen);
 Navigation.registerComponent('ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('ContactsScreen', () => ContactsScreen);
-Navigation.registerComponent('SettingsScreen', () => SettingsScreen);
+Navigation.registerComponentWithRedux('SettingsScreen', () => SettingsScreen, StoreProvider, state);
 
 Navigation.setRoot({
   root: {
