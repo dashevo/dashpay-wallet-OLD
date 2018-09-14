@@ -30,3 +30,8 @@ export const THEMES = {
     background: COLORS.blueDark
   }
 };
+
+export type Theme = {
+  foreground: string,
+  background: string
+}

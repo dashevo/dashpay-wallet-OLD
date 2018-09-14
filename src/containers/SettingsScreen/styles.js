@@ -13,8 +13,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1
   },
+  heading: {
+    fontSize: 20,
+    color: THEMES.vivid.foreground,
+  },
   text: {
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: THEMES.vivid.foreground
+  },
+  buttonRow: {
+    flexDirection: 'row'
   }
 });
 
