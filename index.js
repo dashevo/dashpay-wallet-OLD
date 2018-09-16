@@ -1,4 +1,8 @@
-import { AppRegistry } from 'react-native';
-import DashPay from './src';
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
+import app from './src';
 
-AppRegistry.registerComponent('DashPay', DashPay);
+app();
