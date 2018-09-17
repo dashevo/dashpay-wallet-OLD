@@ -6,10 +6,11 @@
 
 export const COLORS = {
   blue: '#088BE2',
-  blueDim: '#053273',
-  blueDark: '#011E60',
+  blueDim: '#012060',
+  blueDark: '#0B0F3B',
   white: '#FFFFFF',
-  black: '#000000'
+  gray: '#787878',
+  black: '#111921'
 };
 
 export const THEMES = {
