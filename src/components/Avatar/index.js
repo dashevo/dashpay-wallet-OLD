@@ -9,8 +9,10 @@ import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';
 
-const Avatar = ({ source }: Props): ReactElement => (
-  <Image source={source} style={styles.avatar} />
+// This component needs to be expanded with variants of size ('sm', 'md', 'lg'),
+// variants of color, initials when image is missing...
+const Avatar = (props: Props): ReactElement => (
+<Image {...props} style={styles.avatar} />
 );
 
 export default Avatar;
