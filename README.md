@@ -19,4 +19,4 @@ Run the packager from the project folder: `yarn start`
 Launch the app on the emulator: `react-native run-android`. You can toggle *Live Reload* and *Hot Reloading* in the developer menu (Ctrl+M)
 
 ## Code Conventions
-We are using the [AirBNB Javascript style](https://github.com/airbnb/javascript) with configurations for ESLint, Prettify, and Editorconfig. In order to benefit from these, make sure your IDE has those extensions installed and enabled.
+The project includes configurations for ESLint, Prettify, and Editorconfig. In order to benefit from these, make sure your IDE has those extensions installed and enabled.
