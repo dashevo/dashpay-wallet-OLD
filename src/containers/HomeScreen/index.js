@@ -13,6 +13,7 @@ import { Animatable } from 'components';
 import { SharedElement } from 'components';
 import { IconButton } from './components';
 import styles from './styles';
+import { THEMES } from 'constants';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
@@ -99,16 +100,25 @@ class HomeScreen extends React.Component<Props, State> {
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
               action={this.navigate('SendScreen')}
+              theme={THEMES.vivid}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}
               text="Receive"
               action={this.navigate('ReceiveScreen')}
+              theme={THEMES.vivid}
             />
             <IconButton
               source={require('assets/images/icon-people.png')}
               text="Contacts"
               action={this.navigate('ContactsScreen')}
+              theme={THEMES.vivid}
+            />
+            <IconButton
+              source={require('assets/images/icon-settings.png')}
+              text="Settings"
+              action={this.navigate('SettingsScreen')}
+              theme={THEMES.vivid}
             />
           </View>
         </Animatable>

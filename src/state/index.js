@@ -12,6 +12,4 @@ const rootReducer = combineReducers({
   language
 });
 
-const configureStore = () => createStore(rootReducer);
-
-export default configureStore;
+export default createStore(rootReducer);

@@ -3,12 +3,19 @@
  *
  * @flow
  */
+
 import { Navigation } from 'react-native-navigation';
 import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
 import { ContactsScreen } from 'containers';
+import { SettingsScreen } from 'containers';
+import { StoreProvider } from 'containers';
+
+import { COLORS } from 'constants';
+
+import state from 'state';
 
 function app() {
   // TODO: asynchronously
@@ -17,6 +24,12 @@ function app() {
   Navigation.registerComponent('SendScreen', () => SendScreen);
   Navigation.registerComponent('ReceiveScreen', () => ReceiveScreen);
   Navigation.registerComponent('ContactsScreen', () => ContactsScreen);
+  Navigation.registerComponentWithRedux(
+    'SettingsScreen',
+    () => SettingsScreen,
+    StoreProvider,
+    state
+  );
   Navigation.setRoot({
     root: {
       stack: {
@@ -24,11 +37,11 @@ function app() {
         options: {
           statusBar: {
             style: 'light',
-            backgroundColor: '#0D47A1'
+            backgroundColor: COLORS.blue
           },
           layout: {
             orientation: ['portrait'],
-            backgroundColor: '#0182E1'
+            backgroundColor: COLORS.gray
           },
           topBar: {
             visible: false,
@@ -36,7 +49,7 @@ function app() {
             hideOnScroll: false,
             drawBehind: false,
             background: {
-              color: '#00ff00'
+              color: COLORS.bluedim
             }
           }
         },

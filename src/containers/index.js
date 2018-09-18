@@ -14,3 +14,4 @@ export * from './HomeScreen';
 export * from './SendScreen';
 export * from './ReceiveScreen';
 export * from './ContactsScreen';
+export * from './SettingsScreen';
