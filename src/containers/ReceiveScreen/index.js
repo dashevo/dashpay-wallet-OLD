@@ -20,12 +20,14 @@ import { wallet, account } from '../../provider/WalletProvider';
 class ReceiveScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.unusedAddress = account.getUnusedAddress() || 'unusedAddr';
+    this.unusedAddress = account.getUnusedAddress().address || 'unusedAddr';
   }
   render(): ReactElement {
-    <View style={styles.container}>
-      <Text style={styles.text}>{this.unusedAddress}</Text>
-    </View>
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>{this.unusedAddress}</Text>
+      </View>
+    );
   }
 };
 
