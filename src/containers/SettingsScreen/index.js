@@ -9,13 +9,13 @@ import { View } from 'react-native';
 import { Text } from 'react-native';
 import { Button } from 'react-native';
 import translations from 'translations';
-import { changeLocale } from 'state';
 import { ThemedButton } from 'components';
 
 import styles from './styles';
 import { THEMES } from 'constants';
 
-import { selectLanguage } from 'state';
+import { selectLocale } from 'state';
+import { changeLocale } from 'state';
 
 import type { ReactElement } from './types';
 import type { Props } from './types';
@@ -40,7 +40,7 @@ const SettingsScreen = ({ language, changeLocale }: Props): ReactElement => {
 }
 
 const mapStateToProps = state => ({
-  language: selectLanguage(state)
+  language: selectLocale(state)
 });
 
 const mapDispatchToProps = dispatch => {

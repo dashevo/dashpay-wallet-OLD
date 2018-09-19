@@ -4,6 +4,6 @@
  * @flow
  */
 import { createSelector } from 'reselect';
-import { selectLanguage } from 'state';
+import { selectLocale } from 'state';
 
-export default createSelector(selectLanguage, locale => ({ locale }));
+export default createSelector(selectLocale, locale => ({ locale }));

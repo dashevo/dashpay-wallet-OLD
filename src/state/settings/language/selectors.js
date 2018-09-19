@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export const selectLanguage = state => state.settings.language;
+export const selectLocale = state => state.settings.language;
