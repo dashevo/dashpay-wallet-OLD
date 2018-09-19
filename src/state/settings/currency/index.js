@@ -5,7 +5,7 @@
  */
 
 const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
-const initialState = 'usd';
+const initialState = 'USD';
 
 const currency = (state = initialState, action) => {
   switch (action.type) {

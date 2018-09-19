@@ -20,9 +20,6 @@ const styles = StyleSheet.create({
   text: {
     justifyContent: 'center',
     color: THEMES.vivid.foreground
-  },
-  buttonRow: {
-    flexDirection: 'row'
   }
 });
 
