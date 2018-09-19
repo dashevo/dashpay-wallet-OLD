@@ -16,6 +16,7 @@ import type { Props } from './types';
 import type { State } from './types';
 import { SharedElement } from 'components';
 import { Navigation } from 'react-native-navigation';
+import { account } from '../../provider/WalletProvider';
 
 class SplashScreen extends React.Component<Props, State> {
   static get options() {
@@ -57,8 +58,11 @@ class SplashScreen extends React.Component<Props, State> {
   async componentDidMount() {
     await this.animatable[0].current.fadeIn(500);
     await this.animatable[1].current.fadeIn(500);
+    //Will only complete if account isReady
     this.setTimeoutId = setInterval(() => {
-      this.setState(({ progress }) => ({ progress: progress + 1 }));
+      if(this.state.progress<99 || account.isReady){
+        this.setState(({ progress }) => ({ progress: progress + 1 }));
+      }
     }, 5);
   }
 
