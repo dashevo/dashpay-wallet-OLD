@@ -5,11 +5,13 @@
  */
 import { combineReducers } from 'redux';
 import { createStore } from 'redux';
-import language from './language';
-export * from './language';
+import language from './settings/language';
+export * from './settings/language';
 
 const rootReducer = combineReducers({
-  language
+  settings: combineReducers({
+    language: language
+  })
 });
 
 export default createStore(rootReducer);
