@@ -14,10 +14,19 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
+import { wallet, account } from '../../provider/WalletProvider';
 
-const ReceiveScreen = ({ }: Props): ReactElement =>
-  <View style={styles.container}>
-    <Text style={styles.text}>Send</Text>
-  </View>
+
+class ReceiveScreen extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.unusedAddress = account.getUnusedAddress() || 'unusedAddr';
+  }
+  render(): ReactElement {
+    <View style={styles.container}>
+      <Text style={styles.text}>{this.unusedAddress}</Text>
+    </View>
+  }
+};
 
 export { ReceiveScreen };
