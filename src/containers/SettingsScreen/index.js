@@ -15,6 +15,8 @@ import { ThemedButton } from 'components';
 import styles from './styles';
 import { THEMES } from 'constants';
 
+import { selectLanguage } from 'state';
+
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
@@ -38,7 +40,7 @@ const SettingsScreen = ({ language, changeLocale }: Props): ReactElement => {
 }
 
 const mapStateToProps = state => ({
-  language: state.language
+  language: selectLanguage(state)
 });
 
 const mapDispatchToProps = dispatch => {
