@@ -22,10 +22,10 @@ import type { Props } from './types';
 import type { State } from './types';
 
 const SettingsScreen = ({
-    locale,
+    settings,
     changeLocale,
-    currency,
     changeCurrency,
+    changeBalanceVisible,
     state
   }: Props): ReactElement => {
   const localeOptions = Object.keys(translations).map(
@@ -41,21 +41,30 @@ const SettingsScreen = ({
     { key: 'VEF', value: 'Venezuelan Bolivar'}
   ];
 
+  const balanceOptions = [
+    { key: true, value: 'Visible'},
+    { key: false, value: 'Hidden'}
+  ]
+
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Settings</Text>
-      <Text style={styles.text}>Language</Text>
-      <RadioRow options={localeOptions} currentOption={locale} action={changeLocale} />
-      <Text style={styles.text}>Currency</Text>
-      <RadioRow options={currencyOptions} currentOption={currency} action={changeCurrency} />
-      <Text style={styles.text}>{JSON.stringify(state)}</Text>
+      <View style={styles.content}>
+        <Text style={styles.text}>Language</Text>
+        <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
+        <Text style={styles.text}>Currency</Text>
+        <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
+        <Text style={styles.text}>Balance in Navigation Bar</Text>
+        <RadioRow options={balanceOptions} currentOption={settings.balanceVisible} action={changeBalanceVisible} />
+        <Text style={styles.text}>App State</Text>
+        <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
+      </View>
     </View>
   );
 }
 
 const mapStateToProps = state => ({
-  locale: selectSettings(state).locale,
-  currency: selectSettings(state).currency,
+  settings: selectSettings(state),
   state: state
 });
 
@@ -64,7 +73,9 @@ const mapDispatchToProps = dispatch => {
     changeLocale: translation => () =>
       dispatch(changeSettings({locale: translation})),
     changeCurrency: currency => () =>
-      dispatch(changeSettings({currency: currency}))
+      dispatch(changeSettings({currency: currency})),
+    changeBalanceVisible: balanceVisible => () =>
+      dispatch(changeSettings({balanceVisible: balanceVisible}))
   }
 };
 
