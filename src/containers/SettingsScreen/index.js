@@ -14,18 +14,18 @@ import translations from 'translations';
 
 import styles from './styles';
 
-import { selectLocale } from 'state';
-import { changeLocale } from 'state';
-import { selectCurrency } from 'state';
-import { changeCurrency } from 'state';
+import { selectSettings } from 'state';
+import { changeSettings } from 'state';
 
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
 
 const SettingsScreen = ({
-    locale, changeLocale,
-    currency, changeCurrency,
+    locale,
+    changeLocale,
+    currency,
+    changeCurrency,
     state
   }: Props): ReactElement => {
   const localeOptions = Object.keys(translations).map(
@@ -54,15 +54,17 @@ const SettingsScreen = ({
 }
 
 const mapStateToProps = state => ({
-  locale: selectLocale(state),
-  currency: selectCurrency(state),
+  locale: selectSettings(state).locale,
+  currency: selectSettings(state).currency,
   state: state
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeLocale: translation => () => dispatch(changeLocale(translation)),
-    changeCurrency: currency => () => dispatch(changeCurrency(currency))
+    changeLocale: translation => () =>
+      dispatch(changeSettings({locale: translation})),
+    changeCurrency: currency => () =>
+      dispatch(changeSettings({currency: currency}))
   }
 };
 

@@ -5,16 +5,11 @@
  */
 import { combineReducers } from 'redux';
 import { createStore } from 'redux';
-import locale from './settings/locale';
-import currency from './settings/currency';
-export * from './settings/locale';
-export * from './settings/currency';
+import { settingsReducer } from './settings';
 
 const rootReducer = combineReducers({
-  settings: combineReducers({
-    currency: currency,
-    locale: locale
-  })
+  settings: settingsReducer
 });
 
 export default createStore(rootReducer);
+export * from './settings';
