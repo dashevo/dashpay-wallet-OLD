@@ -1,17 +1,13 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
-import { combineReducers } from 'redux';
 import { createStore } from 'redux';
-import language from './language';
+import reducers from './reducers';
+
 export * from './language';
 
-const rootReducer = combineReducers({
-  language
-});
+export default createStore(reducers);
 
-const configureStore = () => createStore(rootReducer);
-
-export default configureStore;
+export { default as getInitialState } from './actions';

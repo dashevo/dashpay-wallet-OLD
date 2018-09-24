@@ -1,13 +1,13 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import selector from './selectors';
-import type { ReactElement } from './types';
+import type { ReactElement } from 'types';
 import type { Props } from './types';
 
 class LanguageProvider extends React.Component<Props> {

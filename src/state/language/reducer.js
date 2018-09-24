@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { DEFAULT_LOCALE } from 'constants';
 import { CHANGE_LOCALE } from './constants';

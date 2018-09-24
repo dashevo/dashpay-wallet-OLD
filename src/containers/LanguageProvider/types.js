@@ -3,9 +3,6 @@
  *
  * @flow
  */
-import type { Element } from 'react';
-export type ReactElement = Element<*>;
-
 export type Props = {
   locale: string,
   translations: {

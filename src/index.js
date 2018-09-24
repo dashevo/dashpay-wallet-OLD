@@ -3,52 +3,44 @@
  *
  * @flow
  */
-import { Navigation } from 'react-native-navigation';
-import { SplashScreen } from 'containers';
-import { HomeScreen } from 'containers';
-import { SendScreen } from 'containers';
-import { ReceiveScreen } from 'containers';
-import { ContactsScreen } from 'containers';
+import { COLORS } from 'constants';
+import { registerRoutes } from 'navigation';
+import { registerLaunch } from 'navigation';
+import { setDefaultOptions } from 'navigation';
+import { setRoot } from 'navigation';
+import routes from './routes';
 
 function app() {
-  // TODO: asynchronously
-  Navigation.registerComponent('SplashScreen', () => SplashScreen);
-  Navigation.registerComponent('HomeScreen', () => HomeScreen);
-  Navigation.registerComponent('SendScreen', () => SendScreen);
-  Navigation.registerComponent('ReceiveScreen', () => ReceiveScreen);
-  Navigation.registerComponent('ContactsScreen', () => ContactsScreen);
-  Navigation.setRoot({
-    root: {
-      stack: {
-        id: 'DashPay',
-        options: {
-          statusBar: {
-            style: 'light',
-            backgroundColor: '#0D47A1'
-          },
-          layout: {
-            orientation: ['portrait'],
-            backgroundColor: '#0182E1'
-          },
-          topBar: {
-            visible: false,
-            animate: false,
-            hideOnScroll: false,
-            drawBehind: false,
-            background: {
-              color: '#00ff00'
-            }
-          }
-        },
-        children: [
-          {
-            component: {
-              name: 'SplashScreen'
-            }
-          }
-        ]
+  registerRoutes(routes);
+  registerLaunch(async () => {
+    setDefaultOptions({
+      statusBar: {
+        style: 'light',
+        backgroundColor: COLORS.blue
+      },
+      layout: {
+        orientation: ['portrait'],
+        backgroundColor: COLORS.blue
+      },
+      topBar: {
+        visible: false,
+        animate: false
       }
-    }
+    });
+    setRoot({
+      root: {
+        stack: {
+          id: 'DashPay',
+          children: [
+            {
+              component: {
+                name: 'SplashScreen'
+              }
+            }
+          ]
+        }
+      }
+    });
   });
 }
 

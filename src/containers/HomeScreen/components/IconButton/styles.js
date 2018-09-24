@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants/theming';

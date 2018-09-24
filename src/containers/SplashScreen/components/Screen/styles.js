@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     alignItems: 'center',
     flex: 1,
@@ -23,12 +23,11 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 0
   },
-  progressBar: {
-    marginBottom: 32,
-    marginTop: 32,
+  reanimatable: {
+    opacity: 0,
+    paddingBottom: 16,
+    paddingTop: 16,
     alignItems: 'center',
     justifyContent: 'center'
   }
 });
-
-export default styles;

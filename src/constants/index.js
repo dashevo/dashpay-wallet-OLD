@@ -3,5 +3,6 @@
  *
  * @flow
  */
-export * from './defaults';
-export * from './theming';
+export { default as COLORS } from './colors';
+export { default as DEFAULTS } from './defaults';
+export { default as THEMING } from './theming';

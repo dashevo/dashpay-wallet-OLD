@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
 import { View } from 'react-native';
@@ -9,7 +9,6 @@ import { Text } from 'react-native';
 import { Image } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { Avatar } from 'components';
-import { Animatable } from 'components';
 import { SharedElement } from 'components';
 import { IconButton } from './components';
 import styles from './styles';
@@ -17,29 +16,9 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
 
+import { Reanimatable } from 'libraries';
+
 class HomeScreen extends React.Component<Props, State> {
-  static get options() {
-    return {
-      statusBar: {
-        style: 'light',
-        backgroundColor: '#0D47A1'
-      },
-      layout: {
-        orientation: ['portrait'],
-        backgroundColor: '#0182E1'
-      },
-      topBar: {
-        // transparent: true,
-        visible: false,
-        animate: false,
-        hideOnScroll: false,
-        drawBehind: false,
-        background: {
-          color: '#00ff00'
-        }
-      }
-    };
-  }
 
   constructor(props: Props) {
     super(props);
@@ -81,19 +60,19 @@ class HomeScreen extends React.Component<Props, State> {
             style={styles.logo}
           />
         </SharedElement>
-        <Animatable ref={this.avatar}>
+        <Reanimatable ref={this.avatar}>
           <View style={styles.avatar}>
             <Avatar source={require('assets/images/avatar-default.png')} />
             <View style={styles.badgeWrapper}>
-              <Animatable ref={this.badge}>
+              <Reanimatable ref={this.badge}>
                 <View style={styles.badge}>
                   <Text style={styles.badgeText}>{'3'}</Text>
                 </View>
-              </Animatable>
+              </Reanimatable>
             </View>
           </View>
-        </Animatable>
-        <Animatable ref={this.buttonGroup}>
+        </Reanimatable>
+        <Reanimatable ref={this.buttonGroup}>
           <View style={styles.buttonGroup}>
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
@@ -111,7 +90,7 @@ class HomeScreen extends React.Component<Props, State> {
               action={this.navigate('ContactsScreen')}
             />
           </View>
-        </Animatable>
+        </Reanimatable>
       </View>
     );
   }

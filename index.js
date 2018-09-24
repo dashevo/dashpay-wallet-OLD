@@ -3,6 +3,7 @@
  *
  * @flow
  */
+import 'intl';
 import app from './src';
 
 app();

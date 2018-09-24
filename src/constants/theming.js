@@ -3,16 +3,9 @@
  *
  * @flow
  */
+import COLORS from './colors';
 
-export const COLORS = {
-  blue: '#088BE2',
-  blueDim: '#053273',
-  blueDark: '#011E60',
-  white: '#FFFFFF',
-  black: '#000000'
-};
-
-export const THEMES = {
+export default {
   light: {
     foreground: COLORS.black,
     background: COLORS.white
