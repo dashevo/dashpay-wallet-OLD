@@ -7,13 +7,20 @@ import { SplashScreen } from 'containers';
 import { SendScreen } from 'containers';
 import enhance from './enhancer';
 
-export default [
+let routes: Routes = [
   {
-    routeName: 'SplashScreen',
-    routeComponent: enhance(SplashScreen)
+    name: 'SplashScreen',
+    component: SplashScreen
   },
   {
-    routeName: 'SendScreen',
-    routeComponent: enhance(SendScreen)
+    name: 'SendScreen',
+    component: SendScreen
   }
 ];
+
+routes = routes.map(({ name, component }) => ({
+  component: enhance(component),
+  name: name
+}));
+
+export default routes;

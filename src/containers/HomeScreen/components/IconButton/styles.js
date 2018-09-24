@@ -4,7 +4,7 @@
  * @wolf
  */
 import { StyleSheet } from 'react-native';
-import { THEMES } from 'constants/theming';
+import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   highlight: {

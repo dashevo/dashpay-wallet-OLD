@@ -23,7 +23,7 @@ export function registerLaunch(listener) {
 }
 
 export function registerRoutes(routes) {
-  forEach(routes, ({ routeName, routeComponent }) => {
-    registerComponent(routeName, () => routeComponent);
+  forEach(routes, ({ name, component }) => {
+    registerComponent(name, () => component);
   });
 }

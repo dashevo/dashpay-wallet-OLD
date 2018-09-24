@@ -5,6 +5,7 @@
  */
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
+import { addLocaleData } from 'react-intl';
 import { connect } from 'react-redux';
 import selector from './selectors';
 import type { ReactElement } from 'types';

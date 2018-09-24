@@ -26,13 +26,12 @@ class SplashScreen extends React.Component<Props> {
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
-    this.navigateFurther();
+    this.props.doSomething().then(console.log);
   }
 
   async handleOnComplete() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeOut());
-    this.navigateFurther();
   }
 
   navigateFurther() {
@@ -49,9 +48,9 @@ class SplashScreen extends React.Component<Props> {
   }
 }
 
-// SplashScreen = connect(
-//   selector,
-//   actions
-// )(SplashScreen);
+SplashScreen = connect(
+  selector,
+  actions
+)(SplashScreen);
 
 export default SplashScreen;

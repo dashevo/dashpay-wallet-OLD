@@ -6,8 +6,24 @@
 import { createStore } from 'redux';
 import reducers from './reducers';
 
+// Tmp
 export * from './language';
 
-export default createStore(reducers);
+// Tmp
+const walletLib = {
+  doSomething() {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve('IS DONE');
+      }, 2000);
+    });
+  }
+};
 
-export { default as getInitialState } from './actions';
+import thunk from 'redux-thunk';
+import middleware from './middleware';
+import { applyMiddleware } from 'redux';
+
+const extraArgument = thunk.withExtraArgument(walletLib);
+const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
+export default createStore(reducers, enhancedMiddleware);
