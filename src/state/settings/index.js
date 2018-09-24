@@ -10,13 +10,15 @@ const CHANGE_SETTINGS = 'CHANGE_SETTINGS';
 const initialState = {
   locale: 'en',
   currency: 'USD',
-  balanceVisible: true
+  balanceVisible: true,
+  network: 'testnet',
 };
 
 type state = {
   locale?: string,
   currency?: string,
-  balanceVisible?: boolean
+  balanceVisible?: boolean,
+  network?: string,
 };
 type settingsAction = {
   type: string,
@@ -46,3 +48,6 @@ export const selectLocale = createSelector(
 export const selectBalanceVisible = createSelector(
   selectSettings, settings => settings.balanceVisible
 );
+export const selectNetwork = createSelector(
+  selectSettings, settings => settings.network
+)

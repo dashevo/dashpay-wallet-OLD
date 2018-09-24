@@ -27,6 +27,7 @@ const SettingsScreen = ({
     changeLocale,
     changeCurrency,
     changeBalanceVisible,
+    changeNetwork,
     state
   }: Props): ReactElement => {
   const localeOptions = Object.keys(translations).map(
@@ -45,6 +46,11 @@ const SettingsScreen = ({
   const balanceOptions = [
     { key: true, value: 'Visible'},
     { key: false, value: 'Hidden'}
+  ];
+
+  const networkOptions = [
+    { key: 'livenet', value: 'Livenet'},
+    { key: 'testnet', value: 'Testnet'},
   ]
 
   return (
@@ -56,6 +62,8 @@ const SettingsScreen = ({
         <Text style={styles.text}>Currency</Text>
         <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
         <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} />
+        <Text style={styles.text}>Network</Text>
+        <RadioRow options={networkOptions} currentOption={settings.network} action={changeNetwork} />
         <Text style={styles.text}>App State</Text>
         <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
       </View>
@@ -75,7 +83,9 @@ const mapDispatchToProps = dispatch => {
     changeCurrency: currency => () =>
       dispatch(changeSettings({currency: currency})),
     changeBalanceVisible: balanceVisible =>
-      dispatch(changeSettings({balanceVisible: balanceVisible}))
+      dispatch(changeSettings({balanceVisible: balanceVisible})),
+    changeNetwork: network => () =>
+      dispatch(changeSettings({network: network})),
   }
 };
 
