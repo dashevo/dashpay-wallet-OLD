@@ -9,6 +9,7 @@ import { View } from 'react-native';
 import { Text } from 'react-native';
 import { Button } from 'react-native';
 import { RadioRow } from './RadioRow';
+import { LabeledSwitch } from 'components';
 
 import translations from 'translations';
 
@@ -54,8 +55,7 @@ const SettingsScreen = ({
         <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
         <Text style={styles.text}>Currency</Text>
         <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
-        <Text style={styles.text}>Balance in Navigation Bar</Text>
-        <RadioRow options={balanceOptions} currentOption={settings.balanceVisible} action={changeBalanceVisible} />
+        <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} />
         <Text style={styles.text}>App State</Text>
         <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
       </View>
@@ -74,7 +74,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(changeSettings({locale: translation})),
     changeCurrency: currency => () =>
       dispatch(changeSettings({currency: currency})),
-    changeBalanceVisible: balanceVisible => () =>
+    changeBalanceVisible: balanceVisible =>
       dispatch(changeSettings({balanceVisible: balanceVisible}))
   }
 };
