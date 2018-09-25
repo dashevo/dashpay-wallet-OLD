@@ -5,7 +5,9 @@
  */
 import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
-import enhance from 'enhancer';
+import { SendScreen } from 'containers';
+import { ReceiveScreen } from 'containers';
+import enhance from './enhancer';
 
 type Routes = {};
 
@@ -13,6 +15,14 @@ let routes: Routes = [
   {
     name: 'SplashScreen',
     component: SplashScreen
+  },
+  {
+    name: 'SendScreen',
+    component: SendScreen
+  },
+  {
+    name: 'ReceiveScreen',
+    component: ReceiveScreen
   },
   {
     name: 'HomeScreen',

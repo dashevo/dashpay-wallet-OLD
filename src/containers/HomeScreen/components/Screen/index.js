@@ -56,17 +56,17 @@ const Screen = (props: Props): ReactElement => (
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
-              action={() => props.navigate.push('SendScreen')}
+              action={() => props.navigation.push('SendScreen')}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}
               text="Receive"
-              action={() => props.navigate.push('ReceiveScreen')}
+              action={() => props.navigation.push('ReceiveScreen')}
             />
             <IconButton
               source={require('assets/images/icon-people.png')}
               text="Contacts"
-              action={() => props.navigate.push('ContactsScreen')}
+              action={() => props.navigation.push('ContactsScreen')}
             />
           </View>
         </Reanimatable>

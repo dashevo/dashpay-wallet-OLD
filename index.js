@@ -3,6 +3,7 @@
  *
  * @flow
  */
+
 import 'intl';
 import { addLocaleData } from 'react-intl';
 import de from 'react-intl/locale-data/de';
