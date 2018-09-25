@@ -3,6 +3,10 @@
  *
  * @flow
  */
+import '../shim.js';
+import crypto from 'crypto';
+import stream from 'stream'
+
 import { COLORS } from 'constants';
 import { registerRoutes } from 'navigation';
 import { registerLaunch } from 'navigation';
