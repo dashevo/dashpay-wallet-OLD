@@ -3,4 +3,4 @@
  *
  * @wolf
  */
-export type Props = {};
+export default null;

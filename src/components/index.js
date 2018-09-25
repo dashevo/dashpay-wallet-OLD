@@ -8,6 +8,9 @@ export { default as Avatar } from './Avatar';
 export { default as Logo } from './Logo';
 export { default as ProgressBar } from './ProgressBar';
 export { default as SharedElement } from './SharedElement';
+export { default as Icon } from './Icon';
+
+export * from './Animation';
 
 // i18n
 export { default as FormattedText } from './FormattedText';

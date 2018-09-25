@@ -7,17 +7,15 @@ import { Navigation } from 'react-native-navigation';
 
 export const navigation = ({ componentId }) => ({
   componentId,
-  push(routeName, parameters = {}) {
+  push(routeName, options = {}) {
     return Navigation.push(componentId, {
       component: {
         name: routeName,
-        passProps: {
-          parameters
-        }
+        options
       }
     });
   },
-  pop(routeName, parameters = {}) {
+  pop(routeName, options = {}) {
     return Navigation.pop(componentId);
   }
 });

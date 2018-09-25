@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
+    "android":
+      "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "flow": "flow",
@@ -38,5 +39,8 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": ["src/assets/fonts"]
   }
 }

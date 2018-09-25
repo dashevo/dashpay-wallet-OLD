@@ -4,5 +4,5 @@
  * @wolf
  */
 export default {
-  elementId: '__logo:origin__'
+  elementId: '__logo:destination__'
 };

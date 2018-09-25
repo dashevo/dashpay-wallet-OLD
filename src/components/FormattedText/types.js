@@ -16,6 +16,6 @@ export type FormattedMessageProps = {
 export type Props = TextProps & FormattedMessageProps;
 
 export type State = {
-  formattedMessageProps: FormattedMessageProps,
-  textProps: TextProps
+  formattedMessageProps?: FormattedMessageProps,
+  textProps?: TextProps
 };

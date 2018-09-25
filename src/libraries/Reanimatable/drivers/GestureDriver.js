@@ -4,20 +4,20 @@
  * @wolf
  */
 import { Animated } from 'react-native';
+import { PanResponder } from 'react-native';
 import Driver from './Driver';
 
-class TimingDriver extends Driver {
+class GestureDriver extends Driver {
   constructor(configs = {}) {
     super(configs);
 
-    this.configs = {
-      toValue: 1,
-      duration: 500,
-      useNativedriverr: true,
-      ...configs
-    };
-
+    this.panResponder = PanResponder.create(configs);
+    this.getAnimationProps = this.getAnimationProps.bind(this);
     this.startAnimation = this.startAnimation.bind(this);
+  }
+
+  getAnimationProps() {
+    return this.panResponder.panHandlers;
   }
 
   startAnimation(configs, onFinish) {
@@ -28,4 +28,4 @@ class TimingDriver extends Driver {
   }
 }
 
-export default TimingDriver;
+export default GestureDriver;

@@ -3,15 +3,15 @@
  *
  * @wolf
  */
-// Tmp: Asynchronous iteration
 async function sequence(refs, callback) {
   const results = [];
-  for (let i = 0; i < refs.length; i++) {
-    let response;
-    if (refs[i].current) {
-      response = await callback(refs[i].current, i);
-    }
-    results.push(response);
+  const countRefs = refs.length;
+  for (let i = 0; i < countRefs; i++) {
+    results.push(
+      refs[i].current
+        ? await callback(refs[i].current, i)
+        : { isInitialized: false }
+    );
   }
   return results;
 }

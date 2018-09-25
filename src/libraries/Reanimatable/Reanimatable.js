@@ -53,7 +53,7 @@ class ReanimatableComponent extends React.PureComponent<Props, State> {
   getAnimationStyles(animationName: string): Object {
     const { driver } = this;
     const { layout } = this.state;
-    return this.animations[animationName](driver, layout);
+    return this.animations[animationName](driver, this.state.layout);
   }
 
   getAnimationPropsFromDriver(): Object {

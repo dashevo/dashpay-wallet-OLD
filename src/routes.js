@@ -4,8 +4,10 @@
  * @wolf
  */
 import { SplashScreen } from 'containers';
-import { SendScreen } from 'containers';
-import enhance from './enhancer';
+import { HomeScreen } from 'containers';
+import enhance from 'enhancer';
+
+type Routes = {};
 
 let routes: Routes = [
   {
@@ -13,8 +15,8 @@ let routes: Routes = [
     component: SplashScreen
   },
   {
-    name: 'SendScreen',
-    component: SendScreen
+    name: 'HomeScreen',
+    component: HomeScreen
   }
 ];
 

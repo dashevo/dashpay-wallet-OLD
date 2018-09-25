@@ -10,7 +10,8 @@ import { Screen } from './components';
 import actions from './actions';
 import defaultProps from './props';
 import selector from './selectors';
-import type { Props } from 'types';
+import type { ReactElement } from './types';
+import type { Props } from './types';
 
 class SplashScreen extends React.Component<Props> {
   static defaultProps = defaultProps;
@@ -26,7 +27,7 @@ class SplashScreen extends React.Component<Props> {
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
-    this.props.doSomething();
+    this.navigateFurther();
   }
 
   async handleOnComplete() {
@@ -35,14 +36,17 @@ class SplashScreen extends React.Component<Props> {
   }
 
   navigateFurther() {
-    this.props.navigation.push('SendScreen');
+    const { routeName } = this.props;
+    const { routeParams } = this.props;
+    this.props.navigation.push(routeName, routeParams);
   }
 
-  render(): React.Element<any> {
+  render(): ReactElement {
     return (
       <Screen
         reanimatableRefs={this.reanimatableRefs}
         onComplete={this.handleOnComplete}
+        elementId={this.props.elementId}
       />
     );
   }

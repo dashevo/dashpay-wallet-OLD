@@ -4,96 +4,62 @@
  * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native';
-import { Image } from 'react-native';
-import { Navigation } from 'react-native-navigation';
-import { Avatar } from 'components';
-import { SharedElement } from 'components';
-import { IconButton } from './components';
-import styles from './styles';
+import { connect } from 'react-redux';
+import { sequence } from 'libraries';
+import { Screen } from './components';
+import actions from './actions';
+import defaultProps from './props';
+import selector from './selectors';
 import type { ReactElement } from './types';
 import type { Props } from './types';
-import type { State } from './types';
 
-import { Reanimatable } from 'libraries';
-
-class HomeScreen extends React.Component<Props, State> {
+class HomeScreen extends React.Component<Props> {
+  static defaultProps = defaultProps;
 
   constructor(props: Props) {
     super(props);
-    this.avatar = React.createRef();
-    this.badge = React.createRef();
-    this.buttonGroup = React.createRef();
-    this.subscription = Navigation.events().bindComponent(this);
+    this.reanimatableRefs = [];
+    this.reanimatableRefs.push(React.createRef());
+    this.reanimatableRefs.push(React.createRef());
+    this.reanimatableRefs.push(React.createRef());
+    this.handleOnComplete = this.handleOnComplete.bind(this);
   }
 
-  async componentDidAppear() {
-    await Promise.all([
-      this.avatar.current.fadeInUpBig(),
-      this.buttonGroup.current.fadeInUpBig()
-    ]);
-    await this.badge.current.bounceIn();
+  async componentDidMount() {
+    const refs = this.reanimatableRefs;
+    function animationController(ref, index) {
+      if (index == 0) return ref.fadeInUpBig();
+      if (index == 1) return ref.bounceIn();
+      if (index == 2) return ref.fadeIn();
+    }
+    await sequence(refs, animationController);
+    // this.navigateFurther();
   }
 
-  componentWillUnmount() {
-    this.subscription.remove();
+  async handleOnComplete() {
+    const refs = this.reanimatableRefs;
+    await sequence(refs, ref => ref.fadeInUpBig());
   }
 
-  navigate(destination) {
-    return async () => Navigation.push(this.props.componentId, {
-      component: {
-        name: destination,
-        options: {
-          //TODO specify nav animation for this transition
-        }
-      }
-    });
+  navigateFurther() {
+    const { routeName } = this.props;
+    this.props.navigation.push(routeName);
   }
 
   render(): ReactElement {
     return (
-      <View style={styles.container}>
-        <SharedElement elementId={'logo2'}>
-          <Image
-            source={require('assets/images/logo.png')}
-            style={styles.logo}
-          />
-        </SharedElement>
-        <Reanimatable ref={this.avatar}>
-          <View style={styles.avatar}>
-            <Avatar source={require('assets/images/avatar-default.png')} />
-            <View style={styles.badgeWrapper}>
-              <Reanimatable ref={this.badge}>
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{'3'}</Text>
-                </View>
-              </Reanimatable>
-            </View>
-          </View>
-        </Reanimatable>
-        <Reanimatable ref={this.buttonGroup}>
-          <View style={styles.buttonGroup}>
-            <IconButton
-              source={require('assets/images/icon-paperplane.png')}
-              text="Pay"
-              action={this.navigate('SendScreen')}
-            />
-            <IconButton
-              source={require('assets/images/icon-bank.png')}
-              text="Receive"
-              action={this.navigate('ReceiveScreen')}
-            />
-            <IconButton
-              source={require('assets/images/icon-people.png')}
-              text="Contacts"
-              action={this.navigate('ContactsScreen')}
-            />
-          </View>
-        </Reanimatable>
-      </View>
+      <Screen
+        reanimatableRefs={this.reanimatableRefs}
+        onComplete={this.handleOnComplete}
+        navigation={this.props.navigation}
+      />
     );
   }
 }
 
-export { HomeScreen };
+HomeScreen = connect(
+  selector,
+  actions
+)(HomeScreen);
+
+export default HomeScreen;

@@ -16,7 +16,7 @@ function app() {
     setDefaultOptions({
       statusBar: {
         style: 'light',
-        backgroundColor: COLORS.blue
+        backgroundColor: '#011E60'
       },
       layout: {
         orientation: ['portrait'],

@@ -3,4 +3,6 @@
  *
  * @wolf
  */
-export type Props = {};
+export default {
+  routeName: 'HomeScreen'
+};

@@ -4,9 +4,3 @@
  * @wolf
  */
 export { default as sequence } from './sequence';
-
-import Driver from '../drivers';
-
-export function isDriver(obj) {
-  return obj instanceof Driver;
-}

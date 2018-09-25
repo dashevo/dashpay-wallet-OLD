@@ -6,26 +6,18 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ProgressBar } from 'components';
-import { Image } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
-import styles from './styles';
 import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
-import defaultProps from './props';
+import styles from './styles';
+import type { ReactElement } from './types';
+import type { Props } from './types';
 
-import { FormattedText } from 'components';
-
-const Screen = (props: Props): React.Element<any> => (
+const Screen = (props: Props): ReactElement => (
   <View style={styles.container}>
     <View style={styles.body}>
-      <FormattedText style={styles.formattedText}>
-        {'HELLO THERE'}
-      </FormattedText>
       <View style={styles.section}>
         <Reanimatable
-          duration={3000}
           ref={props.reanimatableRefs[0]}
           style={styles.reanimatable}>
           <SharedElement elementId={props.elementId}>
@@ -44,5 +36,4 @@ const Screen = (props: Props): React.Element<any> => (
   </View>
 );
 
-Screen.defaultProps = defaultProps;
 export default Screen;
