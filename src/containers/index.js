@@ -10,4 +10,5 @@ export * from './LanguageProvider';
 
 // screens
 export { default as SplashScreen } from './SplashScreen';
+export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as SendScreen } from './SendScreen';

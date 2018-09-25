@@ -57,6 +57,8 @@
 		4984EDFE037840F3AE40B471 /* libRNRandomBytes-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F3FF0CF84514D6D8B50A187 /* libRNRandomBytes-tvOS.a */; };
 		1EA427F578274E7CB39BDD86 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3691A3CA4AF4CC88CBD93E5 /* libReactNativeNavigation.a */; };
 		B49E177A3C924EDE89D0B68D /* ReactNativeNavigationTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 46A3F0253157400D8E51FA6E /* ReactNativeNavigationTests.xctest */; };
+		A890610D105C4DFE990A3903 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26F5E64707545BD90B5B90B /* libRNSVG.a */; };
+		C1B3314B7FBA4C93A68FC3B8 /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6F0C7F83745CF83FA5225 /* libRNSVG-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -386,6 +388,9 @@
 		1FF01D917226404EAA0E0174 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativeNavigation.xcodeproj"; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		B3691A3CA4AF4CC88CBD93E5 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; name = "libReactNativeNavigation.a"; path = "libReactNativeNavigation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		46A3F0253157400D8E51FA6E /* ReactNativeNavigationTests.xctest */ = {isa = PBXFileReference; name = "ReactNativeNavigationTests.xctest"; path = "ReactNativeNavigationTests.xctest"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.cfbundle; explicitFileType = undefined; includeInIndex = 0; };
+		1C11DEA7A1374C65A159D675 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; name = "RNSVG.xcodeproj"; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A26F5E64707545BD90B5B90B /* libRNSVG.a */ = {isa = PBXFileReference; name = "libRNSVG.a"; path = "libRNSVG.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		22B6F0C7F83745CF83FA5225 /* libRNSVG-tvOS.a */ = {isa = PBXFileReference; name = "libRNSVG-tvOS.a"; path = "libRNSVG-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +424,7 @@
 				955A3FCB9A014C58A609F393 /* libRNRandomBytes.a in Frameworks */,
 				1EA427F578274E7CB39BDD86 /* libReactNativeNavigation.a in Frameworks */,
 				B49E177A3C924EDE89D0B68D /* ReactNativeNavigationTests.xctest in Resources */,
+				A890610D105C4DFE990A3903 /* libRNSVG.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +441,12 @@
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				4984EDFE037840F3AE40B471 /* libRNRandomBytes-tvOS.a in Frameworks */,
+				510536DA471E4F44B67FE700 /* libRNSVG-tvOS.a in Frameworks */,
+				2AD0723D6E974A15A27FAB0B /* libRNSVG-tvOS.a in Frameworks */,
+				A77958406FAB40F6B94AD06F /* libRNSVG-tvOS.a in Frameworks */,
+				C24ED1478BEF446E960C2E40 /* libRNSVG-tvOS.a in Frameworks */,
+				3985637C606A473797FB13DE /* libRNSVG-tvOS.a in Frameworks */,
+				C1B3314B7FBA4C93A68FC3B8 /* libRNSVG-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +622,7 @@
 				B76D166C73024BB99424B457 /* RNCamera.xcodeproj */,
 				AFC972241CEF4B7A84365BF8 /* RNRandomBytes.xcodeproj */,
 				1FF01D917226404EAA0E0174 /* ReactNativeNavigation.xcodeproj */,
+				1C11DEA7A1374C65A159D675 /* RNSVG.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1275,10 +1288,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1286,6 +1295,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1308,10 +1318,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1319,6 +1325,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1344,6 +1351,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1368,6 +1376,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1399,10 +1408,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1410,6 +1415,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1441,10 +1447,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1452,6 +1454,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;
@@ -1482,10 +1485,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1493,6 +1492,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Debug;
@@ -1523,10 +1523,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1534,6 +1530,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
 					"$(SRCROOT)/../node_modules/react-native-navigation/lib/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 				);
 			};
 			name = Release;

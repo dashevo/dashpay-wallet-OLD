@@ -1,6 +1,6 @@
 package com.dashpay;
+import com.horcrux.svg.SvgPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
-
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -37,7 +37,8 @@ public class MainApplication extends NavigationApplication {
     return Arrays.<ReactPackage>asList(
       new RNCameraPackage(),
       new VectorIconsPackage(),
-      new RandomBytesPackage()
+      new RandomBytesPackage(),
+      new SvgPackage()
     );
   }
 

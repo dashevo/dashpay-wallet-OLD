@@ -5,6 +5,7 @@
  */
 import { SplashScreen } from 'containers';
 import { SendScreen } from 'containers';
+import { ReceiveScreen } from 'containers';
 import enhance from './enhancer';
 
 let routes: Routes = [
@@ -15,6 +16,10 @@ let routes: Routes = [
   {
     name: 'SendScreen',
     component: SendScreen
+  },
+  {
+    name: 'ReceiveScreen',
+    component: ReceiveScreen
   }
 ];
 
