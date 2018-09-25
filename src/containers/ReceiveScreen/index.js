@@ -15,10 +15,9 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
-import {Screen} from "../SplashScreen/components";
 import connect from "react-redux/es/connect/connect";
-import selector from "../SplashScreen/selectors";
-import actions from "../SplashScreen/actions";
+import selector from "./selectors";
+import actions from "./actions";
 
 const logoFile = require('../../assets/images/dash-logo-letter-blue-small.png');
 
@@ -32,7 +31,7 @@ class ReceiveScreen extends React.Component<Props, State> {
 
   }
   async componentDidMount() {
-    const { payload } = await this.props.getUnusedAddress();
+    const { payload } = await this.props.getAccountUnusedAddress();
     const unusedAddress = payload.data.address;
     this.setState({unusedAddress});
 

@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
   },
   text: {
     justifyContent: 'center'
+  },
+  recipientField:{
+    backgroundColor: THEMES.vivid.foreground,
+    width:200
+  },
+  amountField:{
+    backgroundColor: THEMES.vivid.foreground,
+    width:60
   }
 });
 

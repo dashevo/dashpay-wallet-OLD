@@ -10,8 +10,6 @@ const INITIALIZE_WALLET = 'INITIALIZE_WALLET';
 const INITIALIZE_WALLET_SUCCESS = 'INITIALIZE_WALLET_SUCCESS';
 const INITIALIZE_WALLET_FAILURE = 'INITIALIZE_WALLET_FAILURE';
 
-const GET_ACCOUNT_UNUSED_ADDR = 'GET_ACCOUNT_UNUSED_ADDR';
-
 function initializeWallet() {
   return (dispatch, getState, wallet) =>
     dispatch({
@@ -28,16 +26,8 @@ function initializeWallet() {
     });
 }
 
-function getUnusedAddress() {
-  return (dispatch, getState, walletLib) =>
-    dispatch({
-      type: GET_ACCOUNT_UNUSED_ADDR,
-      payload: { data: walletLib.account.getUnusedAddress() }
-    });
-}
-
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ initializeWallet, getUnusedAddress }, dispatch);
+  return bindActionCreators({ initializeWallet }, dispatch);
 }
 
 export default actions;
