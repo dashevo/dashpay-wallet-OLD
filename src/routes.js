@@ -7,6 +7,7 @@ import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
+import { SettingsScreen } from 'containers';
 import enhance from './enhancer';
 
 type Routes = {};
@@ -27,6 +28,10 @@ let routes: Routes = [
   {
     name: 'HomeScreen',
     component: HomeScreen
+  },
+  {
+    name: 'SettingsScreen',
+    component: SettingsScreen
   }
 ];
 

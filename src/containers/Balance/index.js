@@ -10,6 +10,8 @@
 
 'use strict';
 
+import IconButton from "../HomeScreen/components/IconButton";
+
 const Animated = require('Animated');
 const I18nManager = require('I18nManager');
 const PanResponder = require('PanResponder');
@@ -445,6 +447,8 @@ class Balance extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.onLayout = this.onLayout.bind(this);
+    // let val = account.getBalance() = 694987737;
+    // account.events.on('balance_changed', () => {})
     this.state = {
       width: 200,
       text: 'This is a test',
@@ -555,6 +559,12 @@ class Balance extends React.Component<Props> {
                   {part2}
                 </Text>
               </View>
+              <View style={styles.settingsIcon}>
+                <IconButton
+                  source={require('assets/images/icon-settings.png')}
+                  action={() => this.props.onSettingsPress()}
+                  text=''/>
+              </View>
             </View>
           </TouchableWithoutFeedback>
         </SwipeableRow>
@@ -610,6 +620,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 12,
     opacity: 0.75
+  },
+  settingsIcon: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   }
 });
 

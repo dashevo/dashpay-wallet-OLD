@@ -25,7 +25,9 @@ const Screen = (props: Props): ReactElement => (
         duration={1000}
         ref={props.reanimatableRefs[2]}
         style={styles.reanimatable2}>
-        <Balance />
+        <Balance
+          onSettingsPress={() => props.navigation.push('SettingsScreen')}
+        />
       </Reanimatable>
     </View>
     <View style={styles.body}>

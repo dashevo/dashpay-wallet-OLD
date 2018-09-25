@@ -16,3 +16,4 @@ export { default as SplashScreen } from './SplashScreen';
 export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as SendScreen } from './SendScreen';
 export { default as HomeScreen } from './HomeScreen';
+export { default as SettingsScreen } from './SettingsScreen';
