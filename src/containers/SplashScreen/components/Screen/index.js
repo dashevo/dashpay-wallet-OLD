@@ -15,9 +15,14 @@ import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
 import defaultProps from './props';
 
+import { FormattedText } from 'components';
+
 const Screen = (props: Props): React.Element<any> => (
   <View style={styles.container}>
     <View style={styles.body}>
+      <FormattedText style={styles.formattedText}>
+        {'HELLO THERE'}
+      </FormattedText>
       <View style={styles.section}>
         <Reanimatable
           duration={3000}

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
 import { navigation } from 'navigation';

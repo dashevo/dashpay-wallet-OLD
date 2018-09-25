@@ -29,5 +29,8 @@ export default StyleSheet.create({
     paddingTop: 16,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  formattedText: {
+    color: 'red'
   }
 });

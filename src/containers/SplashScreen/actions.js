@@ -14,8 +14,6 @@ function doSomething() {
     dispatch({
       types: [DO_SOMETHING_REQUEST, DO_SOMETHING_SUCCESS, DO_SOMETHING_FAILURE],
       asyncTask: state => {
-        console.log('language', state.language);
-        console.log('user', state.user);
         return wallet.doSomething();
       },
       payload: { data: 'KEEP THIS INFO' }

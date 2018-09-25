@@ -3,5 +3,7 @@
  *
  * @wolf
  */
-export * from './navigation';
-export * from './helpers';
+export default {
+  formattedMessageProps: {},
+  textProps: {}
+};

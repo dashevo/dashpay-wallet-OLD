@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 const middleware = store => next => action => {
   let { asyncTask, types } = action;

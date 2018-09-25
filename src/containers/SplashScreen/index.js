@@ -26,7 +26,7 @@ class SplashScreen extends React.Component<Props> {
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
-    this.props.doSomething().then(console.log);
+    this.props.doSomething();
   }
 
   async handleOnComplete() {

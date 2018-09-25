@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { COLORS } from 'constants';
 import { registerRoutes } from 'navigation';
