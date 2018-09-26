@@ -9,15 +9,15 @@ const PAY_TO_ADDRESS = 'PAY_TO_ADDRESS';
 const PAY_TO_ADDRESS_FAILURE = 'PAY_TO_ADDRESS_FAILURE';
 const PAY_TO_ADDRESS_SUCCESS = 'PAY_TO_ADDRESS_SUCCESS';
 
-function payToAddress() {
+function payToAddress(recipient, amount, isIS = true) {
   return (dispatch, getState, walletLib) =>
     dispatch({
       types: [PAY_TO_ADDRESS, PAY_TO_ADDRESS_SUCCESS, PAY_TO_ADDRESS_FAILURE],
       asyncTask: (state) =>{
         const txOpts = {
-          satoshis:0,
-          to:'',
-          isInstantSend:true
+          satoshis:amount,
+          to:recipient,
+          isInstantSend:isIS
         }
         const {account} = walletLib;
         return account.broadcastTransaction(account.createTransaction(txOpts), txOpts.isInstantSend);

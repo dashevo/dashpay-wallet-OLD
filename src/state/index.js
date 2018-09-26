@@ -21,12 +21,9 @@ const walletLib = {
         mnemonic
       });
       walletLib.account = this.wallet.getAccount(0);
-      walletLib.account.events.on('ready', () => {
-        // let balance = walletLib.account.getBalance();
-        // walletLib.account.events.on('balance_change', ()=>{
-
-        // })
-        resolve(true)
+      let listener = walletLib.account.events.on('ready', () => {
+        resolve(true);
+        
       })
     });
   }
