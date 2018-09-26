@@ -14,9 +14,7 @@ export default StyleSheet.create({
   symbol: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    alignItems: 'flex-start'
-  },
-  reanimatableSymbol: {
+    alignItems: 'flex-start',
     paddingHorizontal: 16,
     paddingVertical: 16
   },
@@ -24,12 +22,8 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
-    flex: 1
-  },
-  reanimatableAmount: {
     backgroundColor: 'red',
     paddingHorizontal: 16,
-    paddingVertical: 16,
-    flex: 1
+    paddingVertical: 16
   }
 });

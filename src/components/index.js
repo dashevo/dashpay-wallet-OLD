@@ -14,3 +14,7 @@ export * from './Animation';
 
 // i18n
 export { default as FormattedText } from './FormattedText';
+export { default as FormattedDate } from './FormattedDate';
+export { default as FormattedTime } from './FormattedTime';
+export { default as FormattedRelative } from './FormattedRelative';
+export { default as FormattedNumber } from './FormattedNumber';

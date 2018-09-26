@@ -5,6 +5,8 @@
  */
 import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
+import { Balance } from 'containers';
+import { i18n } from './experimental';
 import enhance from 'enhancer';
 
 type Routes = {};
@@ -12,7 +14,7 @@ type Routes = {};
 let routes: Routes = [
   {
     name: 'SplashScreen',
-    component: SplashScreen
+    component: i18n
   },
   {
     name: 'HomeScreen',

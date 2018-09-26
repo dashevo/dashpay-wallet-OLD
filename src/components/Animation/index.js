@@ -68,7 +68,6 @@ const moveDown = driver => ({
 });
 
 const move = driver => {
-  console.log(driver.value);
   return {
     backgroundColor: '#fff',
     borderRadius: 9,
@@ -198,7 +197,6 @@ class Animation extends React.Component<Props, State> {
 
   getDriver() {
     const { driver } = this.props;
-    console.log('driver', driver);
     return typeof driver === 'function' ? new driver({}) : driver;
   }
 
