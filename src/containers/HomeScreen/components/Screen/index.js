@@ -11,7 +11,7 @@ import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
 import { Avatar } from 'components';
-import IconButton from '../IconButton';
+import { IconButton } from 'components';
 import defaultProps from './props';
 import styles from './styles';
 import type { ReactElement } from './types';

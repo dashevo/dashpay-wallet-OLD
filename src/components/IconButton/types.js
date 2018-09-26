@@ -8,6 +8,6 @@ export type ReactElement = Element<*>;
 
 export type Props = {
   source: number,
-  text: string,
+  text?: string,
   action: Function
 };

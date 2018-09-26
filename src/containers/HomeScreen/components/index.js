@@ -3,5 +3,4 @@
  *
  * @wolf
  */
-export * from './IconButton';
 export { default as Screen } from './Screen';

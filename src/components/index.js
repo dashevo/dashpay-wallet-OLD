@@ -9,6 +9,7 @@ export { default as Logo } from './Logo';
 export { default as ProgressBar } from './ProgressBar';
 export { default as SharedElement } from './SharedElement';
 export { default as Icon } from './Icon';
+export { default as IconButton } from './IconButton';
 
 export * from './Animation';
 

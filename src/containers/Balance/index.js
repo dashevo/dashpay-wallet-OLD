@@ -10,7 +10,7 @@
 
 'use strict';
 
-import IconButton from "../HomeScreen/components/IconButton";
+import { IconButton } from 'components';
 
 const Animated = require('Animated');
 const I18nManager = require('I18nManager');
@@ -559,15 +559,15 @@ class Balance extends React.Component<Props> {
                   {part2}
                 </Text>
               </View>
-              <View style={styles.settingsIcon}>
-                <IconButton
-                  source={require('assets/images/icon-settings.png')}
-                  action={() => this.props.onSettingsPress()}
-                  text=''/>
-              </View>
             </View>
           </TouchableWithoutFeedback>
         </SwipeableRow>
+        <View style={styles.settingsIcon}>
+          <IconButton
+            source={require('assets/images/icon-settings.png')}
+            action={() => this.props.onSettingsPress()}
+          />
+        </View>
       </View>
     );
   }
