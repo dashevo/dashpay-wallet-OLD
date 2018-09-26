@@ -575,7 +575,8 @@ class Balance extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   navbar: {
-    backgroundColor: '#011E60'
+    backgroundColor: '#011E60',
+    flexDirection: 'row'
   },
   row: {
     backgroundColor: '#011E60',
@@ -623,8 +624,10 @@ const styles = StyleSheet.create({
   },
   settingsIcon: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 'auto',
+    marginLeft: 'auto'
   }
 });
 
