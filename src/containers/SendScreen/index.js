@@ -29,6 +29,7 @@ class SendScreen extends React.Component<Props, State> {
     };
     this.onChangeRecipient = this.onChangeRecipient.bind(this);
     this.onChangeAmount = this.onChangeAmount.bind(this);
+    this.onPayPressed = this.onPayPressed.bind(this);
 
   }
 
@@ -40,8 +41,9 @@ class SendScreen extends React.Component<Props, State> {
   onChangeAmount(amount){
     this.setState({amount});
   }
-  onPayPressed(){
-    //this.props.payToAddress(this.state.recipient);
+  async onPayPressed(){
+    let result = await this.props.payToAddress(this.state.recipient, this.state.amount);
+    console.log(result);
   }
   render(): React.Element<any> {
     return (
