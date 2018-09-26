@@ -27,6 +27,7 @@ const Screen = (props: Props): ReactElement => (
         style={styles.reanimatable2}>
         <Balance
           onSettingsPress={() => props.navigation.push('SettingsScreen')}
+          walletLib={props.walletLib}
         />
       </Reanimatable>
     </View>

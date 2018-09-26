@@ -28,7 +28,15 @@ const walletLib = {
         resolve(true)
       })
     });
-  }
+  },
+  /**
+   * When using the walletLib wrapper, we call our method from walletLib.account.
+   * This method allow to update the account reference used in the app.
+   * @param accountId - A positive numeric value
+   */
+  changeAccount(accountId=0){
+    walletLib.account = this.wallet.getAccount(accountId);
+  },
 };
 
 function enhance(Component: ReactComponent): ReactComponent {
@@ -36,9 +44,7 @@ function enhance(Component: ReactComponent): ReactComponent {
     constructor(props) {
       super(props);
       this.navigation = navigation(props);
-      if(!walletLib.wallet){
-        this.walletLib = walletLib.initializeWallet();
-      }
+      this.walletLib = walletLib;
     }
 
     render(): ReactElement {

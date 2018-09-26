@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+
 import { StyleSheet, PanResponder, Animated, View, Text } from 'react-native';
 import styles from './styles';
 import shallowEqual from 'fbjs/lib/shallowEqual';
@@ -159,7 +159,7 @@ export default class realworld extends Component {
         {
           icon: 'dash-D-blue',
           amount: {
-            part1: '12,23',
+            part1: '11,23',
             part2: '468676'
           }
         },
@@ -175,9 +175,66 @@ export default class realworld extends Component {
     this._onPress = this._onPress.bind(this);
     this.animation = React.createRef();
     this.swipeableRow = React.createRef();
->>>>>>> 8e00ca02c8515c757bbfecd3c9f6668202fcd833
   }
 
+  _getMaxSwipeDistance(info: Object): number {
+    return this.state.width;
+  componentDidMount(){
+    if(this.props.walletLib && this.props.walletLib.account){
+      this.updateBalance(this.props.walletLib.account.getBalance());
+      // this.subscribeToBalance();
+    }
+  }
+  updateBalance(satoshis){
+    function curCurrencyParts(val) {
+      let str = val.toString();
+      let splitted = str.split('.');
+
+      var nf = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+      const curPart1 = nf.format(splitted[0]);
+
+      const curPart2 = (splitted.length>1) ?
+        splitted[1].slice(0,2).padEnd(2,'0') :
+        splitted[0].slice(0,2).padEnd(2,'0');
+      return {curPart1, curPart2}
+    }
+    function cutSatoshiParts(val){
+      let str = val.toString();
+      let len = str.length;
+
+      const part1 = (len > 6) ?
+        str.slice(0,-8).padStart(1,'0')+','+str.slice(-9,-7).padStart(2,'0') :
+        '0,00';
+
+      const part2 = (len > 6 ) ?
+        str.slice(-6) :
+        str.padStart(6,'0');
+
+      return {part1, part2}
+    }
+    function callToRatesService(satoshis, curr='USD'){
+      //FIXME
+      const pricePerSatoshis = 0.0000019;
+      const currBalance = satoshis * pricePerSatoshis;
+      return currBalance;
+    }
+    let {items} = this.state;
+    const {part1, part2}=cutSatoshiParts(satoshis);
+    items[0].amount.part1 = part1;
+    items[0].amount.part2 = part2;
+
+    const currencyBalance = callToRatesService(satoshis);
+    const {curPart1, curPart2}=curCurrencyParts(currencyBalance);
+    items[1].amount.part1 = curPart1;
+    items[1].amount.part2 = curPart2;
+
+    this.setState({items})
+  }
+  _getMaxSwipeDistance(info: Object): number {
+    return this.state.width;
   _animateToOpenPosition(duration: number = SWIPE_DURATION): void {
     this._animateTo(OPEN_POSITION);
   }

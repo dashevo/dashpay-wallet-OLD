@@ -23,7 +23,7 @@ const walletLib = {
       walletLib.account = this.wallet.getAccount(0);
       let listener = walletLib.account.events.on('ready', () => {
         resolve(true);
-        
+
       })
     });
   }
