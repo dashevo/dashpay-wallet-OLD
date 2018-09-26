@@ -182,8 +182,15 @@ export default class realworld extends Component {
   componentDidMount(){
     if(this.props.walletLib && this.props.walletLib.account){
       this.updateBalance(this.props.walletLib.account.getBalance());
-      // this.subscribeToBalance();
+      this.subscribeToBalance();
     }
+  }
+  subscribeToBalance(){
+    const account = this.props.walletLib.account;
+    this.balanceListener = account.events.on('balance_changed', ()=> self.updateBalance(account.getBalance()));
+  }
+  componentWillUnmount(){
+    this.balanceListener.remove();
   }
   updateBalance(satoshis){
     function curCurrencyParts(val) {
