@@ -11,7 +11,7 @@ import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
 import { Avatar } from 'components';
-import IconButton from '../IconButton';
+import { IconButton } from 'components';
 import defaultProps from './props';
 import styles from './styles';
 import type { ReactElement } from './types';
@@ -25,7 +25,9 @@ const Screen = (props: Props): ReactElement => (
         duration={1000}
         ref={props.reanimatableRefs[2]}
         style={styles.reanimatable2}>
-        <Balance />
+        <Balance
+          onSettingsPress={() => props.navigation.push('SettingsScreen')}
+        />
       </Reanimatable>
     </View>
     <View style={styles.body}>
@@ -56,17 +58,17 @@ const Screen = (props: Props): ReactElement => (
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
-              action={() => props.navigate.push('SendScreen')}
+              action={() => props.navigation.push('SendScreen')}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}
               text="Receive"
-              action={() => props.navigate.push('ReceiveScreen')}
+              action={() => props.navigation.push('ReceiveScreen')}
             />
             <IconButton
               source={require('assets/images/icon-people.png')}
               text="Contacts"
-              action={() => props.navigate.push('ContactsScreen')}
+              action={() => props.navigation.push('ContactsScreen')}
             />
           </View>
         </Reanimatable>

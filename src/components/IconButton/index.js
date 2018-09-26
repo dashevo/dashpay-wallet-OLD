@@ -19,7 +19,7 @@ const IconButton = ({ source, text, action }: Props): ReactElement => (
     onPress={action}>
     <View style={styles.container}>
       <Image source={source} style={styles.image} />
-      <Text style={styles.text}>{text}</Text>
+      { text && <Text style={styles.text}>{text}</Text> }
     </View>
   </TouchableHighlight>
 );

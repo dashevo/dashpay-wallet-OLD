@@ -16,8 +16,10 @@ const styles = StyleSheet.create({
   text: {
     justifyContent: 'center'
   },
-  bold:{
-    fontWeight: 'bold'
+  debugger: {
+    color: THEMES.vivid.foreground,
+    marginTop: 12,
+    fontSize: 12
   }
 });
 

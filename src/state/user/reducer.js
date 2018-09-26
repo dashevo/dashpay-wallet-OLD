@@ -4,7 +4,9 @@
  * @wolf
  */
 export const initialState = {
-  username: 'kreshnik.alidema'
+  username: 'kreshnik.alidema',
+  mnemonic: 'differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine',
+  network: 'testnet'
 };
 
 const user = (state = initialState, action) => {

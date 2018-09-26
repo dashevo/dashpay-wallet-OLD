@@ -1,0 +1,6 @@
+[
+  { "key": "USD", "value": "US Dollar"},
+  { "key": "CAD", "value": "Canadian Dollar"},
+  { "key": "VEF", "value": "Venezuelan Bolivar"},
+  { "key": "EUR", "value": "Euro"}
+]
