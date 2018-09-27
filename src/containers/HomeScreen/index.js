@@ -52,6 +52,7 @@ class HomeScreen extends React.Component<Props> {
         reanimatableRefs={this.reanimatableRefs}
         onComplete={this.handleOnComplete}
         navigation={this.props.navigation}
+        walletLib={this.props.walletLib}
       />
     );
   }
