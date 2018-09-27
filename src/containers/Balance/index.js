@@ -187,6 +187,7 @@ export default class realworld extends Component {
   }
   subscribeToBalance(){
     const account = this.props.walletLib.account;
+    const self = this;
     this.balanceListener = account.events.on('balance_changed', ()=> self.updateBalance(account.getBalance()));
   }
   componentWillUnmount(){

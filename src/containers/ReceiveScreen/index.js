@@ -40,6 +40,7 @@ class ReceiveScreen extends React.Component<Props, State> {
   render(): React.Element<any> {
     return (
       <View style={styles.container}>
+
         <Text selectable={true} style={[styles.text, styles.bold]}>{this.state.unusedAddress}</Text>
         <QRCode
           value="test"

@@ -16,12 +16,22 @@ import {Wallet} from "@dashevo/wallet-lib";
 const walletLib = {
   wallet:null,
   account:null,
+  async payTo(payType, recipient, amount, isIS=true){
+    const txOpts = {
+      amount:parseFloat(amount),
+      to:recipient,
+      isInstantSend:isIS
+    };
+    console.log(txOpts);
+    return walletLib.account.broadcastTransaction(walletLib.account.createTransaction(txOpts), txOpts.isInstantSend);
+  },
   initializeWallet(opts) {
     const { network, mnemonic } = opts;
     return new Promise(resolve => {
       walletLib.wallet = new Wallet({
         network,
-        mnemonic
+        mnemonic,
+        transport:'Insight'
       });
       walletLib.account = this.wallet.getAccount(0);
       walletLib.account.events.on('ready', () => {
@@ -37,6 +47,9 @@ const walletLib = {
   changeAccount(accountId=0){
     walletLib.account = this.wallet.getAccount(accountId);
   },
+  isAddress(input){
+    return input.length===34; //FIXME : This only work for demo purpose but technically wrong
+  }
 };
 
 function enhance(Component: ReactComponent): ReactComponent {
