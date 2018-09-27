@@ -15,7 +15,7 @@ type Routes = {};
 let routes: Routes = [
   {
     name: 'SplashScreen',
-    component: i18n
+    component: SplashScreen
   },
   {
     name: 'SendScreen',

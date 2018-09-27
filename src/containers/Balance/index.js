@@ -10,7 +10,7 @@
 
 'use strict';
 
-import IconButton from "components";
+import IconButton from 'components';
 
 const Animated = require('Animated');
 const I18nManager = require('I18nManager');
@@ -28,6 +28,7 @@ const createReactClass = require('create-react-class');
 const emptyFunction = require('fbjs/lib/emptyFunction');
 
 const IS_RTL = I18nManager.isRTL;
+const settingIconFile = require('../../assets/images/icon-settings.png');
 
 // NOTE: Eventually convert these consts to an input object of configurations
 
@@ -472,12 +473,9 @@ class Balance extends React.Component<Props> {
       ]
     };
     this._onPress = this._onPress.bind(this);
+    this.onSettingsPressed = this.onSettingsPressed.bind(this);
     this.animation = React.createRef();
     this.swipeableRow = React.createRef();
-    console.log(this.props.walletLib.account);
-    console.log(this.props.walletLib.account);
-    console.log(this.props.walletLib.account);
-    console.log(this.props.walletLib.account);
   }
 
   componentDidMount(){
@@ -627,15 +625,19 @@ class Balance extends React.Component<Props> {
               </View>
               <View style={styles.settingsIcon}>
                 <IconButton
-                  source={require('assets/images/icon-settings.png')}
-                  action={() => this.props.onSettingsPress()}
-                  text=''/>
+                  source={settingIconFile}
+                  action={() => this.onSettingsPressed()}
+                  />
               </View>
             </View>
           </TouchableWithoutFeedback>
         </SwipeableRow>
       </View>
     );
+  }
+
+  onSettingsPressed() {
+    return this.props.navigation.push('SettingsScreen')
   }
 }
 
