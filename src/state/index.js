@@ -8,11 +8,12 @@ import reducers from './reducers';
 
 // Tmp
 export * from './language';
+export * from './user';
 
 // Tmp
 const walletLib = {
-  wallet:null,
-  account:null,
+  wallet: null,
+  account: null,
   initializeWallet(opts) {
     const { network, mnemonic } = opts;
     return new Promise(resolve => {
@@ -23,8 +24,7 @@ const walletLib = {
       walletLib.account = this.wallet.getAccount(0);
       let listener = walletLib.account.events.on('ready', () => {
         resolve(true);
-
-      })
+      });
     });
   }
 };
@@ -32,7 +32,7 @@ const walletLib = {
 import thunk from 'redux-thunk';
 import middleware from './middleware';
 import { applyMiddleware } from 'redux';
-import {Wallet} from "@dashevo/wallet-lib";
+import { Wallet } from '@dashevo/wallet-lib';
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);

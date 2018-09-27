@@ -4,10 +4,10 @@
  * @wolf
  */
 import { bindActionCreators } from 'redux';
-import { getDeviceLocale } from 'state';
+import { changeLocale } from 'state';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ getDeviceLocale }, dispatch);
+  return bindActionCreators({ changeLocale }, dispatch);
 }
 
 export default actions;

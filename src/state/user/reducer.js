@@ -3,11 +3,7 @@
  *
  * @wolf
  */
-export const initialState = {
-  username: 'kreshnik.alidema',
-  mnemonic: 'differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine',
-  network: 'testnet'
-};
+export const initialState = {};
 
 const user = (state = initialState, action) => {
   switch (action.type) {

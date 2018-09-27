@@ -22,7 +22,7 @@ const walletLib = {
       to:recipient,
       isInstantSend:isIS
     };
-    console.log(txOpts);
+    // console.log(txOpts);
     return walletLib.account.broadcastTransaction(walletLib.account.createTransaction(txOpts), txOpts.isInstantSend);
   },
   initializeWallet(opts) {

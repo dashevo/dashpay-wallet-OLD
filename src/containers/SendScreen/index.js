@@ -44,7 +44,7 @@ class SendScreen extends React.Component<Props, State> {
   async onPayPressed(){
     let payType = (this.props.walletLib.isAddress(this.state.recipient)) ? 'address' : 'username';
     let result = await this.props.walletLib.payTo(payType, this.state.recipient, this.state.amount);
-    console.log(result);
+    // console.log(result);
   }
   render(): React.Element<any> {
     return (

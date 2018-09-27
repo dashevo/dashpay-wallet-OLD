@@ -175,7 +175,7 @@ const SwipeableRow = createReactClass({
 
   render(): React.Element<any> {
     // The view hidden behind the main view
-    console.log('this.props.maxSwipeDistance', this.props.maxSwipeDistance);
+    // console.log('this.props.maxSwipeDistance', this.props.maxSwipeDistance);
     let slideOutView;
     if (this.state.isSwipeableViewRendered && this.state.rowHeight) {
       slideOutView = (
@@ -478,67 +478,71 @@ class Balance extends React.Component<Props> {
     this.swipeableRow = React.createRef();
   }
 
-  componentDidMount(){
-    if(this.props.walletLib && this.props.walletLib.account){
+  componentDidMount() {
+    if (this.props.walletLib && this.props.walletLib.account) {
       this.updateBalance(this.props.walletLib.account.getBalance());
       this.subscribeToBalance();
     }
   }
-  subscribeToBalance(){
+  subscribeToBalance() {
     const account = this.props.walletLib.account;
     const self = this;
-    this.balanceListener = account.events.on('balance_changed', ()=> self.updateBalance(account.getBalance()));
+    this.balanceListener = account.events.on('balance_changed', () =>
+      self.updateBalance(account.getBalance())
+    );
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.balanceListener.remove();
   }
-  updateBalance(satoshis){
+  updateBalance(satoshis) {
     function curCurrencyParts(val) {
       let str = val.toString();
       let splitted = str.split('.');
 
       var nf = new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'USD'
       });
       const curPart1 = nf.format(splitted[0]);
 
-      const curPart2 = (splitted.length>1) ?
-        splitted[1].slice(0,2).padEnd(2,'0') :
-        splitted[0].slice(0,2).padEnd(2,'0');
-      return {curPart1, curPart2}
+      const curPart2 =
+        splitted.length > 1
+          ? splitted[1].slice(0, 2).padEnd(2, '0')
+          : splitted[0].slice(0, 2).padEnd(2, '0');
+      return { curPart1, curPart2 };
     }
-    function cutSatoshiParts(val){
+    function cutSatoshiParts(val) {
       let str = val.toString();
       let len = str.length;
 
-      const part1 = (len > 6) ?
-        str.slice(0,-8).padStart(1,'0')+','+str.slice(-9,-7).padStart(2,'0') :
-        '0,00';
+      const part1 =
+        len > 6
+          ? str.slice(0, -8).padStart(1, '0') +
+            ',' +
+            str.slice(-9, -7).padStart(2, '0')
+          : '0,00';
 
-      const part2 = (len > 6 ) ?
-        str.slice(-6) :
-        str.padStart(6,'0');
+      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, '0');
 
-      return {part1, part2}
+      return { part1, part2 };
     }
-    function callToRatesService(satoshis, curr='USD'){
+    function callToRatesService(satoshis, curr = 'USD') {
       //FIXME
       const pricePerSatoshis = 0.0000019;
       const currBalance = satoshis * pricePerSatoshis;
       return currBalance;
     }
-    let {items} = this.state;
-    const {part1, part2}=cutSatoshiParts(satoshis);
+    let { items } = this.state;
+    const { part1, part2 } = cutSatoshiParts(satoshis);
     items[0].amount.part1 = part1;
     items[0].amount.part2 = part2;
 
     const currencyBalance = callToRatesService(satoshis);
-    const {curPart1, curPart2}=curCurrencyParts(currencyBalance);
+    const { curPart1, curPart2 } = curCurrencyParts(currencyBalance);
     items[1].amount.part1 = curPart1;
     items[1].amount.part2 = curPart2;
 
-    this.setState({items})
+    this.setState({ items });
   }
   _getMaxSwipeDistance(info: Object): number {
     return this.state.width;
@@ -601,6 +605,7 @@ class Balance extends React.Component<Props> {
         <Icon style={styles.icon} name={icon} />
       </Animation>
     );
+    return null;
     return (
       <View style={styles.navbar}>
         <SwipeableRow
@@ -627,7 +632,7 @@ class Balance extends React.Component<Props> {
                 <IconButton
                   source={settingIconFile}
                   action={() => this.onSettingsPressed()}
-                  />
+                />
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -637,7 +642,7 @@ class Balance extends React.Component<Props> {
   }
 
   onSettingsPressed() {
-    return this.props.navigation.push('SettingsScreen')
+    return this.props.navigation.push('SettingsScreen');
   }
 }
 
@@ -692,7 +697,7 @@ const styles = StyleSheet.create({
   settingsIcon: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   }
 });
 

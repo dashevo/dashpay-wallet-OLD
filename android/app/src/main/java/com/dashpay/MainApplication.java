@@ -1,8 +1,10 @@
 package com.dashpay;
-import com.horcrux.svg.SvgPackage;
+
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.horcrux.svg.SvgPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
@@ -35,9 +37,10 @@ public class MainApplication extends NavigationApplication {
     // Add additional packages you require here
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
+      new RNDeviceInfo(),
+      new RandomBytesPackage(),
       new RNCameraPackage(),
       new VectorIconsPackage(),
-      new RandomBytesPackage(),
       new SvgPackage()
     );
   }

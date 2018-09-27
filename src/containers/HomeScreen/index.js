@@ -33,7 +33,7 @@ class HomeScreen extends React.Component<Props> {
       if (index == 2) return ref.fadeIn();
     }
     await sequence(refs, animationController);
-    // this.navigateFurther();
+    this.props.getDeviceLocale();
   }
 
   async handleOnComplete() {
@@ -47,6 +47,7 @@ class HomeScreen extends React.Component<Props> {
   }
 
   render(): ReactElement {
+    console.log('this.props', this.props);
     return (
       <Screen
         reanimatableRefs={this.reanimatableRefs}

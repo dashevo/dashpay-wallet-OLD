@@ -6,6 +6,6 @@
 import { createSelector } from 'reselect';
 import { selectLanguage } from 'state';
 
-const selector = createSelector(selectLanguage, language => ({ language }));
+const selector = createSelector(selectLanguage, locale => ({ locale }));
 
 export default selector;

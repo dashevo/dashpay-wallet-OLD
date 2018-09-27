@@ -20,17 +20,7 @@ import { Balance } from 'containers';
 
 const Screen = (props: Props): ReactElement => (
   <View style={styles.container}>
-    <View style={styles.header}>
-      <Reanimatable
-        duration={1000}
-        ref={props.reanimatableRefs[2]}
-        style={styles.reanimatable2}>
-        <Balance
-          onSettingsPress={() => props.navigation.push('SettingsScreen')}
-          walletLib={props.walletLib}
-        />
-      </Reanimatable>
-    </View>
+    <View style={styles.header} />
     <View style={styles.body}>
       <View style={styles.section}>
         <SharedElement elementId={props.elementId}>

@@ -1,19 +1,22 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @wolf
+ */
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createSelector } from 'reselect';
-import { selectLanguage } from 'state';
-import { changeLocale } from 'state';
 import { ScrollView } from 'react-native';
 import { View } from 'react-native';
-import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Text } from 'react-native';
 import { FormattedText } from 'components';
 import { FormattedDate } from 'components';
 import { FormattedTime } from 'components';
 import { FormattedRelative } from 'components';
 import { FormattedNumber } from 'components';
+import actions from './actions';
+import selector from './selectors';
+import styles from './styles';
 
 class I18n extends React.Component {
   constructor(props) {
@@ -37,7 +40,13 @@ class I18n extends React.Component {
   }
 
   componentDidMount() {
-    this.intervalID = setInterval(this.generateRandomData, 2000);
+    this.intervalId = setInterval(this.generateRandomData, 2000);
+  }
+
+  componentWillUnmount() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   generateRandomData() {
@@ -45,7 +54,6 @@ class I18n extends React.Component {
       ...this.state.example2,
       count: (this.state.example2.count + 1) % 4
     };
-
     this.setState({ ...this.state, example2 });
   }
 
@@ -140,37 +148,6 @@ class I18n extends React.Component {
       </ScrollView>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    padding: 32,
-    flex: 1
-  },
-  section: {
-    marginBottom: 16
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  heading: {
-    fontSize: 14,
-    color: '#000'
-  },
-  link: {
-    color: 'blue',
-    fontSize: 14,
-    padding: 8
-  }
-});
-
-const selector = createSelector(selectLanguage, locale => ({ locale }));
-
-function actions(dispatch: Function): Object {
-  return bindActionCreators({ changeLocale }, dispatch);
 }
 
 I18n = connect(

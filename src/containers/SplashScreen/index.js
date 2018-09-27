@@ -22,18 +22,23 @@ class SplashScreen extends React.Component<Props> {
     this.reanimatableRefs.push(React.createRef());
     this.reanimatableRefs.push(React.createRef());
     this.handleOnComplete = this.handleOnComplete.bind(this);
+
+    // console.log('__props__', props);
   }
 
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
-    console.log(this);
+    // console.log(this);
     const walletOpts = {
-      network:'testnet',//todo : Should be from state
-      mnemonic:'differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine',
-      transport:'insight'
+      network: 'testnet', //todo : Should be from state
+      mnemonic:
+        'differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine',
+      transport: 'insight'
     };
-    this.props.walletLib.initializeWallet(walletOpts).then(this.navigateFurther.bind(this));
+    this.props.walletLib
+      .initializeWallet(walletOpts)
+      .then(this.navigateFurther.bind(this));
   }
 
   async handleOnComplete() {
