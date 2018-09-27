@@ -20,7 +20,7 @@ import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
 import actions from "./actions";
 
-import currencies from './currencies.json';
+import currencies from 'constants';
 import translations from 'translations';
 import { RadioRow, LabeledSwitch } from 'components';
 

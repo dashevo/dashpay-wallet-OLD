@@ -31,8 +31,8 @@ class ReceiveScreen extends React.Component<Props, State> {
 
   }
   async componentDidMount() {
-    const { payload } = await this.props.getAccountUnusedAddress();
-    const unusedAddress = payload.data.address;
+    const { address } = this.props.walletLib.account.getUnusedAddress();
+    const unusedAddress = address;
     this.setState({unusedAddress});
 
   }
@@ -40,7 +40,8 @@ class ReceiveScreen extends React.Component<Props, State> {
   render(): React.Element<any> {
     return (
       <View style={styles.container}>
-        <Text style={[styles.text, styles.bold]}>{this.state.unusedAddress}</Text>
+
+        <Text selectable={true} style={[styles.text, styles.bold]}>{this.state.unusedAddress}</Text>
         <QRCode
           value="test"
           size={400}
