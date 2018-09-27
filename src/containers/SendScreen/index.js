@@ -24,8 +24,8 @@ class SendScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      recipient: '',
-      amount:'0'
+      recipient: 'yWdXnYxGbouNoo8yMvcbZmZ3Gdp6BpySxL',
+      amount:'1'
     };
     this.onChangeRecipient = this.onChangeRecipient.bind(this);
     this.onChangeAmount = this.onChangeAmount.bind(this);
@@ -42,7 +42,8 @@ class SendScreen extends React.Component<Props, State> {
     this.setState({amount});
   }
   async onPayPressed(){
-    let result = await this.props.payToAddress(this.state.recipient, this.state.amount);
+    let payType = (this.props.walletLib.isAddress(this.state.recipient)) ? 'address' : 'username';
+    let result = await this.props.walletLib.payTo(payType, this.state.recipient, this.state.amount);
     console.log(result);
   }
   render(): React.Element<any> {
@@ -53,6 +54,7 @@ class SendScreen extends React.Component<Props, State> {
           style={styles.recipientField}
           onChangeText={this.onChangeRecipient}
           value={this.state.recipient}
+          placeholder={"Enter a dash address or a username"}
         />
         <Text style={styles.text}>Amount :</Text>
         <TextInput
