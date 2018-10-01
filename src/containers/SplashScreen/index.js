@@ -1,133 +1,71 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
-import { Animatable } from 'components';
-import { ProgressBar } from 'components';
-import { Image } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-import { Text } from 'react-native';
-import styles from './styles';
+import { connect } from 'react-redux';
+import { sequence } from 'libraries';
+import { Screen } from './components';
+import actions from './actions';
+import defaultProps from './props';
+import selector from './selectors';
 import type { ReactElement } from './types';
 import type { Props } from './types';
-import type { State } from './types';
-import { SharedElement } from 'components';
-import { Navigation } from 'react-native-navigation';
 
-class SplashScreen extends React.Component<Props, State> {
-  static get options() {
-    return {
-      statusBar: {
-        style: 'light',
-        backgroundColor: '#0D47A1'
-      },
-      layout: {
-        orientation: ['portrait'],
-        backgroundColor: '#0182E1'
-      },
-      topBar: {
-        // transparent: true,
-        visible: false,
-        animate: false,
-        hideOnScroll: false,
-        drawBehind: false,
-        background: {
-          color: '#00ff00'
-        }
-      }
-    };
-  }
+class SplashScreen extends React.Component<Props> {
+  static defaultProps = defaultProps;
 
   constructor(props: Props) {
     super(props);
-    this.animatable = [];
-    this.animatable.push(React.createRef());
-    this.animatable.push(React.createRef());
-    this.navigateFurther = this.navigateFurther.bind(this);
-    this.onCompleted = this.onCompleted.bind(this);
-    this.state = {
-      logo: require('assets/images/logo.png'),
-      progress: 0
-    };
+    this.reanimatableRefs = [];
+    this.reanimatableRefs.push(React.createRef());
+    this.reanimatableRefs.push(React.createRef());
+    this.handleOnComplete = this.handleOnComplete.bind(this);
+
+    // console.log('__props__', props);
   }
 
   async componentDidMount() {
-    await this.animatable[0].current.fadeIn(500);
-    await this.animatable[1].current.fadeIn(500);
-    this.setTimeoutId = setInterval(() => {
-      this.setState(({ progress }) => ({ progress: progress + 1 }));
-    }, 5);
+    const refs = this.reanimatableRefs;
+    await sequence(refs, ref => ref.fadeIn());
+    // console.log(this);
+    const walletOpts = {
+      network: 'testnet', //todo : Should be from state
+      mnemonic:
+        'differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine',
+      transport: 'insight'
+    };
+    this.props.walletLib
+      .initializeWallet(walletOpts)
+      .then(this.navigateFurther.bind(this));
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.setTimeoutId);
+  async handleOnComplete() {
+    const refs = this.reanimatableRefs;
+    await sequence(refs, ref => ref.fadeOut());
   }
 
-  async onCompleted() {
-    clearInterval(this.setTimeoutId);
-    await this.animatable[1].current.fadeOut(500);
-    this.navigateFurther();
-  }
-
-  async navigateFurther() {
-    await Navigation.push(this.props.componentId, {
-      component: {
-        name: 'HomeScreen',
-        options: {
-          animations: {
-            push: {
-              waitForRender: true,
-              content: {
-                alpha: {
-                  from: 0, // Mandatory, initial value
-                  to: 1, // Mandatory, end value
-                  duration: 150, // Default value is 300 ms
-                  startDelay: 0, // Default value is 0
-                  interpolation: 'decelerate' // Optional
-                }
-              }
-            }
-          },
-          customTransition: {
-            animations: [
-              {
-                type: 'sharedElement',
-                fromId: 'logo1',
-                toId: 'logo2',
-                startDelay: 0,
-                duration: 1
-              }
-            ]
-          }
-        }
-      }
-    });
+  navigateFurther() {
+    const { routeName } = this.props;
+    const { routeParams } = this.props;
+    this.props.navigation.push(routeName, routeParams);
   }
 
   render(): ReactElement {
-    const { logo } = this.state;
-    const { progress } = this.state;
     return (
-      <View style={styles.container}>
-        <View style={styles.header} />
-        <View style={styles.body}>
-          <Animatable ref={this.animatable[0]}>
-            <SharedElement elementId={'logo1'}>
-              <Image source={logo} style={styles.logo} />
-            </SharedElement>
-          </Animatable>
-          <View style={styles.progressBar}>
-            <Animatable ref={this.animatable[1]}>
-              <ProgressBar progress={progress} onCompleted={this.onCompleted} />
-            </Animatable>
-          </View>
-        </View>
-      </View>
+      <Screen
+        reanimatableRefs={this.reanimatableRefs}
+        onComplete={this.handleOnComplete}
+        elementId={this.props.elementId}
+      />
     );
   }
 }
 
-export { SplashScreen };
+SplashScreen = connect(
+  selector,
+  actions
+)(SplashScreen);
+
+export default SplashScreen;

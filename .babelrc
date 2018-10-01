@@ -26,7 +26,8 @@
           "components": "./src/components",
           "constants": "./src/constants",
           "containers": "./src/containers",
-          "navigator": "./src/navigator",
+          "libraries": "./src/libraries",
+          "navigation": "./src/navigation",
           "state": "./src/state",
           "translations": "./src/translations",
           "utilities": "./src/utilities"

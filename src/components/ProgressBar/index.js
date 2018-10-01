@@ -1,89 +1,59 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
-
-// External dependencies
 import * as React from 'react';
 import { View } from 'react-native';
-import { Animated, Easing } from 'react-native';
-
-// Internal dependencies
+import { Reanimatable } from 'libraries';
+import { TimingDriver } from 'libraries';
+import animations from './animations';
+import defaultProps from './props';
 import styles from './styles';
-import type { ReactElement } from './types';
 import type { Props } from './types';
-import type { State } from './types';
 
-class ProgressBar extends React.PureComponent<Props, State> {
-  static defaultProps = {
-    progress: 0,
-    max: 100
-  };
+class ProgressBar extends React.PureComponent<Props> {
+  static defaultProps = defaultProps;
 
-  state = {
-    progress: 0
-  };
-
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
-    this.progress = new Animated.Value(0);
-    this.onCompleted = this.onCompleted.bind(this);
+    this.progressBar = React.createRef();
+    this.driver = new TimingDriver();
   }
 
-  componentDidMount() {
-    this.animate();
-  }
+  async componentDidUpdate() {
+    const { total } = this.props;
+    const { value } = this.props;
 
-  componentDidUpdate() {
-    this.animate();
-  }
+    if (this.progressBar.current.progress) {
+      await this.progressBar.current.progress();
+    }
 
-  animate() {
-    if (this.props.progress <= 100) {
-      Animated.timing(this.progress, {
-        toValue: this.props.progress,
-        duration: 1000,
-        easing: Easing.linear,
-        useNativeDriver: true
-      }).start(this.onCompleted);
+    if (value >= 100) {
+      this.props.onComplete();
     }
   }
 
-  onCompleted(event) {
-    if (event.finished && this.props.progress >= 100) {
-      this.props.onCompleted(event);
-    }
+  renderProgressBar(): React.Element<any> {
+    const { value } = this.props;
+    return (
+      <Reanimatable
+        animations={animations}
+        driver={this.driver}
+        ref={this.progressBar}
+        style={styles.progressBar}
+        value={value}
+      />
+    );
   }
 
-  renderProgressBar(): ReactElement {
-    const progressStyle = {
-      backgroundColor: '#fff',
-      borderRadius: 15,
-      height: 6,
-      transform: [
-        {
-          translateX: this.progress.interpolate({
-            inputRange: [0, 100],
-            outputRange: [240 / -2, 0],
-            extrapolate: 'clamp'
-          })
-        },
-        {
-          // Interpolation a temp workaround for https://github.com/facebook/react-native/issues/6278
-          scaleX: this.progress.interpolate({
-            inputRange: [0, 100],
-            outputRange: [0.0001, 1],
-            extrapolate: 'clamp'
-          })
-        }
-      ]
-    };
-    return <Animated.View style={progressStyle} />;
-  }
-
-  render(): ReactElement {
-    return <View style={styles.progress}>{this.renderProgressBar()}</View>;
+  render(): React.Element<any> {
+    return (
+      <View style={styles.progress}>
+        {/* prettier-ignore */}
+        {this.renderProgressBar()}
+      </View>
+    );
   }
 }
 

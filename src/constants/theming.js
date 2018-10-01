@@ -1,19 +1,11 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
+import COLORS from './colors';
 
-export const COLORS = {
-  blue: '#088BE2',
-  blueDim: '#012060',
-  blueDark: '#0B0F3B',
-  white: '#FFFFFF',
-  gray: '#787878',
-  black: '#111921'
-};
-
-export const THEMES = {
+export default {
   light: {
     foreground: COLORS.black,
     background: COLORS.white
