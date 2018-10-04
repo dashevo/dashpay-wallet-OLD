@@ -22,56 +22,49 @@ import actions from "./actions";
 
 import currencies from 'constants';
 import translations from 'translations';
-import { RadioRow, LabeledSwitch } from 'components';
+import { RadioRow, LabeledSwitch, ThemedButton } from 'components';
+import {
+  selectSettings,
+  changeSettings,
+} from 'state';
 
 class SettingsScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.settings={
-      currency: 'USD',
-      locale: 'en',
-      balanceVisible:true,
-    }
-    this.state = {
-      locale:{
-        options:Object.keys(translations).map(
-          translation => ({
-            key: translation,
-            value: translations[translation].languageName
-          })
-        )
-      },
-      currency:{
-        options:currencies
-      },
-    }
   }
+
   async componentDidMount() {
-    this.changeLocale = this.props.changeLocale.bind(this);
-    this.changeCurrency = this.props.changeCurrency.bind(this);
     this.changeBalanceVisible = this.props.changeBalanceVisible.bind(this);
   }
 
   render(): React.Element<any> {
+    const navigate = this.props.navigate.push;
+    const settings = this.props.selector();
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Settings</Text>
         <View style={styles.content}>
-          <Text style={styles.text}>Language</Text>
-          {/* <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
-          <Text style={styles.text}>Currency</Text>
-          <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
-          <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} /> */}
+          <ThemedButton
+            title='Languages'
+            onPress={ navigate('SettingsLanguageScreen') } />
+          <ThemedButton
+            title='Currency'
+            onPress={ navigate('SettingsCurrencyScreen') } />
+          <LabeledSwitch
+            label="Balance in Navigation Bar"
+            value={settings.balanceVisible}
+            onValueChange={this.changeBalanceVisible} />
           <Text style={styles.text}>App State</Text>
           <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
         </View>
       </View>
     );
   }
-};
-SettingsScreen = connect(
+}
+
+const connectedSettingsScreen = connect(
   selector,
   actions
 )(SettingsScreen);
 
-export default SettingsScreen;
+export default connectedSettingsScreen;

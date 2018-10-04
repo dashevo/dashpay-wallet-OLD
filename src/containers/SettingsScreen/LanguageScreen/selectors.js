@@ -4,6 +4,6 @@
  * @wolf
  */
 import { createSelector } from 'reselect';
-import { selectSettings } from 'state';
+import { selectLocale } from 'state';
 
-export default createSelector(selectSettings, settings => ({ settings }));
+export default createSelector(selectLocale, locale => ({ locale }));

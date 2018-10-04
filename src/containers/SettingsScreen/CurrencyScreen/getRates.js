@@ -4,7 +4,8 @@ const getBtcFiatRates = async () => {
     throw Error(response.statusText);
   } else {
     const json = await response.json();
-    return json.filter(btcFiatRate => ['BTC', 'BCH', 'XAU', 'XAG'].indexOf(btcFiatRate.code) < 0);
+    const excludedRates = ['BTC', 'BCH', 'XAU', 'XAG'];
+    return json.filter(btcFiatRate => excludedRates.indexOf(btcFiatRate.code) < 0);
   }
 }
 
@@ -23,8 +24,8 @@ const getRates = async () => {
   let dashBtcRate = await getDashBtcRate();
   return btcFiatRates.map(btcFiatRate => ({
     ...btcFiatRate,
-    rate: btcFiatRate.rate * dashBtcRate
-  }));
+    rate: btcFiatRate.rate * dashBtcRate,
+  })).sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export default getRates;

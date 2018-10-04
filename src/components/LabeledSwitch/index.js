@@ -4,8 +4,7 @@
  * @flow
  */
 import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Switch } from 'react-native';
+import { View, Text, Switch } from 'react-native';
 import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';
