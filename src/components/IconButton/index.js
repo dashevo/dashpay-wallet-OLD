@@ -8,6 +8,7 @@ import { View } from 'react-native';
 import { Image } from 'react-native';
 import { Text } from 'react-native';
 import { TouchableHighlight } from 'react-native';
+import { THEMES } from 'constants';
 import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';

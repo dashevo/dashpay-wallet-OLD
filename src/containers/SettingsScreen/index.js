@@ -45,13 +45,11 @@ class SettingsScreen extends React.Component<Props, State> {
         options:currencies
       },
     }
-
-
   }
   async componentDidMount() {
     this.changeLocale = this.props.changeLocale.bind(this);
     this.changeCurrency = this.props.changeCurrency.bind(this);
-
+    this.changeBalanceVisible = this.props.changeBalanceVisible.bind(this);
   }
 
   render(): React.Element<any> {
@@ -60,13 +58,12 @@ class SettingsScreen extends React.Component<Props, State> {
         <Text style={styles.heading}>Settings</Text>
         <View style={styles.content}>
           <Text style={styles.text}>Language</Text>
-
-          {/*<RadioRow options={this.state.locale.options} currentOption={this.settings.locale} action={this.changeLocale} />*/}
-          {/*<Text style={styles.text}>Currency</Text>*/}
-          {/*<RadioRow options={this.state.currency.options} currentOption={this.settings.currency} action={this.props.changeCurrency} />*/}
-          {/*<LabeledSwitch label="Balance in Navigation Bar" value={this.settings.balanceVisible} onValueChange={this.props.changeBalanceVisibility} />*/}
+          {/* <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
+          <Text style={styles.text}>Currency</Text>
+          <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
+          <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} /> */}
           <Text style={styles.text}>App State</Text>
-          <Text style={styles.debugger}>{JSON.stringify(this.actions, null, '  ')}</Text>
+          <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
         </View>
       </View>
     );

@@ -23,3 +23,8 @@ export default {
     background: COLORS.blueDark
   }
 };
+
+export type Theme = {
+  foreground: string,
+  background: string
+}

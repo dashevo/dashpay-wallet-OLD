@@ -13,7 +13,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1
   },
+  content: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  },
+  heading: {
+    fontSize: 20,
+    color: THEMES.vivid.foreground,
+  },
   text: {
+    color: THEMES.vivid.foreground,
+    fontWeight: 'bold',
+    marginTop: 12,
     justifyContent: 'center'
   },
   debugger: {
