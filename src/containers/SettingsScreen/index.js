@@ -1,87 +1,77 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { View } from 'react-native';
 import { Text } from 'react-native';
-import { Button } from 'react-native';
-import { RadioRow } from './RadioRow';
-import { LabeledSwitch } from 'components';
-
-import translations from 'translations';
+import { TouchableOpacity } from 'react-native';
+// import { Image } from 'react-native';
+// import { Avatar } from 'components/avatar';
 
 import styles from './styles';
 
-import { selectSettings } from 'state';
-import { changeSettings } from 'state';
-
 import type { ReactElement } from './types';
 import type { Props } from './types';
-import type { State } from './types';
+import type {State} from "../ReceiveScreen/types";
+import QRCode from "react-native-qrcode-svg";
+import connect from "react-redux/es/connect/connect";
+import selector from "./selectors";
+import actions from "./actions";
 
-const SettingsScreen = ({
-    settings,
-    changeLocale,
-    changeCurrency,
-    changeBalanceVisible,
-    state
-  }: Props): ReactElement => {
-  const localeOptions = Object.keys(translations).map(
-    translation => ({
-      key: translation,
-      value: translations[translation].languageName
-    })
-  );
+import currencies from 'constants';
+import translations from 'translations';
+import { RadioRow, LabeledSwitch } from 'components';
 
-  const currencyOptions = [
-    { key: 'USD', value: 'US Dollar'},
-    { key: 'CAD', value: 'Canadian Dollar'},
-    { key: 'VEF', value: 'Venezuelan Bolivar'}
-  ];
+class SettingsScreen extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.settings={
+      currency: 'USD',
+      locale: 'en',
+      balanceVisible:true,
+    }
+    this.state = {
+      locale:{
+        options:Object.keys(translations).map(
+          translation => ({
+            key: translation,
+            value: translations[translation].languageName
+          })
+        )
+      },
+      currency:{
+        options:currencies
+      },
+    }
+  }
+  async componentDidMount() {
+    this.changeLocale = this.props.changeLocale.bind(this);
+    this.changeCurrency = this.props.changeCurrency.bind(this);
+    this.changeBalanceVisible = this.props.changeBalanceVisible.bind(this);
+  }
 
-  const balanceOptions = [
-    { key: true, value: 'Visible'},
-    { key: false, value: 'Hidden'}
-  ]
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Settings</Text>
-      <View style={styles.content}>
-        <Text style={styles.text}>Language</Text>
-        <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
-        <Text style={styles.text}>Currency</Text>
-        <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
-        <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} />
-        <Text style={styles.text}>App State</Text>
-        <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
+  render(): React.Element<any> {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.heading}>Settings</Text>
+        <View style={styles.content}>
+          <Text style={styles.text}>Language</Text>
+          {/* <RadioRow options={localeOptions} currentOption={settings.locale} action={changeLocale} />
+          <Text style={styles.text}>Currency</Text>
+          <RadioRow options={currencyOptions} currentOption={settings.currency} action={changeCurrency} />
+          <LabeledSwitch label="Balance in Navigation Bar" value={settings.balanceVisible} onValueChange={changeBalanceVisible} /> */}
+          <Text style={styles.text}>App State</Text>
+          <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
+        </View>
       </View>
-    </View>
-  );
-}
-
-const mapStateToProps = state => ({
-  settings: selectSettings(state),
-  state: state
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    changeLocale: translation => () =>
-      dispatch(changeSettings({locale: translation})),
-    changeCurrency: currency => () =>
-      dispatch(changeSettings({currency: currency})),
-    changeBalanceVisible: balanceVisible =>
-      dispatch(changeSettings({balanceVisible: balanceVisible}))
+    );
   }
 };
-
-const connectedSettingsScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
+SettingsScreen = connect(
+  selector,
+  actions
 )(SettingsScreen);
 
-export { connectedSettingsScreen as SettingsScreen };
+export default SettingsScreen;

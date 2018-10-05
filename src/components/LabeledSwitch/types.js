@@ -12,4 +12,4 @@ export type Props = {
   label: string,
   value: boolean,
   onValueChange: Function,
-};
+}

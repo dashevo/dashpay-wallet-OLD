@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { StyleSheet } from 'react-native';
 
@@ -12,18 +12,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#046FC1'
   },
-  bar: {
+  progressBar: {
     backgroundColor: '#fff',
     width: 240,
-    height: 10,
-    transform: [
-      {
-        scaleX: 0.75
-      },
-      {
-        translateX: -50
-      }
-    ]
+    height: 10
+    // transform: [
+    //   {
+    //     translateX: 0
+    //   },
+    //   {
+    //     scaleX: 0.0001
+    //   }
+    // ]
   }
 });
 

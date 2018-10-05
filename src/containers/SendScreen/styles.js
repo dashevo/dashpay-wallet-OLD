@@ -1,10 +1,10 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { StyleSheet } from 'react-native';
-import { THEMES } from 'constants/theming';
+import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +15,14 @@ const styles = StyleSheet.create({
   },
   text: {
     justifyContent: 'center'
+  },
+  recipientField:{
+    backgroundColor: THEMES.vivid.foreground,
+    width:200
+  },
+  amountField:{
+    backgroundColor: THEMES.vivid.foreground,
+    width:60
   }
 });
 

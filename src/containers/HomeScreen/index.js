@@ -1,130 +1,67 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from 'react-native';
-import { Image } from 'react-native';
-import { Navigation } from 'react-native-navigation';
-import { Avatar } from 'components';
-import { Animatable } from 'components';
-import { SharedElement } from 'components';
-import { IconButton } from './components';
-import styles from './styles';
-import { THEMES } from 'constants';
+import { connect } from 'react-redux';
+import { sequence } from 'libraries';
+import { Screen } from './components';
+import actions from './actions';
+import defaultProps from './props';
+import selector from './selectors';
 import type { ReactElement } from './types';
 import type { Props } from './types';
-import type { State } from './types';
 
-class HomeScreen extends React.Component<Props, State> {
-  static get options() {
-    return {
-      statusBar: {
-        style: 'light',
-        backgroundColor: '#0D47A1'
-      },
-      layout: {
-        orientation: ['portrait'],
-        backgroundColor: '#0182E1'
-      },
-      topBar: {
-        // transparent: true,
-        visible: false,
-        animate: false,
-        hideOnScroll: false,
-        drawBehind: false,
-        background: {
-          color: '#00ff00'
-        }
-      }
-    };
-  }
+class HomeScreen extends React.Component<Props> {
+  static defaultProps = defaultProps;
 
   constructor(props: Props) {
     super(props);
-    this.avatar = React.createRef();
-    this.badge = React.createRef();
-    this.buttonGroup = React.createRef();
-    this.subscription = Navigation.events().bindComponent(this);
+    this.reanimatableRefs = [];
+    this.reanimatableRefs.push(React.createRef());
+    this.reanimatableRefs.push(React.createRef());
+    this.reanimatableRefs.push(React.createRef());
+    this.handleOnComplete = this.handleOnComplete.bind(this);
   }
 
-  async componentDidAppear() {
-    await Promise.all([
-      this.avatar.current.fadeInUpBig(),
-      this.buttonGroup.current.fadeInUpBig()
-    ]);
-    await this.badge.current.bounceIn();
+  async componentDidMount() {
+    const refs = this.reanimatableRefs;
+    function animationController(ref, index) {
+      if (index == 0) return ref.fadeInUpBig();
+      if (index == 1) return ref.bounceIn();
+      if (index == 2) return ref.fadeIn();
+    }
+    await sequence(refs, animationController);
+    this.props.getDeviceLocale();
   }
 
-  componentWillUnmount() {
-    this.subscription.remove();
+  async handleOnComplete() {
+    const refs = this.reanimatableRefs;
+    await sequence(refs, ref => ref.fadeInUpBig());
   }
 
-  navigate(destination) {
-    return async () => Navigation.push(this.props.componentId, {
-      component: {
-        name: destination,
-        options: {
-          //TODO specify nav animation for this transition
-        }
-      }
-    });
+  navigateFurther() {
+    const { routeName } = this.props;
+    this.props.navigation.push(routeName);
   }
 
   render(): ReactElement {
+    console.log('this.props', this.props);
     return (
-      <View style={styles.container}>
-        <SharedElement elementId={'logo2'}>
-          <Image
-            source={require('assets/images/logo.png')}
-            style={styles.logo}
-          />
-        </SharedElement>
-        <Animatable ref={this.avatar}>
-          <View style={styles.avatar}>
-            <Avatar source={require('assets/images/avatar-default.png')} />
-            <View style={styles.badgeWrapper}>
-              <Animatable ref={this.badge}>
-                <View style={styles.badge}>
-                  <Text style={styles.badgeText}>{'3'}</Text>
-                </View>
-              </Animatable>
-            </View>
-          </View>
-        </Animatable>
-        <Animatable ref={this.buttonGroup}>
-          <View style={styles.buttonGroup}>
-            <IconButton
-              source={require('assets/images/icon-paperplane.png')}
-              text="Pay"
-              action={this.navigate('SendScreen')}
-              theme={THEMES.vivid}
-            />
-            <IconButton
-              source={require('assets/images/icon-bank.png')}
-              text="Receive"
-              action={this.navigate('ReceiveScreen')}
-              theme={THEMES.vivid}
-            />
-            <IconButton
-              source={require('assets/images/icon-people.png')}
-              text="Contacts"
-              action={this.navigate('ContactsScreen')}
-              theme={THEMES.vivid}
-            />
-            <IconButton
-              source={require('assets/images/icon-settings.png')}
-              text="Settings"
-              action={this.navigate('SettingsScreen')}
-              theme={THEMES.vivid}
-            />
-          </View>
-        </Animatable>
-      </View>
+      <Screen
+        reanimatableRefs={this.reanimatableRefs}
+        onComplete={this.handleOnComplete}
+        navigation={this.props.navigation}
+        walletLib={this.props.walletLib}
+      />
     );
   }
 }
 
-export { HomeScreen };
+HomeScreen = connect(
+  selector,
+  actions
+)(HomeScreen);
+
+export default HomeScreen;
