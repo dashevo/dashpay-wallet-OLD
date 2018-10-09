@@ -15,47 +15,34 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type {State} from "../ReceiveScreen/types";
-import QRCode from "react-native-qrcode-svg";
 import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
 import actions from "./actions";
 
-import currencies from 'constants';
-import translations from 'translations';
 import { RadioRow, LabeledSwitch, ThemedButton } from 'components';
-import {
-  selectSettings,
-  changeSettings,
-} from 'state';
 
 class SettingsScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
   }
 
-  async componentDidMount() {
-    this.changeBalanceVisible = this.props.changeBalanceVisible.bind(this);
-  }
-
   render(): React.Element<any> {
-    const navigate = this.props.navigate.push;
-    const settings = this.props.selector();
+    const navigate = this.props.navigation.push;
+    const { balanceVisible, changeBalanceVisible } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Settings</Text>
         <View style={styles.content}>
           <ThemedButton
             title='Languages'
-            onPress={ navigate('SettingsLanguageScreen') } />
+            onPress={ () => navigate('SettingsLanguageScreen') } />
           <ThemedButton
             title='Currency'
-            onPress={ navigate('SettingsCurrencyScreen') } />
+            onPress={ () => navigate('SettingsCurrencyScreen') } />
           <LabeledSwitch
             label="Balance in Navigation Bar"
-            value={settings.balanceVisible}
-            onValueChange={this.changeBalanceVisible} />
-          <Text style={styles.text}>App State</Text>
-          <Text style={styles.debugger}>{JSON.stringify(state, null, '  ')}</Text>
+            value={balanceVisible}
+            onValueChange={changeBalanceVisible} />
         </View>
       </View>
     );
@@ -64,7 +51,7 @@ class SettingsScreen extends React.Component<Props, State> {
 
 const connectedSettingsScreen = connect(
   selector,
-  actions
+  actions,
 )(SettingsScreen);
 
 export default connectedSettingsScreen;

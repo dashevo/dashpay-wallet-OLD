@@ -6,4 +6,6 @@
 import { createSelector } from 'reselect';
 import { selectSettings } from 'state';
 
-export default createSelector(selectSettings, settings => ({ settings }));
+export default createSelector(
+  selectSettings, ({ balanceVisible }) => ({ balanceVisible })
+);

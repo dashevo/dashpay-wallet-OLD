@@ -6,4 +6,6 @@
 import { createSelector } from 'reselect';
 import { selectCurrency } from 'state';
 
-export default createSelector(selectCurrency, currency => ({ currency }));
+export default createSelector(
+  selectCurrency, currency => ({ currentCurrencyCode: currency.code })
+);

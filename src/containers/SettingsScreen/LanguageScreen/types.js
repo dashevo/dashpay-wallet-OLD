@@ -7,6 +7,6 @@ import type { Element } from 'react';
 export type ReactElement = Element<*>;
 
 export type Props = {
-  componentId: string,
+  // componentId: string,
 };
 export type State = {};

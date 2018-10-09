@@ -4,17 +4,16 @@
  * @flow
  */
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Navigation } from 'react-native-navigation';
+import connect from "react-redux/es/connect/connect";
 import {
   View,
   Text,
   Button,
 } from 'react-native';
 import { SelectableList } from 'components';
-import translations from 'translations';
 import styles from './styles';
-import { selectSettings, changeSettings } from 'state';
+import selector from "./selectors";
+import actions from "./actions";
 import getRates from './getRates';
 
 import type {
@@ -31,21 +30,21 @@ class SettingsCurrencyScreen extends React.PureComponent<Props, State> {
   }
 
   async componentDidMount() {
-    const { currentCurrency } = this.props;
+    const { currentCurrencyCode } = this.props;
     const rates = await getRates();
     const currencyOptions = rates.map(rate => ({
       ...rate,
       key: rate.code,
-      selected: rate.code === currentCurrency,
+      selected: rate.code === currentCurrencyCode,
     }));
     this.setState({ currencyOptions })
   }
 
   handleSelection(currency) {
     const { code, name, rate } = currency;
-    const { changeCurrency, componentId } = this.props;
+    const { changeCurrency, navigation, componentId } = this.props;
     changeCurrency({ code, name, rate });
-    Navigation.pop(componentId);
+    navigation.pop(componentId);
   }
 
   renderItem({ name }): ReactElement {
@@ -57,27 +56,16 @@ class SettingsCurrencyScreen extends React.PureComponent<Props, State> {
   render(): ReactElement {
     const { currencyOptions } = this.state;
     return (
-      <View>
+      <View style={styles.container}>
         <SelectableList data={ currencyOptions } renderItem={this.renderItem} onItemPress={this.handleSelection} />
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  currentCurrency: selectSettings(state).currency,
-});
-
-const mapDispatchToProps = dispatch => {
-  return {
-    changeCurrency: currency =>
-      dispatch(changeSettings({currency: currency})),
-  }
-};
-
 const connectedSettingsCurrencyScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  selector,
+  actions,
 )(SettingsCurrencyScreen);
 
-export { connectedSettingsCurrencyScreen as SettingsCurrencyScreen };
+export default connectedSettingsCurrencyScreen;
