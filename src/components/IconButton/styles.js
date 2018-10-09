@@ -6,7 +6,7 @@
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
 
-const styles = (theme) => StyleSheet.create({
+const styles = StyleSheet.create({
   highlight: {
     padding: '5%',
     flexBasis: 0,
@@ -14,7 +14,7 @@ const styles = (theme) => StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    backgroundColor: theme.background
+    backgroundColor: THEMES.vivid.background
   },
   image: {
     height: 25,
@@ -22,7 +22,7 @@ const styles = (theme) => StyleSheet.create({
     resizeMode: 'contain'
   },
   text: {
-    color: theme.foreground
+    color: THEMES.vivid.foreground
   }
 });
 
