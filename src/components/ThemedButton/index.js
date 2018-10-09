@@ -13,7 +13,7 @@ import type { Props } from './types';
 import type { ReactElement } from './types';
 
 const ThemedButton = ({ title, onPress, theme }: Props): ReactElement => {
-  computedStyle = styles(theme);
+  computedStyle = styles(theme || THEMES.vivid);
   return (
     <TouchableHighlight
       style={computedStyle.highlight}

@@ -4,8 +4,8 @@
  * @wolf
  */
 import { createSelector } from 'reselect';
-import { selectSettings } from 'state';
+import { selectCurrency } from 'state';
 
 export default createSelector(
-  selectSettings, ({ balanceVisible }) => ({ balanceVisible })
+  selectCurrency, currency => ({ currentCurrencyCode: currency.code })
 );

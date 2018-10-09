@@ -9,7 +9,7 @@ import type { Theme } from 'constants';
 export type ReactElement = Element<*>;
 
 export type Props = {
-  title: string,
-  onPress: Function,
-  theme?: Theme
+  data: Array<Object>,
+  renderItem: Function,
+  onItemPress: Function,
 };

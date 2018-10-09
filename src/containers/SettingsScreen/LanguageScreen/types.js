@@ -4,12 +4,9 @@
  * @flow
  */
 import type { Element } from 'react';
-import type { Theme } from 'constants';
-
 export type ReactElement = Element<*>;
 
 export type Props = {
-  title: string,
-  onPress: Function,
-  theme?: Theme
+  // componentId: string,
 };
+export type State = {};

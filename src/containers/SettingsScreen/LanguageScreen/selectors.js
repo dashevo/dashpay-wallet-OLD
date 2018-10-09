@@ -4,8 +4,8 @@
  * @wolf
  */
 import { createSelector } from 'reselect';
-import { selectSettings } from 'state';
+import { selectLanguage } from 'state';
 
 export default createSelector(
-  selectSettings, ({ balanceVisible }) => ({ balanceVisible })
+  selectLanguage, locale => ({ locale })
 );

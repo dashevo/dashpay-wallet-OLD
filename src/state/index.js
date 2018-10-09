@@ -7,7 +7,9 @@ import { createStore } from 'redux';
 import reducers from './reducers';
 
 // Tmp
+export * from './settings';
 export * from './language';
+export * from './currency';
 export * from './user';
 
 // Tmp

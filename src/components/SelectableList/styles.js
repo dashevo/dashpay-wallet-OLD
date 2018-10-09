@@ -6,18 +6,27 @@
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
 
-const styles = (theme) => StyleSheet.create({
-  highlight: {
-    padding: 5,
-  },
+const theme = THEMES.vivid;
+
+const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: theme.background
+    alignSelf: 'stretch',
   },
+
+  itemContainer: {
+    padding: 10,
+    flexDirection: 'row',
+  },
+
+  itemContent: {
+    flex: 1,
+  },
+
   text: {
     color: theme.foreground,
-    margin: 5
-  }
+    margin: 5,
+    flex: 1,
+  },
 });
 
 export default styles;

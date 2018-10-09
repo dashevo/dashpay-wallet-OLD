@@ -8,6 +8,8 @@ import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
 import { SettingsScreen } from 'containers';
+import { SettingsLanguageScreen } from 'containers';
+import { SettingsCurrencyScreen } from 'containers';
 import enhance from './enhancer';
 
 type Routes = {};
@@ -32,7 +34,15 @@ let routes: Routes = [
   {
     name: 'SettingsScreen',
     component: SettingsScreen
-  }
+  },
+  {
+    name: 'SettingsLanguageScreen',
+    component: SettingsLanguageScreen
+  },
+  {
+    name: 'SettingsCurrencyScreen',
+    component: SettingsCurrencyScreen
+  },
 ];
 
 routes = routes.map(({ name, component }) => ({
