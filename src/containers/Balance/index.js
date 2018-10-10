@@ -10,8 +10,6 @@
 
 'use strict';
 
-import IconButton from 'components';
-
 const Animated = require('Animated');
 const I18nManager = require('I18nManager');
 const PanResponder = require('PanResponder');
@@ -419,6 +417,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Icon } from 'components';
+import { IconButton } from 'components';
 import { Animation } from 'components';
 
 class Balance extends React.Component<Props> {
@@ -605,7 +604,7 @@ class Balance extends React.Component<Props> {
         <Icon style={styles.icon} name={icon} />
       </Animation>
     );
-    return null;
+    // return null;
     return (
       <View style={styles.navbar}>
         <SwipeableRow
@@ -628,15 +627,15 @@ class Balance extends React.Component<Props> {
                   {part2}
                 </Text>
               </View>
-              <View style={styles.settingsIcon}>
-                <IconButton
-                  source={settingIconFile}
-                  action={() => this.onSettingsPressed()}
-                />
-              </View>
             </View>
           </TouchableWithoutFeedback>
         </SwipeableRow>
+        <View style={styles.settingsIcon}>
+          <IconButton
+            source={settingIconFile}
+            action={() => this.onSettingsPressed()}
+          />
+        </View>
       </View>
     );
   }
@@ -648,7 +647,8 @@ class Balance extends React.Component<Props> {
 
 const styles = StyleSheet.create({
   navbar: {
-    backgroundColor: '#011E60'
+    backgroundColor: '#011E60',
+    flexDirection: 'row'
   },
   row: {
     backgroundColor: '#011E60',
@@ -695,9 +695,10 @@ const styles = StyleSheet.create({
     opacity: 0.75
   },
   settingsIcon: {
+    marginLeft: 'auto',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

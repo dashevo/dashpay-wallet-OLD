@@ -13,8 +13,7 @@ const styles = StyleSheet.create({
     flexGrow: 1
   },
   container: {
-    alignItems: 'center',
-    backgroundColor: THEMES.vivid.background
+    alignItems: 'center'
   },
   image: {
     height: 25,
