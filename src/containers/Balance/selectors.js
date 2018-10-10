@@ -3,4 +3,9 @@
  *
  * @wolf
  */
-export default null;
+import { createSelector } from 'reselect';
+import { selectSettings } from 'state';
+
+export default createSelector(
+  selectSettings, ({ balanceVisible }) => ({ balanceVisible })
+);
