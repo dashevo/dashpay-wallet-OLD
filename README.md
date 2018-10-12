@@ -1,5 +1,7 @@
 # dashpay-wallet
 
+[![Build Status](https://travis-ci.com/dashevo/dashpay-wallet.svg?token=UzYXxxa3Wnmm1sy8HJPN&branch=master)](https://travis-ci.com/dashevo/dashpay-wallet)
+
 ## Setup:
 Install NodeJS, Yarn, Android Studio, Java SDK 8 and Python 2.
 

@@ -3,8 +3,8 @@
  *
  * @wolf
  */
-import { createStore } from "redux";
-import reducers from "./reducers";
+import { createStore } from 'redux';
+import reducer from './reducer';
 
 // Tmp
 export * from "./actions";
@@ -39,4 +39,4 @@ import { Wallet } from "@dashevo/wallet-lib";
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
-export default createStore(reducers, enhancedMiddleware);
+export default createStore(reducer, enhancedMiddleware);

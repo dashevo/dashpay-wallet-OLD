@@ -11,7 +11,7 @@
     "postinstall": "rn-nodeify --install crypto,stream,events,vm,assert,url --hack && react-native link"
   },
   "dependencies": {
-    "@dashevo/wallet-lib": "git+https://github.com/dashevo/wallet-lib.git#feat/transports",
+    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git#feat/transports",
     "assert": "^1.4.1",
     "events": "^1.1.1",
     "intl": "^1.2.5",
