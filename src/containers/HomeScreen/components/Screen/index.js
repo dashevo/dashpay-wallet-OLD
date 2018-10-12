@@ -20,7 +20,9 @@ import { Balance } from 'containers';
 
 const Screen = (props: Props): ReactElement => (
   <View style={styles.container}>
-    <View style={styles.header} />
+    <View style={styles.header}>
+      <Balance navigation={props.navigation} isOpen={true} />
+    </View>
     <View style={styles.body}>
       <View style={styles.section}>
         <SharedElement elementId={props.elementId}>
@@ -60,11 +62,6 @@ const Screen = (props: Props): ReactElement => (
               source={require('assets/images/icon-people.png')}
               text="Contacts"
               action={() => props.navigation.push('ContactsScreen')}
-            />
-            <IconButton
-              source={require('assets/images/icon-settings.png')}
-              text="Settings"
-              action={() => props.navigation.push('SettingsScreen')}
             />
           </View>
         </Reanimatable>
