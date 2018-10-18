@@ -16,6 +16,7 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
 import { Navigation } from 'react-native-navigation';
+import { RecipientInput } from 'components';
 import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
 import actions from "./actions";
@@ -47,15 +48,11 @@ class SendScreen extends React.Component<Props, State> {
     // console.log(result);
   }
   render(): React.Element<any> {
+    const { recipient } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Recipient :</Text>
-        <TextInput
-          style={styles.recipientField}
-          onChangeText={this.onChangeRecipient}
-          value={this.state.recipient}
-          placeholder={"Enter a dash address or a username"}
-        />
+        <Text style={styles.text}>Recipient : {recipient}</Text>
+        <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
         <Text style={styles.text}>Amount :</Text>
         <TextInput
           style={styles.amountField}
