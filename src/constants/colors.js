@@ -8,5 +8,5 @@ export default {
   blueDim: '#053273',
   blueDark: '#011E60',
   white: '#FFFFFF',
-  black: '#000000'
+  black: '#000000',
 };
