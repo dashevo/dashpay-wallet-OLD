@@ -8,9 +8,6 @@
 export * from './StoreProvider';
 export * from './LanguageProvider';
 
-// Features
-export { default as Balance } from './Balance';
-
 // Screens
 export { default as SplashScreen } from './SplashScreen';
 export { default as ReceiveScreen } from './ReceiveScreen';

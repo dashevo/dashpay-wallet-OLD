@@ -23,7 +23,7 @@ import { Animation } from 'components';
 import SwipeableRow from './components/SwipeableRow';
 const settingIconFile = require('../../assets/images/icon-settings.png');
 
-class Balance extends React.Component<Props> {
+class NavBar extends React.Component<Props> {
   static get options() {
     return {
       statusBar: {
@@ -295,4 +295,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Balance;
+export default NavBar;

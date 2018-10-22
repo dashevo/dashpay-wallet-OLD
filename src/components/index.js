@@ -15,6 +15,7 @@ export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
 export { default as RecipientInput } from './RecipientInput';
 export { default as CopyAddressButton } from './CopyAddressButton';
+export { default as NavBar } from './NavBar';
 
 export * from './Animation';
 
