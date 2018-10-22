@@ -20,7 +20,7 @@ import {
 import { Icon } from 'components';
 import { IconButton } from 'components';
 import { Animation } from 'components';
-import SwipeableRow from './components/SwipeableRow';
+import { SwipeableRow } from 'components';
 const settingIconFile = require('../../assets/images/icon-settings.png');
 
 class NavBar extends React.Component<Props> {
