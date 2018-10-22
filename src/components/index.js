@@ -14,6 +14,7 @@ export { default as SelectableList } from './SelectableList';
 export { default as Icon } from './Icon';
 export { default as IconButton } from './IconButton';
 export { default as RecipientInput } from './RecipientInput';
+export { default as CopyAddressButton } from './CopyAddressButton';
 
 export * from './Animation';
 

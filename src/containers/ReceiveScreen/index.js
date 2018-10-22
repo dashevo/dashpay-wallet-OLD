@@ -16,6 +16,7 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
 import connect from "react-redux/es/connect/connect";
+import { CopyAddressButton } from 'components';
 import selector from "./selectors";
 import actions from "./actions";
 
@@ -50,6 +51,7 @@ class ReceiveScreen extends React.Component<Props, State> {
           logoSize={100}
           logoBackgroundColor='white'
           />
+        <CopyAddressButton address='yWdXnYxGbouNoo8yMvcbZmZ3Gdp6BpySxL' />
       </View>
     );
   }
