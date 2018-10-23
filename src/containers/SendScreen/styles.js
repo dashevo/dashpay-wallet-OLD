@@ -3,22 +3,34 @@
  *
  * @wolf
  */
-import { StyleSheet } from 'react-native';
-import { THEMES } from 'constants';
+import { StyleSheet } from "react-native";
+import { THEMES } from "constants";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: THEMES.vivid.background,
-    justifyContent: 'center',
+    backgroundColor: "#fff",
     flex: 1
   },
-  text: {
-    justifyContent: 'center'
+  header: {
+    height: 70,
+    width: "100%"
   },
-  amountField:{
+  body: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 32
+  },
+  text: {
+    justifyContent: "center"
+  },
+  section: {
+    alignSelf: "stretch",
+    paddingTop: 32,
+    paddingBottom: 32
+  },
+  amountField: {
     backgroundColor: THEMES.vivid.foreground,
-    width:60
+    width: 60
   }
 });
 

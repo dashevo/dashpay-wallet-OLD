@@ -1,17 +1,17 @@
-const Animated = require('Animated');
-const I18nManager = require('I18nManager');
-const PanResponder = require('PanResponder');
-const React = require('React');
-const PropTypes = require('prop-types');
+const Animated = require("Animated");
+const I18nManager = require("I18nManager");
+const PanResponder = require("PanResponder");
+const React = require("React");
+const PropTypes = require("prop-types");
 /* $FlowFixMe(>=0.54.0 site=react_native_oss) This comment suppresses an error
  * found when Flow v0.54 was deployed. To see the error delete this comment and
  * run Flow. */
-const TimerMixin = require('react-timer-mixin');
-const View = require('View');
-const StyleSheet = require('StyleSheet');
+const TimerMixin = require("react-timer-mixin");
+const View = require("View");
+const StyleSheet = require("StyleSheet");
 
-const createReactClass = require('create-react-class');
-const emptyFunction = require('fbjs/lib/emptyFunction');
+const createReactClass = require("create-react-class");
+const emptyFunction = require("fbjs/lib/emptyFunction");
 
 const IS_RTL = I18nManager.isRTL;
 
@@ -67,7 +67,7 @@ type Props = $ReadOnly<{|
  * to use this component separately.
  */
 const SwipeableRow = createReactClass({
-  displayName: 'SwipeableRow',
+  displayName: "SwipeableRow",
   _panResponder: {},
   _previousLeft: CLOSED_LEFT_POSITION,
 
@@ -160,7 +160,6 @@ const SwipeableRow = createReactClass({
 
   render(): React.Element<any> {
     // The view hidden behind the main view
-    // console.log('this.props.maxSwipeDistance', this.props.maxSwipeDistance);
     let slideOutView;
     if (this.state.isSwipeableViewRendered && this.state.rowHeight) {
       slideOutView = (
@@ -172,19 +171,20 @@ const SwipeableRow = createReactClass({
                 opacity: this.state.currentLeft.interpolate({
                   inputRange: [-this.props.maxSwipeDistance, 0],
                   outputRange: [0.5, 1],
-                  extrapolate: 'clamp'
+                  extrapolate: "clamp"
                 }),
                 transform: [
                   {
                     scale: this.state.currentLeft.interpolate({
                       inputRange: [-this.props.maxSwipeDistance, 0],
                       outputRange: [0.9, 1],
-                      extrapolate: 'clamp'
+                      extrapolate: "clamp"
                     })
                   }
                 ]
               }
-            ]}>
+            ]}
+          >
             {this.props.slideoutView}
           </Animated.View>
         </View>
@@ -195,7 +195,8 @@ const SwipeableRow = createReactClass({
     const swipeableView = (
       <Animated.View
         onLayout={this._onSwipeableViewLayout}
-        style={{ transform: [{ translateX: this.state.currentLeft }] }}>
+        style={{ transform: [{ translateX: this.state.currentLeft }] }}
+      >
         {this.props.children}
       </Animated.View>
     );
@@ -399,12 +400,12 @@ const SwipeableRow = createReactClass({
 
 const styles = StyleSheet.create({
   iconContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#011E60',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#011E60",
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     paddingLeft: 15
   }

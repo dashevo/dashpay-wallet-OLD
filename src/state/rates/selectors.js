@@ -3,4 +3,4 @@
  *
  * @wolf
  */
-export * from "./deprecated/Reanimatable";
+export const selectRate = state => state.rates;

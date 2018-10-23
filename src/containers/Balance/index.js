@@ -8,7 +8,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import * as React from "react";
 import {
   Text,
   View,
@@ -16,23 +16,23 @@ import {
   Image,
   TouchableWithoutFeedback,
   StyleSheet
-} from 'react-native';
-import { Icon } from 'components';
-import { IconButton } from 'components';
-import { Animation } from 'components';
-import SwipeableRow from './components/SwipeableRow';
-const settingIconFile = require('../../assets/images/icon-settings.png');
+} from "react-native";
+import { Icon } from "components";
+import { IconButton } from "components";
+import { Animation } from "components";
+import SwipeableRow from "./components/SwipeableRow";
+const settingIconFile = require("../../assets/images/icon-settings.png");
 
 class Balance extends React.Component<Props> {
   static get options() {
     return {
       statusBar: {
-        style: 'light',
-        backgroundColor: '#000e2e'
+        style: "light",
+        backgroundColor: "#000e2e"
       },
       layout: {
-        orientation: ['portrait'],
-        backgroundColor: '#0182E1'
+        orientation: ["portrait"],
+        backgroundColor: "#0182E1"
       },
       topBar: {
         // transparent: true,
@@ -41,7 +41,7 @@ class Balance extends React.Component<Props> {
         hideOnScroll: false,
         drawBehind: false,
         background: {
-          color: '#00ff00'
+          color: "#00ff00"
         }
       }
     };
@@ -54,22 +54,22 @@ class Balance extends React.Component<Props> {
     // account.events.on('balance_changed', () => {})
     this.state = {
       width: 200,
-      text: 'This is a test',
+      text: "This is a test",
       index: 0,
       count: 2,
       items: [
         {
-          icon: 'dash-D-blue',
+          icon: "dash-D-blue",
           amount: {
-            part1: '11,23',
-            part2: '468676'
+            part1: "11,23",
+            part2: "468676"
           }
         },
         {
-          icon: 'dollar',
+          icon: "dollar",
           amount: {
-            part1: '4,800',
-            part2: '.64'
+            part1: "4,800",
+            part2: ".64"
           }
         }
       ]
@@ -89,28 +89,30 @@ class Balance extends React.Component<Props> {
   subscribeToBalance() {
     const account = this.props.walletLib.account;
     const self = this;
-    this.balanceListener = account.events.on('balance_changed', () =>
+    this.balanceListener = account.events.on("balance_changed", () =>
       self.updateBalance(account.getBalance())
     );
   }
   componentWillUnmount() {
-    this.balanceListener.remove();
+    if (this.balanceListener) {
+      this.balanceListener.remove();
+    }
   }
   updateBalance(satoshis) {
     function curCurrencyParts(val) {
       let str = val.toString();
-      let splitted = str.split('.');
+      let splitted = str.split(".");
 
-      var nf = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
+      var nf = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
       });
       const curPart1 = nf.format(splitted[0]);
 
       const curPart2 =
         splitted.length > 1
-          ? splitted[1].slice(0, 2).padEnd(2, '0')
-          : splitted[0].slice(0, 2).padEnd(2, '0');
+          ? splitted[1].slice(0, 2).padEnd(2, "0")
+          : splitted[0].slice(0, 2).padEnd(2, "0");
       return { curPart1, curPart2 };
     }
     function cutSatoshiParts(val) {
@@ -119,16 +121,16 @@ class Balance extends React.Component<Props> {
 
       const part1 =
         len > 6
-          ? str.slice(0, -8).padStart(1, '0') +
-            ',' +
-            str.slice(-9, -7).padStart(2, '0')
-          : '0,00';
+          ? str.slice(0, -8).padStart(1, "0") +
+            "," +
+            str.slice(-9, -7).padStart(2, "0")
+          : "0,00";
 
-      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, '0');
+      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, "0");
 
       return { part1, part2 };
     }
-    function callToRatesService(satoshis, curr = 'USD') {
+    function callToRatesService(satoshis, curr = "USD") {
       //FIXME
       const pricePerSatoshis = 0.0000019;
       const currBalance = satoshis * pricePerSatoshis;
@@ -219,7 +221,8 @@ class Balance extends React.Component<Props> {
           onClose={() => this._onClose()}
           shouldBounceOnMount={false}
           onSwipeEnd={this._setListViewScrollable}
-          onSwipeStart={this._setListViewNotScrollable}>
+          onSwipeStart={this._setListViewNotScrollable}
+        >
           <TouchableWithoutFeedback style={styles.icon} onPress={this._onPress}>
             <View style={styles.row}>
               <View style={styles.inline} onLayout={this.onLayout}>
@@ -233,31 +236,25 @@ class Balance extends React.Component<Props> {
             </View>
           </TouchableWithoutFeedback>
         </SwipeableRow>
-        <View style={styles.settingsIcon}>
-          <IconButton
-            source={settingIconFile}
-            action={() => this.onSettingsPressed()}
-          />
-        </View>
       </View>
     );
   }
 
   onSettingsPressed() {
-    return this.props.navigation.push('SettingsScreen');
+    return this.props.navigation.push("SettingsScreen");
   }
 }
 
 const styles = StyleSheet.create({
   navbar: {
-    backgroundColor: '#011E60',
-    flexDirection: 'row'
+    backgroundColor: "#011E60",
+    flexDirection: "row"
   },
   row: {
-    backgroundColor: '#011E60',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    backgroundColor: "#011E60",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
     paddingLeft: 48,
     paddingTop: 10,
     paddingBottom: 10,
@@ -265,33 +262,33 @@ const styles = StyleSheet.create({
     height: 64
   },
   icon: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 22,
     width: 24,
-    textAlign: 'center'
+    textAlign: "center"
   },
   inline: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
   part1: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
     marginRight: 4,
     opacity: 1
   },
   part2: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
     marginRight: 12,
     opacity: 0.75
   },
   settingsIcon: {
-    marginLeft: 'auto',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    marginLeft: "auto",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

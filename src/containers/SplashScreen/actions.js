@@ -5,9 +5,13 @@
  */
 import { bindActionCreators } from "redux";
 import { initializeWallet } from "state";
+import { initializeRateService } from "state";
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ initializeWallet }, dispatch);
+  return bindActionCreators(
+    { initializeWallet, initializeRateService },
+    dispatch
+  );
 }
 
 export default actions;
