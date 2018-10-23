@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @wolf
+ */
+
 import { CHANGE_SETTINGS } from 'state/settings/constants';
 import { changeSettings } from 'state';
 
