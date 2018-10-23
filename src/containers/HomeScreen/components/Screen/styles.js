@@ -5,27 +5,32 @@
  */
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
+import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: THEMES.vivid.background,
+    backgroundColor: THEMES.dark.background,
     justifyContent: 'center',
     flex: 1
   },
   header: {
-    height: 70,
+    height: LENGTHS.navBarHeight,
     width: '100%'
   },
   reanimatable2: {
     opacity: 0,
-    height: 70,
+    height: LENGTHS.navBarHeight,
     width: '100%'
   },
   body: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
+    width: '100%',
+    backgroundColor: THEMES.vivid.background,
+    borderTopLeftRadius: LENGTHS.borderRadius,
+    borderTopRightRadius: LENGTHS.borderRadius,
   },
   logo: {
     resizeMode: 'contain',

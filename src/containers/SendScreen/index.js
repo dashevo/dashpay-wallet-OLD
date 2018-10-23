@@ -7,6 +7,7 @@ import * as React from 'react';
 import {TextInput, View} from 'react-native';
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import { NavBar } from 'components';
 // import { Image } from 'react-native';
 // import { Avatar } from 'components/avatar';
 
@@ -15,7 +16,6 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
-import { Navigation } from 'react-native-navigation';
 import { RecipientInput } from 'components';
 import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
@@ -51,25 +51,30 @@ class SendScreen extends React.Component<Props, State> {
     const { recipient } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Recipient : {recipient}</Text>
-        <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
-        <Text style={styles.text}>Amount :</Text>
-        <TextInput
-          style={styles.amountField}
-          onChangeText={this.onChangeAmount}
-          keyboardType="numeric"
-          value={this.state.amount}
-        />
-        <TouchableOpacity onPress={this.onPayPressed}>
-          <Text style={styles.text}>Pay</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.navigation.pop}>
-          <Text style={styles.text}>Bo Back</Text>
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <NavBar navigation={this.props.navigation} isOpen={true} />
+        </View>
+        <View style={styles.body}>
+          <Text style={styles.text}>Recipient : {recipient}</Text>
+          <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
+          <Text style={styles.text}>Amount :</Text>
+          <TextInput
+            style={styles.amountField}
+            onChangeText={this.onChangeAmount}
+            keyboardType="numeric"
+            value={this.state.amount}
+          />
+          <TouchableOpacity onPress={this.onPayPressed}>
+            <Text style={styles.text}>Pay</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.navigation.pop}>
+            <Text style={styles.text}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      )
-  };
-};
+    );
+  }
+}
 
 
 SendScreen = connect(

@@ -5,6 +5,7 @@
  */
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
+import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,6 +13,13 @@ const styles = StyleSheet.create({
     backgroundColor: THEMES.vivid.background,
     justifyContent: 'center',
     flex: 1
+  },
+  header: {
+    height: LENGTHS.navBarHeight
+  },
+  body: {
+    borderTopLeftRadius: LENGTHS.borderRadius,
+    borderTopRightRadius: LENGTHS.borderRadius
   },
   text: {
     justifyContent: 'center'

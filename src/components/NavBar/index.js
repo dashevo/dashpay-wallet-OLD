@@ -21,32 +21,10 @@ import { Icon } from 'components';
 import { IconButton } from 'components';
 import { Animation } from 'components';
 import { SwipeableRow } from 'components';
+import styles from './styles';
 const settingIconFile = require('../../assets/images/icon-settings.png');
 
 class NavBar extends React.Component<Props> {
-  static get options() {
-    return {
-      statusBar: {
-        style: 'light',
-        backgroundColor: '#000e2e'
-      },
-      layout: {
-        orientation: ['portrait'],
-        backgroundColor: '#0182E1'
-      },
-      topBar: {
-        // transparent: true,
-        visible: false,
-        animate: false,
-        hideOnScroll: false,
-        drawBehind: false,
-        background: {
-          color: '#00ff00'
-        }
-      }
-    };
-  }
-
   constructor(props) {
     super(props);
     this.onLayout = this.onLayout.bind(this);
@@ -94,7 +72,9 @@ class NavBar extends React.Component<Props> {
     );
   }
   componentWillUnmount() {
-    this.balanceListener.remove();
+    if (this.balanceListener) {
+      this.balanceListener.remove();
+    }
   }
   updateBalance(satoshis) {
     function curCurrencyParts(val) {
@@ -247,52 +227,5 @@ class NavBar extends React.Component<Props> {
     return this.props.navigation.push('SettingsScreen');
   }
 }
-
-const styles = StyleSheet.create({
-  navbar: {
-    backgroundColor: '#011E60',
-    flexDirection: 'row'
-  },
-  row: {
-    backgroundColor: '#011E60',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingLeft: 48,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 10,
-    height: 64
-  },
-  icon: {
-    color: '#fff',
-    fontSize: 22,
-    width: 24,
-    textAlign: 'center'
-  },
-  inline: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  part1: {
-    color: '#fff',
-    fontSize: 18,
-    marginRight: 4,
-    opacity: 1
-  },
-  part2: {
-    color: '#fff',
-    fontSize: 16,
-    marginRight: 12,
-    opacity: 0.75
-  },
-  settingsIcon: {
-    marginLeft: 'auto',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
 
 export default NavBar;

@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#011E60',
+    backgroundColor: 'transparent',
     bottom: 0,
     left: 0,
     position: 'absolute',
