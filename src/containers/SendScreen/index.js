@@ -55,21 +55,26 @@ class SendScreen extends React.Component<Props, State> {
           <NavBar navigation={this.props.navigation} isOpen={true} />
         </View>
         <View style={styles.body}>
-          <Text style={styles.text}>Recipient : {recipient}</Text>
-          <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
-          <Text style={styles.text}>Amount :</Text>
-          <TextInput
-            style={styles.amountField}
-            onChangeText={this.onChangeAmount}
-            keyboardType="numeric"
-            value={this.state.amount}
-          />
-          <TouchableOpacity onPress={this.onPayPressed}>
-            <Text style={styles.text}>Pay</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.navigation.pop}>
-            <Text style={styles.text}>Go Back</Text>
-          </TouchableOpacity>
+          <Text style={[styles.text, styles.heading]}>Pay Address</Text>
+          <View style={styles.section}>
+            <Text style={styles.text}>Paste or type address</Text>
+            <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.text}>Amount :</Text>
+            <TextInput
+              style={styles.amountField}
+              onChangeText={this.onChangeAmount}
+              keyboardType="numeric"
+              value={this.state.amount}
+            />
+            <TouchableOpacity onPress={this.onPayPressed}>
+              <Text style={styles.text}>Pay</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.props.navigation.pop}>
+              <Text style={styles.text}>Go Back</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
