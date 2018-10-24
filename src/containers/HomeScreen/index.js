@@ -3,15 +3,15 @@
  *
  * @wolf
  */
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { sequence } from 'libraries';
-import { Screen } from './components';
-import actions from './actions';
-import defaultProps from './props';
-import selector from './selectors';
-import type { ReactElement } from './types';
-import type { Props } from './types';
+import * as React from "react";
+import { connect } from "react-redux";
+import { sequence } from "libraries";
+import { Screen } from "./components";
+import actions from "./actions";
+import defaultProps from "./props";
+import selector from "./selectors";
+import type { ReactElement } from "./types";
+import type { Props } from "./types";
 
 class HomeScreen extends React.Component<Props> {
   static defaultProps = defaultProps;
@@ -47,7 +47,6 @@ class HomeScreen extends React.Component<Props> {
   }
 
   render(): ReactElement {
-    console.log('this.props', this.props);
     return (
       <Screen
         reanimatableRefs={this.reanimatableRefs}

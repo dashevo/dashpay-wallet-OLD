@@ -3,6 +3,7 @@
  *
  * @wolf
  */
+
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
 import { LENGTHS } from 'constants';
@@ -17,6 +18,9 @@ const styles = StyleSheet.create({
   header: {
     height: LENGTHS.navBarHeight
   },
+  scrollBody: {
+    width: '100%'
+  },
   body: {
     flex: 1,
     justifyContent: 'space-around',
@@ -28,7 +32,9 @@ const styles = StyleSheet.create({
     padding: LENGTHS.screenPadding
   },
   section: {
-    margin: 'auto',
+    alignSelf: "stretch",
+    paddingTop: LENGTHS.screenPadding,
+    paddingBottom: LENGTHS.screenPadding,
     width: '100%',
     justifyContent: 'center'
   },

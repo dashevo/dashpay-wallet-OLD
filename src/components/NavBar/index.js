@@ -8,7 +8,7 @@
  * @flow
  */
 
-import * as React from 'react';
+import * as React from "react";
 import {
   Text,
   View,
@@ -32,22 +32,22 @@ class NavBar extends React.Component<Props> {
     // account.events.on('balance_changed', () => {})
     this.state = {
       width: 200,
-      text: 'This is a test',
+      text: "This is a test",
       index: 0,
       count: 2,
       items: [
         {
-          icon: 'dash-D-blue',
+          icon: "dash-D-blue",
           amount: {
-            part1: '11,23',
-            part2: '468676'
+            part1: "11,23",
+            part2: "468676"
           }
         },
         {
-          icon: 'dollar',
+          icon: "dollar",
           amount: {
-            part1: '4,800',
-            part2: '.64'
+            part1: "4,800",
+            part2: ".64"
           }
         }
       ]
@@ -67,7 +67,7 @@ class NavBar extends React.Component<Props> {
   subscribeToBalance() {
     const account = this.props.walletLib.account;
     const self = this;
-    this.balanceListener = account.events.on('balance_changed', () =>
+    this.balanceListener = account.events.on("balance_changed", () =>
       self.updateBalance(account.getBalance())
     );
   }
@@ -79,18 +79,18 @@ class NavBar extends React.Component<Props> {
   updateBalance(satoshis) {
     function curCurrencyParts(val) {
       let str = val.toString();
-      let splitted = str.split('.');
+      let splitted = str.split(".");
 
-      var nf = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
+      var nf = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD"
       });
       const curPart1 = nf.format(splitted[0]);
 
       const curPart2 =
         splitted.length > 1
-          ? splitted[1].slice(0, 2).padEnd(2, '0')
-          : splitted[0].slice(0, 2).padEnd(2, '0');
+          ? splitted[1].slice(0, 2).padEnd(2, "0")
+          : splitted[0].slice(0, 2).padEnd(2, "0");
       return { curPart1, curPart2 };
     }
     function cutSatoshiParts(val) {
@@ -99,16 +99,16 @@ class NavBar extends React.Component<Props> {
 
       const part1 =
         len > 6
-          ? str.slice(0, -8).padStart(1, '0') +
-            ',' +
-            str.slice(-9, -7).padStart(2, '0')
-          : '0,00';
+          ? str.slice(0, -8).padStart(1, "0") +
+            "," +
+            str.slice(-9, -7).padStart(2, "0")
+          : "0,00";
 
-      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, '0');
+      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, "0");
 
       return { part1, part2 };
     }
-    function callToRatesService(satoshis, curr = 'USD') {
+    function callToRatesService(satoshis, curr = "USD") {
       //FIXME
       const pricePerSatoshis = 0.0000019;
       const currBalance = satoshis * pricePerSatoshis;
@@ -199,7 +199,8 @@ class NavBar extends React.Component<Props> {
           onClose={() => this._onClose()}
           shouldBounceOnMount={false}
           onSwipeEnd={this._setListViewScrollable}
-          onSwipeStart={this._setListViewNotScrollable}>
+          onSwipeStart={this._setListViewNotScrollable}
+        >
           <TouchableWithoutFeedback style={styles.icon} onPress={this._onPress}>
             <View style={styles.row}>
               <View style={styles.inline} onLayout={this.onLayout}>
@@ -224,7 +225,7 @@ class NavBar extends React.Component<Props> {
   }
 
   onSettingsPressed() {
-    return this.props.navigation.push('SettingsScreen');
+    return this.props.navigation.push("SettingsScreen");
   }
 }
 

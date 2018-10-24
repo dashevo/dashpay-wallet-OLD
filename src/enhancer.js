@@ -3,27 +3,29 @@
  *
  * @wolf
  */
-import * as React from 'react';
-import { navigation } from 'navigation';
-import { StoreProvider } from 'containers';
-import { LanguageProvider } from 'containers';
-import state from 'state';
-import translations from 'translations';
-import type { ReactComponent } from './types';
-import type { ReactElement } from './types';
-import {Wallet} from "@dashevo/wallet-lib";
+import * as React from "react";
+import { navigation } from "navigation";
+import { StoreProvider } from "containers";
+import { LanguageProvider } from "containers";
+import state from "state";
+import translations from "translations";
+import type { ReactComponent } from "./types";
+import type { ReactElement } from "./types";
+import { Wallet } from "@dashevo/wallet-lib";
 
 const walletLib = {
-  wallet:null,
-  account:null,
-  async payTo(payType, recipient, amount, isIS=true){
+  wallet: null,
+  account: null,
+  async payTo(payType, recipient, amount, isIS = true) {
     const txOpts = {
-      amount:parseFloat(amount),
-      to:recipient,
-      isInstantSend:isIS
+      amount: parseFloat(amount),
+      to: recipient,
+      isInstantSend: isIS
     };
-    // console.log(txOpts);
-    return walletLib.account.broadcastTransaction(walletLib.account.createTransaction(txOpts), txOpts.isInstantSend);
+    return walletLib.account.broadcastTransaction(
+      walletLib.account.createTransaction(txOpts),
+      txOpts.isInstantSend
+    );
   },
   initializeWallet(opts) {
     const { network, mnemonic } = opts;
@@ -31,12 +33,12 @@ const walletLib = {
       walletLib.wallet = new Wallet({
         network,
         mnemonic,
-        transport:'Insight'
+        transport: "Insight"
       });
       walletLib.account = this.wallet.getAccount(0);
-      walletLib.account.events.on('ready', () => {
-        resolve(true)
-      })
+      walletLib.account.events.on("ready", () => {
+        resolve(true);
+      });
     });
   },
   /**
@@ -44,11 +46,11 @@ const walletLib = {
    * This method allow to update the account reference used in the app.
    * @param accountId - A positive numeric value
    */
-  changeAccount(accountId=0){
+  changeAccount(accountId = 0) {
     walletLib.account = this.wallet.getAccount(accountId);
   },
-  isAddress(input){
-    return input.length===34; //FIXME : This only work for demo purpose but technically wrong
+  isAddress(input) {
+    return input.length === 34; //FIXME : This only work for demo purpose but technically wrong
   }
 };
 
@@ -65,7 +67,11 @@ function enhance(Component: ReactComponent): ReactComponent {
       return (
         <StoreProvider store={state}>
           <LanguageProvider translations={translations}>
-            <Component {...props} navigation={this.navigation} walletLib={this.walletLib} />
+            <Component
+              {...props}
+              navigation={this.navigation}
+              walletLib={this.walletLib}
+            />
           </LanguageProvider>
         </StoreProvider>
       );

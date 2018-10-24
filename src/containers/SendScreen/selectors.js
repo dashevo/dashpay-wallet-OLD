@@ -3,4 +3,9 @@
  *
  * @wolf
  */
-export default null;
+import { createSelector } from "reselect";
+import { selectRate } from "state";
+
+const selector = createSelector(selectRate, rate => ({ rate }));
+
+export default selector;
