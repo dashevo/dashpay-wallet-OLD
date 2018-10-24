@@ -22,6 +22,8 @@ import { IconButton } from 'components';
 import { Animation } from 'components';
 import { SwipeableRow } from 'components';
 import styles from './styles';
+import selectors from './selectors';
+import actions from './actions';
 const settingIconFile = require('../../assets/images/icon-settings.png');
 
 class NavBar extends React.Component<Props> {
@@ -228,5 +230,10 @@ class NavBar extends React.Component<Props> {
     return this.props.navigation.push("SettingsScreen");
   }
 }
+
+// NavBar = connect(
+//   selector,
+//   actions
+// )(NavBar);
 
 export default NavBar;

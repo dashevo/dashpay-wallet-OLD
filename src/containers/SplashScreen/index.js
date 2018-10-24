@@ -41,7 +41,7 @@ class SplashScreen extends React.Component<Props> {
   navigateFurther() {
     const { routeName } = this.props;
     const { routeParams } = this.props;
-    this.props.navigation.push("HomeScreen", routeParams);
+    this.props.navigation.resetTo("HomeScreen", routeParams);
   }
 
   render(): ReactElement {
