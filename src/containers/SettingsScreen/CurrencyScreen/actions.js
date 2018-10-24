@@ -4,10 +4,10 @@
  * @wolf
  */
 import { bindActionCreators } from 'redux';
-import { changeCurrency } from 'state';
+import { changeCurrency, getRate } from 'state';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ changeCurrency }, dispatch);
+  return bindActionCreators({ changeCurrency, getRate }, dispatch);
 }
 
 export default actions;
