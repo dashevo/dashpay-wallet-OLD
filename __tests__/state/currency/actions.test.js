@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @wolf
+ */
+
 import { CHANGE_CURRENCY } from 'state/currency/constants';
 import { changeCurrency } from 'state';
 

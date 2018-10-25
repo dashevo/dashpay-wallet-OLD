@@ -4,4 +4,3 @@
  * @wolf
  */
 
-export const selectCurrency = state => state.currency;

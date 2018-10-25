@@ -3,17 +3,19 @@
  *
  * @wolf
  */
-import { combineReducers } from "redux";
-import settings from "./settings";
-import currency from "./currency";
-import language from "./language";
-import user from "./user";
-import rates from "./rates";
-import transactions from "./transactions";
+import { combineReducers } from 'redux';
+import settings from './settings';
+import payment from './payment';
+import rates from './rates';
+import currency from './currency';
+import language from './language';
+import user from './user';
+import transactions from './transactions';
 
 export default combineReducers({
   transactions,
   settings,
+  payment,
   currency,
   language,
   user,

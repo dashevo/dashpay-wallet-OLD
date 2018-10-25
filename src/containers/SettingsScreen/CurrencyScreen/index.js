@@ -14,7 +14,7 @@ import { SelectableList } from 'components';
 import styles from './styles';
 import selector from "./selectors";
 import actions from "./actions";
-import getRates from './getRates';
+import { FIAT_CURRENCIES } from 'constants';
 
 import type {
   ReactElement,
@@ -26,24 +26,21 @@ class SettingsCurrencyScreen extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.handleSelection = this.handleSelection.bind(this);
-    this.state = { currencyOptions: [] };
-  }
-
-  async componentDidMount() {
-    const { currentCurrencyCode } = this.props;
-    const rates = await getRates();
-    const currencyOptions = rates.map(rate => ({
-      ...rate,
-      key: rate.code,
-      selected: rate.code === currentCurrencyCode,
+    const { currentCurrencyCode } = props;
+    const currencyOptions = FIAT_CURRENCIES.map(({code, name}) => ({
+      code,
+      key: code,
+      name,
+      selected: code === currentCurrencyCode,
     }));
-    this.setState({ currencyOptions })
+    this.state = { currencyOptions };
   }
 
-  handleSelection(currency) {
-    const { code, name, rate } = currency;
-    const { changeCurrency, navigation, componentId } = this.props;
-    changeCurrency({ code, name, rate });
+  async handleSelection(currency) {
+    const { code, name } = currency;
+    const { changeCurrency, getRate, navigation, componentId } = this.props;
+    changeCurrency({ code, name });
+    getRate(code);
     navigation.pop(componentId);
   }
 

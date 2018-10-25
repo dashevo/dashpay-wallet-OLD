@@ -3,7 +3,6 @@
  *
  * @wolf
  */
-
 import reducer from './reducer';
 
 export * from './actions';
