@@ -17,5 +17,13 @@ export const navigation = ({ componentId }) => ({
   },
   pop(routeName, options = {}) {
     return Navigation.pop(componentId);
+  },
+  resetTo(routeName, options = {}) {
+    return Navigation.setStackRoot(componentId, {
+      component: {
+        name: routeName,
+        options
+      }
+    })
   }
 });

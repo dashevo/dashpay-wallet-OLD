@@ -3,78 +3,90 @@
  *
  * @wolf
  */
-import * as React from 'react';
-import {TextInput, View} from 'react-native';
-import { Text } from 'react-native';
-import { TouchableOpacity } from 'react-native';
-// import { Image } from 'react-native';
-// import { Avatar } from 'components/avatar';
-
-import styles from './styles';
-
-import type { ReactElement } from './types';
-import type { Props } from './types';
-import type { State } from './types';
-import { Navigation } from 'react-native-navigation';
-import { RecipientInput } from 'components';
+import * as React from "react";
+import { TextInput, View } from "react-native";
+import { ScrollView } from "react-native";
+import { Text } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { AmountField } from "./components";
+import { RecipientField } from "./components";
+import { Button } from "./components";
+import { withFormik } from "formik";
+import * as Yup from "yup";
+import styles from "./styles";
+import { NavBar } from 'components';
+import type { ReactElement } from "./types";
+import type { Props } from "./types";
+import type { State } from "./types";
+import { Navigation } from "react-native-navigation";
 import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
 import actions from "./actions";
 
 class SendScreen extends React.Component<Props, State> {
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
+    this.handleOnPress = this.handleOnPress.bind(this);
     this.state = {
-      recipient: 'yWdXnYxGbouNoo8yMvcbZmZ3Gdp6BpySxL',
-      amount:'1'
+      visible: false
     };
-    this.onChangeRecipient = this.onChangeRecipient.bind(this);
-    this.onChangeAmount = this.onChangeAmount.bind(this);
-    this.onPayPressed = this.onPayPressed.bind(this);
-
   }
 
-  async componentDidMount() {
+  handleOnPress(event) {
+    this.setState({
+      visible: !this.state.visible
+    });
   }
-  onChangeRecipient(recipient){
-    this.setState({recipient});
-  }
-  onChangeAmount(amount){
-    this.setState({amount});
-  }
-  async onPayPressed(){
-    let payType = (this.props.walletLib.isAddress(this.state.recipient)) ? 'address' : 'username';
-    let result = await this.props.walletLib.payTo(payType, this.state.recipient, this.state.amount);
-    // console.log(result);
-  }
+
   render(): React.Element<any> {
-    const { recipient } = this.state;
+    const { visible } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Recipient : {recipient}</Text>
-        <RecipientInput value={recipient} onChangeRecipient={this.onChangeRecipient} />
-        <Text style={styles.text}>Amount :</Text>
-        <TextInput
-          style={styles.amountField}
-          onChangeText={this.onChangeAmount}
-          keyboardType="numeric"
-          value={this.state.amount}
-        />
-        <TouchableOpacity onPress={this.onPayPressed}>
-          <Text style={styles.text}>Pay</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.navigation.pop}>
-          <Text style={styles.text}>Bo Back</Text>
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <NavBar navigation={this.props.navigation} isOpen={true} />
+        </View>
+        <ScrollView style={styles.scrollBody} contentContainerStyle={styles.body}>
+          <Text style={[styles.text, styles.heading]}>Pay Address</Text>
+          <View style={styles.section}>
+            <RecipientField {...this.props} />
+          </View>
+          <View style={styles.section}>
+            <AmountField {...this.props} />
+          </View>
+          <View style={styles.section}>
+            <Text>
+              {visible &&
+                JSON.stringify({
+                  recipient: this.props.values.recipient,
+                  amount: this.props.values.dash
+                })}
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <Button {...this.props} onPress={this.handleOnPress} />
+          </View>
+        </ScrollView>
       </View>
-      )
-  };
-};
+    );
+  }
+}
 
-
-SendScreen = connect(
+SendScreen = SendScreen = connect(
   selector,
   actions
 )(SendScreen);
+
+SendScreen = withFormik({
+  mapPropsToValues: () => ({
+    dash: "",
+    currency: ""
+  }),
+  validationSchema: Yup.object().shape({
+    dash: Yup.number().required("Required"),
+    currency: Yup.number().required("Required")
+  }),
+  handleSubmit: values => {},
+  displayName: "Validation"
+})(SendScreen);
 
 export default SendScreen;

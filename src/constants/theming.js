@@ -7,7 +7,7 @@ import COLORS from './colors';
 
 export default {
   light: {
-    foreground: COLORS.black,
+    foreground: COLORS.blueDark,
     background: COLORS.white
   },
   vivid: {

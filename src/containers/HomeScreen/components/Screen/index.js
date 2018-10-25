@@ -7,6 +7,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 import { ProgressBar } from 'components';
+import { NavBar } from 'components';
 import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
@@ -16,12 +17,11 @@ import defaultProps from './props';
 import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
-import { Balance } from 'containers';
 
 const Screen = (props: Props): ReactElement => (
   <View style={styles.container}>
     <View style={styles.header}>
-      <Balance navigation={props.navigation} isOpen={true} />
+      <NavBar navigation={props.navigation} isOpen={true} />
     </View>
     <View style={styles.body}>
       <View style={styles.section}>

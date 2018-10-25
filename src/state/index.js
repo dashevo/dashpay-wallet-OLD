@@ -3,16 +3,18 @@
  *
  * @wolf
  */
-import { createStore } from 'redux';
-import reducer from './reducer';
+import { createStore } from "redux";
+import reducer from "./reducer";
 
 // Tmp
+export * from "./transactions";
 export * from "./actions";
 export * from "./settings";
 export * from "./language";
 export * from "./payment";
 export * from "./currency";
 export * from "./user";
+export * from "./rates";
 
 // Tmp
 const walletLib = {

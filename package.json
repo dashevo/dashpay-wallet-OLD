@@ -11,9 +11,10 @@
     "postinstall": "rn-nodeify --install crypto,stream,events,vm,assert,url --hack && react-native link"
   },
   "dependencies": {
-    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git#feat/transports",
+    "@dashevo/wallet-lib": "github:dashevo/wallet-lib.git#feat/transports",
     "assert": "^1.4.1",
     "events": "^1.1.1",
+    "formik": "^1.3.1",
     "intl": "^1.2.5",
     "lodash": "^4.17.11",
     "react": "16.3.1",
@@ -38,7 +39,8 @@
     "reselect": "^3.0.1",
     "stream-browserify": "^1.0.0",
     "url": "^0.10.3",
-    "vm-browserify": "0.0.4"
+    "vm-browserify": "0.0.4",
+    "yup": "^0.26.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

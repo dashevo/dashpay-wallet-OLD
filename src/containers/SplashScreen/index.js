@@ -27,7 +27,10 @@ class SplashScreen extends React.Component<Props> {
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
-    this.props.initializeWallet().then(this.navigateFurther.bind(this));
+    return Promise.all([
+      this.props.initializeWallet(),
+      this.props.initializeRateService()
+    ]).then(this.navigateFurther.bind(this));
   }
 
   async handleOnComplete() {
@@ -38,7 +41,7 @@ class SplashScreen extends React.Component<Props> {
   navigateFurther() {
     const { routeName } = this.props;
     const { routeParams } = this.props;
-    this.props.navigation.push(routeName, routeParams);
+    this.props.navigation.resetTo("HomeScreen", routeParams);
   }
 
   render(): ReactElement {
