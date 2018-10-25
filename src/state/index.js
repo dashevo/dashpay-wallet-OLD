@@ -10,6 +10,7 @@ import reducer from './reducer';
 export * from "./actions";
 export * from "./settings";
 export * from "./language";
+export * from "./payment";
 export * from "./currency";
 export * from "./user";
 
