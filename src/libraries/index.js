@@ -3,4 +3,4 @@
  *
  * @wolf
  */
-export * from './Reanimatable';
+export * from "./deprecated/Reanimatable";
