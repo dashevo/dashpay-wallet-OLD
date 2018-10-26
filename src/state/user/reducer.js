@@ -3,6 +3,8 @@
  *
  * @wolf
  */
+import { RECEIVE_BALANCE } from "./constants";
+
 export const initialState = {
   network: "testnet", //todo : Should be from state
   mnemonic:
@@ -12,6 +14,12 @@ export const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
+    case RECEIVE_BALANCE:
+      return {
+        ...state,
+        balance: action.response
+      };
+
     default:
       return state;
   }

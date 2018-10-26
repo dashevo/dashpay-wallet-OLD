@@ -16,11 +16,25 @@ export const initializeWallet = () => {
         INITIALIZE_WALLET_FAILURE
       ],
       async asyncTask(state) {
+        const { mnemonic, network, transport } = state.user;
         try {
           await walletLib.initializeWallet({
-            mnemonic: state.user.mnemonic,
-            network: state.user.network,
-            transport: state.user.transport
+            mnemonic,
+            network,
+            transport
+          });
+          // We need to refactor this.
+          walletLib.account.events.on("balance_changed", () => {
+            const balance = walletLib.account.getBalance();
+            return dispatch({
+              type: "RECEIVE_BALANCE",
+              response: balance
+            });
+          });
+          const balance = walletLib.account.getBalance();
+          return dispatch({
+            type: "RECEIVE_BALANCE",
+            response: balance
           });
         } catch (err) {
           const { message = "Something went wrong." } = err;

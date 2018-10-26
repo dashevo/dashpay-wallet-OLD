@@ -3,9 +3,16 @@
  *
  * @wolf
  */
-import { createSelector } from 'reselect';
-import { selectLanguage } from 'state';
+import { createSelector } from "reselect";
+import { selectLanguage } from "state";
+import { selectBalance } from "state";
 
-const selector = createSelector(selectLanguage, language => ({ language }));
+const selector = createSelector(
+  [selectLanguage, selectBalance],
+  (language, balance) => ({
+    language,
+    balance
+  })
+);
 
 export default selector;

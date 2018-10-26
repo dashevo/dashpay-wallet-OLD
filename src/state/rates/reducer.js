@@ -9,7 +9,6 @@ export const initialState = 0;
 const language = (state = initialState, action) => {
   switch (action.type) {
     case GET_DASH_USD_RATE_SUCCESS:
-      console.log(action.response);
       return parseFloat(action.response);
 
     default:
