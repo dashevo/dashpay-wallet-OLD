@@ -47,6 +47,7 @@ class HomeScreen extends React.Component<Props> {
   }
 
   render(): ReactElement {
+    console.log("__balance__", this.props.balance);
     return (
       <Screen
         reanimatableRefs={this.reanimatableRefs}

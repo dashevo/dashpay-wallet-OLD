@@ -3,3 +3,4 @@
  *
  * @flow
  */
+export const RECEIVE_BALANCE = "RECEIVE_BALANCE";
