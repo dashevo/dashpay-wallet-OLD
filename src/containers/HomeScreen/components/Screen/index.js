@@ -6,6 +6,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { ProgressBar } from 'components';
 import { NavBar } from 'components';
 import { SharedElement } from 'components';
@@ -36,7 +37,8 @@ const Screen = (props: Props): ReactElement => (
           style={styles.reanimatable}>
           <View style={styles.avatar}>
             <Avatar source={require('assets/images/avatar-default.png')} />
-            <View style={styles.badgeWrapper}>
+            <TouchableOpacity style={styles.badgeWrapper}
+                              onPress={() => props.navigation.push('TransactionHistoryScreen')}>
               <Reanimatable
                 duration={1000}
                 ref={props.reanimatableRefs[1]}
@@ -45,7 +47,7 @@ const Screen = (props: Props): ReactElement => (
                   <Text style={styles.badgeText}>{'3'}</Text>
                 </View>
               </Reanimatable>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.buttonGroup}>
             <IconButton

@@ -9,7 +9,7 @@ import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';
 
-import { Address } from '@dashevo/dashcore-lib';
+import { Address } from '@dashevo/wallet-lib';
 
 class RecipientInput extends React.Component<Props, State> {
   constructor(props: Props) {
