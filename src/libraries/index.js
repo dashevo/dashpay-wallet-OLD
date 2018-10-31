@@ -3,4 +3,7 @@
  *
  * @wolf
  */
+export { default as withStyles } from "./styles";
+
+// Deprecated
 export * from "./deprecated/Reanimatable";

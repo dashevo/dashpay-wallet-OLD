@@ -3,46 +3,51 @@
  *
  * @wolf
  */
-import { SplashScreen } from 'containers';
-import { HomeScreen } from 'containers';
-import { SendScreen } from 'containers';
-import { ReceiveScreen } from 'containers';
-import { SettingsScreen } from 'containers';
-import { SettingsLanguageScreen } from 'containers';
-import { SettingsCurrencyScreen } from 'containers';
-import enhance from './enhancer';
+import { SplashScreen } from "containers";
+import { HomeScreen } from "containers";
+import { SendScreen } from "containers";
+import { ReceiveScreen } from "containers";
+import { SettingsScreen } from "containers";
+import { SettingsLanguageScreen } from "containers";
+import { SettingsCurrencyScreen } from "containers";
+import { Styles } from "experimental";
+import enhance from "./enhancer";
 
 type Routes = {};
 
 let routes: Routes = [
   {
-    name: 'SplashScreen',
+    name: "SplashScreen",
     component: SplashScreen
   },
   {
-    name: 'SendScreen',
+    name: "SendScreen",
     component: SendScreen
   },
   {
-    name: 'ReceiveScreen',
+    name: "ReceiveScreen",
     component: ReceiveScreen
   },
   {
-    name: 'HomeScreen',
+    name: "HomeScreen",
     component: HomeScreen
   },
   {
-    name: 'SettingsScreen',
+    name: "SettingsScreen",
     component: SettingsScreen
   },
   {
-    name: 'SettingsLanguageScreen',
+    name: "SettingsLanguageScreen",
     component: SettingsLanguageScreen
   },
   {
-    name: 'SettingsCurrencyScreen',
+    name: "SettingsCurrencyScreen",
     component: SettingsCurrencyScreen
   },
+  {
+    name: "Styles",
+    component: Styles
+  }
 ];
 
 routes = routes.map(({ name, component }) => ({
