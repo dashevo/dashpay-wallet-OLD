@@ -17,6 +17,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet
 } from 'react-native';
+import { connect } from "react-redux";
 import { Icon } from 'components';
 import { IconButton } from 'components';
 import { Animation } from 'components';
@@ -38,20 +39,8 @@ class NavBar extends React.Component<Props> {
       index: 0,
       count: 2,
       items: [
-        {
-          icon: "dash-D-blue",
-          amount: {
-            part1: "11,23",
-            part2: "468676"
-          }
-        },
-        {
-          icon: "dollar",
-          amount: {
-            part1: "4,800",
-            part2: ".64"
-          }
-        }
+        { icon: "dash-D-blue" },
+        { icon: "dollar" }
       ]
     };
     this._onPress = this._onPress.bind(this);
@@ -60,74 +49,6 @@ class NavBar extends React.Component<Props> {
     this.swipeableRow = React.createRef();
   }
 
-  componentDidMount() {
-    if (this.props.walletLib && this.props.walletLib.account) {
-      this.updateBalance(this.props.walletLib.account.getBalance());
-      this.subscribeToBalance();
-    }
-  }
-  subscribeToBalance() {
-    const account = this.props.walletLib.account;
-    const self = this;
-    this.balanceListener = account.events.on("balance_changed", () =>
-      self.updateBalance(account.getBalance())
-    );
-  }
-  componentWillUnmount() {
-    if (this.balanceListener) {
-      this.balanceListener.remove();
-    }
-  }
-  updateBalance(satoshis) {
-    function curCurrencyParts(val) {
-      let str = val.toString();
-      let splitted = str.split(".");
-
-      var nf = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-      });
-      const curPart1 = nf.format(splitted[0]);
-
-      const curPart2 =
-        splitted.length > 1
-          ? splitted[1].slice(0, 2).padEnd(2, "0")
-          : splitted[0].slice(0, 2).padEnd(2, "0");
-      return { curPart1, curPart2 };
-    }
-    function cutSatoshiParts(val) {
-      let str = val.toString();
-      let len = str.length;
-
-      const part1 =
-        len > 6
-          ? str.slice(0, -8).padStart(1, "0") +
-            "," +
-            str.slice(-9, -7).padStart(2, "0")
-          : "0,00";
-
-      const part2 = len > 6 ? str.slice(-6) : str.padStart(6, "0");
-
-      return { part1, part2 };
-    }
-    function callToRatesService(satoshis, curr = "USD") {
-      //FIXME
-      const pricePerSatoshis = 0.0000019;
-      const currBalance = satoshis * pricePerSatoshis;
-      return currBalance;
-    }
-    let { items } = this.state;
-    const { part1, part2 } = cutSatoshiParts(satoshis);
-    items[0].amount.part1 = part1;
-    items[0].amount.part2 = part2;
-
-    const currencyBalance = callToRatesService(satoshis);
-    const { curPart1, curPart2 } = curCurrencyParts(currencyBalance);
-    items[1].amount.part1 = curPart1;
-    items[1].amount.part2 = curPart2;
-
-    this.setState({ items });
-  }
   _getMaxSwipeDistance(info: Object): number {
     return this.state.width;
   }
@@ -181,9 +102,11 @@ class NavBar extends React.Component<Props> {
 
   render() {
     const {
-      icon,
-      amount: { part1, part2 }
+      icon
     } = this.state.items[this.state.index];
+    const {
+      amount: { part1, part2 }
+    } = this.props.items[this.state.index];
     const iconButton = (
       <Animation ref={this.animation}>
         <Icon style={styles.icon} name={icon} />
@@ -231,9 +154,9 @@ class NavBar extends React.Component<Props> {
   }
 }
 
-// NavBar = connect(
-//   selector,
-//   actions
-// )(NavBar);
+let connectedNavBar = connect(
+  selectors,
+  actions
+)(NavBar);
 
-export default NavBar;
+export default connectedNavBar;
