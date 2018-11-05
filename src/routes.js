@@ -7,6 +7,7 @@ import { SplashScreen } from "containers";
 import { HomeScreen } from "containers";
 import { SendScreen } from "containers";
 import { ReceiveScreen } from "containers";
+import { TransactionHistoryScreen } from 'containers';
 import { SettingsScreen } from "containers";
 import { SettingsLanguageScreen } from "containers";
 import { SettingsCurrencyScreen } from "containers";
@@ -33,7 +34,11 @@ let routes: Routes = [
     component: HomeScreen
   },
   {
-    name: "SettingsScreen",
+    name: 'TransactionHistoryScreen',
+    component: TransactionHistoryScreen
+  },
+  {
+    name: 'SettingsScreen',
     component: SettingsScreen
   },
   {
