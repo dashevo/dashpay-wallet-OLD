@@ -31,8 +31,8 @@ let balanceSelector = createSelector(
   selectBalance,
   selectRate,
   (balance, rate) => [
-    buildAmountParts(balance, 0, 8, 4), // Dash
-    buildAmountParts(balance * rate, 2, 4, 2) // Fiat
+    buildAmountParts(balance / 100000000, 0, 8, 4), // Dash
+    buildAmountParts(balance / 100000000 * rate, 2, 4, 2) // Fiat
   ]
 );
 
