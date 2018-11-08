@@ -35,5 +35,5 @@ export default [
   {code: "RUB", name: "Russian Ruble"},
   {code: "MYR", name: "Malaysian Ringgit"},
   {code: "TRY", name: "Turkish Lira"},
-  {code: "MYR", name: "Malaysian Ringgit"},
+  {code: "VES", name: "Venezuelan Bolivar"},
 ]
