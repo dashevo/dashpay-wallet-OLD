@@ -1,20 +1,5 @@
 {
-  "presets": ["react-native"],
-  "env": {
-    "development": {
-      "plugins": [
-        [
-          "flow-react-proptypes",
-          {
-            "ignoreNodeModules": true
-          }
-        ]
-      ]
-    },
-    "production": {
-      "plugins": [["transform-remove-console"]]
-    }
-  },
+  "presets": ["module:metro-react-native-babel-preset"],
   "plugins": [
     [
       "module-resolver",
