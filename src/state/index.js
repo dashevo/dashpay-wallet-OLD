@@ -5,7 +5,7 @@
  */
 import { createStore } from "redux";
 import reducer from "./reducer";
-
+import SecureStorage from 'react-native-secure-storage';
 // Tmp
 export * from "./transactions";
 export * from "./actions";
@@ -23,15 +23,32 @@ const walletLib = {
   initializeWallet(opts) {
     const { network, mnemonic } = opts;
     return new Promise(resolve => {
-      walletLib.wallet = new Wallet({
-        network,
-        mnemonic
-      });
-      walletLib.account = this.wallet.getAccount(0);
-      let listener = walletLib.account.events.on("ready", () => {
+      try {
+        walletLib.wallet = new Wallet({
+          network,
+          mnemonic,
+          adapter:SecureStorage,
+          transport: "insight",
+          injectDefaultPlugins: true
+        });
+      }
+      catch (e) {
+        console.log('Error on init',e);
+        throw e;
+      }
+      walletLib.account = this.wallet.getAccount();
+
+      walletLib.account.events.on("ready", () => {
+        let b = walletLib.account.getBalance();
+        console.log('Balance is :', b)
         resolve(true);
       });
     });
+  },
+  forceRefreshAccount(){
+    return new Promise(resolve => {
+      resolve(walletLib.account.forceRefreshAccount())
+    })
   }
 };
 

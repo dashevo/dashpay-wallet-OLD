@@ -152,6 +152,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-secure-storage')
   implementation fileTree(dir: "libs", include: ["*.jar"])
   implementation "com.facebook.react:react-native:+"  // From node_modules
   implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
