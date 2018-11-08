@@ -8,7 +8,7 @@
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src/**/*.js",
-    "postinstall": "rn-nodeify --install crypto,stream,events,vm,assert,url --hack && react-native link"
+    "postinstall": "rn-nodeify --install crypto,stream,events,vm,assert,url --hack"
   },
   "dependencies": {
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib.git#feat/transports",
