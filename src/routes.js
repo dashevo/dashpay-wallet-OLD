@@ -7,15 +7,13 @@ import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
+import { ContactScreen } from 'containers';
 import { TransactionHistoryScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsCurrencyScreen } from 'containers';
+import { Styles } from 'experimental';
 import enhance from './enhancer';
-
-// Examples
-import { Buttons } from 'examples';
-import { Form } from 'examples';
 
 type Routes = {};
 
@@ -31,6 +29,10 @@ let routes: Routes = [
   {
     name: 'ReceiveScreen',
     component: ReceiveScreen
+  },
+  {
+    name: 'ContactsScreen',
+    component: ContactScreen
   },
   {
     name: 'HomeScreen',
@@ -51,6 +53,10 @@ let routes: Routes = [
   {
     name: 'SettingsCurrencyScreen',
     component: SettingsCurrencyScreen
+  },
+  {
+    name: 'Styles',
+    component: Styles
   }
 ];
 

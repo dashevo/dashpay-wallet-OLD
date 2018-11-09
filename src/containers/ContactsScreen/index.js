@@ -20,4 +20,4 @@ const ContactsScreen = ({ }: Props): ReactElement =>
     <Text style={styles.text}>Send</Text>
   </SafeAreaView>
 
-export { ContactsScreen };
+export default ContactsScreen;
