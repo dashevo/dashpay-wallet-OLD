@@ -4,6 +4,7 @@
  * @flow
  */
 export { default as Icon } from './Icon';
+export { default as Touchable } from './Touchable';
 
 // TODO: "render props" + global variables for styles
 export { default as Avatar } from './Avatar';
