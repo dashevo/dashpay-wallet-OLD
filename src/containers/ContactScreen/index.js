@@ -7,7 +7,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 // import { Avatar } from 'components/avatar';
-import { TabbedCard } from 'components';
+import {
+  TabbedCard,
+  NavBar
+} from 'components';
 
 import connect from "react-redux/es/connect/connect";
 import styles from './styles';
@@ -18,8 +21,9 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
 
-const ContactScreen = ({ }: Props): ReactElement =>
+const ContactScreen = ({ navigation }: Props): ReactElement =>
   <View style={styles.container}>
+    <NavBar navigation={navigation} isOpen={true} />
     <TabbedCard></TabbedCard>
   </View>
 

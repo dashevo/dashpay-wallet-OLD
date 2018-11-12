@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import { CustomTabBar } from './components';
 import styles from './styles';
 import selectors from './selectors';
 import actions from './actions';
@@ -36,7 +37,19 @@ class TabbedCard extends React.Component<Props> {
       <View style={styles.card}>
         <View style={styles.header}>
         </View>
-        <ScrollableTabView>
+        <ScrollableTabView
+          renderTabBar={() => <CustomTabBar />}
+          initialPage={0}
+        >
+          <View style={styles.dummyPage} tabLabel='One'></View>
+          <View style={styles.dummyPage} tabLabel='Two'></View>
+          <View style={styles.dummyPage} tabLabel='Three'></View>
+          <View style={styles.dummyPage} tabLabel='One'></View>
+          <View style={styles.dummyPage} tabLabel='Two'></View>
+          <View style={styles.dummyPage} tabLabel='Three'></View>
+          <View style={styles.dummyPage} tabLabel='One'></View>
+          <View style={styles.dummyPage} tabLabel='Two'></View>
+          <View style={styles.dummyPage} tabLabel='Three'></View>
           <View style={styles.dummyPage} tabLabel='One'></View>
           <View style={styles.dummyPage} tabLabel='Two'></View>
           <View style={styles.dummyPage} tabLabel='Three'></View>
