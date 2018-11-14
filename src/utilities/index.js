@@ -4,6 +4,7 @@
  * @flow
  */
 // TMP
+export { debounce } from 'lodash';
 export { isFunction } from 'lodash';
 
 export { default as compose } from './compose';

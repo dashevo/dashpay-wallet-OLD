@@ -15,6 +15,7 @@ import enhance from './enhancer';
 
 // Examples
 import { Buttons } from 'examples';
+import { Form } from 'examples';
 
 type Routes = {};
 
