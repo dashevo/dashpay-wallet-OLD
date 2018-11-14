@@ -4,11 +4,12 @@
  * @flow
  */
 // 100% donne
+export { default as Button } from './Button';
+export { default as Field } from './Field';
+export { default as Focus } from './Focus';
 export { default as Icon } from './Icon';
 export { default as Interval } from './Interval';
 export { default as Touch } from './Touch';
-
-export { default as Button } from './Button';
 
 // TODO: "render props" + global variables for styles
 export { default as Avatar } from './Avatar';
