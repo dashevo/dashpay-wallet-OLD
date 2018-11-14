@@ -3,34 +3,36 @@
  *
  * @wolf
  */
-import { SplashScreen } from "containers";
-import { HomeScreen } from "containers";
-import { SendScreen } from "containers";
-import { ReceiveScreen } from "containers";
+import { SplashScreen } from 'containers';
+import { HomeScreen } from 'containers';
+import { SendScreen } from 'containers';
+import { ReceiveScreen } from 'containers';
 import { TransactionHistoryScreen } from 'containers';
-import { SettingsScreen } from "containers";
-import { SettingsLanguageScreen } from "containers";
-import { SettingsCurrencyScreen } from "containers";
-import { Styles } from "experimental";
-import enhance from "./enhancer";
+import { SettingsScreen } from 'containers';
+import { SettingsLanguageScreen } from 'containers';
+import { SettingsCurrencyScreen } from 'containers';
+import enhance from './enhancer';
+
+// Examples
+import { Buttons } from 'examples';
 
 type Routes = {};
 
 let routes: Routes = [
   {
-    name: "SplashScreen",
+    name: 'SplashScreen',
     component: SplashScreen
   },
   {
-    name: "SendScreen",
+    name: 'SendScreen',
     component: SendScreen
   },
   {
-    name: "ReceiveScreen",
+    name: 'ReceiveScreen',
     component: ReceiveScreen
   },
   {
-    name: "HomeScreen",
+    name: 'HomeScreen',
     component: HomeScreen
   },
   {
@@ -42,16 +44,12 @@ let routes: Routes = [
     component: SettingsScreen
   },
   {
-    name: "SettingsLanguageScreen",
+    name: 'SettingsLanguageScreen',
     component: SettingsLanguageScreen
   },
   {
-    name: "SettingsCurrencyScreen",
+    name: 'SettingsCurrencyScreen',
     component: SettingsCurrencyScreen
-  },
-  {
-    name: "Styles",
-    component: Styles
   }
 ];
 

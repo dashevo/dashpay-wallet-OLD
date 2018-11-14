@@ -3,8 +3,12 @@
  *
  * @flow
  */
+// 100% donne
 export { default as Icon } from './Icon';
-export { default as Touchable } from './Touchable';
+export { default as Interval } from './Interval';
+export { default as Touch } from './Touch';
+
+export { default as Button } from './Button';
 
 // TODO: "render props" + global variables for styles
 export { default as Avatar } from './Avatar';
@@ -24,4 +28,5 @@ export { default as FormattedDate } from './FormattedDate';
 export { default as FormattedTime } from './FormattedTime';
 export { default as FormattedRelative } from './FormattedRelative';
 export { default as FormattedNumber } from './FormattedNumber';
+export { ActivityIndicator as Spinner } from 'react-native';
 export * from './Animation';

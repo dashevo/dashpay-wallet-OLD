@@ -183,6 +183,8 @@ export { SpringDriver };
 
 import { ScrollDriver } from './ScrollDriver';
 export { ScrollDriver };
+export { default as FadeIn } from './FadeIn';
+export { default as Scale } from './Scale';
 
 class Animation extends React.Component<Props, State> {
   static defaultProps = defaultProps;

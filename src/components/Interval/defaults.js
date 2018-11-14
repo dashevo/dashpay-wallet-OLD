@@ -3,5 +3,6 @@
  *
  * @flow
  */
-export const Props = {};
-export const State = {};
+export default {
+  delay: 300
+};
