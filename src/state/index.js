@@ -3,18 +3,19 @@
  *
  * @wolf
  */
-import { createStore } from "redux";
-import reducer from "./reducer";
+import { createStore } from 'redux';
+import { createLogger } from 'redux-logger';
+import reducer from './reducer';
 
 // Tmp
-export * from "./transactions";
-export * from "./actions";
-export * from "./settings";
-export * from "./language";
-export * from "./payment";
-export * from "./currency";
-export * from "./user";
-export * from "./rates";
+export * from './transactions';
+export * from './actions';
+export * from './settings';
+export * from './language';
+export * from './payment';
+export * from './currency';
+export * from './user';
+export * from './rates';
 
 // Tmp
 const walletLib = {
@@ -28,18 +29,25 @@ const walletLib = {
         mnemonic
       });
       walletLib.account = this.wallet.getAccount(0);
-      let listener = walletLib.account.events.on("ready", () => {
+      let listener = walletLib.account.events.on('ready', () => {
         resolve(true);
       });
     });
   }
 };
 
-import thunk from "redux-thunk";
-import middleware from "./middleware";
-import { applyMiddleware } from "redux";
-import { Wallet } from "@dashevo/wallet-lib";
+import thunk from 'redux-thunk';
+import middleware from './middleware';
+import { applyMiddleware } from 'redux';
+import { Wallet } from '@dashevo/wallet-lib';
 
+// the following code should be splitted into two files:
+// configureStore.prod.js should be without createLogger.
 const extraArgument = thunk.withExtraArgument(walletLib);
-const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
+const enhancedMiddleware = applyMiddleware(
+  middleware,
+  extraArgument,
+  createLogger()
+);
+
 export default createStore(reducer, enhancedMiddleware);
