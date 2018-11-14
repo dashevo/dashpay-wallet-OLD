@@ -4,7 +4,7 @@
  * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { ProgressBar } from 'components';
 import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
@@ -14,7 +14,7 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 
 const Screen = (props: Props): ReactElement => (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <View style={styles.body}>
       <View style={styles.section}>
         <Reanimatable
@@ -33,7 +33,7 @@ const Screen = (props: Props): ReactElement => (
         </Reanimatable>
       </View>
     </View>
-  </View>
+  </SafeAreaView>
 );
 
 export default Screen;

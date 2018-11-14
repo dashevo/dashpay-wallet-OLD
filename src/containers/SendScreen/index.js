@@ -4,7 +4,7 @@
  * @wolf
  */
 import * as React from "react";
-import { TextInput, View } from "react-native";
+import { TextInput, View, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native";
 import { Text } from "react-native";
 import { TouchableOpacity } from "react-native";
@@ -41,7 +41,7 @@ class SendScreen extends React.Component<Props, State> {
   render(): React.Element<any> {
     const { visible } = this.state;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <NavBar navigation={this.props.navigation} isOpen={true} />
         </View>
@@ -66,7 +66,7 @@ class SendScreen extends React.Component<Props, State> {
             <Button {...this.props} onPress={this.handleOnPress} />
           </View>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
