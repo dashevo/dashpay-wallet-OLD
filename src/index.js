@@ -3,27 +3,27 @@
  *
  * @wolf
  */
-import "../shim.js";
-import crypto from "crypto";
-import stream from "stream";
+import '../shim.js';
+import crypto from 'crypto';
+import stream from 'stream';
 
-import { COLORS } from "constants";
-import { registerRoutes } from "navigation";
-import { registerLaunch } from "navigation";
-import { setDefaultOptions } from "navigation";
-import { setRoot } from "navigation";
-import routes from "./routes";
+import { COLORS } from 'constants';
+import { registerRoutes } from 'navigation';
+import { registerLaunch } from 'navigation';
+import { setDefaultOptions } from 'navigation';
+import { setRoot } from 'navigation';
+import routes from './routes';
 
 function app() {
   registerRoutes(routes);
   registerLaunch(async () => {
     setDefaultOptions({
       statusBar: {
-        style: "light",
-        backgroundColor: "#011E60"
+        style: 'light',
+        backgroundColor: '#011E60'
       },
       layout: {
-        orientation: ["portrait"],
+        orientation: ['portrait'],
         backgroundColor: COLORS.blue
       },
       topBar: {
@@ -35,11 +35,11 @@ function app() {
     setRoot({
       root: {
         stack: {
-          id: "DashPay",
+          id: 'DashPay',
           children: [
             {
               component: {
-                name: "SplashScreen"
+                name: 'SplashScreen'
               }
             }
           ]

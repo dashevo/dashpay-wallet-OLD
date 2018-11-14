@@ -7,10 +7,11 @@
         "cwd": "babelrc",
         "root": ["./src"],
         "alias": {
-          "actions": "./src/actions",
+          "assets": "./src/assets",
           "components": "./src/components",
           "constants": "./src/constants",
           "containers": "./src/containers",
+          "examples": "./src/examples",
           "libraries": "./src/libraries",
           "navigation": "./src/navigation",
           "state": "./src/state",

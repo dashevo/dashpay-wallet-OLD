@@ -21,6 +21,7 @@
     "lodash": "^4.17.11",
     "package-lock-only": "0.0.4",
     "react": "^16.6.0-alpha.8af6728",
+    "react-adopt": "^0.6.0",
     "react-intl": "^2.4.0",
     "react-native": "^0.57.4",
     "react-native-camera": "^1.2.0",
