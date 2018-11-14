@@ -4,6 +4,7 @@
  * @flow
  */
 import { createStore, compose } from 'redux';
+import { createLogger } from 'redux-logger';
 import reducer from './reducer';
 
 export * from './contacts';
@@ -58,5 +59,13 @@ const walletLib = {
 };
 
 const extraArgument = thunk.withExtraArgument(walletLib);
-const store = createStore(reducer, applyMiddleware(middleware, extraArgument));
+// the following code should be splitted into two files:
+// configureStore.prod.js should be without createLogger.
+const extraArgument = thunk.withExtraArgument(walletLib);
+const enhancedMiddleware = applyMiddleware(
+  middleware,
+  extraArgument,
+  createLogger()
+);
+const store = createStore(reducer, enhancedMiddleware);
 export default store;
