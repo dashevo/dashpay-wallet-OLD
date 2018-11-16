@@ -12,9 +12,11 @@ import { registerRoutes } from 'navigation';
 import { registerLaunch } from 'navigation';
 import { setDefaultOptions } from 'navigation';
 import { setRoot } from 'navigation';
+import { StatusBar } from 'react-native';
 import routes from './routes';
 
 function app() {
+  StatusBar.setBarStyle('light-content', true);
   registerRoutes(routes);
   registerLaunch(async () => {
     setDefaultOptions({

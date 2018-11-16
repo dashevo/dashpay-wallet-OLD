@@ -5,6 +5,7 @@
  */
 import * as React from 'react';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { ProgressBar } from 'components';
@@ -20,7 +21,7 @@ import type { ReactElement } from './types';
 import type { Props } from './types';
 
 const Screen = (props: Props): ReactElement => (
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <View style={styles.header}>
       <NavBar navigation={props.navigation} isOpen={true} />
     </View>
@@ -69,7 +70,7 @@ const Screen = (props: Props): ReactElement => (
         </Reanimatable>
       </View>
     </View>
-  </View>
+  </SafeAreaView>
 );
 
 Screen.defaultProps = defaultProps;

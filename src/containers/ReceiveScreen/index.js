@@ -4,7 +4,7 @@
  * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 // import { Image } from 'react-native';
@@ -40,7 +40,7 @@ class ReceiveScreen extends React.Component<Props, State> {
 
   render(): React.Element<any> {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
 
         <Text selectable={true} style={[styles.text, styles.bold]}>{this.state.unusedAddress}</Text>
         <QRCode
@@ -52,7 +52,7 @@ class ReceiveScreen extends React.Component<Props, State> {
           logoBackgroundColor='white'
           />
         <CopyAddressButton address='yWdXnYxGbouNoo8yMvcbZmZ3Gdp6BpySxL' />
-      </View>
+      </SafeAreaView>
     );
   }
 };

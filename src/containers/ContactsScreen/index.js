@@ -4,7 +4,7 @@
  * @wolf
  */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import { Text } from 'react-native';
 // import { Image } from 'react-native';
 // import { Avatar } from 'components/avatar';
@@ -16,8 +16,8 @@ import type { Props } from './types';
 import type { State } from './types';
 
 const ContactsScreen = ({ }: Props): ReactElement =>
-  <View style={styles.container}>
+  <SafeAreaView style={styles.container}>
     <Text style={styles.text}>Send</Text>
-  </View>
+  </SafeAreaView>
 
 export { ContactsScreen };
