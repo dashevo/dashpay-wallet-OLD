@@ -45,10 +45,10 @@ class TabbedCard extends React.Component<Props> {
           initialPage={0}
         >
           <View style={styles.dummyPage} tabLabel='One'></View>
-          <View style={styles.dummyPage} tabLabel='Two'></View>
+          <View style={styles.dummyPage} tabLabel='TwoTwoTwoTwo'></View>
           <View style={styles.dummyPage} tabLabel='Three'></View>
           <View style={styles.dummyPage} tabLabel='Four'></View>
-          <View style={styles.dummyPage} tabLabel='Five'></View>
+          <View style={styles.dummyPage} tabLabel='FiveFiveFive'></View>
           <View style={styles.dummyPage} tabLabel='Six'></View>
           <View style={styles.dummyPage} tabLabel='Seven'></View>
           <View style={styles.dummyPage} tabLabel='Eight'></View>

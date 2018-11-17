@@ -12,7 +12,6 @@ import { TransactionHistoryScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsCurrencyScreen } from 'containers';
-import { Styles } from 'experimental';
 import enhance from './enhancer';
 
 type Routes = {};
@@ -54,10 +53,6 @@ let routes: Routes = [
     name: 'SettingsCurrencyScreen',
     component: SettingsCurrencyScreen
   },
-  {
-    name: 'Styles',
-    component: Styles
-  }
 ];
 
 routes = routes.map(({ name, component }) => ({
