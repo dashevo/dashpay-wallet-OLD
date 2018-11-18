@@ -101,6 +101,7 @@ class NavBar extends React.Component<Props> {
   }
 
   render() {
+    const { alternativeCurrency } = this.props;
     const {
       icon
     } = this.state.items[this.state.index];
@@ -134,6 +135,9 @@ class NavBar extends React.Component<Props> {
                 </Text>
                 <Text style={styles.part2} numberOfLines={1}>
                   {part2}
+                </Text>
+                <Text style={styles.part2} numberOfLines={1}>
+                  (1DASH = {alternativeCurrency.rate}{alternativeCurrency.code})
                 </Text>
               </View>
             </View>

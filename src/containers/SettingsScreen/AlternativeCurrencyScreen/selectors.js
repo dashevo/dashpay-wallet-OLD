@@ -4,8 +4,8 @@
  * @wolf
  */
 import { createSelector } from 'reselect';
-import { selectCurrency } from 'state';
+import { selectAlternativeCurrency } from 'state';
 
 export default createSelector(
-  selectCurrency, currency => ({ currentCurrencyCode: currency.code })
+  selectAlternativeCurrency, ({ code }) => ({ currentAlternativeCurrencyCode: code })
 );

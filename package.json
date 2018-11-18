@@ -51,6 +51,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "^0.48.2",
+    "mockdate": "^2.0.2",
     "react-test-renderer": "16.6.0-alpha.8af6728",
     "rn-nodeify": "github:tradle/rn-nodeify"
   },

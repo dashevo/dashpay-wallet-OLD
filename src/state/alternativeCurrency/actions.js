@@ -4,13 +4,20 @@
  * @wolf
  */
 
-import { CHANGE_CURRENCY } from './constants';
-import { CURRENCY_RATE_RECEIVED } from './constants';
+import { CHANGE_ALTERNATIVE_CURRENCY } from './constants';
+import { ALTERNATIVE_CURRENCY_RATE_RECEIVED } from './constants';
+import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from './constants';
+import { ALTERNATIVE_CURRENCY_RATE_LIFESPAN } from './constants';
 
-export const changeCurrency = currency => ({
-  type: CHANGE_CURRENCY,
-  currency,
-});
+const shouldFetchRate = ({ isFetching, didInvalidate, rateUpdatedAt }) => {
+  if (isFetching) {
+    return false;
+  }
+  if (didInvalidate || !rateUpdatedAt) {
+    return true;
+  }
+  return Date.now() - rateUpdatedAt > ALTERNATIVE_CURRENCY_RATE_LIFESPAN;
+};
 
 const getSparkRate = async currencyCode => {
   const response = await fetch(`https://api.get-spark.com/${currencyCode}`);
@@ -51,8 +58,20 @@ const fallbackStrategy = async currencyCode => {
   }
 };
 
-export const getRate = currencyCode => {
-  return async dispatch => {
+export const changeAlternativeCurrency = ({ code, name }) => ({
+  type: CHANGE_ALTERNATIVE_CURRENCY,
+  code,
+  name,
+});
+
+export const invalidateAlternativeCurrencyRate = () => ({
+  type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+});
+
+export const fetchAlternativeCurrencyRateIfNeeded = () => async (dispatch, getState) => {
+  const state = getState().alternativeCurrency;
+  const currencyCode = state.code;
+  if (shouldFetchRate(state)) {
     let rate;
     try {
       rate = await getSparkRate(currencyCode);
@@ -60,8 +79,8 @@ export const getRate = currencyCode => {
       rate = await fallbackStrategy(currencyCode);
     }
     dispatch({
-      type: CURRENCY_RATE_RECEIVED,
+      type: ALTERNATIVE_CURRENCY_RATE_RECEIVED,
       rate,
     });
-  };
-};
+  }
+}

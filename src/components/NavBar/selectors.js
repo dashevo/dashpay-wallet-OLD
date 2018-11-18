@@ -6,7 +6,7 @@
 import { createSelector } from 'reselect';
 import {
   selectSettings,
-  selectRate,
+  selectAlternativeCurrency,
   selectBalance
 } from 'state';
 
@@ -29,8 +29,8 @@ let settingsSelector = createSelector(
 );
 let balanceSelector = createSelector(
   selectBalance,
-  selectRate,
-  (balance, rate) => [
+  selectAlternativeCurrency,
+  (balance, { rate }) => [
     buildAmountParts(balance / 100000000, 0, 8, 4), // Dash
     buildAmountParts(balance / 100000000 * rate, 2, 4, 2) // Fiat
   ]
@@ -38,5 +38,6 @@ let balanceSelector = createSelector(
 
 export default (state) => ({
   balanceVisible: settingsSelector(state),
-  items: balanceSelector(state)
+  items: balanceSelector(state),
+  alternativeCurrency: selectAlternativeCurrency(state),
 });
