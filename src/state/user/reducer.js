@@ -7,9 +7,7 @@ import { RECEIVE_BALANCE } from "./constants";
 
 export const initialState = {
   network: "testnet", //todo : Should be from state
-  mnemonic:
-    "differ beach latin proof gorilla aisle apple brain goddess crash dolphin wine",
-  transport: "insight"
+  mnemonic: 'protect cave garden achieve hand vacant clarify atom finish outer waste sword',
 };
 
 const user = (state = initialState, action) => {
