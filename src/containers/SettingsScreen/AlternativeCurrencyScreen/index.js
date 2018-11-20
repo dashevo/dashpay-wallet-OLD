@@ -14,7 +14,7 @@ import { SelectableList } from 'components';
 import styles from './styles';
 import selector from "./selectors";
 import actions from "./actions";
-import { FIAT_CURRENCIES } from 'constants';
+import { ALTERNATIVE_CURRENCIES } from 'constants';
 
 import type {
   ReactElement,
@@ -22,25 +22,25 @@ import type {
   Props,
 } from './types';
 
-class SettingsCurrencyScreen extends React.PureComponent<Props, State> {
+class SettingsAlternativeCurrencyScreen extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.handleSelection = this.handleSelection.bind(this);
-    const { currentCurrencyCode } = props;
-    const currencyOptions = FIAT_CURRENCIES.map(({code, name}) => ({
+    const { currentAlternativeCurrencyCode } = props;
+    const currencyOptions = ALTERNATIVE_CURRENCIES.map(({code, name}) => ({
       code,
       key: code,
       name,
-      selected: code === currentCurrencyCode,
+      selected: code === currentAlternativeCurrencyCode,
     }));
     this.state = { currencyOptions };
   }
 
   async handleSelection(currency) {
     const { code, name } = currency;
-    const { changeCurrency, getRate, navigation, componentId } = this.props;
-    changeCurrency({ code, name });
-    getRate(code);
+    const { changeAlternativeCurrency, fetchAlternativeCurrencyRateIfNeeded, navigation, componentId } = this.props;
+    changeAlternativeCurrency({ code, name });
+    fetchAlternativeCurrencyRateIfNeeded();
     navigation.pop(componentId);
   }
 
@@ -60,9 +60,9 @@ class SettingsCurrencyScreen extends React.PureComponent<Props, State> {
   }
 }
 
-const connectedSettingsCurrencyScreen = connect(
+const connectedSettingsAlternativeCurrencyScreen = connect(
   selector,
   actions,
-)(SettingsCurrencyScreen);
+)(SettingsAlternativeCurrencyScreen);
 
-export default connectedSettingsCurrencyScreen;
+export default connectedSettingsAlternativeCurrencyScreen;

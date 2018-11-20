@@ -5,11 +5,11 @@
  */
 import { bindActionCreators } from "redux";
 import { initializeWallet } from "state";
-import { initializeRateService } from "state";
+import { fetchAlternativeCurrencyRateIfNeeded } from "state";
 
 function actions(dispatch: Function): Object {
   return bindActionCreators(
-    { initializeWallet, initializeRateService },
+    { initializeWallet, fetchAlternativeCurrencyRateIfNeeded },
     dispatch
   );
 }

@@ -12,9 +12,8 @@ export * from "./actions";
 export * from "./settings";
 export * from "./language";
 export * from "./payment";
-export * from "./currency";
+export * from "./alternativeCurrency";
 export * from "./user";
-export * from "./rates";
 
 // Tmp
 const walletLib = {

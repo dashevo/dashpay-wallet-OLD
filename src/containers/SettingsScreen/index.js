@@ -38,7 +38,7 @@ class SettingsScreen extends React.Component<Props, State> {
             onPress={ () => navigate('SettingsLanguageScreen') } />
           <ThemedButton
             title='Currency'
-            onPress={ () => navigate('SettingsCurrencyScreen') } />
+            onPress={ () => navigate('SettingsAlternativeCurrencyScreen') } />
           <LabeledSwitch
             label="Balance in Navigation Bar"
             value={balanceVisible}

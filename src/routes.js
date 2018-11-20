@@ -10,7 +10,7 @@ import { ReceiveScreen } from 'containers';
 import { TransactionHistoryScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
-import { SettingsCurrencyScreen } from 'containers';
+import { SettingsAlternativeCurrencyScreen } from 'containers';
 import enhance from './enhancer';
 
 // Examples
@@ -49,8 +49,8 @@ let routes: Routes = [
     component: SettingsLanguageScreen
   },
   {
-    name: 'SettingsCurrencyScreen',
-    component: SettingsCurrencyScreen
+    name: 'SettingsAlternativeCurrencyScreen',
+    component: SettingsAlternativeCurrencyScreen
   }
 ];
 
