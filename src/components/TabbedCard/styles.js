@@ -6,12 +6,6 @@
 import { StyleSheet } from 'react-native';
 import { COLORS, LENGTHS } from 'constants';
 
-  // borderRadius: 10,
-  // navBarHeight: 64,
-  // fontSize: 16,
-  // headingFontSize: 48,
-  // screenPadding: 16
-
 export default StyleSheet.create({
   card: {
     backgroundColor: COLORS.white,
@@ -19,6 +13,8 @@ export default StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     height: '100%',
+    borderTopLeftRadius: LENGTHS.borderRadius,
+    borderTopRightRadius: LENGTHS.borderRadius,
   },
   header: {
     padding: LENGTHS.screenPadding,

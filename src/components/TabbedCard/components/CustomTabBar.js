@@ -242,6 +242,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 20,
     paddingRight: 20,
+    flexGrow: 1,
   },
   container: {
     height: 50,

@@ -28,6 +28,9 @@ class TabbedCard extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
+      fakeText: Array.from({length: 1000},
+        () => Math.random().toString(36).substring(2+Math.floor(Math.random()*6)) + (Math.random()>0.2?' ':'. ')
+      )
     };
     // this.onSettingsPressed = this.onSettingsPressed.bind(this);
     // this.animation = React.createRef();
@@ -44,18 +47,15 @@ class TabbedCard extends React.Component<Props> {
           renderTabBar={() => <CustomTabBar />}
           initialPage={0}
         >
-          <View style={styles.dummyPage} tabLabel='One'></View>
-          <View style={styles.dummyPage} tabLabel='TwoTwoTwoTwo'></View>
-          <View style={styles.dummyPage} tabLabel='Three'></View>
-          <View style={styles.dummyPage} tabLabel='Four'></View>
-          <View style={styles.dummyPage} tabLabel='FiveFiveFive'></View>
-          <View style={styles.dummyPage} tabLabel='Six'></View>
-          <View style={styles.dummyPage} tabLabel='Seven'></View>
-          <View style={styles.dummyPage} tabLabel='Eight'></View>
-          <View style={styles.dummyPage} tabLabel='Nine'></View>
-          <View style={styles.dummyPage} tabLabel='Ten'></View>
-          <View style={styles.dummyPage} tabLabel='Eleven'></View>
-          <View style={styles.dummyPage} tabLabel='Twelve'></View>
+          <ScrollView style={styles.dummyPage} tabLabel='One (tall)'>
+            <Text style={{padding:10}}>{this.state.fakeText}</Text>
+          </ScrollView>
+          <ScrollView style={styles.dummyPage} tabLabel='TwoTwoTwoTwo'>
+            <Text style={{padding:10}}>{this.state.fakeText}</Text>
+          </ScrollView>
+          <ScrollView style={styles.dummyPage} tabLabel='Three'>
+            <Text style={{padding:10}}>{this.state.fakeText}</Text>
+          </ScrollView>
         </ScrollableTabView>
       </View>
     );
