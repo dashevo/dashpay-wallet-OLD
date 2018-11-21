@@ -21,12 +21,13 @@ const walletLib = {
   account: null,
   initializeWallet(opts) {
     const { network, mnemonic } = opts;
+    const accountId = opts.accountId || 0;
     return new Promise(resolve => {
       walletLib.wallet = new Wallet({
         network,
         mnemonic
       });
-      walletLib.account = this.wallet.getAccount(0);
+      walletLib.account = this.wallet.getAccount(accountId);
       let listener = walletLib.account.events.on("ready", () => {
         resolve(true);
       });

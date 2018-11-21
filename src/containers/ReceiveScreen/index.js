@@ -33,9 +33,9 @@ class ReceiveScreen extends React.Component<Props, State> {
   }
   async componentDidMount() {
     await this.props.getUnusedAddress();
-    const {address} = this.props;
-    this.setState({unusedAddress:address});
-r  }
+    const {unusedAddress} = this.props;
+    this.setState({unusedAddress});
+  }
 
   render(): React.Element<any> {
     return (
@@ -50,7 +50,7 @@ r  }
           logoSize={100}
           logoBackgroundColor='white'
           />
-        <CopyAddressButton address='yWdXnYxGbouNoo8yMvcbZmZ3Gdp6BpySxL' />
+        <CopyAddressButton address={this.props.unusedAddress} />
       </SafeAreaView>
     );
   }

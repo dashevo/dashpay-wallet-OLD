@@ -7,10 +7,8 @@
 import { createSelector } from "reselect";
 
 export const selectState = state => {
-  console.log("____state____", state);
-  return {
-    address: state.user.address
-  }
+  const { unusedAddress } = state.user;
+  return {unusedAddress}
 };
 
 const selector = createSelector(selectState, obj => obj);
