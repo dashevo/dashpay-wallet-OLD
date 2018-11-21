@@ -3,4 +3,16 @@
  *
  * @wolf
  */
-export default null;
+
+import { createSelector } from "reselect";
+
+export const selectState = state => {
+  console.log("____state____", state);
+  return {
+    address: state.user.address
+  }
+};
+
+const selector = createSelector(selectState, obj => obj);
+
+export default selector;
