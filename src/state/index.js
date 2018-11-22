@@ -28,7 +28,7 @@ const walletLib = {
         walletLib.wallet = new Wallet({
           network,
           mnemonic,
-          // plugins:[DashPayDAP]
+          plugins:[DashPayDAP]
         });
         walletLib.account = walletLib.wallet.getAccount(accountId);
         let listener = walletLib.account.events.on("ready", () => {
@@ -47,7 +47,7 @@ import thunk from "redux-thunk";
 import middleware from "./middleware";
 import { applyMiddleware } from "redux";
 import { Wallet } from "@dashevo/wallet-lib";
-// import DashPayDAP from "@dashevo/wallet-lib/examples/daps/DashPayDAP";
+import DashPayDAP from "@dashevo/wallet-lib/examples/daps/DashPayDAP";
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
