@@ -14,8 +14,9 @@ export * from "./language";
 export * from "./payment";
 export * from "./alternativeCurrency";
 export * from "./user";
-
-// Tmp
+export * from "./account";
+//
+// // Tmp
 const walletLib = {
   wallet: null,
   account: null,
@@ -23,14 +24,21 @@ const walletLib = {
     const { network, mnemonic } = opts;
     const accountId = opts.accountId || 0;
     return new Promise(resolve => {
-      walletLib.wallet = new Wallet({
-        network,
-        mnemonic
-      });
-      walletLib.account = this.wallet.getAccount(accountId);
-      let listener = walletLib.account.events.on("ready", () => {
-        resolve(true);
-      });
+      try {
+        walletLib.wallet = new Wallet({
+          network,
+          mnemonic,
+          // plugins:[DashPayDAP]
+        });
+        walletLib.account = walletLib.wallet.getAccount(accountId);
+        let listener = walletLib.account.events.on("ready", () => {
+          resolve(true);
+        });
+      }catch (e) {
+        console.log(e);
+        resolve(e);
+      }
+
     });
   }
 };
@@ -39,6 +47,7 @@ import thunk from "redux-thunk";
 import middleware from "./middleware";
 import { applyMiddleware } from "redux";
 import { Wallet } from "@dashevo/wallet-lib";
+// import DashPayDAP from "@dashevo/wallet-lib/examples/daps/DashPayDAP";
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);

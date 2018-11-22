@@ -7,7 +7,7 @@
 import { createSelector } from "reselect";
 
 export const selectState = state => {
-  const { unusedAddress } = state.user;
+  const { unusedAddress } = state.account;
   return {unusedAddress}
 };
 

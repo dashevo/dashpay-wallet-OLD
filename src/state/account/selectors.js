@@ -3,3 +3,4 @@
  *
  * @wolf
  */
+export const selectBalance = state => state.account.balance;

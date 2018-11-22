@@ -4,6 +4,7 @@
  * @wolf
  */
 import { combineReducers } from 'redux';
+import account from './account';
 import settings from './settings';
 import payment from './payment';
 import alternativeCurrency from './alternativeCurrency';
@@ -12,6 +13,7 @@ import user from './user';
 import transactions from './transactions';
 
 export default combineReducers({
+  account,
   transactions,
   settings,
   payment,
