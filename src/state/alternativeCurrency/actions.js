@@ -4,7 +4,9 @@
  * @wolf
  */
 
+import { ALTERNATIVE_CURRENCIES } from 'constants';
 import { CHANGE_ALTERNATIVE_CURRENCY } from './constants';
+import { ALTERNATIVE_CURRENCY_RATE_REQUEST } from './constants';
 import { ALTERNATIVE_CURRENCY_RATE_RECEIVED } from './constants';
 import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from './constants';
 import { ALTERNATIVE_CURRENCY_RATE_LIFESPAN } from './constants';
@@ -58,11 +60,13 @@ const fallbackStrategy = async currencyCode => {
   }
 };
 
-export const changeAlternativeCurrency = ({ code, name }) => ({
-  type: CHANGE_ALTERNATIVE_CURRENCY,
-  code,
-  name,
-});
+export const changeAlternativeCurrency = code => {
+  const alternativeCurrency = ALTERNATIVE_CURRENCIES.find(currency => currency.code === code);
+  return {
+    type: CHANGE_ALTERNATIVE_CURRENCY,
+    ...alternativeCurrency,
+  };
+};
 
 export const invalidateAlternativeCurrencyRate = () => ({
   type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
@@ -73,6 +77,9 @@ export const fetchAlternativeCurrencyRateIfNeeded = () => async (dispatch, getSt
   const currencyCode = state.code;
   if (shouldFetchRate(state)) {
     let rate;
+    dispatch({
+      type: ALTERNATIVE_CURRENCY_RATE_REQUEST,
+    });
     try {
       rate = await getSparkRate(currencyCode);
     } catch(error) {

@@ -38,10 +38,6 @@ class NavBar extends React.Component<Props> {
       text: "This is a test",
       index: 0,
       count: 2,
-      items: [
-        { icon: "dash-D-blue" },
-        { icon: "dollar" }
-      ]
     };
     this._onPress = this._onPress.bind(this);
     this.onSettingsPressed = this.onSettingsPressed.bind(this);
@@ -103,17 +99,21 @@ class NavBar extends React.Component<Props> {
   render() {
     const { alternativeCurrency } = this.props;
     const {
-      icon
-    } = this.state.items[this.state.index];
-    const {
       amount: { part1, part2 }
     } = this.props.items[this.state.index];
+
+    const dashIcon = (
+      <Icon style={styles.icon} name={'dash-D-blue'} />
+    );
+    const alternativeCurrencyIcon = (
+      <Text style={styles.icon}>{ alternativeCurrency.symbol }</Text>
+    );
     const iconButton = (
       <Animation ref={this.animation}>
-        <Icon style={styles.icon} name={icon} />
+        { this.state.index ? alternativeCurrencyIcon : dashIcon }
       </Animation>
     );
-    // return null;
+
     return (
       <View style={styles.navbar}>
         <SwipeableRow
