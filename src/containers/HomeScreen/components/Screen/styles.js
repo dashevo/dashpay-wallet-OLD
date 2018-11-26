@@ -4,13 +4,14 @@
  * @wolf
  */
 import { StyleSheet } from 'react-native';
+import { COLORS } from 'constants';
 import { THEMES } from 'constants';
 import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#088BE2',
+    backgroundColor: COLORS.blue,
     justifyContent: 'center',
     flex: 1
   },
