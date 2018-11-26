@@ -180,9 +180,10 @@ const ScrollableTabBar = createReactClass({
     };
 
     return <View
-      style={[styles.container, {backgroundColor: this.props.backgroundColor, }, this.props.style, ]}
+      style={[this.props.style, {backgroundColor: this.props.backgroundColor, }, styles.container, ]}
       onLayout={this.onContainerLayout}
     >
+      {this.props.header}
       <ScrollView
         ref={(scrollView) => { this._scrollView = scrollView; }}
         horizontal={true}
@@ -245,7 +246,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    height: 50,
+    flexDirection: 'column',
+    backgroundColor: 'white',
     borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,

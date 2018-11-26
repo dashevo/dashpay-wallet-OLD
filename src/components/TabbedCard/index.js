@@ -20,7 +20,7 @@ import {
 import { connect } from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { Avatar } from 'components';
-import { CustomTabBar } from './components';
+import { CustomTabBar, DisappearingHeaderPart } from './components';
 import styles from './styles';
 import selectors from './selectors';
 import actions from './actions';
@@ -29,43 +29,52 @@ class TabbedCard extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      fakeText: Array.from({length: 1000},()=>Math.random().toString(36).substr(2+Math.pow(Math.random(),.2)*8).replace(/\d/g,'eai'.charAt(Math.random()*5))+(Math.random()>0.2?' ':'. ')).join('').replace(/.+?[\.\?\!](\s|$)/g,(t)=>t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()),
-      scrollOffset: new Animated.Value(0),
+      scrollOffsets: this.props.children.map(child=>new Animated.Value(0)),
     };
-    // this.onSettingsPressed = this.onSettingsPressed.bind(this);
-    // this.animation = React.createRef();
   }
 
-  onScroll = e => {
-    this.state.scrollOffset.setValue(e.nativeEvent.contentOffset.y);
-  };
+  scrollListener(index) {
+    return (event)=> {
+      this.state.scrollOffsets[index].setValue(event.nativeEvent.contentOffset.y);
+    }
+  }
 
   render() {
     return (
       <View style={styles.card}>
-        <View style={styles.header}>
-          <Animated.View style={styles.disappearingHeaderPart}>
-            <Avatar source={require('assets/images/avatar-default.png')} />
-          </Animated.View>
-          <Text style={styles.cardTitle}>Contact Name</Text>
-        </View>
         <ScrollableTabView
           renderTabBar={
             () => <CustomTabBar
-              scrollOffset={this.state.scrollOffset}
+              scrollOffsets={this.state.scrollOffsets}
+              header={
+                <View style={styles.header}>
+                  <DisappearingHeaderPart
+                    scrolledDistance={this.state.scrollOffsets[0]}
+                    initialHeight={this.props.disappearingHeaderHeight || 0}
+                  >
+                    <Avatar source={require('assets/images/avatar-default.png')} />
+                  </DisappearingHeaderPart>
+                  <Text style={styles.cardTitle}>Contact Name</Text>
+                </View>
+              }
             />
           }
           initialPage={0}
+          tabBarPosition='overlayTop'
         >
-          <ScrollView style={styles.dummyPage} tabLabel='One (tall)'>
-            <Text style={{padding:10}}>{this.state.fakeText}</Text>
-          </ScrollView>
-          <ScrollView style={styles.dummyPage} tabLabel='TwoTwoTwoTwo'>
-            <Text style={{padding:10}}>{this.state.fakeText}</Text>
-          </ScrollView>
-          <ScrollView style={styles.dummyPage} tabLabel='Three'>
-            <Text style={{padding:10}}>{this.state.fakeText}</Text>
-          </ScrollView>
+          {
+            this.props.children.map((child, index) =>
+              <ScrollView
+                tabLabel={child.props.tabLabel || 'Tab ' + index}
+                key={index}
+                onScroll={this.scrollListener(index)}
+                showsVerticalScrollIndicator={false}
+                style={{paddingTop: this.props.disappearingHeaderHeight + 100}}
+              >
+                { child }
+              </ScrollView>
+            )
+          }
         </ScrollableTabView>
       </View>
     );

@@ -19,8 +19,8 @@ export default StyleSheet.create({
   header: {
     padding: LENGTHS.screenPadding,
     flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   title: {
     fontSize: LENGTHS.headingFontSize
