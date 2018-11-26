@@ -3,25 +3,24 @@
  *
  * @wolf
  */
-import * as React from "react";
-import { TextInput, View, SafeAreaView } from "react-native";
-import { ScrollView } from "react-native";
-import { Text } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { AmountField } from "./components";
-import { RecipientField } from "./components";
-import { Button } from "./components";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import styles from "./styles";
+import * as React from 'react';
+import { TextInput, View, SafeAreaView } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { AmountField } from './components';
+import { RecipientField } from './components';
+import { Button } from './components';
+import { withFormik } from 'formik';
+import * as Yup from 'yup';
+import styles from './styles';
 import { NavBar } from 'components';
-import type { ReactElement } from "./types";
-import type { Props } from "./types";
-import type { State } from "./types";
-import { Navigation } from "react-native-navigation";
-import connect from "react-redux/es/connect/connect";
-import selector from "./selectors";
-import actions from "./actions";
+import type { ReactElement } from './types';
+import type { Props } from './types';
+import type { State } from './types';
+import connect from 'react-redux/es/connect/connect';
+import selector from './selectors';
+import actions from './actions';
 
 class SendScreen extends React.Component<Props, State> {
   constructor(props) {
@@ -52,7 +51,9 @@ class SendScreen extends React.Component<Props, State> {
         <View style={styles.header}>
           <NavBar navigation={this.props.navigation} isOpen={true} />
         </View>
-        <ScrollView style={styles.scrollBody} contentContainerStyle={styles.body}>
+        <ScrollView
+          style={styles.scrollBody}
+          contentContainerStyle={styles.body}>
           <Text style={[styles.text, styles.heading]}>Pay Address</Text>
           <View style={styles.section}>
             <RecipientField {...this.props} />
@@ -85,15 +86,15 @@ SendScreen = SendScreen = connect(
 
 SendScreen = withFormik({
   mapPropsToValues: () => ({
-    dash: "",
-    currency: ""
+    dash: '',
+    currency: ''
   }),
   validationSchema: Yup.object().shape({
-    dash: Yup.number().required("Required"),
-    currency: Yup.number().required("Required")
+    dash: Yup.number().required('Required'),
+    currency: Yup.number().required('Required')
   }),
   handleSubmit: values => {},
-  displayName: "Validation"
+  displayName: 'Validation'
 })(SendScreen);
 
 export default SendScreen;

@@ -10,7 +10,7 @@ import { LENGTHS } from 'constants';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: THEMES.dark.background,
+    backgroundColor: '#088BE2',
     justifyContent: 'center',
     flex: 1
   },
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: THEMES.vivid.background,
     borderTopLeftRadius: LENGTHS.borderRadius,
-    borderTopRightRadius: LENGTHS.borderRadius,
+    borderTopRightRadius: LENGTHS.borderRadius
   },
   logo: {
     resizeMode: 'contain',
