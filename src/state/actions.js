@@ -16,7 +16,7 @@ export const initializeWallet = () => {
         INITIALIZE_WALLET_FAILURE
       ],
       async asyncTask(state) {
-        const { mnemonic, network, transport } = state.user;
+        const { mnemonic, network, transport } = state.account;
         try {
           await walletLib.initializeWallet({
             mnemonic,

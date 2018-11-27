@@ -4,19 +4,10 @@
  * @wolf
  */
 import { bindActionCreators } from 'redux';
-
-const GET_ACCOUNT_USUSED_ADDRESS = 'GET_ACCOUNT_USUSED_ADDRESS';
-
-function getAccountUnusedAddress() {
-  return (dispatch, getState, walletLib) =>
-    dispatch({
-      type: GET_ACCOUNT_USUSED_ADDRESS,
-      payload: { data: walletLib.account.getUnusedAddress() }
-    });
-}
+import { getUnusedAddress } from 'state';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ getAccountUnusedAddress }, dispatch);
+  return bindActionCreators({ getUnusedAddress }, dispatch);
 }
 
 export default actions;

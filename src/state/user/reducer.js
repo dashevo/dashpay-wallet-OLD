@@ -3,21 +3,18 @@
  *
  * @wolf
  */
-import { RECEIVE_BALANCE } from "./constants";
-
+import { REGISTER_USERNAME_SUCCESS  } from "./constants";
 export const initialState = {
-  network: "testnet", //todo : Should be from state
-  mnemonic: 'protect cave garden achieve hand vacant clarify atom finish outer waste sword',
+  username: null,
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_BALANCE:
+    case REGISTER_USERNAME_SUCCESS:
       return {
         ...state,
-        balance: action.response
+        username: action.response
       };
-
     default:
       return state;
   }
