@@ -21,11 +21,12 @@ const alternativeCurrency = (state = initialState, action) => {
       };
 
     case CHANGE_ALTERNATIVE_CURRENCY:
-      const { code, name } = action
+      const { code, name, symbol } = action
       return {
         ...initialState,
         code,
         name,
+        symbol,
       };
 
     case ALTERNATIVE_CURRENCY_RATE_REQUEST:

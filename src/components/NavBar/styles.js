@@ -26,7 +26,8 @@ export default StyleSheet.create({
   icon: {
     color: COLORS.white,
     fontSize: 22,
-    width: 24,
+    width: 30,
+    fontWeight: 'bold',
     textAlign: 'center'
   },
   inline: {

@@ -1,9 +1,3 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @wolf
- */
-
 import { CHANGE_ALTERNATIVE_CURRENCY } from 'state/alternativeCurrency/constants';
 import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from 'state/alternativeCurrency/constants';
 import { ALTERNATIVE_CURRENCY_RATE_REQUEST } from 'state/alternativeCurrency/constants';
@@ -14,6 +8,7 @@ import mockDate from 'mockdate';
 const initialState = {
   code: 'USD',
   name: 'US Dollar',
+  symbol: '$',
   isFetching: false,
   didInvalidate: true,
 };
@@ -31,7 +26,7 @@ describe('alternativeCurrency reducer', () => {
   });
 
   it('should handle CHANGE_ALTERNATIVE_CURRENCY', () => {
-    const alternativeCurrency = { code: 'EUR', name: 'Euro' };
+    const alternativeCurrency = { code: 'EUR', name: 'Euro', symbol: '€' };
     const payload = { ...alternativeCurrency, type: CHANGE_ALTERNATIVE_CURRENCY};
     const expectedState = {
       ...initialState,
@@ -39,6 +34,13 @@ describe('alternativeCurrency reducer', () => {
       didInvalidate: true,
     };
     expect(reducer(undefined, payload)).toEqual(expectedState);
+  });
+
+  it('should handle ALTERNATIVE_CURRENCY_RATE_REQUEST', () => {
+    const payload = { type: ALTERNATIVE_CURRENCY_RATE_REQUEST };
+    const expectedState = { ...initialState, isFetching: true };
+    expect(reducer(undefined, payload)).toEqual(expectedState);
+    mockDate.reset();
   });
 
   it('should handle ALTERNATIVE_CURRENCY_RATE_RECEIVED', () => {
@@ -53,13 +55,6 @@ describe('alternativeCurrency reducer', () => {
       isFetching: false,
       rateUpdatedAt: now,
     };
-    expect(reducer(undefined, payload)).toEqual(expectedState);
-    mockDate.reset();
-  });
-
-  it('should handle ALTERNATIVE_CURRENCY_RATE_REQUEST', () => {
-    const payload = { type: ALTERNATIVE_CURRENCY_RATE_REQUEST };
-    const expectedState = { ...initialState, isFetching: true };
     expect(reducer(undefined, payload)).toEqual(expectedState);
     mockDate.reset();
   });

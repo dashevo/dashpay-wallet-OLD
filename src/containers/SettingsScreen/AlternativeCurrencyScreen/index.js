@@ -37,9 +37,9 @@ class SettingsAlternativeCurrencyScreen extends React.PureComponent<Props, State
   }
 
   async handleSelection(currency) {
-    const { code, name } = currency;
+    const { code } = currency;
     const { changeAlternativeCurrency, fetchAlternativeCurrencyRateIfNeeded, navigation, componentId } = this.props;
-    changeAlternativeCurrency({ code, name });
+    changeAlternativeCurrency(code);
     fetchAlternativeCurrencyRateIfNeeded();
     navigation.pop(componentId);
   }
