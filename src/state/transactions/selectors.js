@@ -4,4 +4,4 @@
  * @wolf
  */
 
-export const selectTransactions = state => state.transactions;
+export const selectTransactions = state => state.transactions.history;
