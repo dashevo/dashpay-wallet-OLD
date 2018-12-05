@@ -4,12 +4,14 @@
  * @wolf
  */
 import { StyleSheet } from 'react-native';
+import { COLORS } from 'constants';
 
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
+    backgroundColor: COLORS.blue,
+    justifyContent: 'center',
+    flex: 1
   },
   heading: {
     color: '#333333',

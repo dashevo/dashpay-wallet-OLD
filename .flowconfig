@@ -66,17 +66,5 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
-; DashPay - module-resolver paths.
-module.name_mapper='^actions' ->'<PROJECT_ROOT>/src/actions'
-module.name_mapper='^api' ->'<PROJECT_ROOT>/src/api'
-module.name_mapper='^assets' ->'<PROJECT_ROOT>/src/assets'
-module.name_mapper='^components' ->'<PROJECT_ROOT>/src/components'
-module.name_mapper='^constants' ->'<PROJECT_ROOT>/src/constants'
-module.name_mapper='^navigations' ->'<PROJECT_ROOT>/src/navigations'
-module.name_mapper='^reducers' ->'<PROJECT_ROOT>/src/reducers'
-module.name_mapper='^screens' ->'<PROJECT_ROOT>/src/screens'
-module.name_mapper='^store' ->'<PROJECT_ROOT>/src/store'
-module.name_mapper='^utilities' ->'<PROJECT_ROOT>/src/utilities'
-
 [version]
 ^0.78.0
