@@ -28,14 +28,26 @@ import actions from './actions';
 class TabbedCard extends React.Component<Props> {
   constructor(props) {
     super(props);
-    this.state = {
-      scrollOffsets: this.props.children.map(child=>new Animated.Value(0)),
-    };
+    this.scrollOffset = new Animated.Value(0);
+    this.pageScrollOffsets = new Map();
+    this.pageRefs = new Map();
+    this.headerHeight = (this.props.disappearingHeaderHeight || 0) + 100;
   }
 
   scrollListener(index) {
     return (event)=> {
-      this.state.scrollOffsets[index].setValue(event.nativeEvent.contentOffset.y);
+      this.scrollOffset.setValue(event.nativeEvent.contentOffset.y);
+      this.pageScrollOffsets.set(index, event.nativeEvent.contentOffset.y);
+    }
+  }
+
+  pageChangeListener = (position) => {
+    let right = this.pageRefs.get(Math.ceil(position));
+    let rightOffset = this.pageScrollOffsets.get(Math.ceil(position)) || 0;
+    let headerScrollAmount = Math.min(this.scrollOffset._value, this.props.disappearingHeaderHeight || 0);
+    console.log({rightOffset, headerScrollAmount});
+    if (right) {
+      right.scrollTo({y: this.headerScrollAmount, animated: false});
     }
   }
 
@@ -45,11 +57,11 @@ class TabbedCard extends React.Component<Props> {
         <ScrollableTabView
           renderTabBar={
             () => <CustomTabBar
-              scrollOffsets={this.state.scrollOffsets}
+              scrollOffsets={this.scrollOffset}
               header={
                 <View style={styles.header}>
                   <DisappearingHeaderPart
-                    scrolledDistance={this.state.scrollOffsets[0]}
+                    scrolledDistance={this.scrollOffset}
                     initialHeight={this.props.disappearingHeaderHeight || 0}
                   >
                     <Avatar source={require('assets/images/avatar-default.png')} />
@@ -60,6 +72,8 @@ class TabbedCard extends React.Component<Props> {
             />
           }
           initialPage={0}
+          prerenderingSiblingsNumber={1}
+          onScroll={this.pageChangeListener}
           tabBarPosition='overlayTop'
         >
           {
@@ -67,9 +81,10 @@ class TabbedCard extends React.Component<Props> {
               <ScrollView
                 tabLabel={child.props.tabLabel || 'Tab ' + index}
                 key={index}
+                ref={(ref)=>{this.pageRefs.set(index, ref)}}
                 onScroll={this.scrollListener(index)}
                 showsVerticalScrollIndicator={false}
-                style={{paddingTop: this.props.disappearingHeaderHeight + 100}}
+                contentContainerStyle={{paddingTop: this.headerHeight}}
               >
                 { child }
               </ScrollView>
