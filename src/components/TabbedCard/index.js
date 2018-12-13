@@ -34,6 +34,10 @@ class TabbedCard extends React.Component<Props> {
     this.headerHeight = (this.props.disappearingHeaderHeight || 0) + 100;
   }
 
+  componentDidMount() {
+
+  }
+
   scrollListener(index) {
     return (event)=> {
       this.scrollOffset.setValue(event.nativeEvent.contentOffset.y);
@@ -42,12 +46,16 @@ class TabbedCard extends React.Component<Props> {
   }
 
   pageChangeListener = (position) => {
+    let headerScrollAmount = Math.min(this.scrollOffset._value, this.props.disappearingHeaderHeight || 0);
     let right = this.pageRefs.get(Math.ceil(position));
     let rightOffset = this.pageScrollOffsets.get(Math.ceil(position)) || 0;
-    let headerScrollAmount = Math.min(this.scrollOffset._value, this.props.disappearingHeaderHeight || 0);
-    console.log({rightOffset, headerScrollAmount});
-    if (right) {
-      right.scrollTo({y: this.headerScrollAmount, animated: false});
+    if (right && rightOffset < (this.props.disappearingHeaderHeight || 0)) {
+      right.scrollTo({y: headerScrollAmount, animated: false});
+    }
+    let left = this.pageRefs.get(Math.floor(position));
+    let leftOffset = this.pageScrollOffsets.get(Math.floor(position)) || 0;
+    if (left && leftOffset < (this.props.disappearingHeaderHeight || 0)) {
+      left.scrollTo({y: headerScrollAmount, animated: false});
     }
   }
 
