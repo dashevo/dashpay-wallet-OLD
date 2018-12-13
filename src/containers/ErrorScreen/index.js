@@ -29,8 +29,7 @@ class ErrorScreen extends React.Component<Props, State> {
   render(): React.Element<any> {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Error ... 😵</Text>
-        <Text style={styles.desc}>Please stay calm and try again</Text>
+        <Text style={styles.header}>We're sorry, there has been an application error</Text>
         <TouchableOpacity style={styles.navButton} onPress={this.navigateHome}>
           <Text style={styles.desc}>Go back to Home Screen</Text>
         </TouchableOpacity>
