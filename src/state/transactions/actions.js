@@ -34,6 +34,7 @@ export const createTransaction = (opts) => {
           if(!opts.recipient) {
             throw new Error('Missing recipient to pay')
           }
+
           const recipient = opts.recipient;
           const satoshis = opts.satoshis !== undefined ? opts.satoshis : dashToDuffs(parseFloat(opts.amount));
           if(!satoshis) throw new Error('Missing satoshis or amount to pay');

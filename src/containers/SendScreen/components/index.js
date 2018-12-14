@@ -3,6 +3,6 @@
  *
  * @flow
  */
-export { default as AmountField } from "./AmountField";
-export { default as Button } from "./Button";
-export { default as RecipientField } from "./RecipientField";
+export { default as AmountField } from './AmountField';
+export { default as RecipientField } from './RecipientField';
+export { default as PayButton } from './PayButton';

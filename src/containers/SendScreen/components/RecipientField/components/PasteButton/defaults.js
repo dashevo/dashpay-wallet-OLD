@@ -3,8 +3,4 @@
  *
  * @flow
  */
-export default {
-  setFieldValue: () => {},
-  rate: 0,
-  currency: 0
-};
+export default {};

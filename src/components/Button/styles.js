@@ -10,12 +10,12 @@ export default StyleSheet.create({
   ['box']: {
     alignItems: 'center',
     alignSelf: 'flex-start',
-    backgroundColor: variables.buttonBackgroundColor,
-    borderRadius: variables.buttonBorderRadius,
-    borderColor: variables.buttonBorderColor,
-    borderWidth: variables.buttonBorderWidth,
+    backgroundColor: '#088BE2',
+    borderRadius: 0,
+    borderColor: '#088BE2',
+    borderWidth: 0,
     flexDirection: 'row',
-    height: variables.buttonHeight,
+    height: 50,
     justifyContent: 'center'
   },
   ['row']: {
@@ -51,11 +51,11 @@ export default StyleSheet.create({
     fontSize: 16
   },
   ['box__primary']: {
-    backgroundColor: variables.componentPrimaryBackgroundColor,
-    borderColor: variables.componentPrimaryBorderColor
+    backgroundColor: '#088BE2',
+    borderColor: '#088BE2'
   },
   ['text__primary']: {
-    color: variables.componentPrimaryColor
+    color: '#fff'
   },
   ['icon__primary']: {
     color: variables.componentPrimaryColor

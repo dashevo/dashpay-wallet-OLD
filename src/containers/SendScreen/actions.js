@@ -4,10 +4,10 @@
  * @wolf
  */
 import { bindActionCreators } from 'redux';
-import { createTransaction, broadcastTransaction } from 'state';
+import { createTransaction } from 'state';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ createTransaction, broadcastTransaction }, dispatch);
+  return bindActionCreators({ createTransaction }, dispatch);
 }
 
 export default actions;
