@@ -16,6 +16,9 @@ export default StyleSheet.create({
     borderTopLeftRadius: LENGTHS.borderRadius,
     borderTopRightRadius: LENGTHS.borderRadius,
   },
+  cardTitle: {
+    color: 'white',
+  },
   header: {
     padding: LENGTHS.screenPadding,
     flexDirection: 'column',

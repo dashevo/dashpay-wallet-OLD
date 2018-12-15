@@ -14,6 +14,7 @@ const {
   Dimensions,
 } = ReactNative;
 const Button = require('./Button');
+import { COLORS } from 'constants';
 
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
@@ -38,13 +39,14 @@ const ScrollableTabBar = createReactClass({
   getDefaultProps() {
     return {
       scrollOffset: 52,
-      activeTextColor: 'navy',
-      inactiveTextColor: 'black',
-      backgroundColor: null,
+      activeTextColor: '#FFFFFF',
+      inactiveTextColor: '#FFFFFFB3',
+      backgroundColor: COLORS.blue,
       style: {},
       tabStyle: {},
       tabsContainerStyle: {},
       underlineStyle: {},
+      textStyle: {textShadowRadius: 0,textShadowColor: 'transparent'}
     };
   },
 
@@ -92,8 +94,8 @@ const ScrollableTabBar = createReactClass({
     const nextTabMeasurements = this._tabsMeasurements[position + 1];
     const nextTabWidth = nextTabMeasurements && nextTabMeasurements.width || 0;
     const tabOffset = this._tabsMeasurements[position].left;
-    const leftMargin = 20;
-    const rightMargin = 20;
+    const leftMargin = 5;
+    const rightMargin = 5;
     let smoothedTabWidth = (1 - pageOffset) * tabWidth + pageOffset * nextTabWidth;
     let newScrollX = -leftMargin + tabOffset + pageOffset * tabWidth; // left edge of current tab
     let tabCenterOffset = (position + pageOffset) / pageCount * smoothedTabWidth;
@@ -135,7 +137,7 @@ const ScrollableTabBar = createReactClass({
   renderTab(name, page, isTabActive, isFirst, isLast, onPressHandler, onLayoutHandler) {
     const { activeTextColor, inactiveTextColor, textStyle, } = this.props;
     const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = isTabActive ? 'bold' : 'normal';
+    const fontWeight = 'normal';// isTabActive ? 'bold' : 'normal';
     const viewStyles = [styles.tab, this.props.tabStyle];
     if (isFirst) {
       viewStyles.push(styles.firstTab);
@@ -170,8 +172,8 @@ const ScrollableTabBar = createReactClass({
     const tabUnderlineStyle = {
       position: 'absolute',
       height: 2,
-      backgroundColor: 'navy',
-      bottom: 2,
+      backgroundColor: 'white',
+      bottom: 1,
     };
 
     const dynamicTabUnderline = {
@@ -247,8 +249,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'column',
-    backgroundColor: 'white',
-    borderWidth: 1,
+    backgroundColor: COLORS.blue,
+    borderWidth: 0,
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,
@@ -259,9 +261,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   firstTab: {
-    marginLeft: 20,
+    marginLeft: 5,
   },
   lastTab: {
-    marginRight: 20,
+    marginRight: 5,
   },
 });

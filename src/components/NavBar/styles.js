@@ -8,7 +8,7 @@ import { COLORS } from 'constants';
 
 export default StyleSheet.create({
   navbar: {
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.bluedark,
     flexDirection: 'row',
     width: '100%'
   },

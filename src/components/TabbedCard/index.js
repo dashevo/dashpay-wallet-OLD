@@ -31,7 +31,11 @@ class TabbedCard extends React.Component<Props> {
     this.scrollOffset = new Animated.Value(0);
     this.pageScrollOffsets = new Map();
     this.pageRefs = new Map();
-    this.headerHeight = (this.props.disappearingHeaderHeight || 0) + 100;
+    this.headerHeight = this.props.disappearingHeaderHeight + 100;
+  }
+
+  static defaultProps = {
+    disappearingHeaderHeight: 0,
   }
 
   componentDidMount() {
@@ -49,12 +53,12 @@ class TabbedCard extends React.Component<Props> {
     let headerScrollAmount = Math.min(this.scrollOffset._value, this.props.disappearingHeaderHeight || 0);
     let right = this.pageRefs.get(Math.ceil(position));
     let rightOffset = this.pageScrollOffsets.get(Math.ceil(position)) || 0;
-    if (right && rightOffset < (this.props.disappearingHeaderHeight || 0)) {
+    if (right && rightOffset <= this.props.disappearingHeaderHeight) {
       right.scrollTo({y: headerScrollAmount, animated: false});
     }
     let left = this.pageRefs.get(Math.floor(position));
     let leftOffset = this.pageScrollOffsets.get(Math.floor(position)) || 0;
-    if (left && leftOffset < (this.props.disappearingHeaderHeight || 0)) {
+    if (left && leftOffset <= this.props.disappearingHeaderHeight) {
       left.scrollTo({y: headerScrollAmount, animated: false});
     }
   }
@@ -70,7 +74,7 @@ class TabbedCard extends React.Component<Props> {
                 <View style={styles.header}>
                   <DisappearingHeaderPart
                     scrolledDistance={this.scrollOffset}
-                    initialHeight={this.props.disappearingHeaderHeight || 0}
+                    initialHeight={this.props.disappearingHeaderHeight}
                   >
                     <Avatar source={require('assets/images/avatar-default.png')} />
                   </DisappearingHeaderPart>
