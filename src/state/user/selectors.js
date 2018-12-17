@@ -3,4 +3,3 @@
  *
  * @wolf
  */
-export const selectBalance = state => state.user.balance;

@@ -3,5 +3,4 @@
  *
  * @wolf
  */
-
-export const selectCurrency = state => state.currency;
+export const selectBalance = state => state.account.balance;

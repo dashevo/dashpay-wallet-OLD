@@ -32,10 +32,17 @@ class SendScreen extends React.Component<Props, State> {
     };
   }
 
-  handleOnPress(event) {
+  async handleOnPress(event) {
     this.setState({
       visible: !this.state.visible
     });
+    const paymentOpts = {
+      recipient: this.props.values.recipient,
+      amount: this.props.values.dash
+    };
+    const rawtx = await this.props.createTransaction(paymentOpts)
+    const txid = await this.props.broadcastTransaction(rawtx.response)
+
   }
 
   render(): React.Element<any> {

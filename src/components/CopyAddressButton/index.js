@@ -12,7 +12,7 @@ import type { ReactElement } from './types';
 
 const CopyAddressButton = ({ address }: Props): ReactElement => {
   const copyAddress = async () => {
-    await Clipboard.setString(`dash:/${address}`);
+    await Clipboard.setString(`${address}`);
     alert('Copied');
   };
   return (

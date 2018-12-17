@@ -4,8 +4,8 @@
  * @wolf
  */
 import { createSelector } from "reselect";
-import { selectRate } from "state";
+import { selectAlternativeCurrency } from "state";
 
-const selector = createSelector(selectRate, rate => ({ rate }));
+const selector = createSelector(selectAlternativeCurrency, alternativeCurrency => alternativeCurrency);
 
 export default selector;

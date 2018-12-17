@@ -3,4 +3,14 @@
  *
  * @wolf
  */
-export default null;
+
+import { createSelector } from "reselect";
+
+export const selectState = state => {
+  const { unusedAddress } = state.account;
+  return {unusedAddress}
+};
+
+const selector = createSelector(selectState, obj => obj);
+
+export default selector;

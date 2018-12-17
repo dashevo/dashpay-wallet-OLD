@@ -4,24 +4,40 @@
  * @flow
  */
 
- import { MAKE_PAYMENT_TRANSACTION_REQUEST } from './constants';
- import { MAKE_PAYMENT_TRANSACTION_SUCCESS } from './constants';
- import { MAKE_PAYMENT_TRANSACTION_FAILURE } from './constants';
- import { GET_TRANSACTIONS_REQUEST } from './constants';
- import { GET_TRANSACTIONS_SUCCESS } from './constants';
- import { GET_TRANSACTIONS_FAILURE } from './constants';
+import * as ActionsTypes from "./constants";
+const DUFFS_PER_DASH = 100000000;
 
-export const makePaymentTransaction = (type, recipient, amount) => {
+function dashToDuffs(dash) {
+  if (dash === undefined || dash.constructor.name !== 'Number') {
+    throw new Error(`Can only convert a number ${dash}`);
+  }
+  return parseInt((dash * DUFFS_PER_DASH).toFixed(0), 10);
+}
+
+/**
+ * Create a valid transaction ready to be broadcasted from the provided options
+ * @param opts
+ * @param opts.satoshis
+ * @param opts.recipient
+ * @return Promise<Dashcore.Transaction>
+ */
+export const createTransaction = (opts) => {
   return (dispatch, getState, walletLib) =>
     dispatch({
       types: [
-        MAKE_PAYMENT_TRANSACTION_REQUEST,
-        MAKE_PAYMENT_TRANSACTION_SUCCESS,
-        MAKE_PAYMENT_TRANSACTION_FAILURE,
+        ActionsTypes.CREATE_TX_REQUEST,
+        ActionsTypes.CREATE_TX_SUCCESS,
+        ActionsTypes.CREATE_TX_FAILURE,
       ],
       async asyncTask(state) {
         try {
-          return walletLib.payTo(type, recipient, amount);
+          if(!opts.recipient) {
+            throw new Error('Missing recipient to pay')
+          }
+          const recipient = opts.recipient;
+          const satoshis = opts.satoshis !== undefined ? opts.satoshis : dashToDuffs(parseFloat(opts.amount));
+          if(!satoshis) throw new Error('Missing satoshis or amount to pay');
+          return walletLib.account.createTransaction({recipient, satoshis});
         } catch (err) {
           const { message = "Something went wrong." } = err;
           throw new Error(message);
@@ -30,41 +46,47 @@ export const makePaymentTransaction = (type, recipient, amount) => {
     });
 };
 
-const mockTransactions = [
-  {
-    type: 'sent',
-    txid: '36820d7268090d6f315eef03b28b7b2b2097c8b067608f652612a2c4612a6697',
-    time: '2018-10-30 09:56:42',
-    from: 'yPWVEG3mW8pFdPCXcE53gN1fSTM8dkV7kF',
-    to: [{
-      address: 'yPn5VvPk7ioN9emDv3MkCKovpjNqSLwW1p',
-      amount: 6.9998,
-    }],
-  },
-  {
-    type: 'receive',
-    txid: '2911362650f08df1ea16e03973bb41e1ee33680cce2ec6ce864e2daf35431e08',
-    time: '2018-10-30 09:56:42',
-    from: 'yPn5VvPk7ioN9emDv3MkCKovpjNqSLwW1p',
-    to: [{
-      address: 'yPWVEG3mW8pFdPCXcE53gN1fSTM8dkV7kF',
-      amount: 1.3726,
-    }],
-  }
-];
-
-export const getTransactions = () => {
+/**
+ * Will broadcast the rawtx to the active network
+ * @param rawtx - string - The hex raw representation of a transaction
+ * @return Promise<string> - txid
+ */
+export const broadcastTransaction = (rawtx) => {
   return (dispatch, getState, walletLib) =>
     dispatch({
       types: [
-        GET_TRANSACTIONS_REQUEST,
-        GET_TRANSACTIONS_SUCCESS,
-        GET_TRANSACTIONS_FAILURE,
+        ActionsTypes.BROADCAST_TX_REQUEST,
+        ActionsTypes.BROADCAST_TX_SUCCESS,
+        ActionsTypes.BROADCAST_TX_FAILURE,
       ],
       async asyncTask(state) {
         try {
-          return mockTransactions;
-          // return walletLib.account.getTransactionHistory();
+          if(rawtx){
+            return walletLib.account.broadcastTransaction(rawtx);
+          }
+        } catch (err) {
+          const { message = "Something went wrong." } = err;
+          throw new Error(message);
+        }
+      }
+    });
+};
+
+/**
+ * Get the transaction history of the active account
+ * @return Promise<Object>
+ */
+export const getTransactionHistory = () => {
+  return (dispatch, getState, walletLib) =>
+    dispatch({
+      types: [
+        ActionsTypes.GET_TRANSACTIONS_REQUEST,
+        ActionsTypes.GET_TRANSACTIONS_SUCCESS,
+        ActionsTypes.GET_TRANSACTIONS_FAILURE,
+      ],
+      async asyncTask(state) {
+        try {
+          return walletLib.account.getTransactionHistory();
         } catch (err) {
           const { message = "Something went wrong." } = err;
           throw new Error(message);

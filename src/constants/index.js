@@ -6,6 +6,6 @@
 export { default as COLORS } from './colors';
 export { default as THEMES } from './theming';
 export { default as LENGTHS } from './lengths';
-export { default as FIAT_CURRENCIES } from './fiatCurrencies';
+export { default as ALTERNATIVE_CURRENCIES } from './alternativeCurrencies';
 
 export * from './defaults';
