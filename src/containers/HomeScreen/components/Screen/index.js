@@ -38,8 +38,9 @@ const Screen = (props: Props): ReactElement => (
           style={styles.reanimatable}>
           <View style={styles.avatar}>
             <Avatar source={require('assets/images/avatar-default.png')} />
-            <TouchableOpacity style={styles.badgeWrapper}
-                              onPress={() => props.navigation.push('TransactionHistoryScreen')}>
+            <TouchableOpacity
+              style={styles.badgeWrapper}
+              onPress={() => props.navigation.push('TransactionHistoryScreen')}>
               <Reanimatable
                 duration={1000}
                 ref={props.reanimatableRefs[1]}
@@ -54,7 +55,7 @@ const Screen = (props: Props): ReactElement => (
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
-              action={() => props.navigation.push('SendScreen')}
+              action={() => props.navigation.push('ScannerScreen')}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}

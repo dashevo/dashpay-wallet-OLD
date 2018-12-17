@@ -32,7 +32,9 @@ const getSparkRate = async currencyCode => {
 };
 
 const getCryptoCompareRate = async currencyCode => {
-  const response = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`);
+  const response = await fetch(
+    `https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`
+  );
   if (!response.ok) {
     throw Error(response.statusText);
   } else {
@@ -52,7 +54,7 @@ const getCasaVesRate = async () => {
 };
 
 const fallbackStrategy = async currencyCode => {
-  switch(currencyCode) {
+  switch (currencyCode) {
     case 'VES':
       return await getCasaVesRate();
     default:
@@ -61,33 +63,38 @@ const fallbackStrategy = async currencyCode => {
 };
 
 export const changeAlternativeCurrency = code => {
-  const alternativeCurrency = ALTERNATIVE_CURRENCIES.find(currency => currency.code === code);
+  const alternativeCurrency = ALTERNATIVE_CURRENCIES.find(
+    currency => currency.code === code
+  );
   return {
     type: CHANGE_ALTERNATIVE_CURRENCY,
-    ...alternativeCurrency,
+    ...alternativeCurrency
   };
 };
 
 export const invalidateAlternativeCurrencyRate = () => ({
-  type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+  type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE
 });
 
-export const fetchAlternativeCurrencyRateIfNeeded = () => async (dispatch, getState) => {
+export const fetchAlternativeCurrencyRateIfNeeded = () => async (
+  dispatch,
+  getState
+) => {
   const state = getState().alternativeCurrency;
   const currencyCode = state.code;
   if (shouldFetchRate(state)) {
     let rate;
     dispatch({
-      type: ALTERNATIVE_CURRENCY_RATE_REQUEST,
+      type: ALTERNATIVE_CURRENCY_RATE_REQUEST
     });
     try {
       rate = await getSparkRate(currencyCode);
-    } catch(error) {
+    } catch (error) {
       rate = await fallbackStrategy(currencyCode);
     }
     dispatch({
       type: ALTERNATIVE_CURRENCY_RATE_RECEIVED,
-      rate,
+      rate
     });
   }
-}
+};
