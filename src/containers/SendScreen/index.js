@@ -39,13 +39,16 @@ class SendScreen extends React.Component<Props, State> {
       recipient: this.props.values.recipient,
       amount: this.props.values.dash
     };
-    const rawtx = await this.props.createTransaction(paymentOpts)
-    const txid = await this.props.broadcastTransaction(rawtx.response)
-
+    const rawtx = await this.props.createTransaction(paymentOpts);
+    const txid = await this.props.broadcastTransaction(rawtx.response);
   }
 
   render(): React.Element<any> {
     const { visible } = this.state;
+    console.log(
+      '__SendScreen/this.props.initialValues__',
+      this.props.initialValues
+    );
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>

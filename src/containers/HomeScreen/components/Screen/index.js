@@ -20,6 +20,8 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 
+import { StackActions, NavigationActions } from 'react-navigation';
+
 const Screen = (props: Props): ReactElement => (
   <SafeAreaView style={styles.container}>
     <View style={styles.header}>
@@ -55,7 +57,17 @@ const Screen = (props: Props): ReactElement => (
             <IconButton
               source={require('assets/images/icon-paperplane.png')}
               text="Pay"
-              action={() => props.navigation.push('ScannerScreen')}
+              action={() => {
+                const resetAction = StackActions.reset({
+                  index: 2,
+                  actions: [
+                    StackActions.push({ routeName: 'HomeScreen' }),
+                    StackActions.push({ routeName: 'SendScreen' }),
+                    StackActions.push({ routeName: 'ScannerScreen' })
+                  ]
+                });
+                console.log(props.navigation.dispatch(resetAction));
+              }}
             />
             <IconButton
               source={require('assets/images/icon-bank.png')}
