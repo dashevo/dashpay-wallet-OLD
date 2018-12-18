@@ -8,7 +8,6 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import { ProgressBar } from 'components';
 import { NavBar } from 'components';
 import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
