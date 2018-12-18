@@ -37,9 +37,6 @@ const routes = {
   TransactionHistoryScreen: {
     screen: TransactionHistoryScreen
   },
-  TransactionHistoryScreen: {
-    screen: TransactionHistoryScreen
-  },
   SettingsScreen: {
     screen: SettingsScreen
   },
