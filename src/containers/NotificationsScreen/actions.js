@@ -4,10 +4,10 @@
  * @wolf
  */
 import { bindActionCreators } from 'redux';
-import { getTransactions } from 'state'
+import { getTransactionHistory } from 'state'
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ getTransactions }, dispatch);
+  return bindActionCreators({ getTransactionHistory }, dispatch);
 }
 
 export default actions;

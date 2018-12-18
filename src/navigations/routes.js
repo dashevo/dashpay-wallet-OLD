@@ -8,7 +8,7 @@ import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
-import { TransactionHistoryScreen } from 'containers';
+import { NotificationsScreen } from 'containers';
 import { ErrorScreen } from "containers";
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
@@ -44,11 +44,8 @@ const routes = {
   ReceiveScreen: {
     screen: ReceiveScreen
   },
-  TransactionHistoryScreen: {
-    screen: TransactionHistoryScreen
-  },
-  TransactionHistoryScreen: {
-    screen: TransactionHistoryScreen
+  NotificationsScreen: {
+    screen: NotificationsScreen
   },
   SettingsScreen: {
     screen: SettingsScreen

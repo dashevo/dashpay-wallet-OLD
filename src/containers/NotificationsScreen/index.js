@@ -17,10 +17,10 @@ import connect from "react-redux/es/connect/connect";
 import selector from "./selectors";
 import actions from "./actions";
 
-class TransactionHistoryScreen extends React.Component<Props, State> {
+class NotificationsScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    props.getTransactions();
+    props.getTransactionHistory();
   }
 
   renderItem(transaction, key): React.Element<any> {
@@ -34,17 +34,19 @@ class TransactionHistoryScreen extends React.Component<Props, State> {
   render(): ReactElement {
     return (
       <View style={styles.container}>
-        <Text>Received</Text>
+        <Text>Received Contact Requests</Text>
+        { this.props.contactRequests.map(this.renderItem) }
+        <Text>Received Transactions</Text>
         { this.props.history.received.map(this.renderItem) }
-        <Text>Sent</Text>
+        <Text>Sent Transactions</Text>
         { this.props.history.sent.map(this.renderItem) }
       </View>
     );
   }
 };
-TransactionHistoryScreen = connect(
+NotificationsScreen = connect(
   selector,
   actions
-)(TransactionHistoryScreen);
+)(NotificationsScreen);
 
-export default TransactionHistoryScreen;
+export default NotificationsScreen;

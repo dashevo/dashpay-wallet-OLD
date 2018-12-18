@@ -15,6 +15,7 @@ export * from "./payment";
 export * from "./alternativeCurrency";
 export * from "./user";
 export * from "./account";
+export * from "./contacts";
 //
 // // Tmp
 const walletLib = {
@@ -31,11 +32,10 @@ const walletLib = {
           plugins:[DashPayDAP]
         });
         walletLib.account = walletLib.wallet.getAccount(accountId);
-        let listener = walletLib.account.events.on("ready", () => {
+        walletLib.account.events.on("ready", () => {
           resolve(true);
         });
       }catch (e) {
-        console.log(e);
         resolve(e);
       }
 
