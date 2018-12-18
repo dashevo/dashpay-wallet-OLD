@@ -12,4 +12,4 @@ const selector = createSelector([selectOngoingTransaction], initialValues => {
   };
 });
 
-export default null;
+export default selector;

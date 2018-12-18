@@ -80,35 +80,28 @@ class FastFieldInner extends React.Component {
   }
 
   render() {
-    const { component, name, render, children, form, ...rest } = this.props;
+    const { name, children, form, ...props } = this.props;
+
     const value = form.values[name];
 
     const field = {
-      numberOfLines: rest.numberOfLines,
+      numberOfLines: props.numberOfLines,
       onBlur: this.handleBlur,
       onChangeText: this.handleChangeText,
       onFocus: this.handleFocus,
-      placeholder: rest.placeholder,
-      returnKeyType: rest.returnKeyType,
-      blurOnSubmit: rest.blurOnSubmit,
-      placeholderTextColor: rest.placeholderTextColor,
+      placeholder: props.placeholder,
+      returnKeyType: props.returnKeyType,
+      blurOnSubmit: props.blurOnSubmit,
+      placeholderTextColor: props.placeholderTextColor,
       onSubmitEditing: this.handleSubmitEditing,
       getRef: this.getRef,
       value,
       name
     };
 
-    const props = { field, form };
+    const childrenProps = { field, form };
 
-    return component
-      ? React.createElement(component, {
-          ...props,
-          ...rest,
-          children
-        })
-      : isFunction(children)
-        ? children(props)
-        : children;
+    return isFunction(children) ? children(childrenProps) : children;
   }
 }
 

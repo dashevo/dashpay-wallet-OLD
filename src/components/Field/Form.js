@@ -4,6 +4,7 @@
  * @flow
  */
 import * as React from 'react';
+import { isEqual } from 'lodash';
 import { FormProvider } from './context';
 import { isFunction } from './utilities';
 import { validateYupSchema } from './utilities';
@@ -47,6 +48,7 @@ class Form extends React.Component<Props, State> {
     (this: any).setFormState = this.setFormState.bind(this);
     (this: any).handleSubmit = this.handleSubmit.bind(this);
     (this: any).reinitializeForm = this.reinitializeForm.bind(this);
+    (this: any).setValues = this.setValues.bind(this);
 
     this.state = {
       values: props.initialValues || {},
@@ -72,7 +74,8 @@ class Form extends React.Component<Props, State> {
       setFieldFocus: this.setFieldFocus,
       setState: this.setFormState,
       handleSubmit: this.handleSubmit,
-      reinitialize: this.reinitializeForm
+      reinitialize: this.reinitializeForm,
+      setValues: this.setValues
     };
 
     this.fields = {};
@@ -86,6 +89,12 @@ class Form extends React.Component<Props, State> {
 
   componentWillUnmount() {
     this.didMount = false;
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    if (!isEqual(prevProps.initialValues, this.props.initialValues)) {
+      this.resetForm(this.props.initialValues);
+    }
   }
 
   registerField(name, Component) {
@@ -233,29 +242,33 @@ class Form extends React.Component<Props, State> {
     });
   }
 
+  setValues(values) {
+    this.setState({ values }, () => {
+      if (this.props.validateOnChange) {
+        this.runValidation(values);
+      }
+    });
+  }
+
   reinitializeForm(values = this.state.values, callback) {
     this.props.onReinitialize(values, this.actions, callback);
   }
 
   handleSubmit(event: Object) {
     // TODO: stop validation
-
     this.submitForm();
   }
 
   render(): React.Element<any> {
-    const { component, children } = this.props;
-    const props = {
+    const { children, ...props } = this.props;
+    const form = {
+      ...props,
       ...this.state,
       ...this.actions
     };
     return (
-      <FormProvider value={props}>
-        {component
-          ? React.createElement(component, props)
-          : isFunction(children)
-            ? children(props)
-            : children}
+      <FormProvider value={form}>
+        {isFunction(children) ? children(childrenProps) : children}
       </FormProvider>
     );
   }

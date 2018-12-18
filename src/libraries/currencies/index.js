@@ -52,8 +52,17 @@ export function getNextCurrency(currencies, currentCurrency) {
 }
 
 export function convert(amount, fromCurrency, toCurrency, conversions) {
+  if (fromCurrency === toCurrency) {
+    return amount;
+  }
+
   const exchangeRates = conversions[fromCurrency].rates;
   const exchangeRate = exchangeRates[toCurrency];
+
+  if (!exchangeRate) {
+    return amount;
+  }
+
   return (amount * exchangeRate).toFixed(10).toString();
 }
 

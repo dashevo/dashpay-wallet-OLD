@@ -35,10 +35,10 @@ export { default as Form } from './Field/Form';
 export { default as Field } from './Field/Validation';
 export { TouchableHighlight as Touchable } from 'react-native';
 export { View } from 'react-native';
-export { TextInput as Input } from 'react-native';
 export { Text } from 'react-native';
 export { Image } from 'react-native';
 export { ScrollView } from 'react-native';
+export { TouchableWithoutFeedback } from 'react-native';
 
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
@@ -116,6 +116,7 @@ class CurrencyInput extends React.Component<any> {
   render(): React.Element<any> {
     return (
       <TextInput
+        {...this.props}
         keyboardType={'numeric'}
         style={this.props.style}
         value={undefined}
@@ -124,12 +125,31 @@ class CurrencyInput extends React.Component<any> {
         onChangeText={this.handleChangeText}
         ref={ref => {
           this.input = ref;
+
+          if (this.props.getRef) {
+            this.props.getRef(ref);
+          }
         }}
       />
     );
   }
 }
 
-CurrencyInput = injectIntl(CurrencyInput, { intlPropName: 'i18n' });
+CurrencyInput = injectIntl(CurrencyInput, {
+  intlPropName: 'i18n'
+});
+
+export function Input(props) {
+  return (
+    <TextInput
+      {...props}
+      ref={ref => {
+        if (props.getRef) {
+          props.getRef(ref);
+        }
+      }}
+    />
+  );
+}
 
 export { CurrencyInput };

@@ -16,6 +16,12 @@ export * from './alternativeCurrency';
 export * from './user';
 export * from './account';
 
+import thunk from 'redux-thunk';
+import middleware from './middleware';
+import { applyMiddleware } from 'redux';
+import { Wallet } from '@dashevo/wallet-lib';
+import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
+
 //
 // // Tmp
 const DAPIClient = require('@dashevo/dapi-client');
@@ -48,12 +54,6 @@ const walletLib = {
     });
   }
 };
-
-import thunk from 'redux-thunk';
-import middleware from './middleware';
-import { applyMiddleware } from 'redux';
-import { Wallet } from '@dashevo/wallet-lib';
-import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
