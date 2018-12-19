@@ -13,7 +13,7 @@
           "containers": "./src/containers",
           "examples": "./src/examples",
           "libraries": "./src/libraries",
-          "navigation": "./src/navigation",
+          "navigations": "./src/navigations",
           "state": "./src/state",
           "translations": "./src/translations",
           "utilities": "./src/utilities"

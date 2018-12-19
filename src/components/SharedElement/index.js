@@ -3,6 +3,6 @@
  *
  * @wolf
  */
-import { Navigation } from 'react-native-navigation';
+import { View } from 'react-native';
 
-export default Navigation.Element;
+export default View; // Tmp: No shared elements

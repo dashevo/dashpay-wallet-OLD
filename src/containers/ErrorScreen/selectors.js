@@ -3,5 +3,6 @@
  *
  * @wolf
  */
-export * from './navigation';
-export * from './helpers';
+const selector = null;
+
+export default selector;

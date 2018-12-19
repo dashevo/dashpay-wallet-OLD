@@ -3,15 +3,15 @@
  *
  * @wolf
  */
-import * as React from "react";
-import { connect } from "react-redux";
-import { sequence } from "libraries";
-import { Screen } from "./components";
-import actions from "./actions";
-import defaultProps from "./props";
-import selector from "./selectors";
-import type { ReactElement } from "./types";
-import type { Props } from "./types";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { sequence } from 'libraries';
+import { Screen } from './components';
+import actions from './actions';
+import defaultProps from './props';
+import selector from './selectors';
+import type { ReactElement } from './types';
+import type { Props } from './types';
 
 class SplashScreen extends React.Component<Props> {
   static defaultProps = defaultProps;
@@ -30,7 +30,7 @@ class SplashScreen extends React.Component<Props> {
     return Promise.all([
       this.props.initializeWallet(),
       this.props.fetchAlternativeCurrencyRateIfNeeded()
-    ]).then(this.navigateFurther.bind(this));
+    ]).then(this.navigateFurther.bind(this)).catch(err=>alert(err.message));
   }
 
   async handleOnComplete() {
@@ -41,7 +41,7 @@ class SplashScreen extends React.Component<Props> {
   navigateFurther() {
     const { routeName } = this.props;
     const { routeParams } = this.props;
-    this.props.navigation.resetTo("HomeScreen", routeParams);
+    this.props.navigation.replace('HomeScreen', routeParams);
   }
 
   render(): ReactElement {

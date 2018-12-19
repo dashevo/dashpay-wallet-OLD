@@ -4,13 +4,14 @@
  * @wolf
  */
 import { StyleSheet } from 'react-native';
+import { COLORS } from 'constants';
 import { THEMES } from 'constants';
 import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: THEMES.dark.background,
+    backgroundColor: COLORS.blue,
     justifyContent: 'center',
     flex: 1
   },
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: THEMES.vivid.background,
     borderTopLeftRadius: LENGTHS.borderRadius,
-    borderTopRightRadius: LENGTHS.borderRadius,
+    borderTopRightRadius: LENGTHS.borderRadius
   },
   logo: {
     resizeMode: 'contain',
