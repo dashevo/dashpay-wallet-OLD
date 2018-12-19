@@ -7,15 +7,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
-
 import styles from './styles';
-
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
-import connect from "react-redux/es/connect/connect";
-import selector from "./selectors";
-import actions from "./actions";
+import { connect } from 'react-redux';
+import selector from './selectors';
+import actions from './actions';
 
 class NotificationsScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -35,15 +33,16 @@ class NotificationsScreen extends React.Component<Props, State> {
     return (
       <View style={styles.container}>
         <Text>Received Contact Requests</Text>
-        { this.props.contactRequests.map(this.renderItem) }
+        {this.props.contactRequests.map(this.renderItem)}
         <Text>Received Transactions</Text>
-        { this.props.history.received.map(this.renderItem) }
+        {this.props.history.received.map(this.renderItem)}
         <Text>Sent Transactions</Text>
-        { this.props.history.sent.map(this.renderItem) }
+        {this.props.history.sent.map(this.renderItem)}
       </View>
     );
   }
-};
+}
+
 NotificationsScreen = connect(
   selector,
   actions

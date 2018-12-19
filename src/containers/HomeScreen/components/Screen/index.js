@@ -41,7 +41,7 @@ const Screen = (props: Props): ReactElement => (
             <Avatar source={require('assets/images/avatar-default.png')} />
             <TouchableOpacity
               style={styles.badgeWrapper}
-              onPress={() => props.navigation.push('TransactionHistoryScreen')}>
+              onPress={() => props.navigation.push('NotificationsScreen')}>
               <Reanimatable
                 duration={1000}
                 ref={props.reanimatableRefs[1]}
