@@ -64,7 +64,9 @@ class SendScreen extends React.Component<Props> {
   handleSubmit(values) {
     const amount = this.convertAmountToDASH(values.amount, values.currency);
     const transactionData = Object.assign({}, values, { amount });
-    // this.props.createTransaction(transactionData)
+    this.props
+      .createTransaction(transactionData)
+      .then(console.log, console.log);
   }
 
   render(): React.Element<any> {

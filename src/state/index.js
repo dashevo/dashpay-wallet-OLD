@@ -7,6 +7,7 @@ import { createStore } from 'redux';
 import reducer from './reducer';
 
 // Tmp
+export * from './contacts';
 export * from './transactions';
 export * from './actions';
 export * from './settings';
