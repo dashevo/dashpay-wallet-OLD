@@ -9,3 +9,9 @@ export { default as LENGTHS } from './lengths';
 export { default as ALTERNATIVE_CURRENCIES } from './alternativeCurrencies';
 
 export * from './defaults';
+
+// TMP
+export const CURRENCIES = {
+  DASH: { code: 'DASH', name: 'DASH' },
+  USD: { code: 'USD', name: 'US Dollar' }
+};

@@ -9,21 +9,24 @@ import * as variables from '../variables';
 export default StyleSheet.create({
   ['box']: {
     alignItems: 'center',
-    alignSelf: 'flex-start',
-    backgroundColor: variables.buttonBackgroundColor,
-    borderRadius: variables.buttonBorderRadius,
-    borderColor: variables.buttonBorderColor,
-    borderWidth: variables.buttonBorderWidth,
+    alignSelf: 'stretch',
+    backgroundColor: '#088BE2',
+    borderColor: '#088BE2',
+    borderRadius: 0,
+    borderWidth: 0,
     flexDirection: 'row',
-    height: variables.buttonHeight,
+    flexGrow: 1,
+    flexShrink: 0,
+    height: 50,
     justifyContent: 'center'
   },
   ['row']: {
+    alignSelf: 'stretch',
     alignItems: 'center',
     flexDirection: 'row',
     flexGrow: 1,
     flexShrink: 0,
-    justifyContent: 'flex-start'
+    justifyContent: 'center'
   },
   ['left']: {
     flex: 0,
@@ -51,11 +54,11 @@ export default StyleSheet.create({
     fontSize: 16
   },
   ['box__primary']: {
-    backgroundColor: variables.componentPrimaryBackgroundColor,
-    borderColor: variables.componentPrimaryBorderColor
+    backgroundColor: '#088BE2',
+    borderColor: '#088BE2'
   },
   ['text__primary']: {
-    color: variables.componentPrimaryColor
+    color: '#fff'
   },
   ['icon__primary']: {
     color: variables.componentPrimaryColor

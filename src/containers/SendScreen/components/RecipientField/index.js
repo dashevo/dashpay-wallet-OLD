@@ -3,40 +3,73 @@
  *
  * @flow
  */
-import * as React from "react";
 
-import { View } from "react-native";
-import { TextInput } from "react-native";
-import { Text } from "react-native";
-import styles from "./styles";
+// External dependencies
+import * as React from 'react';
 
-class RecipientField extends React.Component<{}> {
-  constructor(props: Props) {
-    super(props);
-    (this: any).handleOnChangeText = this.handleOnChangeText.bind(this);
-  }
+// Internal dependencies
+import { Field } from 'components';
+import { View } from 'components';
+import { Input } from 'components';
+import { PasteButton } from './components';
+import defaultProps from './defaults';
+import styles from './styles';
+import type { Props } from './types';
 
-  handleOnChangeText(value) {
-    this.props.setFieldValue("recipient", value);
-  }
+let dismissPasteConfirmation = null;
 
-  render(): React.Element<any> {
-    return (
-      <View style={styles.row}>
-        <TextInput
-          ref={this.input}
-          placeholder={"Recipient"}
-          keyboardType={"numeric"}
-          onChangeText={this.handleOnChangeText}
-          underlineColorAndroid={"transparent"}
-          placeholderTextColor={"#999"}
-          selectionColor={"blue"}
-          value={this.props.values.recipient}
-          style={styles.input}
-        />
-      </View>
-    );
-  }
+function RecipientField(props: Props): React.Element<any> {
+  return (
+    <Field {...props}>
+      {({ field, form }) => {
+        const { name, value } = field;
+        const { showPasteConfirmation } = form.state;
+
+        const confirm = showPasteConfirmation && value;
+        const show = showPasteConfirmation || !value;
+
+        function handlePaste(value: string) {
+          form.setFieldTouched(name);
+          form.setFieldValue(name, value);
+
+          form.setFieldFocus(name);
+          form.setState({
+            showPasteConfirmation: true
+          });
+
+          clearTimeout(dismissPasteConfirmation);
+          dismissPasteConfirmation = setTimeout(() => {
+            form.setState({
+              showPasteConfirmation: false
+            });
+          }, 4000);
+        }
+
+        function handleError(error: string) {
+          form.setFieldTouched(name);
+          form.setFieldError(name, error);
+        }
+
+        return (
+          <View style={styles.row}>
+            <View style={styles.body}>
+              <Input style={styles.input} {...field} />
+            </View>
+            <View style={styles.right}>
+              <PasteButton
+                onPaste={handlePaste}
+                onError={handleError}
+                confirm={confirm}
+                show={show}
+              />
+            </View>
+          </View>
+        );
+      }}
+    </Field>
+  );
 }
+
+RecipientField.defaultProps = defaultProps;
 
 export default RecipientField;

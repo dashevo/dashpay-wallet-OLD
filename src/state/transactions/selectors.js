@@ -4,4 +4,7 @@
  * @wolf
  */
 
-export const selectTransactions = state => state.transactions.history;
+export const selectTransactions = state => state.transactions;
+
+export const selectOngoingTransaction = state =>
+  state.transactions.ongoingTransaction;

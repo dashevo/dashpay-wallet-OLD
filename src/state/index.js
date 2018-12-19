@@ -3,21 +3,32 @@
  *
  * @wolf
  */
-import { createStore } from "redux";
-import reducer from "./reducer";
+import { createStore } from 'redux';
+import reducer from './reducer';
 
 // Tmp
-export * from "./transactions";
-export * from "./actions";
-export * from "./settings";
-export * from "./language";
-export * from "./payment";
-export * from "./alternativeCurrency";
-export * from "./user";
-export * from "./account";
-export * from "./contacts";
+export * from './transactions';
+export * from './actions';
+export * from './settings';
+export * from './language';
+export * from './payment';
+export * from './alternativeCurrency';
+export * from './user';
+export * from './account';
+
+import thunk from 'redux-thunk';
+import middleware from './middleware';
+import { applyMiddleware } from 'redux';
+import { Wallet } from '@dashevo/wallet-lib';
+import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
+
 //
 // // Tmp
+const DAPIClient = require('@dashevo/dapi-client');
+const transport = new DAPIClient({
+  seeds: [{ ip: '52.39.47.232', port: 3000 }]
+});
+
 const walletLib = {
   wallet: null,
   account: null,
@@ -29,25 +40,20 @@ const walletLib = {
         walletLib.wallet = new Wallet({
           network,
           mnemonic,
-          plugins:[DashPayDAP]
+          plugins: [DashPayDAP],
+          allowSensitiveOperations: true,
+          transport
         });
         walletLib.account = walletLib.wallet.getAccount(accountId);
-        walletLib.account.events.on("ready", () => {
+        let listener = walletLib.account.events.on('ready', () => {
           resolve(true);
         });
-      }catch (e) {
+      } catch (e) {
         resolve(e);
       }
-
     });
   }
 };
-
-import thunk from "redux-thunk";
-import middleware from "./middleware";
-import { applyMiddleware } from "redux";
-import { Wallet } from "@dashevo/wallet-lib";
-import DashPayDAP from "@dashevo/wallet-lib/examples/daps/DashPayDAP";
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);

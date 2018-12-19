@@ -8,7 +8,7 @@
  * @flow
  */
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Text,
   View,
@@ -17,7 +17,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet
 } from 'react-native';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Icon } from 'components';
 import { IconButton } from 'components';
 import { Animation } from 'components';
@@ -35,9 +35,9 @@ class NavBar extends React.Component<Props> {
     // account.events.on('balance_changed', () => {})
     this.state = {
       width: 200,
-      text: "This is a test",
+      text: 'This is a test',
       index: 0,
-      count: 2,
+      count: 2
     };
     this._onPress = this._onPress.bind(this);
     this.onSettingsPressed = this.onSettingsPressed.bind(this);
@@ -102,15 +102,13 @@ class NavBar extends React.Component<Props> {
       amount: { part1, part2 }
     } = this.props.items[this.state.index];
 
-    const dashIcon = (
-      <Icon style={styles.icon} name={'dash-D-blue'} />
-    );
+    const dashIcon = <Icon style={styles.icon} name={'dash-D-blue'} />;
     const alternativeCurrencyIcon = (
-      <Text style={styles.icon}>{ alternativeCurrency.symbol }</Text>
+      <Text style={styles.icon}>{alternativeCurrency.symbol}</Text>
     );
     const iconButton = (
       <Animation ref={this.animation}>
-        { this.state.index ? alternativeCurrencyIcon : dashIcon }
+        {this.state.index ? alternativeCurrencyIcon : dashIcon}
       </Animation>
     );
 
@@ -125,8 +123,7 @@ class NavBar extends React.Component<Props> {
           onClose={() => this._onClose()}
           shouldBounceOnMount={false}
           onSwipeEnd={this._setListViewScrollable}
-          onSwipeStart={this._setListViewNotScrollable}
-        >
+          onSwipeStart={this._setListViewNotScrollable}>
           <TouchableWithoutFeedback style={styles.icon} onPress={this._onPress}>
             <View style={styles.row}>
               <View style={styles.inline} onLayout={this.onLayout}>
@@ -137,7 +134,8 @@ class NavBar extends React.Component<Props> {
                   {part2}
                 </Text>
                 <Text style={styles.part2} numberOfLines={1}>
-                  (1DASH = {alternativeCurrency.rate}{alternativeCurrency.code})
+                  (1DASH = {alternativeCurrency.rate}
+                  {alternativeCurrency.code})
                 </Text>
               </View>
             </View>
@@ -154,7 +152,7 @@ class NavBar extends React.Component<Props> {
   }
 
   onSettingsPressed() {
-    return this.props.navigation.push("SettingsScreen");
+    return this.props.navigation.push('SettingsScreen');
   }
 }
 
