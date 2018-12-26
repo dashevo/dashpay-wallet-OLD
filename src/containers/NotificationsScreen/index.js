@@ -7,6 +7,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
+import ContactRequestItem from './components/ContactRequestItem';
 import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
@@ -30,10 +31,11 @@ class NotificationsScreen extends React.Component<Props, State> {
   }
 
   render(): ReactElement {
+    const { contactRequests, approveContactRequest } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Received Contact Requests</Text>
-        {this.props.contactRequests.map(this.renderItem)}
+        <Text>Received Contact Requests LOL</Text>
+        {contactRequests.map((transaction, key) => ContactRequestItem(transaction, key, approveContactRequest))}
         <Text>Received Transactions</Text>
         {this.props.history.received.map(this.renderItem)}
         <Text>Sent Transactions</Text>

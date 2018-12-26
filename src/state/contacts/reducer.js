@@ -4,6 +4,9 @@ import { CONTACT_REQUEST_RECEIVED } from './constants';
 import { CONTACT_STATES } from './constants';
 import { REMOVE_CONTACT } from './constants';
 import { UPDATE_CONTACT } from './constants';
+import { ACCEPT_CONTACT_REQUEST } from './constants';
+import { ACCEPT_CONTACT_SUCCESS } from './constants';
+import { ACCEPT_CONTACT_FAILURE } from './constants';
 
 const mockContacts = [
   {
@@ -47,7 +50,7 @@ const contact = (state, action) => {
       return {
         ...state,
         ...action.contact,
-      }
+      };
 
     default:
       return state;

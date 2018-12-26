@@ -9,6 +9,7 @@ import { ReceiveScreen } from 'containers';
 import { ErrorScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
+import { NotificationsScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
@@ -48,6 +49,9 @@ const routes = {
   },
   SettingsScreen: {
     screen: SettingsScreen
+  },
+  NotificationsScreen: {
+    screen: NotificationsScreen
   },
   SettingsLanguageScreen: {
     screen: SettingsLanguageScreen

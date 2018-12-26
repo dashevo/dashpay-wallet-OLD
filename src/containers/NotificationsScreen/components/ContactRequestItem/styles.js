@@ -1,16 +1,18 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @flow
+ * @wolf
  */
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flex: 1,
-    paddingTop: 20,
+    backgroundColor: 'grey',
+    color: 'white',
+    padding: 5,
+    margin: 5,
+    borderRadius: 5,
   },
 });
 
