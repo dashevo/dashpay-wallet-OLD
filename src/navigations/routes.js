@@ -13,6 +13,7 @@ import { ErrorScreen } from "containers";
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
+import { ContactScreen } from 'containers';
 
 const routes = {
   SplashScreen: {
@@ -55,6 +56,9 @@ const routes = {
   },
   SettingsAlternativeCurrencyScreen: {
     screen: SettingsAlternativeCurrencyScreen
+  },
+  ContactScreen: {
+    screen: ContactScreen
   }
 };
 

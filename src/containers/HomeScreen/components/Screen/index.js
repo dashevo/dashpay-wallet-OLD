@@ -63,7 +63,7 @@ const Screen = (props: Props): ReactElement => (
             <IconButton
               source={require('assets/images/icon-people.png')}
               text="Contacts"
-              action={() => props.navigation.push('ContactsScreen')}
+              action={() => props.navigation.push('ContactScreen')}
             />
           </View>
         </Reanimatable>

@@ -31,11 +31,12 @@ class TabbedCard extends React.Component<Props> {
     this.scrollOffset = new Animated.Value(0);
     this.pageScrollOffsets = new Map();
     this.pageRefs = new Map();
-    this.headerHeight = this.props.disappearingHeaderHeight + 100;
+    this.headerHeight = this.props.disappearingHeaderHeight + this.props.persistentHeaderHeight;
   }
 
   static defaultProps = {
     disappearingHeaderHeight: 0,
+    persistentHeaderHeight: 100
   }
 
   componentDidMount() {
@@ -76,9 +77,9 @@ class TabbedCard extends React.Component<Props> {
                     scrolledDistance={this.scrollOffset}
                     initialHeight={this.props.disappearingHeaderHeight}
                   >
-                    <Avatar source={require('assets/images/avatar-default.png')} />
+                    {this.props.disappearingHeaderPart}
                   </DisappearingHeaderPart>
-                  <Text style={styles.cardTitle}>Contact Name</Text>
+                  {this.props.persistentHeaderPart}
                 </View>
               }
             />

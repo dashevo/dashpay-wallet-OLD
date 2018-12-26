@@ -3,9 +3,9 @@
  *
  * @wolf
  */
-import {RECEIVE_BALANCE, GET_UNUSED_ADDRESS_SUCCESS, CHANGE_NETWORK_SUCCESS} from "./constants";
+import {RECEIVE_BALANCE, GET_UNUSED_ADDRESS_SUCCESS, CHANGE_NETWORK_SUCCESS} from './constants';
 export const initialState = {
-  network: "testnet",
+  network: 'testnet',
   mnemonic: 'protect cave garden achieve hand vacant clarify atom finish outer waste sword',
   unusedAddress: '',
   balance: 0

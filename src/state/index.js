@@ -3,21 +3,26 @@
  *
  * @wolf
  */
-import { createStore } from "redux";
-import reducer from "./reducer";
+import { createStore } from 'redux';
+import { applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducer';
+import middleware from './middleware';
+import { Wallet } from '@dashevo/wallet-lib';
+import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
+import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
 
 // Tmp
-export * from "./transactions";
-export * from "./actions";
-export * from "./settings";
-export * from "./language";
-export * from "./payment";
-export * from "./alternativeCurrency";
-export * from "./user";
-export * from "./account";
-export * from "./contacts";
-//
-// // Tmp
+export * from './transactions';
+export * from './actions';
+export * from './settings';
+export * from './language';
+export * from './payment';
+export * from './alternativeCurrency';
+export * from './user';
+export * from './account';
+export * from './contacts';
+
 const walletLib = {
   wallet: null,
   account: null,
@@ -29,25 +34,20 @@ const walletLib = {
         walletLib.wallet = new Wallet({
           network,
           mnemonic,
-          plugins:[DashPayDAP]
+          plugins: [DashPayDAP],
+          adapter: new InMem(),
+          allowSensitiveOperations: true
         });
         walletLib.account = walletLib.wallet.getAccount(accountId);
-        walletLib.account.events.on("ready", () => {
+        walletLib.account.events.on('ready', () => {
           resolve(true);
         });
-      }catch (e) {
+      } catch (e) {
         resolve(e);
       }
-
     });
   }
 };
-
-import thunk from "redux-thunk";
-import middleware from "./middleware";
-import { applyMiddleware } from "redux";
-import { Wallet } from "@dashevo/wallet-lib";
-import DashPayDAP from "@dashevo/wallet-lib/examples/daps/DashPayDAP";
 
 const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(middleware, extraArgument);
