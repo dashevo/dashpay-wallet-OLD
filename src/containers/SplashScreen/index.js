@@ -27,6 +27,7 @@ class SplashScreen extends React.Component<Props> {
   async componentDidMount() {
     const refs = this.reanimatableRefs;
     await sequence(refs, ref => ref.fadeIn());
+
     return Promise.all([
       this.props.initializeWallet(),
       this.props.fetchAlternativeCurrencyRateIfNeeded()

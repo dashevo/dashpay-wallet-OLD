@@ -3,78 +3,61 @@
  *
  * @flow
  */
-import * as React from "react";
-import { Text } from "react-native";
-import { View } from "react-native";
-import { TouchableWithoutFeedback } from "react-native";
-import { CurrencyField } from "./components";
-import { CurrencyImage } from "./components";
-import { DashField } from "./components";
-import { DashImage } from "./components";
-import { Divider } from "./components";
-import { Slide } from "./components";
 
-const styles = {
-  view: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-    position: "relative",
-    width: "100%",
-    height: 128
-  }
-};
+// External dependencies
+import * as React from 'react';
 
-class AmountField extends React.Component<{}> {
-  constructor(props: Props) {
-    super(props);
+// Internal dependencies
+import { Field } from 'components';
+import { View } from 'components';
+import { CurrencyInput } from 'components';
+import { CurrencyToggler } from './components';
+import defaultProps from './defaults';
+import styles from './styles';
+import type { Props } from './types';
 
-    (this: any).setActive = this.setActive.bind(this);
+function AmountField(props: Props): React.Element<any> {
+  return (
+    <Field {...props}>
+      {({ field, form }) => {
+        const { currencies, values, convertAmount } = form;
+        const { amount, currency: currCurrency } = values;
 
-    this.state = {
-      active: "dash"
-    };
-  }
+        const isFocused = form.focused[field.name];
+        const toValue = isFocused ? 1 : 0.25;
 
-  setActive(fieldName) {
-    this.setState({
-      active: fieldName
-    });
-  }
+        function handleToggle(nextCurrency) {
+          const nextAmount = convertAmount(amount, currCurrency, nextCurrency);
+          form.setValues({
+            ...values,
+            amount: nextAmount,
+            currency: nextCurrency
+          });
+        }
 
-  // This should be done with render props
-  render(): React.Element<any> {
-    const isDash = this.state.active === "dash";
-    const isCurrency = this.state.active === "currency";
-    return (
-      <View style={styles.view}>
-        <Divider />
-        <Slide
-          active={isDash}
-          icon={<DashImage {...this.props} />}
-          input={
-            <DashField
-              {...this.props}
-              active={isDash}
-              setActive={this.setActive}
-            />
-          }
-        />
-        <Slide
-          active={isCurrency}
-          icon={<CurrencyImage {...this.props} />}
-          input={
-            <CurrencyField
-              {...this.props}
-              active={isCurrency}
-              setActive={this.setActive}
-            />
-          }
-        />
-      </View>
-    );
-  }
+        return (
+          <View style={styles.column}>
+            <View style={styles.row}>
+              <CurrencyInput
+                currency={currCurrency}
+                style={styles.input}
+                {...field}
+              />
+            </View>
+            <View style={styles.row}>
+              <CurrencyToggler
+                currencies={currencies}
+                currency={currCurrency}
+                onToggle={handleToggle}
+              />
+            </View>
+          </View>
+        );
+      }}
+    </Field>
+  );
 }
+
+AmountField.defaultProps = defaultProps;
 
 export default AmountField;

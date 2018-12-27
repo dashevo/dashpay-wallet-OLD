@@ -8,7 +8,7 @@ describe('alternativeCurrency actions', () => {
       type: CHANGE_ALTERNATIVE_CURRENCY,
       code: 'USD',
       name: 'US Dollar',
-      symbol: '$',
+      symbol: '$'
     };
     expect(changeAlternativeCurrency('USD')).toEqual(expectedAction);
   });

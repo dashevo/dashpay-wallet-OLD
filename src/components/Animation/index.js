@@ -7,6 +7,8 @@ import * as React from 'react';
 import { Animated, Dimensions } from 'react-native';
 import { View } from 'react-native';
 
+export { default as SlideInRight } from './SlideInRight';
+
 type Props = {};
 type State = {};
 type ReactElement = Element<*>;
@@ -220,6 +222,47 @@ class Animation extends React.Component<Props, State> {
   render(): ReactElement {
     const { styles } = this.state;
     return <Animated.View {...this.props} style={styles} />;
+  }
+}
+
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
+export class Opacity extends React.Component {
+  static defaultProps = {
+    duration: 300,
+    toValue: 1
+  };
+
+  constructor(props) {
+    super(props);
+    this.animatedValue = new Animated.Value(props.toValue);
+  }
+
+  componentDidMount() {
+    Animated.timing(this.animatedValue, {
+      ...this.props,
+      useNativeDriver: true
+    }).start();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.toValue !== prevProps.toValue) {
+      Animated.timing(this.animatedValue, {
+        ...this.props,
+        useNativeDriver: true
+      }).start();
+    }
+  }
+
+  render() {
+    const { ...props } = this.props;
+    props.style = {
+      opacity: this.animatedValue
+    };
+    return <Animated.View {...props} />;
   }
 }
 

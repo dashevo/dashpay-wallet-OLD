@@ -4,15 +4,10 @@
  * @wolf
  */
 import { createStore } from 'redux';
-import { applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import reducer from './reducer';
-import middleware from './middleware';
-import { Wallet } from '@dashevo/wallet-lib';
-import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
-import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
 
 // Tmp
+export * from './contacts';
 export * from './transactions';
 export * from './actions';
 export * from './settings';
@@ -21,7 +16,20 @@ export * from './payment';
 export * from './alternativeCurrency';
 export * from './user';
 export * from './account';
-export * from './contacts';
+
+import thunk from 'redux-thunk';
+import middleware from './middleware';
+import { applyMiddleware } from 'redux';
+import { Wallet } from '@dashevo/wallet-lib';
+import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
+import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
+
+//
+// // Tmp
+const DAPIClient = require('@dashevo/dapi-client');
+const transport = new DAPIClient({
+  seeds: [{ ip: '52.39.47.232', port: 3000 }]
+});
 
 const walletLib = {
   wallet: null,
@@ -36,10 +44,11 @@ const walletLib = {
           mnemonic,
           plugins: [DashPayDAP],
           adapter: new InMem(),
-          allowSensitiveOperations: true
+          allowSensitiveOperations: true,
+          transport
         });
         walletLib.account = walletLib.wallet.getAccount(accountId);
-        walletLib.account.events.on('ready', () => {
+        let listener = walletLib.account.events.on('ready', () => {
           resolve(true);
         });
       } catch (e) {

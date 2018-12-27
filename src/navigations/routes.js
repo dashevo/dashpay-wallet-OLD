@@ -5,11 +5,11 @@
  */
 
 import { SplashScreen } from 'containers';
+import { ScannerScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
-import { NotificationsScreen } from 'containers';
-import { ErrorScreen } from "containers";
+import { ErrorScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
@@ -17,21 +17,10 @@ import { ContactScreen } from 'containers';
 
 const routes = {
   SplashScreen: {
-    screen: SplashScreen,
-    cardStyle: {
-      backgroundColor: '#000'
-    },
-    containerStyle: {
-      backgroundColor: '#000'
-    },
-    navigationOptions: {
-      cardStyle: {
-        backgroundColor: '#000'
-      },
-      containerStyle: {
-        backgroundColor: '#000'
-      }
-    }
+    screen: SplashScreen
+  },
+  ScannerScreen: {
+    screen: ScannerScreen
   },
   HomeScreen: {
     screen: HomeScreen
@@ -44,9 +33,6 @@ const routes = {
   },
   ReceiveScreen: {
     screen: ReceiveScreen
-  },
-  NotificationsScreen: {
-    screen: NotificationsScreen
   },
   SettingsScreen: {
     screen: SettingsScreen

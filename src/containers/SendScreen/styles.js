@@ -5,50 +5,55 @@
  */
 
 import { StyleSheet } from 'react-native';
-import { THEMES } from 'constants';
-import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: THEMES.dark.background,
-    justifyContent: 'center',
+  ['container']: {
+    flex: 1
+  },
+  ['scrollView']: {
+    backgroundColor: '#088BE2',
+    paddingTop: 6,
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    overflow: 'hidden',
     flex: 1
   },
   header: {
-    height: LENGTHS.navBarHeight
+    position: 'relative',
+    backgroundColor: '#088BE2',
+    paddingLeft: 24,
+    paddingRight: 24,
+    paddingTop: 24,
+    paddingBottom: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
-  scrollBody: {
-    width: '100%'
-  },
-  body: {
+  ['body']: {
+    backgroundColor: '#fff',
     flex: 1,
-    justifyContent: 'space-around',
+    alignSelf: 'stretch',
     flexDirection: 'column',
-    width: '100%',
-    backgroundColor: THEMES.light.background,
-    borderTopLeftRadius: LENGTHS.borderRadius,
-    borderTopRightRadius: LENGTHS.borderRadius,
-    padding: LENGTHS.screenPadding
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 128,
+    padding: 24
   },
-  section: {
-    alignSelf: "stretch",
-    paddingTop: LENGTHS.screenPadding,
-    paddingBottom: LENGTHS.screenPadding,
-    width: '100%',
-    justifyContent: 'center'
+  ['row']: {
+    alignSelf: 'stretch'
   },
-  text: {
-    color: THEMES.light.foreground,
-    fontSize: LENGTHS.fontSize
+  ['dash']: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    marginBottom: 24
   },
-  heading: {
-    fontSize: LENGTHS.headingFontSize,
-    margin: LENGTHS.screenPadding
-  },
-  amountField:{
-    backgroundColor: THEMES.vivid.foreground,
-    flex: 1
+  ['footer']: {
+    alignSelf: 'stretch'
   }
 });
 

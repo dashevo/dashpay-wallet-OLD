@@ -3,23 +3,20 @@
  *
  * @flow
  */
-import React from 'react';
+import * as React from 'react';
 import { compose } from 'utilities';
 import Styles from '../Styles';
-import Focus from '../Focus';
-import defaultProps from './defaults';
+import Validation from './Validation';
 import styles from './styles';
-import type { Props } from './types';
+type Props = {};
 
 const Composed = compose([
-  (props: Props): React.Element<any> => <Styles {...props} />,
-  (props: Props): React.Element<any> => <Focus {...props} />
+  (props: Props): React.Element<any> => <Validation {...props} />,
+  (props: Props): React.Element<any> => <Styles {...props} />
 ]);
 
 function Field(props: Props): React.Element<any> {
   return <Composed styles={styles} {...props} />;
 }
-
-Field.defaultProps = defaultProps;
 
 export default Field;

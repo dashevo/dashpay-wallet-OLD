@@ -5,3 +5,6 @@
  */
 
 export const selectTransactions = state => state.transactions.history;
+
+export const selectOngoingTransaction = state =>
+  state.transactions.ongoingTransaction;

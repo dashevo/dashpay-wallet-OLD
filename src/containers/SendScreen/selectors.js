@@ -3,9 +3,13 @@
  *
  * @wolf
  */
-import { createSelector } from "reselect";
-import { selectAlternativeCurrency } from "state";
+import { createSelector } from 'reselect';
+import { selectOngoingTransaction } from 'state';
 
-const selector = createSelector(selectAlternativeCurrency, alternativeCurrency => alternativeCurrency);
+const selector = createSelector([selectOngoingTransaction], initialValues => {
+  return {
+    initialValues
+  };
+});
 
 export default selector;
