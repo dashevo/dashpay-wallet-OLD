@@ -22,6 +22,7 @@ import middleware from './middleware';
 import { applyMiddleware } from 'redux';
 import { Wallet } from '@dashevo/wallet-lib';
 import DashPayDAP from '@dashevo/wallet-lib/examples/daps/DashPayDAP';
+import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
 
 //
 // // Tmp
@@ -42,6 +43,7 @@ const walletLib = {
           network,
           mnemonic,
           plugins: [DashPayDAP],
+          adapter: new InMem(),
           allowSensitiveOperations: true,
           transport
         });

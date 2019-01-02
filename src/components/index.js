@@ -23,6 +23,9 @@ export { default as RecipientInput } from './RecipientInput';
 export { default as CopyAddressButton } from './CopyAddressButton';
 export { default as NavBar } from './NavBar';
 export { default as SwipeableRow } from './SwipeableRow';
+export { default as TabbedCard } from './TabbedCard';
+
+// i18n
 export { default as FormattedText } from './FormattedText';
 export { default as FormattedDate } from './FormattedDate';
 export { default as FormattedTime } from './FormattedTime';

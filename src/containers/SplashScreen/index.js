@@ -31,7 +31,7 @@ class SplashScreen extends React.Component<Props> {
     return Promise.all([
       this.props.initializeWallet(),
       this.props.fetchAlternativeCurrencyRateIfNeeded()
-    ]).then(this.navigateFurther.bind(this));
+    ]).then(this.navigateFurther.bind(this)).catch(err=>alert(err.message));
   }
 
   async handleOnComplete() {
