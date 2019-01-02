@@ -5,7 +5,7 @@ import { UPDATE_CONTACT } from 'state/contacts/constants';
 import { REMOVE_CONTACT } from 'state/contacts/constants';
 import { CONTACT_STATES } from 'state/contacts/constants';
 import { initialState } from 'state/contacts/reducer';
-import reducer from 'state/contacts/reducer';
+import { contacts as reducer } from 'state/contacts/reducer'; // Tmp
 
 describe('contacts reducer', () => {
   it('should return the initial state', () => {
@@ -15,7 +15,10 @@ describe('contacts reducer', () => {
   it('should handle ADD_CONTACT', () => {
     const contact = { address: 'contact_address' };
     const payload = { contact, type: ADD_CONTACT };
-    const expectedState = [...initialState, { ...contact, state: CONTACT_STATES.ADDED }];
+    const expectedState = [
+      ...initialState,
+      { ...contact, state: CONTACT_STATES.ADDED }
+    ];
     expect(reducer(undefined, payload)).toEqual(expectedState);
   });
 
@@ -30,7 +33,10 @@ describe('contacts reducer', () => {
   it('should handle CONTACT_REQUEST_RECEIVED', () => {
     const contact = { address: 'contact_address' };
     const payload = { contact, type: CONTACT_REQUEST_RECEIVED };
-    const expectedState = [...initialState, { ...contact, state: CONTACT_STATES.REQUEST_RECEIVED }];
+    const expectedState = [
+      ...initialState,
+      { ...contact, state: CONTACT_STATES.REQUEST_RECEIVED }
+    ];
     expect(reducer(undefined, payload)).toEqual(expectedState);
   });
 
@@ -46,9 +52,11 @@ describe('contacts reducer', () => {
   it('should handle UPDATE_CONTACT', () => {
     const address = 'contact_address';
     const state = [{ address, name: 'name1' }];
-    const payload = { contact: { address, name: 'name2' }, type: UPDATE_CONTACT };
+    const payload = {
+      contact: { address, name: 'name2' },
+      type: UPDATE_CONTACT
+    };
     const expectedState = [{ address, name: 'name2' }];
     expect(reducer(state, payload)).toEqual(expectedState);
   });
 });
-

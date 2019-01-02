@@ -54,7 +54,7 @@ const contact = (state, action) => {
   }
 };
 
-const contacts = (state = initialState, action) => {
+export const contacts = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CONTACT:
     case CONTACT_REQUEST_RECEIVED:
