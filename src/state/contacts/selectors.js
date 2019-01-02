@@ -1,6 +1,6 @@
 import { CONTACT_STATES } from 'state/contacts/constants';
 
-export const selectAllContacts = state => state.contacts;
+export const selectAllContacts = state => state.contacts.local.items;
 
 export const selectContactRequests = state =>
   selectAllContacts(state).filter(

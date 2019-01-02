@@ -11,7 +11,7 @@ import alternativeCurrency from './alternativeCurrency';
 import language from './language';
 import user from './user';
 import transactions from './transactions';
-import contacts from './contacts';
+import contacts from './contacts/reducer';
 
 export default combineReducers({
   account,

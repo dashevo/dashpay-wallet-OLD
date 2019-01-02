@@ -11,6 +11,8 @@ export * from './LanguageProvider';
 // Screens
 export { default as SplashScreen } from './SplashScreen';
 export { default as ScannerScreen } from './ScannerScreen';
+export { default as ContactScreen } from './ContactScreen';
+export { default as ContactsScreen } from './ContactsScreen';
 
 export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as ContactsScreen } from './ContactsScreen';
