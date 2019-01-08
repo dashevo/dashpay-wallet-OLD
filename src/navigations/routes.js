@@ -14,6 +14,7 @@ import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactScreen } from 'containers';
+import { PaymentConfirmationScreen } from 'containers';
 
 const routes = {
   SplashScreen: {
@@ -23,7 +24,7 @@ const routes = {
     screen: ScannerScreen
   },
   HomeScreen: {
-    screen: HomeScreen
+    screen: PaymentConfirmationScreen
   },
   SendScreen: {
     screen: SendScreen
