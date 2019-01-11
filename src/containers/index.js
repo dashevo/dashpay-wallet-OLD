@@ -9,18 +9,17 @@ export * from './StoreProvider';
 export * from './LanguageProvider';
 
 // Screens
-export { default as SplashScreen } from './SplashScreen';
-export { default as ScannerScreen } from './ScannerScreen';
-
-export { default as ReceiveScreen } from './ReceiveScreen';
-export { default as ContactsScreen } from './ContactsScreen';
 export { default as ContactScreen } from './ContactScreen';
-export { default as SendScreen } from './SendScreen';
+export { default as ContactsScreen } from './ContactsScreen';
+export { default as ErrorScreen } from './ErrorScreen';
 export { default as HomeScreen } from './HomeScreen';
 export { default as NotificationsScreen } from './NotificationsScreen';
-export { default as ErrorScreen } from './ErrorScreen';
-
+export { default as ReceiveScreen } from './ReceiveScreen';
+export { default as ScannerScreen } from './ScannerScreen';
+export { default as SendScreen } from './SendScreen';
 export { default as SettingsScreen } from './SettingsScreen';
+export { default as SplashScreen } from './SplashScreen';
+
 export {
   default as SettingsLanguageScreen
 } from './SettingsScreen/LanguageScreen';

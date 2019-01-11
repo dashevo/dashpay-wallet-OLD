@@ -13,12 +13,19 @@ import { ErrorScreen } from 'containers';
 import { SettingsScreen } from 'containers';
 import { SettingsLanguageScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
+import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
 import { PaymentConfirmationScreen } from 'containers';
 
 const routes = {
   SplashScreen: {
     screen: SplashScreen
+  },
+  ContactsScreen: {
+    screen: ContactsScreen
+  },
+  ContactScreen: {
+    screen: ContactScreen
   },
   ScannerScreen: {
     screen: ScannerScreen

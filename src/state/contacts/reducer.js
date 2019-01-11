@@ -54,7 +54,7 @@ const contact = (state, action) => {
   }
 };
 
-const contacts = (state = initialState, action) => {
+export const contacts = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CONTACT:
     case CONTACT_REQUEST_RECEIVED:
@@ -75,4 +75,15 @@ const contacts = (state = initialState, action) => {
   }
 };
 
-export default contacts;
+
+// External dependencies
+import { combineReducers } from "redux";
+
+// Internal dependencies
+import blockchain from "./blockchain/reducer";
+import local from "./local/reducer";
+
+export default combineReducers({
+  blockchain,
+  local
+});

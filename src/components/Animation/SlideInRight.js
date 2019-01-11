@@ -14,7 +14,7 @@ class SlideInRight extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.animatedValue = new Animated.Value(0);
+    this.animatedValue = new Animated.Value(props.toValue);
   }
 
   componentDidMount() {
@@ -24,19 +24,19 @@ class SlideInRight extends React.PureComponent {
     }).start();
   }
 
-  componentDidUpdate() {
-    Animated.timing(this.animatedValue, {
-      ...this.props,
-      useNativeDriver: true
-    }).start();
+  componentDidUpdate(prevProps) {
+    if (prevProps.toValue !== this.props.toValue) {
+      Animated.timing(this.animatedValue, {
+        ...this.props,
+        useNativeDriver: true
+      }).start();
+    }
   }
 
   render() {
-    const { ...props } = this.props;
-    props.style = {
-      transform: [{ translateX: this.animatedValue }]
-    };
-    return <Animated.View {...props} />;
+    const style = this.props.style;
+    const animatedStyle = { transform: [{ translateX: this.animatedValue }] };
+    return <Animated.View {...this.props} style={[style, animatedStyle]} />;
   }
 }
 

@@ -85,16 +85,24 @@ class FastFieldInner extends React.Component {
     const value = form.values[name];
 
     const field = {
+      autoCapitalize: props.autoCapitalize,
+      autoCorrect: props.autoCorrect,
+      blurOnSubmit: props.blurOnSubmit,
+      clearButtonMode: props.clearButtonMode,
+      editable: props.editable,
+      getRef: this.getRef,
+      maxLength: props.maxLength,
+      name: props.name,
       numberOfLines: props.numberOfLines,
       onBlur: this.handleBlur,
       onChangeText: this.handleChangeText,
       onFocus: this.handleFocus,
-      placeholder: props.placeholder,
-      returnKeyType: props.returnKeyType,
-      blurOnSubmit: props.blurOnSubmit,
-      placeholderTextColor: props.placeholderTextColor,
       onSubmitEditing: this.handleSubmitEditing,
-      getRef: this.getRef,
+      placeholder: props.placeholder,
+      placeholderTextColor: props.placeholderTextColor,
+      returnKeyType: props.returnKeyType,
+      spellCheck: props.spellCheck,
+      underlineColorAndroid: props.underlineColorAndroid,
       value,
       name
     };

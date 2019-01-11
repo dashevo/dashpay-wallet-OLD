@@ -3,6 +3,4 @@
  *
  * @wolf
  */
-
-export default (state) => ({
-});
+export default null;
