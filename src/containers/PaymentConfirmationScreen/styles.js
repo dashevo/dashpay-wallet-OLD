@@ -5,8 +5,8 @@
  */
 import { StyleSheet } from 'react-native';
 import { COLORS } from 'constants';
-import { THEMES } from 'constants';
-import { LENGTHS } from 'constants';
+// import { THEMES } from 'constants';
+// import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   backdrop: {

@@ -51,9 +51,6 @@ const routes = {
   SettingsAlternativeCurrencyScreen: {
     screen: SettingsAlternativeCurrencyScreen
   },
-  ContactScreen: {
-    screen: ContactScreen
-  }
 };
 
 export default routes;
