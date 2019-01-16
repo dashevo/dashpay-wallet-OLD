@@ -5,12 +5,14 @@
  */
 import { StyleSheet } from 'react-native';
 import { COLORS } from 'constants';
+import { LENGTHS } from 'constants';
 // import { THEMES } from 'constants';
-// import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   backdrop: {
     backgroundColor: COLORS.blueDark,
+    flexDirection: 'column',
+    padding: LENGTHS.screenPadding,
   },
   container: {
     alignItems: 'center',
@@ -19,14 +21,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   avatarContainer: {
-    marginTop: -50,
     marginHorizontal: 'auto',
-    width: 110,
     padding: 10,
     borderRadius: 55,
     backgroundColor: COLORS.white,
   },
-
+  titleText: {
+  },
+  fiatBeforeFee: {
+  },
+  inset: {
+  },
+  insetHeader: {
+  },
+  insetValue: {
+  },
+  footer: {
+  },
+  swipeArea: {
+    flexDirection: 'row',
+  }
 });
 
 export default styles;
