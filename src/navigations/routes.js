@@ -31,10 +31,13 @@ const routes = {
     screen: ScannerScreen
   },
   HomeScreen: {
-    screen: PaymentConfirmationScreen
+    screen: HomeScreen
   },
   SendScreen: {
     screen: SendScreen
+  },
+  PaymentConfirmationScreen: {
+    screen: PaymentConfirmationScreen
   },
   ErrorScreen: {
     screen: ErrorScreen

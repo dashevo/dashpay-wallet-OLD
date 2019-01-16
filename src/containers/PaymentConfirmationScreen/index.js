@@ -19,7 +19,6 @@ import { connect } from 'react-redux';
 class PaymentConfirmationScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    props.getTransactionHistory();
   }
 
   render(): ReactElement {

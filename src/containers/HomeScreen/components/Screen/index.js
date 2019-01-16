@@ -68,8 +68,10 @@ const Screen = (props: Props): ReactElement => (
               text="Contacts"
               action={() => props.navigation.push('ContactsScreen')}
             />
+          </View>
+          <View style={styles.buttonGroup}>
             <IconButton
-              source={require('assets/images/icon-paperplane.png')}
+              source={require('assets/images/icon-temp.png')}
               text="QR Code"
               action={() => {
                 const resetAction = StackActions.reset({
@@ -82,6 +84,11 @@ const Screen = (props: Props): ReactElement => (
                 });
                 props.navigation.dispatch(resetAction);
               }}
+            />
+            <IconButton
+              source={require('assets/images/icon-temp.png')}
+              text="Confirmation"
+              action={() => props.navigation.push('PaymentConfirmationScreen')}
             />
           </View>
         </Reanimatable>
