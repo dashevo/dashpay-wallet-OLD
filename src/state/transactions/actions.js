@@ -50,6 +50,15 @@ export const createTransaction = opts => {
     });
 };
 
+export const isAutolockAvailable = rawtx => {
+  return (dispatch, getState, walletLib) => {
+    walletLib.account.createTransaction();
+    const tx = Dashcore.Transaction(rawtx);
+    tx.getInputs();
+    return tx.inputs.length <= 4;
+  };
+};
+
 /**
  * Will broadcast the rawtx to the active network
  * @param rawtx - string - The hex raw representation of a transaction
