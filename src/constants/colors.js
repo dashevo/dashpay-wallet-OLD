@@ -9,4 +9,5 @@ export default {
   blueDark: '#011E60',
   white: '#FFFFFF',
   black: '#000000',
+  gray: '#EEEDEF',
 };

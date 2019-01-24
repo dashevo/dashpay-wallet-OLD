@@ -24,26 +24,35 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
   render(): ReactElement {
     return (
       <View style={styles.backdrop}>
-        <View style={styles.container}>
-          <View style={styles.avatarContainer}>
-            <Avatar source={require('assets/images/avatar-default.png')} />
+        <View style={styles.containerContainer}>
+          <View style={styles.container}>
+            <View style={styles.avatarContainer}>
+              <Avatar source={require('assets/images/dash_logo_white_on_blue.png')}
+                style={styles.topAvatar} />
+            </View>
+            <View style={styles.header}>
+              <Text style={styles.titleText}>Pay</Text>
+              <Text style={styles.fiatBeforeFee}>$700</Text>
+            </View>
+            <View style={styles.inset}>
+              <Text style={styles.insetHeader}>Sending</Text>
+              <Text style={styles.insetValue}>D 1.23456</Text>
+              <Text style={styles.insetHeader}>Network Fee</Text>
+              <Text style={styles.insetValue}>D 0.00001</Text>
+            </View>
+            <Text style={styles.totalText}>Total</Text>
+            <Text style={styles.totalFiat}>$700.15</Text>
           </View>
-          <Text style={styles.titleText}>Pay</Text>
-          <Text style={styles.fiatBeforeFee}>$700</Text>
-          <View style={styles.inset}>
-            <Text style={styles.insetHeader}>Sending</Text>
-            <Text style={styles.insetValue}>D 1.23456</Text>
-            <Text>Network Fee</Text>
-            <Text>D 0.00001</Text>
+          <View style={styles.footer}>
+            <View style={styles.chevron}></View>
+            <Text style={styles.address}>1BoatSLRHtKNnhkdXEeobR76b53LETtpyT</Text>
           </View>
-          <Text>Total</Text>
-          <Text>$700.15</Text>
-          <View style={styles.footer}></View>
         </View>
         <View style={styles.swipeArea}>
-          <Avatar source={require('assets/images/avatar-default.png')} />
-          <Text>Swipe to Pay</Text>
-          <Avatar source={require('assets/images/avatar-default.png')} />
+          <Avatar style={styles.swipeAvatar} />
+          <Text style={styles.swipeText}>Swipe to Pay</Text>
+          <Avatar source={require('assets/images/dash_logo_white_on_blue.png')}
+            style={styles.swipeAvatar} />
         </View>
       </View>
     );
