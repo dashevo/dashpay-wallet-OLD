@@ -27,7 +27,7 @@ import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
 // // Tmp
 const DAPIClient = require('@dashevo/dapi-client');
 const transport = new DAPIClient({
-  seeds: [{ ip: '52.39.47.232', port: 3000 }]
+  seeds: [{ ip: '54.218.19.16', port: 3000 }]
 });
 
 const walletLib = {
