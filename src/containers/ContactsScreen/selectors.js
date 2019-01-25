@@ -17,7 +17,7 @@ function selector(state) {
   const frequentlyData = take(sortBy(state.contacts.local.items, 'name'), 5);
   contacts.push({ title: frequentlyTitle, data: frequentlyData });
 
-  console.log('_state.contacts.local.items_', take(sortBy(state.contacts.local.items, 'name'), 5));
+  console.log('state', state);
 
   const alphabeticallyTitle = 'Alphabetically';
   const alphabeticallyData = sortBy(state.contacts.local.items, 'name');
