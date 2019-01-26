@@ -8,4 +8,4 @@ export type ReactElement = Element<*>;
 
 export type Props = {
 };
-export type State = {};
+export type StateType = {};

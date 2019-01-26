@@ -121,6 +121,9 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: '#0000003F',
   },
+  swipeMovablePart: {
+    position: 'relative',
+  },
   swipeAvatar: {
     height: 50,
     width: 50,
