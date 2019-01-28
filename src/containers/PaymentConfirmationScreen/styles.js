@@ -117,12 +117,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    borderRadius: 29,// 50 / 2 + 4 + 8
+    borderRadius: 33,// 50 / 2 + 8
     padding: 8,
     backgroundColor: '#0000003F',
   },
   swipeMovablePart: {
     position: 'relative',
+    zIndex: 2,
   },
   swipeAvatar: {
     height: 50,
