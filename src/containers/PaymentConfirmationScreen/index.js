@@ -8,7 +8,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 import { Animated } from 'react-native';
-import { Avatar } from 'components';
+import { Avatar, Icon } from 'components';
 import {
   PanGestureHandler,
   State,
@@ -53,29 +53,37 @@ class SwipeComponent extends React.Component {
 
   _onHandlerStateChange = event => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
+      const springProperties = {
+        velocity: 10,
+        tension: 60,
+        friction: 10,
+        useNativeDriver: true
+      };
       if (this._swipeDistanceValue < this.state.maxSwipeDistance - 25) {
         // not enough of a swipe
         Animated.spring(this._swipeDistance, {
-          velocity: 10,
-          tension: 60,
-          friction: 10,
+          ...springProperties,
           toValue: 0,
-          useNativeDriver: true
         }).start();
       } else {
         // they swiped like they meant it
         Animated.spring(this._swipeDistance, {
-          velocity: 10,
-          tension: 60,
-          friction: 10,
+          ...springProperties,
           toValue: this.state.maxSwipeDistance,
-          useNativeDriver: true
         }).start();
+        // confirmation function, probably will close this and navigate somewhere
+        if (this.props.onConfirmation && typeof this.props.onConfirmation === 'function') {
+          this.props.onConfirmation();
+        }
       }
     }
   };
 
   render(): ReactElement {
+    const {
+      toAvatar,
+      fromAvatar,
+    } = this.props;
     return (
       <PanGestureHandler
         onGestureEvent={this._onPanGestureEvent}
@@ -90,7 +98,7 @@ class SwipeComponent extends React.Component {
               })
             }]
           }]}>
-            <Avatar style={styles.swipeAvatar} />
+            <Avatar source={fromAvatar} style={styles.swipeAvatar} />
           </Animated.View>
           <Text style={styles.swipeText}>Swipe to Pay</Text>
           <Animated.View style={{
@@ -102,7 +110,7 @@ class SwipeComponent extends React.Component {
               })
             }]
           }}>
-            <Avatar source={require('assets/images/dash_logo_white_on_blue.png')}
+            <Avatar source={toAvatar}
               style={styles.swipeAvatar} />
           </Animated.View>
         </Animated.View>
@@ -117,33 +125,46 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
   }
 
   render(): ReactElement {
+    const {
+      fiatSymbol,
+      amountDash,
+      amountFiat,
+      feeDash,
+      feeFiat,
+      totalFiat,
+      destinationAddress,
+      toAvatar,
+      fromAvatar,
+      onConfirmation,
+    } = this.props;
+
     return (
       <View style={styles.backdrop}>
         <View style={styles.containerContainer}>
           <View style={styles.container}>
             <View style={styles.avatarContainer}>
-              <Avatar source={require('assets/images/dash_logo_white_on_blue.png')}
+              <Avatar source={toAvatar}
                 style={styles.topAvatar} />
             </View>
             <View style={styles.header}>
               <Text style={styles.titleText}>Pay</Text>
-              <Text style={styles.fiatBeforeFee}>$700</Text>
+              <Text style={styles.fiatBeforeFee}>{fiatSymbol}{amountFiat}</Text>
             </View>
             <View style={styles.inset}>
               <Text style={styles.insetHeader}>Sending</Text>
-              <Text style={styles.insetValue}>D 1.23456</Text>
+              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} /> {amountDash}</Text>
               <Text style={styles.insetHeader}>Network Fee</Text>
-              <Text style={styles.insetValue}>D 0.00001</Text>
+              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} /> {feeDash}</Text>
             </View>
             <Text style={styles.totalText}>Total</Text>
-            <Text style={styles.totalFiat}>$700.16</Text>
+            <Text style={styles.totalFiat}>{fiatSymbol}{totalFiat}</Text>
           </View>
           <View style={styles.footer}>
             <View style={styles.chevron}></View>
-            <Text style={styles.address}>1BoatSLRHtKNnhkdXEeobR76b53LETtpyT</Text>
+            <Text style={styles.address}>{destinationAddress}</Text>
           </View>
         </View>
-        <SwipeComponent />
+        <SwipeComponent toAvatar={toAvatar} fromAvatar={fromAvatar} onConfirmation={onConfirmation} />
       </View>
     );
   }

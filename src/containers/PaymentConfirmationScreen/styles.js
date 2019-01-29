@@ -10,7 +10,7 @@ import { LENGTHS } from 'constants';
 
 const styles = StyleSheet.create({
   backdrop: {
-    backgroundColor: COLORS.blueDark,
+    backgroundColor: COLORS.blueDark + '7F', //TODO this will break if colors are expressed differently
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     height: '100%',
