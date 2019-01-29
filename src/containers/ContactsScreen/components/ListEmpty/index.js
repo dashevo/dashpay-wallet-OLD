@@ -6,16 +6,17 @@
 
 // External dependencies
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { TouchableOpacity } from 'components';
 
 // Internal dependencies
 import { View } from 'components';
 import { Text } from 'components';
-import { TouchableOpacity } from 'components';
 import type { Props } from './types';
 import styles from './styles';
 
 function ListEmpty(props: Props): React.Element<any> {
-  const { query } = props;
+  const { query, sendContactRequest } = props;
   return (
     <View style={styles.view}>
       <View style={styles.row}>
@@ -26,7 +27,7 @@ function ListEmpty(props: Props): React.Element<any> {
         </Text>
       </View>
       <View style={styles.row}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => sendContactRequest(query)}>
           <Text style={styles.buttonText}>{'Add to contacts'}</Text>
         </TouchableOpacity>
       </View>

@@ -28,7 +28,7 @@ import { random } from 'lodash';
 export function sendContactRequest(address) {
   return function(dispatch, getState, walletLib) {
     return dispatch({
-      query,
+      address,
       types: [
         SEND_CONTACT_REQUEST_REQUEST,
         SEND_CONTACT_REQUEST_SUCCESS,
