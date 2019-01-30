@@ -54,7 +54,7 @@ class SwipeComponent extends React.Component {
   _onHandlerStateChange = event => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       const springProperties = {
-        velocity: 10,
+        velocity: 20,
         tension: 60,
         friction: 10,
         useNativeDriver: true
@@ -70,19 +70,21 @@ class SwipeComponent extends React.Component {
         Animated.spring(this._swipeDistance, {
           ...springProperties,
           toValue: this.state.maxSwipeDistance,
-        }).start();
-        // confirmation function, probably will close this and navigate somewhere
-        if (this.props.onConfirmation && typeof this.props.onConfirmation === 'function') {
-          this.props.onConfirmation();
-        }
+        }).start(
+          () => { // callback, called after the animation finishes
+            if (this.props.onConfirmation && typeof this.props.onConfirmation === 'function') {
+              this.props.onConfirmation();
+            }
+          }
+        );
       }
     }
   };
 
   render(): ReactElement {
     const {
-      toAvatar,
-      fromAvatar,
+      toAvatar = require('assets/images/avatar-default.png'),
+      fromAvatar =  require('assets/images/avatar-default.png'),
     } = this.props;
     return (
       <PanGestureHandler
@@ -126,16 +128,16 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
 
   render(): ReactElement {
     const {
-      fiatSymbol,
-      amountDash,
-      amountFiat,
-      feeDash,
-      feeFiat,
-      totalFiat,
-      destinationAddress,
-      toAvatar,
-      fromAvatar,
-      onConfirmation,
+      fiatSymbol = '$',
+      amountDash = 10,
+      amountFiat = 700,
+      feeDash = 0.0001,
+      feeFiat = 0.007,
+      totalFiat = 700.01,
+      destinationAddress = '1BoatSLRHtKNnhkdXEeobR76b53LETtpyT',
+      toAvatar = require('assets/images/avatar-default.png'),
+      fromAvatar = require('assets/images/avatar-default.png'),
+      onConfirmation = ()=>{this.props.navigation.goBack();},
     } = this.props;
 
     return (
@@ -152,9 +154,9 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
             </View>
             <View style={styles.inset}>
               <Text style={styles.insetHeader}>Sending</Text>
-              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} /> {amountDash}</Text>
+              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} />{amountDash}</Text>
               <Text style={styles.insetHeader}>Network Fee</Text>
-              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} /> {feeDash}</Text>
+              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} />{feeDash}</Text>
             </View>
             <Text style={styles.totalText}>Total</Text>
             <Text style={styles.totalFiat}>{fiatSymbol}{totalFiat}</Text>
