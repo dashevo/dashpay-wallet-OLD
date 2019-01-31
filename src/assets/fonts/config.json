@@ -47,7 +47,7 @@
         "isMulticolor2": false,
         "grid": 32,
         "tags": [
-          "dash-D-blue"
+          "DASH"
         ]
       },
       "attrs": [
@@ -57,7 +57,7 @@
       "properties": {
         "order": 8,
         "id": 0,
-        "name": "dash-D-blue",
+        "name": "DASH",
         "prevSize": 32,
         "code": 59649
       },
@@ -170,7 +170,7 @@
         "isMulticolor": false,
         "isMulticolor2": false,
         "tags": [
-          "dollar",
+          "USD",
           "usd"
         ],
         "grid": 32
@@ -182,7 +182,7 @@
         "order": 9,
         "id": 0,
         "prevSize": 32,
-        "name": "dollar",
+        "name": "USD",
         "code": 59653
       },
       "setIdx": 2,

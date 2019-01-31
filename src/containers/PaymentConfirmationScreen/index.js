@@ -153,9 +153,9 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
             </View>
             <View style={styles.inset}>
               <Text style={styles.insetHeader}>Sending</Text>
-              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} />{amountDash}</Text>
+              <Text style={styles.insetValue}><Icon name={'DASH'} />{amountDash}</Text>
               <Text style={styles.insetHeader}>Network Fee</Text>
-              <Text style={styles.insetValue}><Icon name={'dash-D-blue'} />{feeDash}</Text>
+              <Text style={styles.insetValue}><Icon name={'DASH'} />{feeDash}</Text>
             </View>
             <Text style={styles.totalText}>Total</Text>
             <Text style={styles.totalFiat}>{fiatSymbol}{totalFiat}</Text>
