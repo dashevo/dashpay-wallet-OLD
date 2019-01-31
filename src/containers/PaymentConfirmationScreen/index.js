@@ -127,18 +127,17 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
   }
 
   render(): ReactElement {
-    const {
-      fiatSymbol = '$',
-      amountDash = 10,
-      amountFiat = 700,
-      feeDash = 0.0001,
-      feeFiat = 0.007,
-      totalFiat = 700.01,
-      destinationAddress = '1BoatSLRHtKNnhkdXEeobR76b53LETtpyT',
-      toAvatar = require('assets/images/avatar-default.png'),
-      fromAvatar = require('assets/images/avatar-default.png'),
-      onConfirmation = ()=>{this.props.navigation.goBack();},
-    } = this.props;
+    const
+      fiatSymbol = this.props.navigation.getParam('fiatSymbol'),
+      amountDash = this.props.navigation.getParam('amountDash'),
+      amountFiat = this.props.navigation.getParam('amountFiat'),
+      feeDash = this.props.navigation.getParam('feeDash'),
+      feeFiat = this.props.navigation.getParam('feeFiat'),
+      totalFiat = this.props.navigation.getParam('totalFiat'),
+      destinationAddress = this.props.navigation.getParam('destinationAddress'),
+      toAvatar = this.props.navigation.getParam('toAvatar'),
+      fromAvatar = this.props.navigation.getParam('fromAvatar'),
+      onConfirmation = this.props.navigation.getParam(' ');
 
     return (
       <View style={styles.backdrop}>
