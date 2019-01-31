@@ -85,11 +85,6 @@ const Screen = (props: Props): ReactElement => (
                 props.navigation.dispatch(resetAction);
               }}
             />
-            <IconButton
-              source={require('assets/images/icon-temp.png')}
-              text="Confirmation"
-              action={() => props.navigation.push('PaymentConfirmationScreen')}
-            />
           </View>
         </Reanimatable>
       </View>

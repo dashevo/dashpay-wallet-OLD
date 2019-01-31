@@ -137,7 +137,7 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
       destinationAddress = this.props.navigation.getParam('destinationAddress'),
       toAvatar = this.props.navigation.getParam('toAvatar'),
       fromAvatar = this.props.navigation.getParam('fromAvatar'),
-      onConfirmation = this.props.navigation.getParam(' ');
+      onConfirmation = this.props.navigation.getParam('onConfirmation');
 
     return (
       <View style={styles.backdrop}>
@@ -149,16 +149,16 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
             </View>
             <View style={styles.header}>
               <Text style={styles.titleText}>Pay</Text>
-              <Text style={styles.fiatBeforeFee}>{fiatSymbol}{amountFiat}</Text>
+              <Text style={styles.fiatBeforeFee}><Icon style={styles.fiatBeforeFee} name={fiatSymbol} />{amountFiat}</Text>
             </View>
             <View style={styles.inset}>
               <Text style={styles.insetHeader}>Sending</Text>
-              <Text style={styles.insetValue}><Icon name={'DASH'} />{amountDash}</Text>
+              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'DASH'} />{amountDash}</Text>
               <Text style={styles.insetHeader}>Network Fee</Text>
-              <Text style={styles.insetValue}><Icon name={'DASH'} />{feeDash}</Text>
+              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'DASH'} />{feeDash}</Text>
             </View>
             <Text style={styles.totalText}>Total</Text>
-            <Text style={styles.totalFiat}>{fiatSymbol}{totalFiat}</Text>
+            <Text style={styles.totalFiat}><Icon style={styles.totalFiat} name={fiatSymbol} />{totalFiat}</Text>
           </View>
           <View style={styles.footer}>
             <View style={styles.chevron}></View>
