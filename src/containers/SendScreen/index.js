@@ -56,17 +56,43 @@ class SendScreen extends React.Component<Props> {
     return convert(amount, fromCurrency, 'DASH', conversions);
   }
 
+  convertAmountToFiat(amount, fromCurrency) {
+    const conversions = this.props.conversions;
+    return convert(amount, fromCurrency, 'USD', conversions);
+  }
+
   convertAmount(amount, fromCurrency, toCurrency) {
     const conversions = this.props.conversions;
     return convert(amount, fromCurrency, toCurrency, conversions);
   }
 
   handleSubmit(values) {
-    const amount = this.convertAmountToDASH(values.amount, values.currency);
-    const transactionData = Object.assign({}, values, { amount });
-    this.props
-      .createTransaction(transactionData)
-      .then(console.log, console.log);
+    const amountDash = this.convertAmountToDASH(values.amount, values.currency);
+    const amountFiat = this.convertAmountToFiat(values.amount, values.currency);
+    const transactionData = Object.assign({}, values, { amountDash });
+    const feeAmount = 1; //TODO this is wrong on purpose.
+      // we need to prepare a transaction with the library and pass that
+      // and if it is confirmed, ask the library to broadcast it.
+    const feeFiat = this.convertAmountToFiat(feeAmount, values.currency);
+    const totalFiat = this.convertAmountToFiat(amountDash + feeAmount, values.currency);
+    const destinationAddress = ''
+    this.props.navigation.push('PaymentConfirmationScreen', {
+      fiatSymbol: this.state.conversions['USD'].code,
+      amountDash: amountDash,
+      amountFiat: amountFiat,
+      feeDash: feeAmount,
+      feeFiat: feeFiat,
+      totalFiat: totalFiat,
+      destinationAddress: values.recipient,
+      toAvatar: require('assets/images/icon-temp.png'),
+      fromAvatar: require('assets/images/icon-temp.png'),
+      onConfirmation: () => {
+        this.props
+          .createTransaction(transactionData)
+          .then(console.log, console.log);
+        this.props.navigation.goBack(); //TODO go to payment history
+      }
+    });
   }
 
   render(): React.Element<any> {

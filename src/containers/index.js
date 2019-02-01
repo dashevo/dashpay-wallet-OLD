@@ -26,3 +26,5 @@ export {
 export {
   default as SettingsAlternativeCurrencyScreen
 } from './SettingsScreen/AlternativeCurrencyScreen';
+
+export { default as PaymentConfirmationScreen } from './PaymentConfirmationScreen';

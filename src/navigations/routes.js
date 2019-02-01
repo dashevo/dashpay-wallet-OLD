@@ -15,6 +15,7 @@ import { SettingsLanguageScreen } from 'containers';
 import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
+import { PaymentConfirmationScreen } from 'containers';
 
 const routes = {
   SplashScreen: {
@@ -35,6 +36,9 @@ const routes = {
   SendScreen: {
     screen: SendScreen
   },
+  PaymentConfirmationScreen: {
+    screen: PaymentConfirmationScreen
+  },
   ErrorScreen: {
     screen: ErrorScreen
   },
@@ -50,9 +54,6 @@ const routes = {
   SettingsAlternativeCurrencyScreen: {
     screen: SettingsAlternativeCurrencyScreen
   },
-  ContactScreen: {
-    screen: ContactScreen
-  }
 };
 
 export default routes;
