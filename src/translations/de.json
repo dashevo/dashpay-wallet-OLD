@@ -1,6 +1,1 @@
-{
-  "Hello DASH Team!": "Hallo DASH Team!",
-
-  "Welcome {name}, you have {count, plural, =0 {no new messages} one {one new message} other {{count} new messages}}.":
-    "Herzlich willkommen {name}, du hast {count, plural, =0 {keine neue nachrichten} one {eine neue nachricht} other {{count} neue nachrichten}}."
-}
+{}
