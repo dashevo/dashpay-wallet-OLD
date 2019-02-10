@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import React from 'react';
 import { connect } from 'react-redux';

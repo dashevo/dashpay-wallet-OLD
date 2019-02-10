@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { DEFAULT_LOCALE } from 'constants';
 import { GET_DEVICE_LOCALE_SUCCESS } from './constants';

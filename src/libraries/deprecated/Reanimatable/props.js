@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { Easing } from 'react-native';
 import { TimingDriver } from './drivers';

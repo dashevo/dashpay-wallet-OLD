@@ -1,7 +1,8 @@
+// ['transform-remove-console']
+
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
-    ['transform-remove-console'],
     [
       '@babel/plugin-transform-spread',
       {
@@ -15,6 +16,7 @@ module.exports = {
         root: ['./src'],
         alias: {
           assets: './src/assets',
+          theme: './src/theme',
           components: './src/components',
           constants: './src/constants',
           containers: './src/containers',

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { createStore, compose } from 'redux';
 import reducer from './reducer';
@@ -46,7 +46,7 @@ const walletLib = {
           allowSensitiveOperations: true,
           transport
         });
-        walletLib.account = walletLib.wallet.getAccount(accountId);
+        walletLib.account = walletLib.wallet.getAccount({ index: accountId });
         let listener = walletLib.account.events.on('ready', () => {
           resolve(true);
         });

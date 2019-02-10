@@ -3,8 +3,10 @@
  *
  * @flow
  */
-import { TouchableHighlight } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
-TouchableHighlight.displayName = 'Touchable';
+TouchableOpacity.defaultProps = {
+  activeOpacity: 0.65
+}
 
-export default TouchableHighlight;
+export default TouchableOpacity;

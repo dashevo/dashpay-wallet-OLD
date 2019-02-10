@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import * as React from 'react';
 import { connect } from 'react-redux';
@@ -31,7 +31,9 @@ class SplashScreen extends React.Component<Props> {
     return Promise.all([
       this.props.initializeWallet(),
       this.props.fetchAlternativeCurrencyRateIfNeeded()
-    ]).then(this.navigateFurther.bind(this)).catch(err=>alert(err.message));
+    ])
+      .then(this.navigateFurther.bind(this))
+      .catch(err => alert(err.message));
   }
 
   async handleOnComplete() {
@@ -42,7 +44,7 @@ class SplashScreen extends React.Component<Props> {
   navigateFurther() {
     const { routeName } = this.props;
     const { routeParams } = this.props;
-    this.props.navigation.replace('HomeScreen', routeParams);
+    this.props.navigation.replace('PayScreen', routeParams);
   }
 
   render(): ReactElement {

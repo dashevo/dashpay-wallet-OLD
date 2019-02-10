@@ -3,31 +3,20 @@
  *
  * @flow
  */
-export * from './Animation';
+
 export { ActivityIndicator as Spinner } from 'react-native';
 export { default as AutoSubmit } from './Field/AutoSubmit';
 export { default as Avatar } from './Avatar';
 export { default as Button } from './Button';
-export { default as CopyAddressButton } from './CopyAddressButton';
 export { default as Field } from './Field/Validation';
 export { default as Focus } from './Focus';
 export { default as Form } from './Field/Form';
-export { default as FormattedDate } from './FormattedDate';
-export { default as FormattedNumber } from './FormattedNumber';
-export { default as FormattedRelative } from './FormattedRelative';
-export { default as FormattedText } from './FormattedText';
-export { default as FormattedTime } from './FormattedTime';
+
 export { default as Icon } from './Icon';
-export { default as IconButton } from './IconButton';
 export { default as Interval } from './Interval';
-export { default as LabeledSwitch } from './LabeledSwitch';
-export { default as Logo } from './Logo';
 export { default as NavBar } from './NavBar';
 export { default as ProgressBar } from './ProgressBar';
-export { default as RecipientInput } from './RecipientInput';
 export { default as SelectableList } from './SelectableList';
-export { default as SharedElement } from './SharedElement';
-export { default as SwipeableRow } from './SwipeableRow';
 export { default as TabbedCard } from './TabbedCard';
 export { default as ThemedButton } from './ThemedButton';
 export { default as Touch } from './Touch';
@@ -38,6 +27,24 @@ export { TouchableHighlight as Touchable } from 'react-native';
 export { TouchableOpacity } from 'react-native';
 export { TouchableWithoutFeedback } from 'react-native';
 export { View } from 'react-native';
+
+// Deprecated
+export * from './deprecated/Animation';
+export { default as Box } from './deprecated/Box';
+export { default as CopyAddressButton } from './deprecated/CopyAddressButton';
+export { default as FormattedDate } from './deprecated/FormattedDate';
+export { default as FormattedNumber } from './deprecated/FormattedNumber';
+export { default as FormattedRelative } from './deprecated/FormattedRelative';
+export { default as FormattedText } from './deprecated/FormattedText';
+export { default as FormattedTime } from './deprecated/FormattedTime';
+export { default as IconButton } from './deprecated/IconButton';
+export { default as LabeledSwitch } from './deprecated/LabeledSwitch';
+export { default as Logo } from './deprecated/Logo';
+export { default as RecipientInput } from './deprecated/RecipientInput';
+export { default as SharedElement } from './deprecated/SharedElement';
+export { default as SwipeableRow } from './deprecated/SwipeableRow';
+
+
 
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
