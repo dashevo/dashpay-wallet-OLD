@@ -16,10 +16,14 @@ import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
 import { PaymentConfirmationScreen } from 'containers';
+import PayScreen from 'containers/PayScreen';
 
 const routes = {
   SplashScreen: {
     screen: SplashScreen
+  },
+  PayScreen: {
+    screen: PayScreen
   },
   ContactsScreen: {
     screen: ContactsScreen

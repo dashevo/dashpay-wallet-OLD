@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 export const MAKE_PAYMENT = 'MAKE_PAYMENT';
 export const PAYMENT_COMPLETED = 'PAYMENT_COMPLETED';

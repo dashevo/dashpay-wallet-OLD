@@ -268,7 +268,7 @@ class Form extends React.Component<Props, State> {
     };
     return (
       <FormProvider value={form}>
-        {isFunction(children) ? children(childrenProps) : children}
+        {isFunction(children) ? children(form) : children}
       </FormProvider>
     );
   }

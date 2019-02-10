@@ -4,8 +4,10 @@
  * @flow
  */
 import * as React from 'react';
-import type { Props } from './types';
-import type { State } from './types';
+import { renderProps } from 'utilities';
+
+type Props = {};
+type State = {};
 
 class Touch extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -36,8 +38,7 @@ class Touch extends React.Component<Props, State> {
   }
 
   render(): React.Element<any> {
-    const renderedChildren = this.props.children(this.state);
-    return renderedChildren && React.Children.only(renderedChildren);
+    return renderProps(this.props, this.state);
   }
 }
 

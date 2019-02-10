@@ -1,31 +1,58 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
+
+// External dependencies
 import * as React from 'react';
+
+// Internal dependencies
+import Composer from 'utilities/compose';
 import { Image } from 'react-native';
-import type { Props } from './types';
-import type { ReactElement } from './types';
+import { renderProps } from 'utilities';
+import { isFunction } from 'lodash';
+import Styles from 'components/Styles';
+import Touch from 'components/Touch';
+import Text from 'components/Text';
+import Icon from 'components/Icon';
+import styles from './styles';
 
-const Avatar = (props: Props): ReactElement => {
-  const defaultProps = {
-    style: {
-      height: 100,
-      width: 100,
-      borderRadius: 50
-    },
-    source: require('assets/images/avatar-default.png')
-  };
+type Props = {};
 
-  const mergedProps = {
-    ...defaultProps,
-    ...props
-  };
-
+function Card(tmpProps) {
   return (
-    <Image source={mergedProps.source} style={mergedProps.style} />
-  );
-};
+    <Composer
+      components={[
+        (props: Props): React.Element<any> => (
+          <Touch {...props} onPress={tmpProps.onPress} />
+        ),
+        (props: Props): React.Element<any> => (
+          <Styles {...props} styles={styles} />
+        )
+      ]}>
+      {([{ bind, touched }, { styles }]) => {
+        if (isFunction(tmpProps.children)) {
+          let children;
 
-export default Avatar;
+          if (tmpProps.image) {
+            children = (
+              <Image source={{ uri: tmpProps.image }} style={styles.image} />
+            );
+          } else if (tmpProps.name) {
+            const firstChar = tmpProps.name.charAt(0);
+            children = <Text style={styles.text}>{firstChar}</Text>;
+          } else {
+            children = <Icon style={styles.text} name={'dash'} />;
+          }
+
+          return tmpProps.children({ bind, touched, styles, children });
+        } else {
+          return null;
+        }
+      }}
+    </Composer>
+  );
+}
+
+export default Card;

@@ -2,7 +2,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { DEFAULT_SETTINGS, CHANGE_SETTINGS } from './constants';
 

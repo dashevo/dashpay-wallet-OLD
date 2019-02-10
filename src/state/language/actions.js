@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import DeviceInfo from 'react-native-device-info';
 import { CHANGE_LOCALE } from './constants';
