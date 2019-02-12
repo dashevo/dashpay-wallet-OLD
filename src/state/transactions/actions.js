@@ -42,11 +42,6 @@ export const createTransaction = opts => {
               : dashToDuffs(parseFloat(opts.amount));
           if (!satoshis) throw new Error('Missing satoshis or amount to pay');
 
-          console.log(
-            '__',
-            JSON.stringify(walletLib.account.storage.getStore())
-          );
-
           const tx = walletLib.account.createTransaction({
             recipient,
             satoshis
@@ -100,6 +95,29 @@ export const getTransactionHistory = () => {
       async asyncTask(state) {
         try {
           return walletLib.account.getTransactionHistory();
+        } catch (err) {
+          const { message = 'Something went wrong.' } = err;
+          throw new Error(message);
+        }
+      }
+    });
+};
+
+/**
+ * Get the transaction history of the active account
+ * @return Promise<Object>
+ */
+export const createPaymentTransaction = data => {
+  return (dispatch, getState, walletLib) =>
+    dispatch({
+      types: [
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_REQUEST,
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_SUCCESS,
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_FAILURE
+      ],
+      async asyncTask(state) {
+        try {
+          return data;
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
           throw new Error(message);

@@ -1,28 +1,14 @@
-import { createMaterialTopTabNavigator } from 'react-navigation';
-import { Dimensions } from 'react-native';
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
 
-import Pay from '../containers/PayTab';
-// import Activity from '../containers/ActivityTab';
-// import Profile from '../containers/ProfileTab';
-// import Receive from '../containers/ReceiveTab';
+// External dependencies
+import { createStackNavigator } from 'react-navigation';
 
-import TabBar from './TabBar';
+// Internal dependencies
+import routes from './routes';
+import config from './config';
 
-const Tabs = createMaterialTopTabNavigator(
-  {
-    Pay,
-    // Receive,
-    // Activity,
-    // Profile
-  },
-  {
-    tabBarComponent: TabBar,
-    tabBarOptions: {
-      upperCaseLabel: false,
-      showIcon: false,
-      scrollEnabled: true
-    }
-  }
-);
-
-export default Tabs;
+export default createStackNavigator(routes, config);

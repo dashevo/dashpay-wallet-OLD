@@ -91,12 +91,19 @@ const styles = {
     fontSize: 24
   },
   ['card']: {
-    flex: 1
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    height: 39
   }
 };
 
 import { TouchableHighlight } from 'react-native';
 import { View } from 'react-native';
+import { Text } from 'react-native';
+
+import ThemeConsumer from 'theme/ThemeConsumer';
+import { TouchableOpacity } from 'react-native';
 
 function Item(props) {
   const { color } = props;
@@ -120,6 +127,44 @@ class ColorPicker extends React.Component {
         keyExtractor={(item, index) => item}
         renderItem={({ index, item }) => (
           <Item color={item} onChange={this.props.onChange} />
+        )}
+        ListHeaderComponent={() => (
+          <React.Fragment>
+            <ThemeConsumer>
+              {({ setTheme }) => (
+                <TouchableHighlight
+                  onPress={() => setTheme('blue')}
+                  style={[styles.card, { backgroundColor: '#088BE2' }]}>
+                  <Text style={{ color: '#fff' }}>{'Blue'}</Text>
+                </TouchableHighlight>
+              )}
+            </ThemeConsumer>
+            <ThemeConsumer>
+              {({ setTheme }) => (
+                <TouchableHighlight
+                  onPress={() => setTheme('red')}
+                  style={[styles.card, { backgroundColor: '#CA2C2D' }]}>
+                  <Text style={{ color: '#fff' }}>{'Red'}</Text>
+                </TouchableHighlight>
+              )}
+            </ThemeConsumer>
+            <ThemeConsumer>
+              {({ setTheme }) => (
+                <TouchableHighlight
+                  onPress={() => setTheme('dark')}
+                  style={[styles.card, { backgroundColor: '#000' }]}>
+                  <Text style={{ color: '#fff' }}>{'Dark'}</Text>
+                </TouchableHighlight>
+              )}
+            </ThemeConsumer>
+          </React.Fragment>
+        )}
+        ListFooterComponent={() => (
+          <TouchableHighlight
+            {...this.props}
+            style={[styles.card, { backgroundColor: '#000' }]}>
+            <Text style={{ color: '#fff' }}>{'Close'}</Text>
+          </TouchableHighlight>
         )}
       />
     );

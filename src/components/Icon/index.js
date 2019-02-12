@@ -3,9 +3,13 @@
  *
  * @flow
  */
-import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
-import DashPayFontIcons from 'assets/fonts/config.json';
 
-const Icon = createIconSetFromIcoMoon(DashPayFontIcons);
+// External dependencies
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+
+// Internal dependencies
+import DashPay from 'assets/fonts/DashPay.json';
+
+const Icon = createIconSetFromIcoMoon(DashPay);
 
 export default Icon;

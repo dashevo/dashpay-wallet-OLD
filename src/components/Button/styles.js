@@ -3,26 +3,33 @@
  *
  * @flow
  */
-import { StyleSheet } from 'react-native';
 
-import * as vars from '../variables';
-
-export default StyleSheet.create({
+const styles = (theme: Object): Object => ({
   ['container']: {
     alignItems: 'center',
     alignSelf: 'center',
-    backgroundColor: 'red',
-    borderColor: 'red',
-    borderRadius: 16,
+    backgroundColor: theme.btnContainerBackgroundColor,
+    borderColor: theme.btnContainerBackgroundColor,
+    borderRadius: 25,
     borderWidth: 0,
-    height: 32,
+    height: 50,
     justifyContent: 'center',
     position: 'relative',
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 32,
+    paddingRight: 32
   },
   ['text']: {
-    fontSize: 14,
-    color: "#fff"
+    color: theme.btnTextColor,
+    fontSize: 16
+  },
+  ['container__sm']: {
+    paddingLeft: 16,
+    paddingRight: 16,
+    height: 32
+  },
+  ['text__sm']: {
+    fontSize: 14
   }
 });
+
+export default styles;
