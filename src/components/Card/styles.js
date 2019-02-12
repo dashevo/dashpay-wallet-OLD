@@ -6,13 +6,13 @@
 
 const styles = (theme: Object): Object => ({
   ['tmp']: {
-    backgroundColor: 'black',
-    borderColor: 'black',
-    marginTop: 15
+    backgroundColor: theme.cardContainerBackgroundColor,
+    borderColor: theme.cardContainerBorderColor,
+    marginBottom: 15,
   },
   ['container']: {
-    backgroundColor: theme.backgroundColor,
-    borderColor: theme.borderColor,
+    backgroundColor: theme.cardContainerBackgroundColor,
+    borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
     borderRadius: 4,
     borderWidth: 1,
@@ -21,64 +21,63 @@ const styles = (theme: Object): Object => ({
     position: 'relative',
   },
   ['header']: {
-    backgroundColor: theme.backgroundColor,
-    borderColor: theme.borderColor,
+    backgroundColor: theme.cardContainerBackgroundColor,
+    borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
     borderWidth: 0,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,
-    paddingBottom: 12,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 12
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16,
   },
   ['body']: {
-    backgroundColor: theme.backgroundColor,
-    borderColor: theme.borderColor,
+    backgroundColor: theme.cardContainerBackgroundColor,
+    borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
     borderWidth: 0,
-    padding: 20
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   ['footer']: {
-    backgroundColor: theme.backgroundColor,
-    borderColor: theme.borderColor,
+    backgroundColor: theme.cardContainerBackgroundColor,
+    borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
     borderWidth: 0,
     borderBottomLeftRadius: 3,
     borderBottomRightRadius: 3,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    paddingBottom: 12,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 12
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 16,
   },
   ['row']: {
     alignItems: 'center',
     flexDirection: 'row',
     flexGrow: 1,
     flexShrink: 0,
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
-  ['col']: {
-    alignSelf: 'stretch',
-    alignItems: 'flex-start',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    minWidth: 20
+  ['metadata']: {
+    paddingLeft: 15,
+    flex: 1,
   },
   ['highlighted']: {
-    backgroundColor: 'blue',
-    borderColor: 'blue',
+    backgroundColor: theme.cardHighlightedBackgroundColor,
+    borderColor: theme.cardHighlightedBorderColor,
     borderStyle: 'solid',
     borderWidth: 1,
     borderRadius: 3,
-    padding: 12
+    padding: 12,
+    flex: 1,
   },
   ['title']: {
-    color: theme.color,
+    color: theme.cardTitleColor,
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 18,
@@ -86,7 +85,7 @@ const styles = (theme: Object): Object => ({
     marginTop: 0
   },
   ['subtitle']: {
-    color: theme.color,
+    color: theme.cardSubtitleColor,
     fontSize: 12,
     fontWeight: '500',
     lineHeight: 16,
@@ -94,17 +93,17 @@ const styles = (theme: Object): Object => ({
     marginTop: 0
   },
   ['text']: {
-    color: theme.color,
+    color: theme.cardTextColor,
     fontSize: 18,
     textAlign: 'left'
   },
   ['small']: {
-    color: theme.color,
+    color: theme.cardSmallColor,
     fontSize: 10,
     fontWeight: '400'
   },
   ['icon']: {
-    color: theme.color,
+    color: theme.cardIconColor,
     fontSize: 18,
     textAlign: 'center',
     width: 24

@@ -21,29 +21,28 @@ import styles from './styles';
 type Props = {};
 
 function Card(tmpProps) {
+  let { children, ...rest } = tmpProps;
   return (
     <Composer
       components={[
         (props: Props): React.Element<any> => (
-          <Touch {...props} onPress={tmpProps.onPress} />
+          <Touch {...props} {...rest} onPress={tmpProps.onPress} />
         ),
         (props: Props): React.Element<any> => (
-          <Styles {...props} styles={styles} />
+          <Styles {...props} {...rest} styles={styles} />
         )
       ]}>
       {([{ bind, touched }, { styles }]) => {
         if (isFunction(tmpProps.children)) {
-          let children;
-
           if (tmpProps.image) {
             children = (
               <Image source={{ uri: tmpProps.image }} style={styles.image} />
             );
           } else if (tmpProps.name) {
             const firstChar = tmpProps.name.charAt(0);
-            children = <Text style={styles.text}>{firstChar}</Text>;
+            children = <Text style={styles.dash}>{firstChar}</Text>;
           } else {
-            children = <Icon style={styles.text} name={'dash'} />;
+            children = <Icon style={styles.dash} name={'dash'} />;
           }
 
           return tmpProps.children({ bind, touched, styles, children });

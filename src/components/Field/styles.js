@@ -3,17 +3,12 @@
  *
  * @flow
  */
-import { StyleSheet } from 'react-native';
-import * as variables from '../variables';
 
-export default StyleSheet.create({
+const styles = (theme: Object): Object => ({
   ['container']: {
     alignSelf: 'stretch',
     flexDirection: 'column',
-    marginBottom: 15,
-
-
-
+    marginBottom: 15
   },
   ['row']: {
     alignItems: 'center',
@@ -69,3 +64,5 @@ export default StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+export default styles;

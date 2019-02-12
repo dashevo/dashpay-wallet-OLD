@@ -14,7 +14,7 @@ function App(props) {
   return (
     <StoreProvider store={state}>
       <LanguageProvider translations={translations}>
-        <ThemeProvider theme={'light'}>
+        <ThemeProvider theme={'blue'}>
           <Navigator {...props} />
         </ThemeProvider>
       </LanguageProvider>
