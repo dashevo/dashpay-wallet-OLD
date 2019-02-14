@@ -10,12 +10,14 @@ export default [
   {
     address: "XQ8K2zYnqprfCwc5NhEJVtWAjxHPgT3uFD",
     image: "https://www.dash.org/assets/img/team/alex_werner.png",
-    name: "Alex Werner"
+    name: "Alex Werner",
+    state: "PENDING CONTACT"
   },
   {
     address: "XBpsnTQ27DfMxukGqRLh8rbXNJ6vCaEmAe",
     image: "https://www.dash.org/assets/img/team/codablocker.jpeg",
-    name: "Alexander Block"
+    name: "Alexander Block",
+    state: "IGNORED"
   },
   {
     address: "XrsCJxFu9Vd2bSZPEUg65QpLfjNK8aXBA7",
