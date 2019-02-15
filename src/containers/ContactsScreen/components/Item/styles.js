@@ -34,5 +34,11 @@ export default StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     textAlign: "left"
-  }
+  },
+  state: {
+    color: '#BABABA',
+    fontSize: 12,
+    fontWeight: 'bold',
+    paddingLeft: 15,
+  },
 });

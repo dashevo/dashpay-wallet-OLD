@@ -31,13 +31,15 @@ class Item extends React.Component<Props> {
   }
 
   render(): React.Element<any> {
-    const { name } = this.props;
-    const { image } = this.props;
+    const { name, state, image } = this.props;
     return (
       <TouchableOpacity onPress={this.handlePress}>
         <View style={styles.row}>
           <Image style={styles.image} source={{ uri: image }} />
-          <Text style={styles.text}>{name}</Text>
+          <View>
+            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.state}>{(state || '').toUpperCase()}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );
