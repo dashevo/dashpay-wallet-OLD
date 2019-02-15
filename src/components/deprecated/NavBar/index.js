@@ -102,7 +102,7 @@ class NavBar extends React.Component<Props> {
       amount: { part1, part2 }
     } = this.props.items[this.state.index];
 
-    const dashIcon = <Icon style={styles.icon} name={'DASH'} />;
+    const dashIcon = <Icon style={styles.icon} name={'dash'} />;
     const alternativeCurrencyIcon = (
       <Text style={styles.icon}>{alternativeCurrency.symbol}</Text>
     );

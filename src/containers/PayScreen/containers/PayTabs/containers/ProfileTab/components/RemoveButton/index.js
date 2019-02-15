@@ -14,6 +14,7 @@ import Field from 'components/Field';
 import View from 'components/View';
 import Text from 'components/Text';
 
+// Tmp
 function RemoveButton(props) {
   return (
     <Button {...props} sm>

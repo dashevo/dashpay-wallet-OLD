@@ -1,5 +1,8 @@
-/* @flow */
-
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {

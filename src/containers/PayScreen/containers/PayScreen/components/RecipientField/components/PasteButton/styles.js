@@ -14,14 +14,14 @@ const styles = (theme: Object): Object => ({
     borderWidth: 0,
     height: 42,
     justifyContent: 'center',
-    position: 'relative',
     paddingLeft: 15,
     paddingRight: 15,
+    position: 'relative'
   },
   ['text']: {
     color: theme.btnTextColor,
     fontSize: 16
-  },
+  }
 });
 
 export default styles;

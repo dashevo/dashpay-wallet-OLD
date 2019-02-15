@@ -7,8 +7,8 @@
 const styles = (theme: Object): Object => ({
   ['container']: {
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#ced4da',
+    backgroundColor: theme.fieldInputBackgroundColor,
+    borderColor: theme.fieldInputBorderColor,
     borderRadius: 25,
     borderWidth: 1,
     flexDirection: 'row',
@@ -31,14 +31,14 @@ const styles = (theme: Object): Object => ({
     paddingRight: 4,
     position: 'absolute',
     right: 0,
-    top: 0,
+    top: 0
   },
   ['input']: {
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     borderRadius: 24,
     borderWidth: 0,
-    color: '#999',
+    color: theme.fieldInputColor,
     flex: 1,
     fontSize: 16,
     fontWeight: '400',

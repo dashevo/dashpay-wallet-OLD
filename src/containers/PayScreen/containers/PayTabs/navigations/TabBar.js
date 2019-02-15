@@ -1,5 +1,8 @@
-/* @flow */
-
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -13,8 +16,11 @@ import {
   Text
 } from 'react-native';
 import TouchableItem from './TouchableItem';
-import { SceneRendererPropType } from './PropTypes';
-import type { Scene, SceneRendererProps } from './TypeDefinitions';
+
+const SceneRendererPropType = {};
+type SceneRendererProps = {};
+type Scene = {};
+
 import type {
   ViewStyleProp,
   TextStyleProp
@@ -56,10 +62,10 @@ import { compose } from 'utilities';
 import Styles from 'components/Styles';
 
 const tmpStyles = theme => ({
-  ["container"]: {
+  ['container']: {
     backgroundColor: theme.navbarContainerBackgroundColor,
     borderColor: theme.navbarContainerBorderColor
-  },
+  }
 });
 
 const Composed = compose([
@@ -382,7 +388,8 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
       <Composed>
         {({ styles: superStyles }) => (
           <SlideInDown fromValue={-40}>
-            <Animated.View style={[styles.tabBar, this.props.style, superStyles.container]}>
+            <Animated.View
+              style={[styles.tabBar, this.props.style, superStyles.container]}>
               <Animated.View
                 pointerEvents="none"
                 style={[

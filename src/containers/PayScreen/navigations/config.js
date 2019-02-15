@@ -3,12 +3,14 @@
  *
  * @flow
  */
+import * as React from 'react';
 import { Animated } from 'react-native';
 import { Easing } from 'react-native';
 import { Platform } from 'react-native';
 import { StackViewTransitionConfigs } from 'react-navigation';
 import { NavigationTransitionProps } from 'react-navigation';
 import { TransitionConfig } from 'react-navigation';
+import NavBar from 'components/NavBar';
 
 function getSceneIndicesForInterpolationInputRange(props) {
   const { scene, scenes } = props;
@@ -122,9 +124,6 @@ function transitionConfig(
   return SlideFromBottom;
 }
 
-import * as React from 'react';
-import Navbar from 'components/Navbar';
-
 const config = {
   transitionConfig,
   mode: 'card',
@@ -135,7 +134,7 @@ const config = {
     backgroundColor: '#fff'
   },
   defaultNavigationOptions: {
-    header: props => <Navbar {...props} />
+    header: props => <NavBar {...props} />
   }
 };
 
