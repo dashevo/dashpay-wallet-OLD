@@ -12,6 +12,7 @@ import View from 'components/View';
 import Text from 'components/Text';
 import styles from './styles';
 
+// TMP
 function Metadata(props) {
   return (
     <View style={styles.row}>

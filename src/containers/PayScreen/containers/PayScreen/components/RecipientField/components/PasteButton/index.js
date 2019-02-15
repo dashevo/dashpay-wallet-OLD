@@ -17,6 +17,8 @@ import { View } from 'components';
 import { Text } from 'components';
 import styles from './styles';
 
+type Props = {};
+
 function PasteButton(props: Props): React.Element<any> {
   const children = props.confirm ? 'Pasted!' : 'Paste';
   const toValue = props.show ? 0 : 100;

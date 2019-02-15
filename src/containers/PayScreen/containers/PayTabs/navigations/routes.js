@@ -13,15 +13,27 @@ import ProfileTab from '../containers/ProfileTab';
 const routes = {
   PayTab: {
     screen: PayTab,
+    navigationOptions: {
+      tabBarLabel: 'Pay'
+    }
   },
   ReceiveTab: {
-    screen: ReceiveTab
+    screen: ReceiveTab,
+    navigationOptions: {
+      tabBarLabel: 'Receive'
+    }
   },
   ActivityTab: {
-    screen: ActivityTab
+    screen: ActivityTab,
+    navigationOptions: {
+      tabBarLabel: 'Activity'
+    }
   },
   ProfileTab: {
-    screen: ProfileTab
+    screen: ProfileTab,
+    navigationOptions: {
+      tabBarLabel: 'Profile'
+    }
   }
 };
 

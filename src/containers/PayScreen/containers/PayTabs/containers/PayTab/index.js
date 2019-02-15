@@ -41,11 +41,11 @@ class PayTab extends React.Component<Props, State> {
   }
 
   convertToDashAmount = dashAmount => {
-    return dashAmount / 79.29;
+    return dashAmount / 79.29; // Tmp
   };
 
   convertToFiatAmount = dashAmount => {
-    return dashAmount * 79.29;
+    return dashAmount * 79.29; // Tmp
   };
 
   _onSubmit = (values, form) => {

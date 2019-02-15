@@ -19,7 +19,7 @@ function Transactions(props) {
     <FlatList
       data={props.transactions}
       style={{ flex: 1 }}
-      keyExtractor={(item, index) => `pay-${index}`}
+      keyExtractor={(item, index) => `activity-${index}`}
       renderItem={props => <TransactionCard {...props} />}
       contentContainerStyle={styles.contentContainerStyle}
       ListEmptyComponent={() => (

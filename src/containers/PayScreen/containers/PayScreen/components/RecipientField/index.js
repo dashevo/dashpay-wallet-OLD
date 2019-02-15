@@ -9,10 +9,10 @@ import * as React from 'react';
 
 // Internal dependencies
 import Field from 'components/Field';
-import { View } from 'components';
-import { Text } from 'components';
-import { Input } from 'components';
-import { PasteButton } from './components';
+import View from 'components/View';
+import Text from 'components/Text';
+import Input from 'components/Input';
+import PasteButton from './components/PasteButton';
 import defaultProps from './defaults';
 import styles from './styles';
 import type { Props } from './types';
@@ -21,7 +21,7 @@ let dismissPasteConfirmation = null;
 
 function RecipientField(props: Props): React.Element<any> {
   return (
-    <Field {...props} name={'recipient'} styles={styles}>
+    <Field {...props} styles={styles}>
       {({ input, form, styles }) => {
         const { name, value } = input;
         const { showPasteConfirmation } = form.state;

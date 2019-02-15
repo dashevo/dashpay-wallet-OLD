@@ -17,7 +17,7 @@ function mapStateToProps(state, props) {
       fiatAmount: transaction.fiatAmount,
       timestamp: transaction.timestamp,
       receiver: state.contacts.local.items[transaction.recipient],
-      sender: state.contacts.local.items['XXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx']
+      sender: state.contacts.local.items['XXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx'] // Tmp
     };
   });
 
