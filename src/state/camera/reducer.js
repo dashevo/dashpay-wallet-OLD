@@ -3,41 +3,51 @@
  *
  * @flow
  */
-import { RNCamera } from "react-native-camera";
-import { CAMERA_TOGGLE_TYPE } from "./constants";
-import { CAMERA_TOGGLE_FLASH_MODE } from "./constants";
-import { CAMERA_TOGGLE_WHITE_BALANCE } from "./constants";
 
+import { CAMERA_TOGGLE_TYPE } from './constants';
+import { CAMERA_TOGGLE_FLASH_MODE } from './constants';
+import { CAMERA_TOGGLE_WHITE_BALANCE } from './constants';
 
 const typeOptions = [
-  RNCamera.Constants.Type.front,
-  RNCamera.Constants.Type.back
+  // RNCamera.Constants.Type.front,
+  // RNCamera.Constants.Type.back,
+  1,
+  0
 ];
 
-const typeIcons = ["camera-front", "camera-back"];
+const typeIcons = ['camera-front', 'camera-back'];
 
 const flashModeOptions = [
-  RNCamera.Constants.FlashMode.auto,
-  RNCamera.Constants.FlashMode.on,
-  RNCamera.Constants.FlashMode.off,
+  // RNCamera.Constants.FlashMode.auto,
+  // RNCamera.Constants.FlashMode.on,
+  // RNCamera.Constants.FlashMode.off,
+  3,
+  1,
+  0
 ];
 
 const flashModeIcons = [
-  "camera-flash-auto",
-  "camera-flash-on",
-  "camera-flash-off",
+  'camera-flash-auto',
+  'camera-flash-on',
+  'camera-flash-off'
 ];
 
 const whiteBalanceOptions = [
-  RNCamera.Constants.WhiteBalance.auto,
-  RNCamera.Constants.WhiteBalance.sunny,
-  RNCamera.Constants.WhiteBalance.cloudy,
-  RNCamera.Constants.WhiteBalance.shadow,
-  RNCamera.Constants.WhiteBalance.incandescent,
-  RNCamera.Constants.WhiteBalance.fluorescent
+  // RNCamera.Constants.WhiteBalance.auto,
+  // RNCamera.Constants.WhiteBalance.sunny,
+  // RNCamera.Constants.WhiteBalance.cloudy,
+  // RNCamera.Constants.WhiteBalance.shadow,
+  // RNCamera.Constants.WhiteBalance.incandescent,
+  // RNCamera.Constants.WhiteBalance.fluorescen,
+  0,
+  2,
+  1,
+  3,
+  5,
+  undefined
 ];
 
-const whiteBalanceIcons = ["1", "2", "3", "4", "5", "6"];
+const whiteBalanceIcons = ['1', '2', '3', '4', '5', '6'];
 
 function getNextOptionIndex(options, currOption) {
   return (
@@ -46,12 +56,12 @@ function getNextOptionIndex(options, currOption) {
 }
 
 const initialState = {
-  type: RNCamera.Constants.Type.front,
-  typeIcon: "camera-front",
-  flashMode: RNCamera.Constants.FlashMode.auto,
-  flashModeIcon: "camera-flash-auto",
-  whiteBalance: RNCamera.Constants.WhiteBalance.auto,
-  whiteBalanceIcon: "1"
+  type: 1,
+  typeIcon: 'camera-front',
+  flashMode: 3,
+  flashModeIcon: 'camera-flash-auto',
+  whiteBalance: 0,
+  whiteBalanceIcon: '1'
 };
 
 const camera = (state = initialState, action) => {

@@ -4,7 +4,7 @@
  * @wolf
  */
 
- import { MAKE_PAYMENT } from 'state/payment/constants';
+import { MAKE_PAYMENT } from 'state/payment/constants';
 import { makePayment } from 'state';
 
 describe('payment actions', () => {
@@ -14,7 +14,7 @@ describe('payment actions', () => {
     const expectedAction = {
       recipient,
       amount,
-      type: MAKE_PAYMENT,
+      type: MAKE_PAYMENT
     };
     expect(makePayment(recipient, amount)).toEqual(expectedAction);
   });

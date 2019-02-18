@@ -1,6 +1,5 @@
 import { CHANGE_ALTERNATIVE_CURRENCY } from 'state/alternativeCurrency/constants';
 import { changeAlternativeCurrency } from 'state';
-import mockDate from 'mockdate';
 
 describe('alternativeCurrency actions', () => {
   it('should create an action to set the new alternative currency', () => {
