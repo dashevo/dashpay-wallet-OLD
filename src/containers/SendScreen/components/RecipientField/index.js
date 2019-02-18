@@ -21,8 +21,8 @@ let dismissPasteConfirmation = null;
 function RecipientField(props: Props): React.Element<any> {
   return (
     <Field {...props}>
-      {({ field, form }) => {
-        const { name, value } = field;
+      {({ input, form }) => {
+        const { name, value } = input;
         const { showPasteConfirmation } = form.state;
 
         const confirm = showPasteConfirmation && value;
@@ -53,7 +53,7 @@ function RecipientField(props: Props): React.Element<any> {
         return (
           <View style={styles.row}>
             <View style={styles.body}>
-              <Input style={styles.input} {...field} />
+              <Input style={styles.input} {...input} />
             </View>
             <View style={styles.right}>
               <PasteButton
