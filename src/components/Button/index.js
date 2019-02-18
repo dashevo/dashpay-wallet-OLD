@@ -9,7 +9,7 @@ import { isFunction } from 'utilities';
 import Styles from '../Styles';
 import Touch from '../Touch';
 import Touchable from '../Touchable';
-import Box from '../Box';
+import View from '../View';
 import defaultProps from './defaults';
 import styles from './styles';
 import type { Props } from './types';

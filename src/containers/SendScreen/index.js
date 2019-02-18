@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 
 // External dependencies
@@ -89,7 +89,6 @@ class SendScreen extends React.Component<Props> {
       onConfirmation: () => {
         this.props
           .createTransaction(transactionData)
-          .then(console.log, console.log);
         this.props.navigation.goBack(); //TODO go to payment history
       }
     });

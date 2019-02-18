@@ -16,10 +16,19 @@ import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
 import { PaymentConfirmationScreen } from 'containers';
+import PayScreen from 'containers/PayScreen';
+import CameraRollScreen from 'containers/CameraRollScreen';
+import CameraScreen from 'containers/CameraScreen';
 
 const routes = {
   SplashScreen: {
     screen: SplashScreen
+  },
+  CameraRollScreen: {
+    screen: CameraRollScreen
+  },
+  CameraScreen: {
+    screen: CameraScreen
   },
   ContactsScreen: {
     screen: ContactsScreen
@@ -34,7 +43,7 @@ const routes = {
     screen: HomeScreen
   },
   SendScreen: {
-    screen: SendScreen
+    screen: PayScreen
   },
   PaymentConfirmationScreen: {
     screen: PaymentConfirmationScreen

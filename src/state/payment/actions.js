@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { MAKE_PAYMENT } from './constants';
 import { PAYMENT_COMPLETED } from './constants';

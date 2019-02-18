@@ -1,9 +1,11 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { combineReducers } from 'redux';
+import camera from './camera';
+import cameraRoll from './cameraRoll';
 import account from './account';
 import settings from './settings';
 import payment from './payment';
@@ -14,6 +16,8 @@ import transactions from './transactions';
 import contacts from './contacts/reducer';
 
 export default combineReducers({
+  camera,
+  cameraRoll,
   account,
   transactions,
   settings,
@@ -21,5 +25,5 @@ export default combineReducers({
   alternativeCurrency,
   language,
   user,
-  contacts,
+  contacts
 });
