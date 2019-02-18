@@ -20,7 +20,7 @@ function MoreButton(props) {
   // TODO: Action Component = Button with state from Form
   return (
     <Field {...props}>
-      {({ field, form }) => {
+      {({ input, form }) => {
         const { isSearching } = form;
         const { visible } = form;
 

@@ -5,12 +5,12 @@
  */
 
 // External dependencies
-import * as React from "react";
-import { debounce } from "lodash";
-import { isEqual } from "lodash";
+import * as React from 'react';
+import { debounce } from 'lodash';
+import { isEqual } from 'lodash';
 
 // Internal dependencies
-import connect from "./connect";
+import connect from './connect';
 
 class AutoSubmit extends React.Component<any> {
   static defaultProps = {

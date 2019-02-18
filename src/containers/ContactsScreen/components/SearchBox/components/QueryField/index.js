@@ -17,7 +17,7 @@ import styles from './styles';
 function QueryField(props: Props): React.Element<any> {
   return (
     <Field {...props}>
-      {({ field }) => <Input {...field} style={styles.input} />}
+      {({ input }) => <Input {...input} style={styles.input} />}
     </Field>
   );
 }
