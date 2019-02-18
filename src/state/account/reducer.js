@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import {RECEIVE_BALANCE, GET_UNUSED_ADDRESS_SUCCESS, CHANGE_NETWORK_SUCCESS} from './constants';
 export const initialState = {

@@ -41,7 +41,13 @@ export const createTransaction = opts => {
               ? opts.satoshis
               : dashToDuffs(parseFloat(opts.amount));
           if (!satoshis) throw new Error('Missing satoshis or amount to pay');
-          return walletLib.account.createTransaction({ recipient, satoshis });
+
+          const tx = walletLib.account.createTransaction({
+            recipient,
+            satoshis
+          });
+
+          return walletLib.account.broadcastTransaction(tx);
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
           throw new Error(message);
@@ -55,7 +61,7 @@ export const createTransaction = opts => {
  * @param rawtx - string - The hex raw representation of a transaction
  * @return Promise<string> - txid
  */
-export const broadcastTransaction = rawtx => {
+export const broadcastTransaction = tx => {
   return (dispatch, getState, walletLib) =>
     dispatch({
       types: [
@@ -65,9 +71,7 @@ export const broadcastTransaction = rawtx => {
       ],
       async asyncTask(state) {
         try {
-          if (rawtx) {
-            return walletLib.account.broadcastTransaction(rawtx);
-          }
+          return walletLib.account.broadcast(tx);
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
           throw new Error(message);
@@ -91,6 +95,29 @@ export const getTransactionHistory = () => {
       async asyncTask(state) {
         try {
           return walletLib.account.getTransactionHistory();
+        } catch (err) {
+          const { message = 'Something went wrong.' } = err;
+          throw new Error(message);
+        }
+      }
+    });
+};
+
+/**
+ * Get the transaction history of the active account
+ * @return Promise<Object>
+ */
+export const createPaymentTransaction = data => {
+  return (dispatch, getState, walletLib) =>
+    dispatch({
+      types: [
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_REQUEST,
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_SUCCESS,
+        ActionsTypes.CREATE_PAYMENT_TRANSACTION_FAILURE
+      ],
+      async asyncTask(state) {
+        try {
+          return data;
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
           throw new Error(message);

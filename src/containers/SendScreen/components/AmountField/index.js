@@ -19,11 +19,11 @@ import type { Props } from './types';
 function AmountField(props: Props): React.Element<any> {
   return (
     <Field {...props}>
-      {({ field, form }) => {
+      {({ input, form }) => {
         const { currencies, values, convertAmount } = form;
         const { amount, currency: currCurrency } = values;
 
-        const isFocused = form.focused[field.name];
+        const isFocused = form.focused[input.name];
         const toValue = isFocused ? 1 : 0.25;
 
         function handleToggle(nextCurrency) {
@@ -41,7 +41,7 @@ function AmountField(props: Props): React.Element<any> {
               <CurrencyInput
                 currency={currCurrency}
                 style={styles.input}
-                {...field}
+                {...input}
               />
             </View>
             <View style={styles.row}>

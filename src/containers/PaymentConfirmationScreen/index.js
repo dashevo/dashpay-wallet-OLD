@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 
 import * as React from 'react';
@@ -153,9 +153,9 @@ class PaymentConfirmationScreen extends React.Component<Props, State> {
             </View>
             <View style={styles.inset}>
               <Text style={styles.insetHeader}>Sending</Text>
-              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'DASH'} />{amountDash}</Text>
+              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'dash'} />{amountDash}</Text>
               <Text style={styles.insetHeader}>Network Fee</Text>
-              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'DASH'} />{feeDash}</Text>
+              <Text style={styles.insetValue}><Icon style={styles.insetValue} name={'dash'} />{feeDash}</Text>
             </View>
             <Text style={styles.totalText}>Total</Text>
             <Text style={styles.totalFiat}><Icon style={styles.totalFiat} name={fiatSymbol} />{totalFiat}</Text>

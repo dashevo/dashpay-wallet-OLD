@@ -83,13 +83,16 @@ class FastFieldInner extends React.Component {
     const { name, children, form, ...props } = this.props;
 
     const value = form.values[name];
+    const touched = form.touched[name];
+    const error = form.errors[name];
+    const label = touched && error ? props.label : error;
 
-    const field = {
+    const input = {
       autoCapitalize: props.autoCapitalize,
       autoCorrect: props.autoCorrect,
       blurOnSubmit: props.blurOnSubmit,
       clearButtonMode: props.clearButtonMode,
-      editable: props.editable,
+      editable: !props.disabled,
       getRef: this.getRef,
       maxLength: props.maxLength,
       name: props.name,
@@ -107,7 +110,12 @@ class FastFieldInner extends React.Component {
       name
     };
 
-    const childrenProps = { field, form };
+    const touchable = {
+      disabled: props.disabled,
+      onPress: this.focus
+    };
+
+    const childrenProps = { touchable, input, form, styles: {} };
 
     return isFunction(children) ? children(childrenProps) : children;
   }

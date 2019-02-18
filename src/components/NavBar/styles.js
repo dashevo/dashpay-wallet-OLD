@@ -1,56 +1,74 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
-import { StyleSheet } from 'react-native';
-import { COLORS } from 'constants';
 
-export default StyleSheet.create({
-  navbar: {
-    backgroundColor: COLORS.bluedark,
-    flexDirection: 'row',
-    width: '100%'
-  },
-  row: {
-    backgroundColor: 'transparent',
+const styles = (theme: Object): Object => ({
+  ['container']: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: 48,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 10,
-    height: 64
+    backgroundColor: theme.navbarContainerBackgroundColor,
+    borderColor: theme.navbarContainerBorderColor,
+    borderWidth: theme.navbarContainerBorderWidth,
+    height: theme.navbarContainerHeight,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: 0
   },
-  icon: {
-    color: COLORS.white,
-    fontSize: 22,
-    width: 30,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-  inline: {
+  ['body']: {
+    alignItems: 'center',
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
+    justifyContent: 'flex-start'
   },
-  part1: {
-    color: COLORS.white,
-    fontSize: 18,
-    marginRight: 4,
-    opacity: 1
-  },
-  part2: {
-    color: COLORS.white,
-    fontSize: 16,
-    marginRight: 12,
-    opacity: 0.75
-  },
-  settingsIcon: {
-    marginLeft: 'auto',
+  ['right']: {
+    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-start'
+  },
+  ['wrapper']: {
+    backgroundColor: theme.navbarContainerBackgroundColor,
+    borderColor: theme.navbarContainerBackgroundColor,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderRadius: 14,
+    elevation: 2
+  },
+  ['title']: {
+    color: theme.navbarTitleColor,
+    fontSize: theme.navbarTitleFontSize,
+    fontWeight: theme.navbarTitleFontWeight,
+    lineHeight: theme.navbarTitleLineHeight
+  },
+  ['button']: {
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    height: theme.navbarContainerHeight,
+    paddingBottom: 0,
+    paddingLeft: 16,
+    paddingRight: 16,
+    paddingTop: 0,
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
+  ['text']: {
+    color: theme.navbarTextColor,
+    fontSize: theme.navbarTextFontSize,
+    fontWeight: theme.navbarTextFontWeight,
+    lineHeight: theme.navbarTextLineHeight
+  },
+  ['icon']: {
+    color: theme.navbarIconColor,
+    fontSize: theme.navbarIconFontSize,
+    fontWeight: theme.navbarIconFontWeight,
+    lineHeight: theme.navbarIconLineHeight
   }
 });
+
+export default styles;

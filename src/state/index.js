@@ -1,9 +1,10 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  *
- * @wolf
+ * @flow
  */
 import { createStore, compose } from 'redux';
+import { createLogger } from 'redux-logger';
 import reducer from './reducer';
 
 export * from './contacts';
@@ -27,7 +28,7 @@ import InMem from '@dashevo/wallet-lib/src/adapters/InMem';
 // // Tmp
 const DAPIClient = require('@dashevo/dapi-client');
 const transport = new DAPIClient({
-  seeds: [{ ip: '52.39.47.232', port: 3000 }]
+  seeds: [{ ip: '54.187.113.35', port: 3000 }]
 });
 
 const walletLib = {
@@ -46,7 +47,7 @@ const walletLib = {
           allowSensitiveOperations: true,
           transport
         });
-        walletLib.account = walletLib.wallet.getAccount(accountId);
+        walletLib.account = walletLib.wallet.getAccount({ index: accountId });
         let listener = walletLib.account.events.on('ready', () => {
           resolve(true);
         });
@@ -57,6 +58,13 @@ const walletLib = {
   }
 };
 
+// the following code should be splitted into two files:
+// configureStore.prod.js should be without createLogger.
 const extraArgument = thunk.withExtraArgument(walletLib);
-const store = createStore(reducer, applyMiddleware(middleware, extraArgument));
+const enhancedMiddleware = applyMiddleware(
+  middleware,
+  extraArgument,
+  createLogger()
+);
+const store = createStore(reducer, enhancedMiddleware);
 export default store;

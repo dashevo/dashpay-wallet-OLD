@@ -5,6 +5,7 @@
  */
 import { GET_TRANSACTIONS_SUCCESS } from './constants';
 import { TRANSACTION_RECIPIENT_SCANNED } from './constants';
+import { CREATE_PAYMENT_TRANSACTION_SUCCESS } from './constants';
 
 export const initialState = {
   history: [],
@@ -36,6 +37,23 @@ const transactions = (state = initialState, action) => {
       return {
         ...state,
         history: action.response
+      };
+
+    case CREATE_PAYMENT_TRANSACTION_SUCCESS:
+      const timestamp = new Date().getTime();
+      return {
+        ...state,
+        history: {
+          ...state.history,
+          [action.response.recipient]: (
+            state.history[action.response.recipient] || []
+          ).concat({
+            recipient: action.response.recipient,
+            dashAmount: action.response.dashAmount,
+            fiatAmount: action.response.fiatAmount,
+            timestamp
+          })
+        }
       };
 
     default:
