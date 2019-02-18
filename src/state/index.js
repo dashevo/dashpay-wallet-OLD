@@ -58,7 +58,6 @@ const walletLib = {
   }
 };
 
-const extraArgument = thunk.withExtraArgument(walletLib);
 // the following code should be splitted into two files:
 // configureStore.prod.js should be without createLogger.
 const extraArgument = thunk.withExtraArgument(walletLib);
