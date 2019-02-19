@@ -15,6 +15,9 @@ import { SEARCH_BLOCKCHAIN_CONTACTS_REQUEST } from 'state/action-types';
 import { SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS } from 'state/action-types';
 import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
 
+import { SEND_CONTACT_REQUEST_SUCCESS } from './constants';
+import { SEND_CONTACT_REQUEST_FAILURE } from './constants';
+
 const tmpRequests = [
   {
     recipient: 'XPefq9AuH3XR8jCp6nT7WtayMrN2J5vkKz',
@@ -85,6 +88,13 @@ export function requests(state = tmpRequests, action) {
 
     default:
       return state;
+  }
+}
+
+export function contacts(state = {}, action) {
+  switch (action.type) {
+    case SEND_CONTACT_REQUEST_SUCCESS:
+      alert
   }
 }
 

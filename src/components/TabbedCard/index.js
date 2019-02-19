@@ -108,7 +108,7 @@ class TabbedCard extends React.Component<Props> {
   }
 
   // onSettingsPressed() {
-  //   return this.props.navigation.push('SettingsScreen');
+  //   return this.props.navigation.navigate('SettingsScreen');
   // }
 }
 

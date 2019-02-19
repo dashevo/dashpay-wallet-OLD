@@ -38,9 +38,6 @@ const routes = {
   ContactScreen: {
     screen: ContactScreen
   },
-  HomeScreen: {
-    screen: HomeScreen
-  },
   SendScreen: {
     screen: PayScreen
   },

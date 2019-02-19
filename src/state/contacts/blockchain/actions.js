@@ -36,8 +36,8 @@ export function sendContactRequest(address) {
       ],
       async asyncTask(state) {
         try {
-          const dashPayDap = walletLib.account.getPlugin('DashPayDAP');
-          return dashPayDap.createContactRequest(address);
+          const dashPayDap = walletLib.account.getDAP('dashpaydap');
+          return dashPayDap.createContactRequest('dashtestuserone', address);
         } catch (error) {
           const { message = "Something went wrong." } = error;
           throw new Error(message);

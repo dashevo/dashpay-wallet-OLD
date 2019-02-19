@@ -75,7 +75,7 @@ class SendScreen extends React.Component<Props> {
     const feeFiat = this.convertAmountToFiat(feeAmount, values.currency);
     const totalFiat = this.convertAmountToFiat(amountDash + feeAmount, values.currency);
     const destinationAddress = ''
-    this.props.navigation.push('PaymentConfirmationScreen', {
+    this.props.navigation.navigate('PaymentConfirmationScreen', {
       fiatSymbol: this.state.conversions['USD'].code,
       amountDash: amountDash,
       amountFiat: amountFiat,
