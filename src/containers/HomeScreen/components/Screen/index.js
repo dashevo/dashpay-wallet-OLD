@@ -8,7 +8,6 @@ import { View } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import { NavBar } from 'components';
 import { SharedElement } from 'components';
 import { Reanimatable } from 'libraries';
 import { Logo } from 'components';
@@ -24,7 +23,6 @@ import { StackActions, NavigationActions } from 'react-navigation';
 const Screen = (props: Props): ReactElement => (
   <SafeAreaView style={styles.container}>
     <View style={styles.header}>
-      <NavBar navigation={props.navigation} isOpen={true} />
     </View>
     <View style={styles.body}>
       <View style={styles.section}>

@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import { convert } from 'libraries/currencies';
 import { View } from 'components';
-import { NavBar } from 'components';
 import { Form } from 'components';
 import { ScrollView } from 'components';
 import { Image } from 'components';
@@ -98,7 +97,6 @@ class SendScreen extends React.Component<Props> {
     const { initialValues } = this.props;
     return (
       <View style={styles.container}>
-        <NavBar />
         <Form {...this.state} initialValues={initialValues}>
           <ScrollView
             style={styles.scrollView}

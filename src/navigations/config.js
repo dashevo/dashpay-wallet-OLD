@@ -14,6 +14,7 @@ import { StackViewTransitionConfigs } from 'react-navigation';
 import { NavigationTransitionProps } from 'react-navigation';
 import { TransitionConfig } from 'react-navigation';
 import { PatchedHeader } from 'libraries';
+import { NavStatic } from 'components';
 
 function getSceneIndicesForInterpolationInputRange(props) {
   const { scene, scenes } = props;
@@ -127,6 +128,13 @@ function transitionConfig(
   return SlideFromBottom;
 }
 
+function defaultNavigationOptions() {
+  return {
+    header: (props) => createElement(NavStatic, props, null),
+    headerTransparent: true,
+  }
+}
+
 const config = {
   transitionConfig,
   headerMode: 'float',
@@ -134,11 +142,7 @@ const config = {
   cardStyle: {
     backgroundColor: '#011E60'
   },
-  defaultNavigationOptions: {
-    header: props => createElement(PatchedHeader, props, null),
-    headerTransparent: true,
-    headerTitle: null,
-  }
+  defaultNavigationOptions: defaultNavigationOptions,
 };
 
 export default config;

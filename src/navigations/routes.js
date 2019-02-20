@@ -22,7 +22,10 @@ import CameraScreen from 'containers/CameraScreen';
 
 const routes = {
   SplashScreen: {
-    screen: SplashScreen
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null
+    }
   },
   CameraRollScreen: {
     screen: CameraRollScreen

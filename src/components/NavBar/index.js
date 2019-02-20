@@ -8,9 +8,9 @@ import { TouchableOpacity } from 'react-native';
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
+import Styles from 'components/Styles';
 import styles from './styles';
 import { compose } from 'utilities';
-import Styles from '../Styles';
 
 const Composed = compose([
   (props: Props): React.Element<any> => <Styles {...props} styles={styles} />
@@ -34,15 +34,6 @@ function Navbar(props) {
                 {title}
               </Text>
             </View>
-          </View>
-          <View style={styles.right}>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
-              <Icon style={styles.icon} name={'bell'} />
-              <Text style={styles.text}>{'3'}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
-              <Icon style={styles.icon} name={'bars'} />
-            </TouchableOpacity>
           </View>
         </View>
       )}

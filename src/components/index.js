@@ -25,6 +25,7 @@ export { TouchableHighlight as Touchable } from 'react-native';
 export { TouchableOpacity } from 'react-native';
 export { TouchableWithoutFeedback } from 'react-native';
 export { View } from 'react-native';
+export { default as NavStatic } from './NavStatic';
 
 // Deprecated
 export * from './deprecated/Animation';
