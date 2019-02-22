@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@dashevo/dapi-client": "git+ssh://git@github.com/dashevo/dapi-client.git#57a011f5124fdb04b40da5314d2eb901fa8576e2",
-    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git",
-    "@dashevo/dashcore-lib": "^0.16.5",
+    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git#88957614dbab7740385189f02a66a0da929d8b0a",
+    "@dashevo/dashcore-lib": "^0.16.9",
     "assert": "^1.4.1",
     "base-x": "3.0.4",
     "crypto": "^1.0.1",

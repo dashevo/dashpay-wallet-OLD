@@ -19,6 +19,7 @@ function dashToDuffs(dash) {
  * @param opts
  * @param opts.satoshis
  * @param opts.recipient
+ * @param opts.instantTransaction - When set at true, will overide default and set instant fee
  * @return Promise<Dashcore.Transaction>
  */
 export const createTransaction = opts => {
@@ -34,18 +35,32 @@ export const createTransaction = opts => {
           if (!opts.recipient) {
             throw new Error('Missing recipient to pay');
           }
-
           const recipient = opts.recipient;
+          const instantTransaction =
+            opts.instantTransaction !== undefined
+              ? opts.instantTransaction
+              : false;
+
           const satoshis =
             opts.satoshis !== undefined
               ? opts.satoshis
               : dashToDuffs(parseFloat(opts.amount));
+
           if (!satoshis) throw new Error('Missing satoshis or amount to pay');
 
-          const tx = walletLib.account.createTransaction({
+          const txOpts = {
             recipient,
             satoshis
-          });
+          };
+
+          if(instantTransaction) txOpts.isInstantSend = true;
+
+          const tx = walletLib.account.createTransaction(txOpts);
+
+          // If we tried to use auto-instantlocking but it failed, we then explicitely asks for tx with instant fee.
+          if(!instantTransaction && !tx.isSimpleTransaction()){
+            return dispatch(createTransaction(Object.assign(opts,{instantTransaction:true})));
+          }
 
           return walletLib.account.broadcastTransaction(tx);
         } catch (err) {
@@ -117,7 +132,7 @@ export const createPaymentTransaction = data => {
       ],
       async asyncTask(state) {
         try {
-          return data;
+          return dispatch(createTransaction({recipient: data.recipient, amount: data.dashAmount}));
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
           throw new Error(message);
