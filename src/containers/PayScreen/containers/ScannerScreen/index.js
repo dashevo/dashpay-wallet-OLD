@@ -5,13 +5,10 @@
  */
 // External dependencies
 import * as React from 'react';
-import { connect } from 'react-redux';
 
 // Internal dependencies
 import { CodeScanner } from './components';
-import actions from './actions';
 import defaultProps from './defaults';
-import selector from './selectors';
 import type { Props } from './types';
 
 class ScannerScreen extends React.Component<Props> {
@@ -25,8 +22,8 @@ class ScannerScreen extends React.Component<Props> {
 
     this.state = {
       onCodeScanned: this.handleCodeScanned,
-      shouldRender: false,
-      scanEnabled: false
+      shouldRender: true,
+      scanEnabled: true
     };
   }
 
@@ -54,8 +51,9 @@ class ScannerScreen extends React.Component<Props> {
         scanEnabled: false
       },
       () => {
-        this.props.transactionRecipientScanned(data);
-        this.props.navigation.goBack();
+        this.props.navigation.replace('PayTabs', {
+          recipient: data.data.replace('dash:', '')
+        });
       }
     );
   }
@@ -64,10 +62,5 @@ class ScannerScreen extends React.Component<Props> {
     return <CodeScanner {...this.state} />;
   }
 }
-
-ScannerScreen = connect(
-  selector,
-  actions
-)(ScannerScreen);
 
 export default ScannerScreen;

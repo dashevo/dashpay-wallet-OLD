@@ -4,7 +4,7 @@
  * @flow
  */
 
-import { ScannerScreen } from 'containers';
+import { SplashScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
@@ -35,8 +35,8 @@ const routes = {
   ContactScreen: {
     screen: ContactScreen
   },
-  ScannerScreen: {
-    screen: ScannerScreen
+  HomeScreen: {
+    screen: HomeScreen
   },
   SendScreen: {
     screen: PayScreen
