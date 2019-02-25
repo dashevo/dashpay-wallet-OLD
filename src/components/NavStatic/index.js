@@ -24,7 +24,7 @@ class StaticNav extends React.PureComponent {
         {({ styles }) => (
           <View style={styles.container} pointerEvents='box-none'>
             <TouchableOpacity style={styles.button} onPress={() => {}}>
-              <Icon style={styles.icon} name={'bell'} />
+              <Icon style={styles.icon} name={'squiggle'} />
               <Text style={styles.text}>{'3'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => {}}>
