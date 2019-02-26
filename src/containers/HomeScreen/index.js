@@ -125,7 +125,7 @@ class SplashScreen extends React.Component<Props, State> {
     };
     return (
       <FadeIn {...props}>
-        <IconBar />
+        <IconBar {...this.props} />
       </FadeIn>
     );
   }
