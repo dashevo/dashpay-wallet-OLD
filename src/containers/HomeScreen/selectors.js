@@ -3,16 +3,10 @@
  *
  * @flow
  */
-import { createSelector } from "reselect";
-import { selectLanguage } from "state";
-import { selectBalance } from "state";
-
-const selector = createSelector(
-  [selectLanguage, selectBalance],
-  (language, balance) => ({
-    language,
-    balance
-  })
-);
-
-export default selector;
+export default () => ({
+  user: {
+    name: 'Kreshnik Alidema',
+    icon: 'dash',
+    image: 'https://www.dash.org/assets/img/team/kreshnik_alidema.jpg'
+  }
+});

@@ -5,15 +5,88 @@
  */
 
 // External dependencies
-import { combineReducers } from "redux";
-import { keyBy } from "lodash";
-import { uniq } from "lodash";
-import { add } from "lodash";
+import { combineReducers } from 'redux';
+import { keyBy } from 'lodash';
+import { uniq } from 'lodash';
+import { add } from 'lodash';
 
 // Internal dependencies
-import { SEARCH_BLOCKCHAIN_CONTACTS_REQUEST } from "state/action-types";
-import { SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS } from "state/action-types";
-import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from "state/action-types";
+import { SEARCH_BLOCKCHAIN_CONTACTS_REQUEST } from 'state/action-types';
+import { SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS } from 'state/action-types';
+import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
+
+const tmpRequests = [
+  {
+    recipient: 'XPefq9AuH3XR8jCp6nT7WtayMrN2J5vkKz',
+    type: 'received',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XQ8K2zYnqprfCwc5NhEJVtWAjxHPgT3uFD',
+    type: 'received',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XQT54ewCdKVAvYxmzFWUsnEcypD6kR9S8Z',
+    type: 'received',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XdY6Gga2DF59m4ApUNrtq3fER7wbyMhsJK',
+    type: 'received',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XWLT463GdAqygBVkNX2DwftmSj7CUvebF5',
+    type: 'received',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XwN8RPv493AjgzJrbSF7DWaKTs2HLpxMtm',
+    type: 'accepted',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XDN9tsW4CcGyuXLfMxpbPkhTz2daFr63Y7',
+    type: 'accepted',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'Xg3maXx62fsC7cTA9dntFyYDbMWV5qHeuR',
+    type: 'accepted',
+    timestamp: new Date()
+  },
+  {
+    recipient: 'XXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx',
+    type: 'accepted',
+    timestamp: new Date()
+  }
+];
+
+export function requests(state = tmpRequests, action) {
+  switch (action.type) {
+    case 'ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS':
+      return state.map(request => {
+        if (request.recipient === action.response.sender.address) {
+          return {
+            ...request,
+            timestamp: new Date(),
+            type: 'accepted'
+          };
+        } else {
+          return request;
+        }
+      });
+
+    case 'REJECT_BLOCKCHAIN_CONTACT_SUCCESS':
+      return state.filter(
+        request => request.recipient !== action.response.sender.address
+      );
+
+    default:
+      return state;
+  }
+}
 
 export function counts(state = {}, action) {
   switch (action.type) {
@@ -42,7 +115,7 @@ export function isSearching(state = false, action) {
 export function items(state = {}, action) {
   switch (action.type) {
     case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-      const contacts = keyBy(action.response, "address");
+      const contacts = keyBy(action.response, 'address');
       return Object.assign({}, state, contacts);
 
     default:
@@ -71,7 +144,7 @@ export function queries(state = {}, action) {
   }
 }
 
-export function query(state = "", action) {
+export function query(state = '', action) {
   switch (action.type) {
     case SEARCH_BLOCKCHAIN_CONTACTS_REQUEST:
       return action.query;
@@ -82,10 +155,10 @@ export function query(state = "", action) {
 }
 
 // TMP
-export function visible(state = "", action) {
+export function visible(state = '', action) {
   switch (action.type) {
     case SEARCH_BLOCKCHAIN_CONTACTS_REQUEST:
-    case "SEARCH_LOCAL_CONTACTS_REQUEST":
+    case 'SEARCH_LOCAL_CONTACTS_REQUEST':
       return SEARCH_BLOCKCHAIN_CONTACTS_REQUEST === action.type;
 
     default:
@@ -94,6 +167,7 @@ export function visible(state = "", action) {
 }
 
 export default combineReducers({
+  requests,
   counts,
   isSearching,
   items,

@@ -3,64 +3,181 @@
  *
  * @flow
  */
-import * as React from "react";
-import { connect } from "react-redux";
-import { sequence } from "libraries";
-import { Screen } from "./components";
-import actions from "./actions";
-import defaultProps from "./props";
-import selector from "./selectors";
-import type { ReactElement } from "./types";
-import type { Props } from "./types";
 
-class HomeScreen extends React.Component<Props> {
-  static defaultProps = defaultProps;
+// External dependencies
+import * as React from 'react';
+import { Dimensions } from 'react-native';
+import { connect } from 'react-redux';
 
+// Internal dependencies
+import View from 'components/View';
+import Text from 'components/Text';
+import NavBar from './components/NavBar';
+import ProgressBar from 'components/ProgressBar';
+import { Logo } from 'components';
+import SpringProvider from './components/SpringProvider';
+import ParallaxScrollView from './components/ParallaxScrollView';
+import ProfilePic from './components/ProfilePic';
+import IconBar from './components/IconBar';
+import SlideUp from './components/SlideUp';
+import FadeIn from './components/FadeIn';
+import selector from './selectors';
+import actions from './actions';
+import styles from './styles';
+import Activities from './components/Activities';
+import { TouchableOpacity } from 'react-native';
+
+const { height: viewportHeight, width: viewportWidth } = Dimensions.get(
+  'window'
+);
+
+class SplashScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.reanimatableRefs = [];
-    this.reanimatableRefs.push(React.createRef());
-    this.reanimatableRefs.push(React.createRef());
-    this.reanimatableRefs.push(React.createRef());
-    this.handleOnComplete = this.handleOnComplete.bind(this);
+
+    this.handleProgress = this.handleProgress.bind(this);
+    this.handleComplete = this.handleComplete.bind(this);
+    this.handleAnimationEnd = this.handleAnimationEnd.bind(this);
+
+    this.renderHeader = this.renderHeader.bind(this);
+    this.renderBody = this.renderBody.bind(this);
+
+    this.state = {
+      progress: 0,
+      complete: false
+    };
   }
 
-  async componentDidMount() {
-    const refs = this.reanimatableRefs;
-    function animationController(ref, index) {
-      if (index == 0) return ref.fadeInUpBig();
-      if (index == 1) return ref.bounceIn();
-      if (index == 2) return ref.fadeIn();
+  handleProgress(value) {
+    this.setState({
+      progress: value
+    });
+  }
+
+  handleComplete() {
+    this.setState({
+      complete: true
+    });
+  }
+
+  handleAnimationEnd(event) {
+    if (this.state.progress === 0 && event.finished) {
+      this.props.getInitialState(this.handleProgress);
     }
-    await sequence(refs, animationController);
-    this.props.getDeviceLocale();
   }
 
-  async handleOnComplete() {
-    const refs = this.reanimatableRefs;
-    await sequence(refs, ref => ref.fadeInUpBig());
-  }
-
-  navigateFurther() {
-    const { routeName } = this.props;
-    this.props.navigation.push(routeName);
-  }
-
-  render(): ReactElement {
+  renderNavBar(): React.Element<any> {
+    const props = {
+      inputRange: [0, 1.75, 2],
+      outputRange: [0, 0, 1]
+    };
     return (
-      <Screen
-        reanimatableRefs={this.reanimatableRefs}
-        onComplete={this.handleOnComplete}
-        navigation={this.props.navigation}
-        walletLib={this.props.walletLib}
-      />
+      <FadeIn style={styles.navBar} {...props}>
+        <NavBar {...this.props} />
+      </FadeIn>
+    );
+  }
+
+  renderLogo(): React.Element<any> {
+    const props = {
+      inputRange: [0, 0.5],
+      outputRange: [0, 1]
+    };
+    return (
+      <FadeIn {...props}>
+        <Logo style={styles.logo} />
+      </FadeIn>
+    );
+  }
+
+  renderProgressBar(): React.Element<any> {
+    const props = {
+      inputRange: [0.5, 1, 1.5],
+      outputRange: [0, 1, 0]
+    };
+    return (
+      <FadeIn {...props}>
+        <ProgressBar
+          onComplete={this.handleComplete}
+          value={this.state.progress}
+        />
+      </FadeIn>
+    );
+  }
+
+  renderProfilePic(): React.Element<any> {
+    const { user } = this.props;
+    const props = {
+      inputRange: [0, 1.5, 1.75],
+      outputRange: [0, 0, 1]
+    };
+    return (
+      <FadeIn {...props}>
+        <ProfilePic {...user} />
+      </FadeIn>
+    );
+  }
+
+  renderIconBar(): React.Element<any> {
+    const props = {
+      inputRange: [0, 1.75, 2],
+      outputRange: [0, 0, 1]
+    };
+    return (
+      <FadeIn {...props}>
+        <IconBar />
+      </FadeIn>
+    );
+  }
+
+  renderHeader(): React.Element<any> {
+    const tmp = viewportHeight / 2 - 128;
+    const props = {
+      inputRange: [0, 1.5, 1.75],
+      outputRange: [tmp, tmp, 0]
+    };
+    return (
+      <SlideUp style={styles.slideUp} {...props}>
+        {this.renderLogo()}
+        {this.renderProgressBar()}
+        {this.renderProfilePic()}
+        {this.renderIconBar()}
+        {this.renderNavBar()}
+      </SlideUp>
+    );
+  }
+
+  renderBody(): React.Element<any> {
+    const props = {
+      inputRange: [0, 1.75, 2],
+      outputRange: [0, 0, 1]
+    };
+    return (
+      <FadeIn {...props}>
+        <Activities />
+      </FadeIn>
+    );
+  }
+
+  render(): React.Element<any> {
+    return (
+      <View style={styles.container}>
+        <SpringProvider
+          toValue={this.state.complete ? 2 : 1}
+          onAnimationEnd={this.handleAnimationEnd}>
+          <ParallaxScrollView
+            renderHeader={this.renderHeader}
+            renderBody={this.renderBody}
+          />
+        </SpringProvider>
+      </View>
     );
   }
 }
 
-HomeScreen = connect(
+SplashScreen = connect(
   selector,
   actions
-)(HomeScreen);
+)(SplashScreen);
 
-export default HomeScreen;
+export default SplashScreen;

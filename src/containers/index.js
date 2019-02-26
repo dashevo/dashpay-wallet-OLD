@@ -18,7 +18,6 @@ export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as ScannerScreen } from './ScannerScreen';
 export { default as SendScreen } from './SendScreen';
 export { default as SettingsScreen } from './SettingsScreen';
-export { default as SplashScreen } from './SplashScreen';
 
 export {
   default as SettingsLanguageScreen

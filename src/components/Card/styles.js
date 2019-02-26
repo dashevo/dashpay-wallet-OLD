@@ -8,6 +8,7 @@ const styles = (theme: Object): Object => ({
   ['tmp']: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
+    borderRadius: 5,
     marginBottom: 15,
   },
   ['container']: {

@@ -12,11 +12,11 @@ import styles from './styles';
 import { compose } from 'utilities';
 import Styles from '../Styles';
 
-const Composed = compose([
+export const Composed = compose([
   (props: Props): React.Element<any> => <Styles {...props} styles={styles} />
 ]);
 
-function Navbar(props) {
+function NavBar(props) {
   const { options } = props.scene.descriptor;
   const { title } = options;
   return (
@@ -50,4 +50,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default NavBar;
