@@ -4,10 +4,15 @@
  * @flow
  */
 import { bindActionCreators } from 'redux';
-import { getDeviceLocale } from 'state';
+import { getInitialState } from 'state/actions';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ getDeviceLocale }, dispatch);
+  return bindActionCreators(
+    {
+      getInitialState
+    },
+    dispatch
+  );
 }
 
 export default actions;

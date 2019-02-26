@@ -8,7 +8,11 @@ import { Image } from 'react-native';
 
 // SVG Should be implemented.
 const Logo = props => (
-  <Image source={require('assets/images/logo.png')} style={props.style} />
+  <Image
+    source={require('assets/images/logo.png')}
+    resizeMode={'contain'}
+    style={props.style}
+  />
 );
 
 export default Logo;

@@ -4,7 +4,6 @@
  * @flow
  */
 
-import { SplashScreen } from 'containers';
 import { ScannerScreen } from 'containers';
 import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
@@ -21,8 +20,8 @@ import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
 
 const routes = {
-  SplashScreen: {
-    screen: SplashScreen
+  HomeScreen: {
+    screen: HomeScreen
   },
   CameraRollScreen: {
     screen: CameraRollScreen
@@ -38,9 +37,6 @@ const routes = {
   },
   ScannerScreen: {
     screen: ScannerScreen
-  },
-  HomeScreen: {
-    screen: HomeScreen
   },
   SendScreen: {
     screen: PayScreen
@@ -62,7 +58,7 @@ const routes = {
   },
   SettingsAlternativeCurrencyScreen: {
     screen: SettingsAlternativeCurrencyScreen
-  },
+  }
 };
 
 export default routes;

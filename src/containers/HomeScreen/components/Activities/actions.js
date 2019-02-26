@@ -4,16 +4,15 @@
  * @flow
  */
 import { bindActionCreators } from 'redux';
-import { initializeWallet } from 'state';
-import { getUnusedAddress } from 'state';
-import { fetchAlternativeCurrencyRateIfNeeded } from 'state';
+
+import { acceptBlockchainContact } from 'state/contacts/blockchain/actions';
+import { rejectBlockchainContact } from 'state/contacts/blockchain/actions';
 
 function actions(dispatch: Function): Object {
   return bindActionCreators(
     {
-      initializeWallet,
-      getUnusedAddress,
-      fetchAlternativeCurrencyRateIfNeeded
+      acceptBlockchainContact,
+      rejectBlockchainContact
     },
     dispatch
   );

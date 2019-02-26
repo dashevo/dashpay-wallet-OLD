@@ -3,4 +3,4 @@
  *
  * @flow
  */
-export default null;
+export default {};
