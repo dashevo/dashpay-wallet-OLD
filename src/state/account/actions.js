@@ -51,6 +51,26 @@ export const changeNetwork = (networkName) =>{
     });
 };
 
+export const register = (username) => {
+  return (dispatch, getState, walletLib) =>
+    dispatch({
+      types: [
+        ActionsTypes.REGISTER_USERNAME_REQUEST,
+        ActionsTypes.REGISTER_USERNAME_SUCCESS,
+        ActionsTypes.REGISTER_USERNAME_FAILURE,
+      ],
+      async asyncTask(state) {
+        try {
+          const dashPayDap = walletLib.account.getDAP('dashpaydap');
+          return dashPayDap.registerBUser(username);
+        } catch (err) {
+          const { message = "Something went wrong." } = err;
+          throw new Error(message);
+        }
+      }
+    });
+};
+
 /**
  * Will get a new unused address to get payments
  * @param type - enum - The type of address we are looking (internal, misc..), default : external.

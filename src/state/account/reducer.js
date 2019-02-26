@@ -3,6 +3,7 @@
  *
  * @flow
  */
+import { REGISTER_USERNAME_SUCCESS, REGISTER_USERNAME_FAILURE } from './constants';
 import {RECEIVE_BALANCE, GET_UNUSED_ADDRESS_SUCCESS, CHANGE_NETWORK_SUCCESS} from './constants';
 export const initialState = {
   network: 'testnet',
@@ -27,6 +28,19 @@ const account = (state = initialState, action) => {
       return {
         ...state,
         network: action.response.toString()
+      };
+    case REGISTER_USERNAME_SUCCESS:
+      alert('Success');
+      return {
+        ...state,
+        registered: true,
+      };
+    case REGISTER_USERNAME_FAILURE:
+      alert(`Error: ${action.error.message}`);
+      return {
+        ...state,
+        registered: false,
+        registerError: action.error.message,
       };
     default:
       return state;
