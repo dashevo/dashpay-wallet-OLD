@@ -7,7 +7,7 @@
 const styles = (theme: Object): Object => ({
   ['container']: {
     height: theme.navbarContainerHeight,
-    padding: 0,
+    paddingRight: 8,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -18,8 +18,8 @@ const styles = (theme: Object): Object => ({
     borderColor: 'transparent',
     height: theme.navbarContainerHeight,
     paddingBottom: 0,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
     paddingTop: 0,
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -29,6 +29,7 @@ const styles = (theme: Object): Object => ({
     fontSize: theme.navbarTextFontSize,
     fontWeight: theme.navbarTextFontWeight,
     lineHeight: theme.navbarTextLineHeight,
+    marginLeft: 4,
   },
   ['icon']: {
     color: theme.navbarIconColor,
