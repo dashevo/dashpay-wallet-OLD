@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@dashevo/dapi-client": "git+ssh://git@github.com/dashevo/dapi-client.git#57a011f5124fdb04b40da5314d2eb901fa8576e2",
-    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git#88957614dbab7740385189f02a66a0da929d8b0a",
     "@dashevo/dashcore-lib": "^0.16.9",
+    "@dashevo/wallet-lib": "git+ssh://git@github.com/dashevo/wallet-lib.git#04f11edfb00e97cd2d555c5c1f522a82dc7066a1",
     "assert": "^1.4.1",
     "base-x": "3.0.4",
     "crypto": "^1.0.1",
@@ -25,7 +25,7 @@
     "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-intl": "^2.8.0",
-    "react-native": "^0.58.3",
+    "react-native": "^0.58.5",
     "react-native-camera": "^1.10.0",
     "react-native-crypto": "^2.1.2",
     "react-native-device-info": "^0.26.1",
