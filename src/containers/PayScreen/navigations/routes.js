@@ -7,6 +7,7 @@
 // Internal dependencies
 import PayScreen from '../containers/PayScreen';
 import PayTabs from '../containers/PayTabs';
+import ScannerScreen from '../containers/ScannerScreen';
 
 const routes = {
   PayScreen: {
@@ -22,6 +23,12 @@ const routes = {
         'name',
         props.navigation.getParam('recipient')
       )
+    })
+  },
+  ScannerScreen: {
+    screen: ScannerScreen,
+    navigationOptions: props => ({
+      header: null
     })
   }
 };

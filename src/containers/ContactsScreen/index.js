@@ -62,8 +62,8 @@ class ContactsScreen extends React.Component<Props, State> {
     return <ListEmpty {...this.props} />;
   }
 
-  handlePress(address: string) {
-    this.props.navigation.navigate('ContactScreen', { address });
+  handlePress(params: string) {
+    this.props.navigation.navigate('PayTabs', params);
   }
 
   handleSubmit(values: Object) {
