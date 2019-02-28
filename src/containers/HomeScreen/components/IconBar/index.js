@@ -20,17 +20,17 @@ function IconBar(props) {
       <IconButton
         source={require('assets/images/icon-paperplane.png')}
         text="Pay"
-        action={() => props.navigation.push('SendScreen')}
+        action={() => props.navigation.navigate('SendScreen')}
       />
       <IconButton
         source={require('assets/images/icon-bank.png')}
-        text="Receive"
-        action={() => props.navigation.push('ReceiveScreen')}
+        text="QR Code"
+        action={() => props.navigation.navigate('ScannerScreen')}
       />
       <IconButton
         source={require('assets/images/icon-people.png')}
         text="Contacts"
-        action={() => props.navigation.push('ContactsScreen')}
+        action={() => props.navigation.navigate('ContactsScreen')}
       />
     </View>
   );

@@ -27,7 +27,10 @@ class Item extends React.Component<Props> {
   }
 
   handlePress(event) {
-    this.props.onPress(this.props.address)
+    this.props.onPress({
+      name: this.props.name,
+      recipient: this.props.address
+    });
   }
 
   render(): React.Element<any> {
