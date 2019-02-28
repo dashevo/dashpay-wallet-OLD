@@ -64,7 +64,7 @@ function forInitial(props) {
   };
 }
 
-function forVertical(props) {
+export function forVertical(props) {
   const { layout, position, scene } = props;
 
   if (!layout.isMeasured) {

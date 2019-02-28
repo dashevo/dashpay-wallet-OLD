@@ -4,8 +4,6 @@
  * @flow
  */
 
-import { SplashScreen } from 'containers';
-import { HomeScreen } from 'containers';
 import { SendScreen } from 'containers';
 import { ReceiveScreen } from 'containers';
 import { ErrorScreen } from 'containers';
@@ -15,6 +13,7 @@ import { SettingsAlternativeCurrencyScreen } from 'containers';
 import { ContactsScreen } from 'containers';
 import { ContactScreen } from 'containers';
 import { PaymentConfirmationScreen } from 'containers';
+import HomeScreen from 'containers/HomeScreen';
 import PayScreen from 'containers/PayScreen';
 import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';

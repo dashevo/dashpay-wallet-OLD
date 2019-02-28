@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react';
-
+import { forVertical } from './config';
 import {
   Animated,
   Easing,
@@ -111,12 +111,10 @@ class CustomNavigationView extends React.Component {
       outputRange: [0, 1, 0]
     });
 
-    const animation = {
-      backgroundColor: '#211F24',
-      borderColor: '#211F24',
-      opacity: animatedValue,
-      transform: [{ scale: animatedValue }]
-    };
+    const animation = forVertical({
+      ...transitionProps,
+      scene
+    });
 
     const Scene = scene.descriptor.getComponent();
     const { height } = this.state;
@@ -184,7 +182,10 @@ const CustomTransitioner = createAppContainer(
 
 const styles = StyleSheet.create({
   view: {
+    backgroundColor: '#211F24',
+    borderColor: '#211F24',
     position: 'absolute',
+    overflow: 'hidden',
     left: 0,
     right: 0,
     top: 0,

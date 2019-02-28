@@ -31,7 +31,7 @@ const { height: viewportHeight, width: viewportWidth } = Dimensions.get(
   'window'
 );
 
-class SplashScreen extends React.Component<Props, State> {
+class HomeScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -175,9 +175,9 @@ class SplashScreen extends React.Component<Props, State> {
   }
 }
 
-SplashScreen = connect(
+HomeScreen = connect(
   selector,
   actions
-)(SplashScreen);
+)(HomeScreen);
 
-export default SplashScreen;
+export default HomeScreen;
