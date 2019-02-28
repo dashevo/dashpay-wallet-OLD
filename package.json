@@ -9,9 +9,9 @@
     "postinstall": "rn-nodeify --install crypto,stream,events,vm,assert,url --hack"
   },
   "dependencies": {
-    "@dashevo/dapi-client": "git+ssh://git@github.com/dashevo/dapi-client.git#57a011f5124fdb04b40da5314d2eb901fa8576e2",
+    "@dashevo/dapi-client": "github:dashevo/dapi-client.git#57a011f5124fdb04b40da5314d2eb901fa8576e2",
     "@dashevo/dashcore-lib": "^0.16.9",
-    "@dashevo/wallet-lib": "https://github.com/dashevo/wallet-lib/#dapi_branch",
+    "@dashevo/wallet-lib": "github:dashevo/wallet-lib#dapi_branch",
     "assert": "^1.4.1",
     "base-x": "3.0.4",
     "crypto": "^1.0.1",
