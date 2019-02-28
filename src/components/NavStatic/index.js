@@ -18,16 +18,16 @@ const Composed = compose([
 
 class StaticNav extends React.PureComponent {
   render() {
-    const { navigation } = this.props;
+    const { navigation, showMenu } = this.props;
     return (
       <Composed>
         {({ styles }) => (
           <View style={styles.container} pointerEvents='box-none'>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <TouchableOpacity style={styles.button} onPress={showMenu}>
               <Icon style={styles.icon} name={'squiggle'} />
               <Text style={styles.text}>{'3'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {}}>
+            <TouchableOpacity style={styles.button} onPress={showMenu}>
               <Icon style={styles.icon} name={'bars'} />
             </TouchableOpacity>
           </View>

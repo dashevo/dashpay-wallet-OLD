@@ -11,6 +11,8 @@ const styles = (theme: Object): Object => ({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    backgroundColor: "transparent",
+    borderColor: "transparent",
   },
   ['button']: {
     alignItems: 'center',

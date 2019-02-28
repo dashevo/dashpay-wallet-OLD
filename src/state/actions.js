@@ -3,9 +3,9 @@
  *
  * @flow
  */
-export const INITIALIZE_WALLET_REQUEST = "INITIALIZE_WALLET_REQUEST";
-export const INITIALIZE_WALLET_SUCCESS = "INITIALIZE_WALLET_SUCCESS";
-export const INITIALIZE_WALLET_FAILURE = "INITIALIZE_WALLET_FAILURE";
+export const INITIALIZE_WALLET_REQUEST = 'INITIALIZE_WALLET_REQUEST';
+export const INITIALIZE_WALLET_SUCCESS = 'INITIALIZE_WALLET_SUCCESS';
+export const INITIALIZE_WALLET_FAILURE = 'INITIALIZE_WALLET_FAILURE';
 
 export const initializeWallet = () => {
   return (dispatch, getState, walletLib) =>
@@ -24,22 +24,71 @@ export const initializeWallet = () => {
             transport
           });
           // We need to refactor this.
-          walletLib.account.events.on("balance_changed", () => {
+          walletLib.account.events.on('balance_changed', () => {
             const balance = walletLib.account.getBalance();
             return dispatch({
-              type: "RECEIVE_BALANCE",
+              type: 'RECEIVE_BALANCE',
               response: balance
             });
           });
           const balance = walletLib.account.getBalance();
           return dispatch({
-            type: "RECEIVE_BALANCE",
+            type: 'RECEIVE_BALANCE',
             response: balance
           });
         } catch (err) {
-          const { message = "Something went wrong." } = err;
+          const { message = 'Something went wrong.' } = err;
           throw new Error(message);
         }
       }
     });
 };
+
+// TMP
+function e() {}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+import { random } from 'lodash';
+
+export function getInitialState(progress = e) {
+  return function(dispatch, getState, walletLib) {
+    return dispatch({
+      types: [
+        'GET_INITIAL_STATE_REQUEST',
+        'GET_INITIAL_STATE_SUCCESS',
+        'GET_INITIAL_STATE_FAILURE'
+      ],
+      async asyncTask(state) {
+        try {
+          let count = 0;
+          const promises = [
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            wait(random(250, 2500)),
+            dispatch(initializeWallet())
+          ];
+          progress(0);
+          promises.forEach(promise => {
+            promise.then(() => {
+              count++;
+              progress((count * 100) / promises.length);
+            });
+          });
+          return Promise.all(promises);
+        } catch (err) {
+          const { message = 'Something went wrong.' } = err;
+          throw new Error(message);
+        }
+      }
+    });
+  };
+}
