@@ -7,6 +7,6 @@ export default () => ({
   user: {
     name: 'Kreshnik Alidema',
     icon: 'dash',
-    image: 'https://www.dash.org/assets/img/team/kreshnik_alidema.jpg'
+    image: 'https://api.adorable.io/avatars/285/kreshnik_alidema.jpg'
   }
 });
