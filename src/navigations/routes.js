@@ -21,9 +21,6 @@ import CameraScreen from 'containers/CameraScreen';
 const routes = {
   HomeScreen: {
     screen: HomeScreen,
-    navigationOptions: {
-      header: null
-    }
   },
   CameraRollScreen: {
     screen: CameraRollScreen

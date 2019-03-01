@@ -166,7 +166,8 @@ class CustomNavigationView extends React.Component {
               ]
             }
           ]}>
-          { scene.descriptor.options.header !== null &&
+          { //TODO figure out how to get scene.descriptor.options populated
+            scene.descriptor.navigation.state.routeName !== 'HomeScreen' &&
             <View style={styles.navStatic}>
               <NavStatic
                 navigation={scene.descriptor.navigation}
@@ -188,7 +189,7 @@ class CustomNavigationView extends React.Component {
 const CustomRouter = StackRouter(routes);
 
 const CustomTransitioner = createAppContainer(
-  createNavigator(CustomNavigationView, CustomRouter, config)
+  createNavigator(CustomNavigationView, CustomRouter, {})
 );
 
 const styles = StyleSheet.create({
