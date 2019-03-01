@@ -18,11 +18,13 @@ import {
 } from 'react-native';
 import {
   createAppContainer,
-  Transitioner,
   SafeAreaView,
   StackRouter,
   createNavigator
 } from 'react-navigation';
+import {
+  Transitioner
+} from 'react-navigation-stack';
 import routes from './routes';
 import config from './config';
 
