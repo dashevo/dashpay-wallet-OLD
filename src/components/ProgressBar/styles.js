@@ -7,23 +7,18 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   progress: {
-    width: 240,
-    borderRadius: 16,
     overflow: 'hidden',
-    backgroundColor: '#046FC1'
+    backgroundColor: 'transparent',
+    borderColor: '#fff',
+    borderRadius: 5,
+    borderWidth: 1,
+    height: 10,
+    position: 'relative'
   },
   progressBar: {
     backgroundColor: '#fff',
-    width: 240,
-    height: 10
-    // transform: [
-    //   {
-    //     translateX: 0
-    //   },
-    //   {
-    //     scaleX: 0.0001
-    //   }
-    // ]
+    borderRadius: 0,
+    height: 8,
   }
 });
 

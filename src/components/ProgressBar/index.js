@@ -4,53 +4,78 @@
  * @flow
  */
 import * as React from 'react';
+import { Animated } from 'react-native';
 import { View } from 'react-native';
-import { Reanimatable } from 'libraries';
-import { TimingDriver } from 'libraries';
-import animations from './animations';
+import { Text } from 'react-native';
 import defaultProps from './props';
 import styles from './styles';
-import type { Props } from './types';
 
-class ProgressBar extends React.PureComponent<Props> {
+type Props = {};
+type State = {};
+
+class ProgressBar extends React.PureComponent<Props, State> {
   static defaultProps = defaultProps;
 
   constructor(props: Props) {
     super(props);
-    this.progressBar = React.createRef();
-    this.driver = new TimingDriver();
+    this.progress = new Animated.Value(0);
+    this.state = {
+      height: 0,
+      width: 0
+    };
   }
 
-  async componentDidUpdate() {
-    const { total } = this.props;
-    const { value } = this.props;
-
-    if (this.progressBar.current.progress) {
-      await this.progressBar.current.progress();
-    }
-
-    if (value >= 100) {
-      this.props.onComplete();
+  componentDidUpdate(props) {
+    if (props.value !== this.props.value) {
+      Animated.spring(
+        // Animate value over time
+        this.progress, // The value to drive
+        {
+          toValue: this.props.value
+        }
+      ).start(endState => {
+        if (this.props.value === 100 && endState.finished) {
+          this.props.onComplete();
+        }
+      });
     }
   }
+
+  _onLayout = e => {
+    this.setState({
+      width: e.nativeEvent.layout.width,
+      height: e.nativeEvent.layout.height
+    });
+  };
 
   renderProgressBar(): React.Element<any> {
-    const { value } = this.props;
-    return (
-      <Reanimatable
-        animations={animations}
-        driver={this.driver}
-        ref={this.progressBar}
-        style={styles.progressBar}
-        value={value}
-      />
-    );
+    const { width, height } = this.state;
+    const animations = {
+      backgroundColor: '#fff',
+      width,
+      transform: [
+        {
+          translateX: this.progress.interpolate({
+            inputRange: [0, 100],
+            outputRange: [width / -2, 0],
+            extrapolate: 'clamp'
+          })
+        },
+        {
+          scaleX: this.progress.interpolate({
+            inputRange: [0, 100],
+            outputRange: [0.0001, 1],
+            extrapolate: 'clamp'
+          })
+        }
+      ]
+    };
+    return <Animated.View style={[styles.progressBar, animations]} />;
   }
 
   render(): React.Element<any> {
     return (
-      <View style={styles.progress}>
-        {/* prettier-ignore */}
+      <View onLayout={this._onLayout} style={styles.progress}>
         {this.renderProgressBar()}
       </View>
     );

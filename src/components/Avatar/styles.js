@@ -88,6 +88,25 @@ const styles = (theme: Object): Object => ({
     color: '#fff',
     fontSize: 16,
     textAlign: 'center'
+  },
+  ['left__tmp']: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.avatarContainerBackgroundColor,
+    borderColor: theme.avatarContainerBorderColor,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    position: 'absolute',
+    left: undefined,
+    right: 15,
+    top: undefined,
+    bottom: 15
+  },
+  ['title__tmp']: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center'
   }
 });
 
