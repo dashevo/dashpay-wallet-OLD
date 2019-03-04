@@ -27,7 +27,7 @@ describe('reducer', () => {
           response: [
             {
               address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-              image: 'https://www.dash.org/assets/img/team/ryan.png',
+              image: 'https://api.adorable.io/avatars/285/ryan.png',
               name: 'Ryan Taylor'
             }
           ]
@@ -59,7 +59,7 @@ describe('reducer', () => {
           response: [
             {
               address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-              image: 'https://www.dash.org/assets/img/team/ryan.png',
+              image: 'https://api.adorable.io/avatars/285/ryan.png',
               name: 'Ryan Taylor'
             }
           ]
@@ -90,7 +90,7 @@ describe('reducer', () => {
       const original = deepFreeze({
         XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK: {
           address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-          image: 'https://www.dash.org/assets/img/team/ryan.png',
+          image: 'https://api.adorable.io/avatars/285/ryan.png',
           name: 'Ryan Taylor'
         }
       });
@@ -100,7 +100,7 @@ describe('reducer', () => {
         response: [
           {
             address: 'XXKH6u5BWygdaJUPZf8qRbwCFcQMkVrtSs',
-            image: 'https://www.dash.org/assets/img/team/bob_carroll.jpg',
+            image: 'https://api.adorable.io/avatars/285/bob_carroll.jpg',
             name: 'Bob Carroll'
           }
         ]
@@ -108,12 +108,12 @@ describe('reducer', () => {
       expect(state).toEqual({
         XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK: {
           address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-          image: 'https://www.dash.org/assets/img/team/ryan.png',
+          image: 'https://api.adorable.io/avatars/285/ryan.png',
           name: 'Ryan Taylor'
         },
         XXKH6u5BWygdaJUPZf8qRbwCFcQMkVrtSs: {
           address: 'XXKH6u5BWygdaJUPZf8qRbwCFcQMkVrtSs',
-          image: 'https://www.dash.org/assets/img/team/bob_carroll.jpg',
+          image: 'https://api.adorable.io/avatars/285/bob_carroll.jpg',
           name: 'Bob Carroll'
         }
       });
@@ -128,7 +128,7 @@ describe('reducer', () => {
         response: [
           {
             address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-            image: 'https://www.dash.org/assets/img/team/ryan.png',
+            image: 'https://api.adorable.io/avatars/285/ryan.png',
             name: 'Ryan Taylor'
           }
         ]
@@ -147,7 +147,7 @@ describe('reducer', () => {
           response: [
             {
               address: 'XYqcZmR4puhHT5WvarBzfXNskxJS2UL8nK',
-              image: 'https://www.dash.org/assets/img/team/ryan.png',
+              image: 'https://api.adorable.io/avatars/285/ryan.png',
               name: 'Ryan Taylor'
             }
           ]

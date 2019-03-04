@@ -9,7 +9,6 @@ import { Text } from 'react-native';
 import { Avatar } from 'components';
 import {
   TabbedCard,
-  NavBar
 } from 'components';
 
 import connect from "react-redux/es/connect/connect";
@@ -23,7 +22,6 @@ import type { Props } from './types';
 
 const ContactScreen = ({ navigation }: Props): ReactElement =>
   <SafeAreaView style={styles.container}>
-    <NavBar navigation={navigation} isOpen={true} />
     <TabbedCard
       disappearingHeaderHeight={150}
       disappearingHeaderPart={

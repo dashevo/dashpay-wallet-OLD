@@ -18,15 +18,18 @@ import {
 } from 'react-native';
 import {
   createAppContainer,
-  Transitioner,
   SafeAreaView,
   StackRouter,
   createNavigator
 } from 'react-navigation';
+import {
+  Transitioner
+} from 'react-navigation-stack';
 import routes from './routes';
 import config from './config';
 
 import MainMenu from './MainMenu';
+import NavStatic from 'components/NavStatic';
 
 class CustomNavigationView extends React.Component {
   constructor(props) {
@@ -104,7 +107,7 @@ class CustomNavigationView extends React.Component {
     const { navigation, router } = this.props;
     const { routes } = navigation.state;
     const { position } = transitionProps;
-    const { index } = scene;
+    const { index, options } = scene;
 
     const animatedValue = position.interpolate({
       inputRange: [index - 1, index, index + 1],
@@ -163,6 +166,15 @@ class CustomNavigationView extends React.Component {
               ]
             }
           ]}>
+          { //TODO figure out how to get scene.descriptor.options populated
+            scene.descriptor.navigation.state.routeName !== 'HomeScreen' &&
+            <View pointerEvents='box-none' style={styles.navStatic}>
+              <NavStatic
+                navigation={scene.descriptor.navigation}
+                showMenu={this.showMenu}
+              />
+            </View>
+          }
           <Scene
             navigation={scene.descriptor.navigation}
             showMenu={this.showMenu}
@@ -190,6 +202,13 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0
+  },
+  navStatic: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    zIndex: 1,
   }
 });
 

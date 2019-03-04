@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 // Internal dependencies
 import View from 'components/View';
 import Text from 'components/Text';
-import NavBar from './components/NavBar';
+import NavStatic from 'components/NavStatic';
 import ProgressBar from 'components/ProgressBar';
 import { Logo } from 'components';
 import SpringProvider from './components/SpringProvider';
@@ -73,7 +73,7 @@ class HomeScreen extends React.Component<Props, State> {
     };
     return (
       <FadeIn style={styles.navBar} {...props}>
-        <NavBar {...this.props} />
+        <NavStatic {...this.props} />
       </FadeIn>
     );
   }

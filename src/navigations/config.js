@@ -3,12 +3,18 @@
  *
  * @flow
  */
+
+import { createElement } from 'react';
+
+import { View } from 'react-native';
 import { Animated } from 'react-native';
 import { Easing } from 'react-native';
 import { Platform } from 'react-native';
 import { StackViewTransitionConfigs } from 'react-navigation';
 import { NavigationTransitionProps } from 'react-navigation';
 import { TransitionConfig } from 'react-navigation';
+import { PatchedHeader } from 'libraries';
+import { NavStatic } from 'components';
 
 function getSceneIndicesForInterpolationInputRange(props) {
   const { scene, scenes } = props;
@@ -122,16 +128,21 @@ function transitionConfig(
   return SlideFromBottom;
 }
 
+function defaultNavigationOptions() {
+  return {
+    header: (props) => createElement(NavStatic, props, null),
+    headerTransparent: true,
+  }
+}
+
 const config = {
   transitionConfig,
-  headerMode: 'none',
+  headerMode: 'float',
   mode: 'card',
   cardStyle: {
     backgroundColor: '#011E60'
   },
-  containerStyle: {
-    backgroundColor: '#011E60'
-  }
+  defaultNavigationOptions: defaultNavigationOptions,
 };
 
 export default config;
