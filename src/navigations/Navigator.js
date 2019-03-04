@@ -168,7 +168,7 @@ class CustomNavigationView extends React.Component {
           ]}>
           { //TODO figure out how to get scene.descriptor.options populated
             scene.descriptor.navigation.state.routeName !== 'HomeScreen' &&
-            <View style={styles.navStatic}>
+            <View pointerEvents='box-none' style={styles.navStatic}>
               <NavStatic
                 navigation={scene.descriptor.navigation}
                 showMenu={this.showMenu}
