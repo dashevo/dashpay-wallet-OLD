@@ -17,15 +17,12 @@ export function ProfilePic(props) {
   const { icon } = props;
   const { name } = props;
   return (
-    <Avatar {...props} tmp>
+    <Avatar {...props} theme={'red'} tmp>
       {({ children, styles }) => (
         <View style={styles.col}>
           <View style={styles.center}>
             <View style={styles.container}>
               <View style={styles.body}>{children}</View>
-              <View style={styles.left}>
-                <Icon style={styles.icon} name={icon} />
-              </View>
             </View>
           </View>
           <View style={styles.center}>

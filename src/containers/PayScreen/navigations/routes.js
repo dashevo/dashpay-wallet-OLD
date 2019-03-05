@@ -13,7 +13,8 @@ const routes = {
   PayScreen: {
     screen: PayScreen,
     navigationOptions: {
-      title: 'Pay at the address'
+      title: 'Pay at the address',
+      params: null
     }
   },
   PayTabs: {
@@ -22,14 +23,16 @@ const routes = {
       title: props.navigation.getParam(
         'name',
         props.navigation.getParam('recipient')
-      )
+      ),
+      params: null
     })
   },
   ScannerScreen: {
     screen: ScannerScreen,
-    navigationOptions: props => ({
-      header: null
-    })
+    navigationOptions: {
+      title: 'Pay at the address',
+      params: null
+    }
   }
 };
 
