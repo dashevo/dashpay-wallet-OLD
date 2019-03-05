@@ -6,6 +6,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Image } from 'react-native';
+import { Icon } from 'components';
 import { Text } from 'react-native';
 import { TouchableHighlight } from 'react-native';
 import { THEMES } from 'constants';
@@ -13,14 +14,14 @@ import styles from './styles';
 import type { Props } from './types';
 import type { ReactElement } from './types';
 
-const IconButton = ({ source, text, action }: Props): ReactElement => (
+const IconButton = ({ icon, text, action }: Props): ReactElement => (
   <TouchableHighlight
     style={styles.highlight}
     underlayColor="transparent"
     onPress={action}>
     <View style={styles.container}>
-      <Image source={source} style={styles.image} />
-      { text && <Text style={styles.text}>{text}</Text> }
+      <Icon name={icon} style={styles.image} />
+      {text && <Text style={styles.text}>{text}</Text>}
     </View>
   </TouchableHighlight>
 );
