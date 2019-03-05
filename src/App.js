@@ -2,7 +2,6 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 import * as React from 'react';
-import { Text } from 'react-native';
 import { StoreProvider } from 'containers';
 import { LanguageProvider } from 'containers';
 import ThemeProvider from 'theme/ThemeProvider';
