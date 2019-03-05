@@ -18,7 +18,8 @@ export const Composed = compose([
 
 function NavBar(props) {
   const { options } = props.scene.descriptor;
-  const { title } = options;
+  const { title = '', params = {} } = options;
+  console.log('__props.navigation__', props.navigation);
   return (
     <Composed>
       {({ styles }) => (
@@ -26,7 +27,7 @@ function NavBar(props) {
           <View style={styles.body}>
             <TouchableOpacity
               style={styles.button}
-              onPress={props.navigation.goBack}>
+              onPress={() => props.navigation.dismiss()}>
               <Icon style={styles.icon} name={'chevron-left'} />
             </TouchableOpacity>
             <View style={styles.wrapper}>

@@ -6,7 +6,6 @@
 export default () => ({
   user: {
     name: 'Kreshnik Alidema',
-    icon: 'dash',
-    image: 'https://api.adorable.io/avatars/285/kreshnik_alidema.jpg'
+    icon: 'dash'
   }
 });

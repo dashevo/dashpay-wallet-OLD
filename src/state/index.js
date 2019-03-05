@@ -64,7 +64,7 @@ const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(
   middleware,
   extraArgument,
-  createLogger()
+  // createLogger()
 );
 const store = createStore(reducer, enhancedMiddleware);
 export default store;

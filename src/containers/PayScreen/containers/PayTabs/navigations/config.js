@@ -17,7 +17,7 @@ const config = {
   tabBarOptions: {
     upperCaseLabel: false,
     showIcon: false,
-    scrollEnabled: true
+    scrollEnabled: false
   }
 };
 

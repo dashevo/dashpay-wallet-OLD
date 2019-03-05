@@ -121,6 +121,20 @@ class CustomNavigationView extends React.Component {
 
     const Scene = scene.descriptor.getComponent();
     const { height } = this.state;
+
+    // return (
+    //   <Animated.View
+    //     key={index}
+    //     style={[styles.view, animation]}
+    //     onLayout={this._onLayout}>
+    //     <Scene
+    //       navigation={scene.descriptor.navigation}
+    //       showMenu={this.showMenu}
+    //       hideMenu={this.hideMenu}
+    //     />
+    //   </Animated.View>
+    // );
+
     return (
       <Animated.View
         key={index}
