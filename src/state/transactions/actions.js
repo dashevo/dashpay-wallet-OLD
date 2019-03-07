@@ -31,6 +31,8 @@ export const createTransaction = opts => {
       ],
       async asyncTask(state) {
         try {
+          console.log('__opts__', opts);
+
           if (!opts.recipient) {
             throw new Error('Missing recipient to pay');
           }
@@ -41,6 +43,9 @@ export const createTransaction = opts => {
               ? opts.satoshis
               : dashToDuffs(parseFloat(opts.amount));
           if (!satoshis) throw new Error('Missing satoshis or amount to pay');
+
+          console.log('__recipient__', recipient);
+          console.log('__satoshis__', satoshis);
 
           const tx = walletLib.account.createTransaction({
             recipient,
