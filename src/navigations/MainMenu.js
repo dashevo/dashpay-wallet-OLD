@@ -158,28 +158,26 @@ const styles = {
     marginBottom: 0
   },
   ['amount']: {
-    paddingBottom: 16,
-    paddingTop: 16
+    paddingBottom: 48,
+    paddingTop: 48
   },
   ['dashIcon']: {
     color: '#EFEEF1',
-    fontSize: 21,
-    marginLeft: 8,
-    paddingLeft: 8
+    fontSize: 27,
+    marginRight: 8
   },
   ['dashText']: {
     color: '#EFEEF1',
-    fontSize: 21
+    fontSize: 27
   },
   ['fiatIcon']: {
     color: '#3C3B40',
-    fontSize: 14,
-    marginLeft: 8,
-    paddingLeft: 8
+    fontSize: 19,
+    marginRight: 8
   },
   ['fiatText']: {
     color: '#3C3B40',
-    fontSize: 14
+    fontSize: 19
   },
   ['button']: {
     position: 'absolute',
