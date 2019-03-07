@@ -19,7 +19,7 @@ import styles from './styles';
 
 function SearchBox(props: Props): React.Element<any> {
   return (
-    <Form {...props}>
+    <Form {...props} ref={props.searchBox}>
       <AutoSubmit />
       <View style={styles.row}>
         <QueryField />
