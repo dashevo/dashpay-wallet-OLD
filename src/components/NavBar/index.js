@@ -19,7 +19,6 @@ export const Composed = compose([
 function NavBar(props) {
   const { options } = props.scene.descriptor;
   const { title = '', params = {} } = options;
-  console.log('__props.navigation__', props.navigation);
   return (
     <Composed>
       {({ styles }) => (
