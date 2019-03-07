@@ -49,8 +49,23 @@ class PayTab extends React.Component<Props, State> {
   };
 
   _onSubmit = (values, form) => {
-    this.props.createPaymentTransaction(values);
-    form.resetForm();
+    console.log(this.props.receiver, this.props.sender);
+    this.props.navigation.navigate('PaymentConfirmationScreen', {
+      fiatSymbol: 'usd',
+      amountDash: values.amount,
+      amountFiat: values.amount,
+      feeDash: 0.999,
+      feeFiat: 0.999,
+      totalFiat: values.amount,
+      destinationAddress: values.recipient,
+      toAvatar: { uri: this.props.receiver.image },
+      fromAvatar: { uri: this.props.sender.image },
+      onConfirmation: () => {
+        this.props.createPaymentTransaction(values);
+        form.resetForm();
+        this.props.navigation.goBack(null);
+      }
+    });
   };
 
   render() {
