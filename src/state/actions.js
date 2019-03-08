@@ -7,6 +7,14 @@ export const INITIALIZE_WALLET_REQUEST = 'INITIALIZE_WALLET_REQUEST';
 export const INITIALIZE_WALLET_SUCCESS = 'INITIALIZE_WALLET_SUCCESS';
 export const INITIALIZE_WALLET_FAILURE = 'INITIALIZE_WALLET_FAILURE';
 
+const DUFFS_PER_DASH = 100000000;
+function duffsToDash(duffs) {
+  if (duffs === undefined || duffs.constructor.name !== 'Number') {
+    throw new Error('Can only convert a number');
+  }
+  return duffs / DUFFS_PER_DASH;
+}
+
 export const initializeWallet = () => {
   return (dispatch, getState, walletLib) =>
     dispatch({
@@ -23,18 +31,19 @@ export const initializeWallet = () => {
             network,
             transport
           });
-          // We need to refactor this.
+
           walletLib.account.events.on('balance_changed', () => {
             const balance = walletLib.account.getBalance();
             return dispatch({
               type: 'RECEIVE_BALANCE',
-              response: balance
+              response: duffsToDash(balance)
             });
           });
+
           const balance = walletLib.account.getBalance();
           return dispatch({
             type: 'RECEIVE_BALANCE',
-            response: balance
+            response: duffsToDash(balance)
           });
         } catch (err) {
           const { message = 'Something went wrong.' } = err;

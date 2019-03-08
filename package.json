@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "postinstall": "rn-nodeify --install fs,path,process,crypto,stream,events,vm,assert,url --hack",
+    "postinstall":
+      "rn-nodeify --install fs,path,process,crypto,stream,events,vm,assert,url --hack",
     "test": "jest",
     "flow": "flow"
   },
   "dependencies": {
-    "@dashevo/dapi-client": "github:dashevo/dapi-client#4af8a7e8b8b5a634f1f5a933dd811796780d0c69",
+    "@dashevo/dapi-client":
+      "github:dashevo/dapi-client#4af8a7e8b8b5a634f1f5a933dd811796780d0c69",
     "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap#demo",
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib#demo",
     "assert": "^1.4.1",
@@ -95,8 +97,6 @@
     "vm": "vm-browserify"
   },
   "rnpm": {
-    "assets": [
-      "src/assets/fonts"
-    ]
+    "assets": ["src/assets/fonts"]
   }
 }

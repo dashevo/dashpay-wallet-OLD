@@ -23,7 +23,7 @@ class StaticNav extends React.PureComponent {
       <Composed>
         {({ styles }) => (
           <View style={styles.container} pointerEvents='box-none'>
-            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('ActivityScreen')}}>
+            <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('ActivitiesScreen')}}>
               <Icon style={styles.icon} name={'squiggle'} />
               <Text style={styles.text}>{'3'}</Text>
             </TouchableOpacity>

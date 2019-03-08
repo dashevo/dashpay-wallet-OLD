@@ -16,14 +16,14 @@ import HomeScreen from 'containers/HomeScreen';
 import PayScreen from 'containers/PayScreen';
 import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
-import ActivityScreen from 'containers/ActivityScreen';
+import ActivitiesScreen from 'containers/ActivitiesScreen';
 
 const routes = {
   HomeScreen: {
     screen: HomeScreen
   },
-  ActivityScreen: {
-    screen: ActivityScreen
+  ActivitiesScreen: {
+    screen: ActivitiesScreen
   },
   CameraRollScreen: {
     screen: CameraRollScreen
