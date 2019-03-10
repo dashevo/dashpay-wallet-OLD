@@ -32,14 +32,6 @@ export const initializeWallet = () => {
             transport
           });
 
-          walletLib.account.events.on('balance_changed', () => {
-            const balance = walletLib.account.getBalance();
-            return dispatch({
-              type: 'RECEIVE_BALANCE',
-              response: duffsToDash(balance)
-            });
-          });
-
           const balance = walletLib.account.getBalance();
           return dispatch({
             type: 'RECEIVE_BALANCE',
