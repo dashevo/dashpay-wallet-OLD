@@ -94,7 +94,14 @@ export function requests(state = tmpRequests, action) {
 export function contacts(state = {}, action) {
   switch (action.type) {
     case SEND_CONTACT_REQUEST_SUCCESS:
-      alert
+      alert('Contact request sent');
+      return;
+    case SEND_CONTACT_REQUEST_FAILURE:
+      alert('Contact request failed');
+      return;
+
+    default:
+      return state;
   }
 }
 
@@ -184,5 +191,6 @@ export default combineReducers({
   orders,
   queries,
   query,
+  contacts,
   visible
 });
