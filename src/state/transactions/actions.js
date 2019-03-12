@@ -47,12 +47,6 @@ export const createTransaction = opts => {
             satoshis
           });
 
-          console.log('___serialize___', tx.serialize());
-
-          console.log('___recipient___', recipient);
-          console.log('___satoshis___', satoshis);
-          console.log('___tx___', tx);
-
           return walletLib.account.broadcastTransaction(tx);
         } catch (err) {
           const { message = 'Something went wrong.' } = err;

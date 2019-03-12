@@ -22,13 +22,11 @@ import { Logo } from 'components';
 import { selectBalance } from 'state';
 
 function MainMenu(props: Props): React.Element<any> {
-  const { balance = 0 } = props;
-  const {
-    dashAmount = balance,
-    fiatAmount = balance * 82.45,
-    dashSymbol = 'dash',
-    fiatSymbol = 'usd'
-  } = props;
+  const balance = props.balance || 0;
+  const dashAmount = balance;
+  const fiatAmount = balance;
+  const dashSymbol = 'dash';
+  const fiatSymbol = 'usd';
   return (
     <View style={styles.container}>
       <ParallaxScrollView
@@ -196,8 +194,8 @@ const styles = {
   }
 };
 
-const selector = createSelector([selectBalance], balance => ({ balance }));
-
-MainMenu = connect(selector)(MainMenu);
+MainMenu = connect(state => ({
+  balance: selectBalance(state)
+}))(MainMenu);
 
 export default MainMenu;

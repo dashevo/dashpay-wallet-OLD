@@ -61,7 +61,7 @@ class PayTab extends React.Component<Props, State> {
       fromAvatar: { uri: this.props.sender.image },
       onConfirmation: () => {
         this.props
-          .createTransaction({
+          .createSendPaymentTransaction({
             recipient: values.recipient,
             amount: values.dashAmount
           })

@@ -33,7 +33,7 @@ const transport = new DAPIClient({
   retries: 5
 });
 
-const walletLib = {
+let walletLib = {
   wallet: null,
   account: null,
   initializeWallet(opts) {
@@ -52,11 +52,12 @@ const walletLib = {
           mnemonic,
           plugins: [dpd],
           allowSensitiveOperations: true,
-          transport
+          transport,
+          adapter
         });
 
         walletLib.account = walletLib.wallet.getAccount({ index: accountId });
-        let listener = walletLib.account.events.on('ready', () => {
+        walletLib.account.events.on('ready', () => {
           resolve(true);
         });
       } catch (error) {

@@ -9,23 +9,22 @@ import { orderBy } from 'lodash';
 function mapStateToProps(state, props) {
   const recipient = props.navigation.getParam('recipient');
   const contact = state.contacts.local.items[recipient] || {};
-  let transactions = state.transactions.history[recipient] || [];
+  let transactions = state.payments.send.byRecipients[recipient] || [];
 
   const receiver = state.contacts.local.items[recipient] || {}; // Tmp
   const sender =
     state.contacts.local.items['yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx'] || {}; // Tmp
 
-  transactions = transactions.map(transaction => {
+  transactions = transactions.map(transactionId => {
+    const transaction = state.payments.send.items[transactionId]
     return {
-      dashAmount: transaction.dashAmount,
-      fiatAmount: transaction.fiatAmount,
+      dashAmount: transaction.amount,
+      fiatAmount: transaction.amount,
       timestamp: transaction.timestamp,
       receiver,
       sender
     };
   });
-
-  transactions = orderBy(transactions, ['timestamp'], ['desc']);
 
   return {
     transactions,

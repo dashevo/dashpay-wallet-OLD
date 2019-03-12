@@ -7,6 +7,3 @@
 // External dependencies
 
 // Internal dependencies
-import ActivitiesScreen from './navigations';
-
-export default ActivitiesScreen;

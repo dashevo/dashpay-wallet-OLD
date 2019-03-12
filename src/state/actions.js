@@ -35,7 +35,7 @@ export const initializeWallet = () => {
           const balance = walletLib.account.getBalance();
           return dispatch({
             type: 'RECEIVE_BALANCE',
-            response: duffsToDash(balance)
+            response: balance
           });
         } catch (err) {
           const { message = 'Something went wrong.' } = err;

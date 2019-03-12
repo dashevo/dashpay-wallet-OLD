@@ -14,6 +14,7 @@ import language from './language';
 import user from './user';
 import transactions from './transactions';
 import contacts from './contacts/reducer';
+import payments from './payments/reducer';
 
 export default combineReducers({
   camera,
@@ -25,5 +26,6 @@ export default combineReducers({
   alternativeCurrency,
   language,
   user,
-  contacts
+  contacts,
+  payments
 });
