@@ -73,8 +73,8 @@ export function getInitialState(progress = e) {
             wait(random(250, 2500)),
             wait(random(250, 2500)),
             wait(random(250, 2500)),
-            wait(random(250, 2500))
-            // dispatch(initializeWallet())
+            wait(random(250, 2500)),
+            dispatch(initializeWallet())
           ];
           progress(0);
           promises.forEach(promise => {
