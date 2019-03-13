@@ -2,10 +2,10 @@ package com.dashpay;
 
 import android.app.Application;
 
-import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
+import com.bitgo.randombytes.RandomBytesPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
@@ -28,13 +28,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-        new MainReactPackage(),
-        new RandomBytesPackage(),
-        new RNCameraPackage(),
-        new RNDeviceInfo(),
-        new RNGestureHandlerPackage(),
-        new SvgPackage(),
-        new VectorIconsPackage()
+          new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SvgPackage(),
+            new RandomBytesPackage(),
+            new RNGestureHandlerPackage(),
+            new RNDeviceInfo(),
+            new RNCameraPackage()
       );
     }
 

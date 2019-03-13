@@ -18,7 +18,6 @@ import {
   Animated,
 } from 'react-native';
 import { connect } from 'react-redux';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import { Avatar } from 'components';
 import { CustomTabBar, DisappearingHeaderPart } from './components';
 import styles from './styles';
@@ -67,7 +66,7 @@ class TabbedCard extends React.Component<Props> {
   render() {
     return (
       <View style={styles.card}>
-        <ScrollableTabView
+        <ScrollView
           renderTabBar={
             () => <CustomTabBar
               scrollOffsets={this.scrollOffset}
@@ -103,7 +102,7 @@ class TabbedCard extends React.Component<Props> {
               </ScrollView>
             )
           }
-        </ScrollableTabView>
+        </ScrollView>
       </View>
     );
   }
