@@ -6,6 +6,7 @@
 export default () => ({
   user: {
     name: 'Kreshnik Alidema',
-    icon: 'dash'
+    icon: 'dash',
+    image: 'https://dashpay-wallet-static.dash.org/team/kreshnik_alidema.jpg'
   }
 });
