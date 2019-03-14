@@ -21,6 +21,10 @@ import { SEND_CONTACT_REQUEST_REQUEST } from "./constants";
 import { SEND_CONTACT_REQUEST_SUCCESS } from "./constants";
 import { SEND_CONTACT_REQUEST_FAILURE } from "./constants";
 
+import { FETCH_CONTACT_REQUESTS_REQUEST } from "./constants";
+import { FETCH_CONTACT_REQUESTS_SUCCESS } from "./constants";
+import { FETCH_CONTACT_REQUESTS_FAILURE } from "./constants";
+
 import searchApi from './api';
 import defaults from './defaults';
 import { random } from 'lodash';
@@ -47,6 +51,27 @@ export function sendContactRequest(address) {
   };
 }
 
+export function fetchContactRequests(address) {
+  return function(dispatch, getState, walletLib) {
+    return dispatch({
+      types: [
+        FETCH_CONTACT_REQUESTS_REQUEST,
+        FETCH_CONTACT_REQUESTS_SUCCESS,
+        FETCH_CONTACT_REQUESTS_FAILURE
+      ],
+      async asyncTask(state) {
+        try {
+          const dashPayDap = walletLib.account.getDAP('dashpaydap');
+          dashPayDap.username = 'testd2'; // current user from the state should be here
+          return dashPayDap.getPendingContactRequests();
+        } catch (error) {
+          const { message = "Something went wrong." } = error;
+          throw new Error(message);
+        }
+      }
+    });
+  };
+}
 
 export function searchBlockchainContacts(query, options = defaults) {
   return function(dispatch, getState, walletLib) {
@@ -59,7 +84,8 @@ export function searchBlockchainContacts(query, options = defaults) {
       ],
       async asyncTask(state) {
         try {
-          return searchApi(query);
+          const dashPayDap = walletLib.account.getDAP('dashpaydap');
+          return searchApi(dashPayDap, query);
         } catch (error) {
           const { message = 'Something went wrong.' } = error;
           throw new Error(message);
