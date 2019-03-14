@@ -1,3 +1,10 @@
-import React from 'react';
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ *
+ * @flow
+ */
 
-export default (props) => null;
+// Internal dependencies
+import PayScreen from './navigations';
+
+export default PayScreen;

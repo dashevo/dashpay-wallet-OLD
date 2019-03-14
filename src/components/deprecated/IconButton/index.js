@@ -20,7 +20,7 @@ const IconButton = ({ icon, text, action }: Props): ReactElement => (
     underlayColor="transparent"
     onPress={action}>
     <View style={styles.container}>
-      <Icon name={icon} style={styles.image} />
+      {text && <Icon style={styles.icon} name={icon} />}
       {text && <Text style={styles.text}>{text}</Text>}
     </View>
   </TouchableHighlight>

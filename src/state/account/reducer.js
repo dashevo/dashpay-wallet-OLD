@@ -3,10 +3,15 @@
  *
  * @flow
  */
-import {RECEIVE_BALANCE, GET_UNUSED_ADDRESS_SUCCESS, CHANGE_NETWORK_SUCCESS} from './constants';
+import {
+  RECEIVE_BALANCE,
+  GET_UNUSED_ADDRESS_SUCCESS,
+  CHANGE_NETWORK_SUCCESS
+} from './constants';
 export const initialState = {
   network: 'testnet',
-  mnemonic: 'protect cave garden achieve hand vacant clarify atom finish outer waste sword',
+  mnemonic:
+    'truth want orchard guide pill ugly omit result movie obey make favorite',
   unusedAddress: '',
   balance: 0
 };

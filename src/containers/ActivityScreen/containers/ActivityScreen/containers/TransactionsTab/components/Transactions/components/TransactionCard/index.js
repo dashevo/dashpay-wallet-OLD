@@ -32,13 +32,7 @@ function SmallAvatar(props) {
 
 function TransactionCard(props) {
   const { item } = props;
-  const {
-    dashAmount,
-    fiatAmount,
-    receiver = {},
-    sender = {},
-    timestamp
-  } = item;
+  const { dashAmount, fiatAmount, receiver, sender, timestamp } = item;
   const dashSymbol = 'dash';
   const fiatSymbol = 'usd';
   return (

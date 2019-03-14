@@ -15,8 +15,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center'
   },
-  image: {
+  icon: {
     fontSize: 21,
+    marginBottom: 5,
     color: THEMES.vivid.foreground
   },
   text: {

@@ -40,8 +40,8 @@ class PayTab extends React.Component<Props, State> {
     };
   }
 
-  convertToDashAmount = dashAmount => {
-    return dashAmount / 79.29; // Tmp
+  convertToDashAmount = fiatAmount => {
+    return fiatAmount / 79.29; // Tmp
   };
 
   convertToFiatAmount = dashAmount => {
@@ -49,6 +49,31 @@ class PayTab extends React.Component<Props, State> {
   };
 
   _onSubmit = (values, form) => {
+    const amountDash = values.amount;
+    const amountFiat = this.convertToFiatAmount(amountDash);
+    const transactionData = Object.assign({}, values, { amountDash });
+    const feeAmount = 1; //TODO this is wrong on purpose.
+    // we need to prepare a transaction with the library and pass that
+    // and if it is confirmed, ask the library to broadcast it.
+    const feeFiat = 1;
+    const totalFiat = 1;
+    const destinationAddress = '';
+    this.props.navigation.navigate('ConfirmationScreen', {
+      fiatSymbol: 'USD',
+      amountDash: amountDash,
+      amountFiat: amountFiat,
+      feeDash: feeAmount,
+      feeFiat: feeFiat,
+      totalFiat: totalFiat,
+      destinationAddress: values.recipient,
+      toAvatar: require('assets/images/icon-temp.png'),
+      fromAvatar: require('assets/images/icon-temp.png'),
+      onConfirmation: () => {
+        this.props.createTransaction(transactionData);
+        this.props.navigation.goBack(); //TODO go to payment history
+      }
+    });
+
     this.props.createPaymentTransaction(values);
     form.resetForm();
   };
