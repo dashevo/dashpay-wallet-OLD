@@ -5,3 +5,4 @@ node_js:
 
 script:
   - npm test
+  - travis_wait 30 npm ci
