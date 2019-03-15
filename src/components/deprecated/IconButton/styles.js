@@ -16,9 +16,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    height: 25,
-    width: 35,
-    resizeMode: 'contain'
+    fontSize: 21,
+    color: THEMES.vivid.foreground
   },
   text: {
     color: THEMES.vivid.foreground

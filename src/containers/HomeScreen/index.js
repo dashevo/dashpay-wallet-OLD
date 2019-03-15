@@ -154,7 +154,7 @@ class HomeScreen extends React.Component<Props, State> {
     };
     return (
       <FadeIn {...props}>
-        <Activities />
+        <Activities {...this.props} />
       </FadeIn>
     );
   }

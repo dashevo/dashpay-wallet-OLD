@@ -14,7 +14,8 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  Text
+  Text,
+  BackHandler
 } from 'react-native';
 import {
   createAppContainer,
@@ -22,9 +23,7 @@ import {
   StackRouter,
   createNavigator
 } from 'react-navigation';
-import {
-  Transitioner
-} from 'react-navigation-stack';
+import { Transitioner } from 'react-navigation-stack';
 import routes from './routes';
 import config from './config';
 
@@ -40,6 +39,21 @@ class CustomNavigationView extends React.Component {
       active: false
     };
   }
+
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.onBackPressed
+    );
+  }
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
+
+  onBackPressed = () => {
+    return true;
+  };
 
   render() {
     const { navigation, router, descriptors } = this.props;
@@ -180,15 +194,15 @@ class CustomNavigationView extends React.Component {
               ]
             }
           ]}>
-          { //TODO figure out how to get scene.descriptor.options populated
-            scene.descriptor.navigation.state.routeName !== 'HomeScreen' &&
-            <View pointerEvents='box-none' style={styles.navStatic}>
+          {//TODO figure out how to get scene.descriptor.options populated
+          scene.descriptor.navigation.state.routeName !== 'HomeScreen' && (
+            <View pointerEvents="box-none" style={styles.navStatic}>
               <NavStatic
                 navigation={scene.descriptor.navigation}
                 showMenu={this.showMenu}
               />
             </View>
-          }
+          )}
           <Scene
             navigation={scene.descriptor.navigation}
             showMenu={this.showMenu}
@@ -222,7 +236,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    zIndex: 1,
+    zIndex: 1
   }
 });
 

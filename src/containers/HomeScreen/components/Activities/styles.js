@@ -18,6 +18,21 @@ const styles = StyleSheet.create({
   },
   ['text']: {
     fontSize: 16
+  },
+  ['button']: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16
+  },
+  ['buttonIcon']: {
+    fontSize: 21,
+    color: '#fff'
+  },
+  ['buttonText']: {
+    fontSize: 16,
+    color: '#fff',
+    marginLeft: 12
   }
 });
 

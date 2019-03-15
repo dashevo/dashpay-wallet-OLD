@@ -19,8 +19,8 @@ export default StyleSheet.create({
     paddingRight: 32
   },
   ['navBar']: {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     position: 'absolute',
     top: 0,
     left: 0,
