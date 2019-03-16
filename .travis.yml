@@ -3,6 +3,12 @@ language: node_js
 node_js:
   - "11"
 
+install:
+- npm ci
+
+cache:
+  directories:
+  - "$HOME/.npm"
+
 script:
   - npm test
-  - travis_wait 30 npm ci
