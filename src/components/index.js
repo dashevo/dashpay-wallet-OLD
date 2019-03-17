@@ -29,9 +29,7 @@ export { default as NavStatic } from './NavStatic';
 
 // Deprecated
 export * from './deprecated/Animation';
-export { default as NavBar } from './deprecated/NavBar';
 export { default as Box } from './deprecated/Box';
-export { default as CopyAddressButton } from './deprecated/CopyAddressButton';
 export { default as FormattedDate } from './deprecated/FormattedDate';
 export { default as FormattedNumber } from './deprecated/FormattedNumber';
 export { default as FormattedRelative } from './deprecated/FormattedRelative';
@@ -40,9 +38,6 @@ export { default as FormattedTime } from './deprecated/FormattedTime';
 export { default as IconButton } from './deprecated/IconButton';
 export { default as LabeledSwitch } from './deprecated/LabeledSwitch';
 export { default as Logo } from './deprecated/Logo';
-export { default as RecipientInput } from './deprecated/RecipientInput';
-export { default as SharedElement } from './deprecated/SharedElement';
-export { default as SwipeableRow } from './deprecated/SwipeableRow';
 export { default as CurrencyInput } from './CurrencyInput';
 export { default as Input } from './Input';
 export { default as Avatar } from './deprecated/Avatar';
