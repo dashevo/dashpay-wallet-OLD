@@ -43,7 +43,7 @@ const walletLib = {
       'light point battle foam find motion true because genre people banana fit';
     const accountId = opts.accountId || 0;
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       try {
         const dpd = new DashPayDAP({ username });
 
@@ -59,8 +59,9 @@ const walletLib = {
         let listener = walletLib.account.events.on('ready', () => {
           resolve(true);
         });
-      } catch (e) {
-        resolve(e);
+      } catch (error) {
+        console.error(error);
+        reject(error);
       }
     });
   }
