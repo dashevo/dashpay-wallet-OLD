@@ -73,7 +73,11 @@ const extraArgument = thunk.withExtraArgument(walletLib);
 const enhancedMiddleware = applyMiddleware(
   middleware,
   extraArgument,
-  createLogger()
 );
-const store = createStore(reducer, enhancedMiddleware);
+let composeEnhancers = compose;
+if (__DEV__ && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+}
+const enhancer = composeEnhancers(enhancedMiddleware);
+const store = createStore(reducer, enhancer);
 export default store;
