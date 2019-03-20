@@ -52,8 +52,7 @@ let walletLib = {
           mnemonic,
           plugins: [dpd],
           allowSensitiveOperations: true,
-          transport,
-          adapter
+          transport
         });
 
         walletLib.account = walletLib.wallet.getAccount({ index: accountId });
