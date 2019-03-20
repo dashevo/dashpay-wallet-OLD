@@ -58,6 +58,7 @@ class HomeScreen extends React.Component<Props, State> {
     this.setState({
       complete: true
     });
+    this.props.navigation.navigate('ContactsScreen');
   }
 
   handleAnimationEnd(event) {

@@ -27,7 +27,7 @@ class SettingsScreen extends React.Component<Props, State> {
   }
 
   render(): React.Element<any> {
-    const navigate = this.props.navigation.push;
+    const navigate = this.props.navigation.navigate;
     const { balanceVisible, changeBalanceVisible } = this.props;
     return (
       <View style={styles.container}>

@@ -23,7 +23,7 @@ class ErrorScreen extends React.Component<Props, State> {
   }
 
   navigateHome() {
-    this.props.navigation.push("HomeScreen");
+    this.props.navigation.navigate("HomeScreen");
   }
 
   render(): React.Element<any> {
