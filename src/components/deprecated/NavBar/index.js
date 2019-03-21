@@ -156,9 +156,9 @@ class NavBar extends React.Component<Props> {
   }
 }
 
-let connectedNavBar = connect(
+NavBar = connect(
   selectors,
   actions
 )(NavBar);
 
-export default connectedNavBar;
+export default NavBar;

@@ -20,47 +20,47 @@ import { SEND_CONTACT_REQUEST_FAILURE } from './constants';
 
 const tmpRequests = [
   {
-    recipient: 'XPefq9AuH3XR8jCp6nT7WtayMrN2J5vkKz',
+    recipient: 'yPefq9AuH3XR8jCp6nT7WtayMrN2J5vkKz',
     type: 'received',
     timestamp: new Date()
   },
   {
-    recipient: 'XQ8K2zYnqprfCwc5NhEJVtWAjxHPgT3uFD',
+    recipient: 'yQ8K2zYnqprfCwc5NhEJVtWAjxHPgT3uFD',
     type: 'received',
     timestamp: new Date()
   },
   {
-    recipient: 'XQT54ewCdKVAvYxmzFWUsnEcypD6kR9S8Z',
+    recipient: 'yQT54ewCdKVAvYxmzFWUsnEcypD6kR9S8Z',
     type: 'received',
     timestamp: new Date()
   },
   {
-    recipient: 'XdY6Gga2DF59m4ApUNrtq3fER7wbyMhsJK',
+    recipient: 'ydY6Gga2DF59m4ApUNrtq3fER7wbyMhsJK',
     type: 'received',
     timestamp: new Date()
   },
   {
-    recipient: 'XWLT463GdAqygBVkNX2DwftmSj7CUvebF5',
+    recipient: 'yWLT463GdAqygBVkNX2DwftmSj7CUvebF5',
     type: 'received',
     timestamp: new Date()
   },
   {
-    recipient: 'XwN8RPv493AjgzJrbSF7DWaKTs2HLpxMtm',
+    recipient: 'ywN8RPv493AjgzJrbSF7DWaKTs2HLpxMtm',
     type: 'accepted',
     timestamp: new Date()
   },
   {
-    recipient: 'XDN9tsW4CcGyuXLfMxpbPkhTz2daFr63Y7',
+    recipient: 'yDN9tsW4CcGyuXLfMxpbPkhTz2daFr63Y7',
     type: 'accepted',
     timestamp: new Date()
   },
   {
-    recipient: 'Xg3maXx62fsC7cTA9dntFyYDbMWV5qHeuR',
+    recipient: 'yg3maXx62fsC7cTA9dntFyYDbMWV5qHeuR',
     type: 'accepted',
     timestamp: new Date()
   },
   {
-    recipient: 'XXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx',
+    recipient: 'yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx',
     type: 'accepted',
     timestamp: new Date()
   }

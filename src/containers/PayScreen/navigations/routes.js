@@ -8,6 +8,7 @@
 import PayScreen from '../containers/PayScreen';
 import PayTabs from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
+import PaymentConfirmationScreen from '../containers/PaymentConfirmationScreen';
 
 const routes = {
   PayScreen: {
@@ -32,6 +33,12 @@ const routes = {
     navigationOptions: {
       title: 'Pay at the address',
       params: null
+    }
+  },
+  PaymentConfirmationScreen: {
+    screen: PaymentConfirmationScreen,
+    navigationOptions: {
+      header: null
     }
   }
 };

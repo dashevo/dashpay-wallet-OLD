@@ -4,10 +4,10 @@
  * @flow
  */
 import { bindActionCreators } from 'redux';
-import { createPaymentTransaction } from 'state/transactions/actions';
+import { createSendPaymentTransaction } from 'state/payments/send/actions';
 
 function actions(dispatch: Function): Object {
-  return bindActionCreators({ createPaymentTransaction }, dispatch);
+  return bindActionCreators({ createSendPaymentTransaction }, dispatch);
 }
 
 export default actions;

@@ -62,7 +62,7 @@ class TransactionCard extends React.PureComponent {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel'
         },
         {
@@ -84,7 +84,7 @@ class TransactionCard extends React.PureComponent {
 
   render() {
     const { item } = this.props;
-    const { sender, timestamp } = item;
+    const { sender = {}, timestamp } = item;
     if (item.type === 'accepted') {
       return (
         <Card onPress={() => {}}>

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { SectionList } from 'react-native';
 import { Text } from 'react-native';
 import { Animated } from 'react-native';
+import { InteractionManager } from 'react-native';
 import { Image } from 'components';
 
 // Internal dependencies
@@ -37,6 +38,8 @@ class ContactsScreen extends React.Component<Props, State> {
     (this: any).handleSubmit = this.handleSubmit.bind(this);
     (this: any).handleMore = this.handleMore.bind(this);
 
+    (this: any).searchBox = React.createRef();
+
     this.scrollPos = new Animated.Value(0);
     this.scrollSinkY = Animated.event(
       [{ nativeEvent: { contentOffset: { y: this.scrollPos } } }],
@@ -62,8 +65,14 @@ class ContactsScreen extends React.Component<Props, State> {
     return <ListEmpty {...this.props} />;
   }
 
-  handlePress(params: string) {
+  async handlePress(params: string) {
     this.props.navigation.navigate('PayTabs', params);
+
+    await InteractionManager.runAfterInteractions();
+    if (this.searchBox.current.resetForm) {
+      this.searchBox.current.setFieldValue('query', '');
+      this.searchBox.current.submitForm();
+    }
   }
 
   handleSubmit(values: Object) {
@@ -113,6 +122,7 @@ class ContactsScreen extends React.Component<Props, State> {
           <View style={[styles.row, styles.second]}>
             <SearchBox
               {...this.props}
+              searchBox={this.searchBox}
               onSubmit={this.handleSubmit}
               onMore={this.handleMore}
             />

@@ -58,12 +58,17 @@ class HomeScreen extends React.Component<Props, State> {
     this.setState({
       complete: true
     });
-    this.props.navigation.navigate('ContactsScreen');
   }
 
-  handleAnimationEnd(event) {
+  async handleAnimationEnd(event) {
     if (this.state.progress === 0 && event.finished) {
-      this.props.getInitialState(this.handleProgress);
+      await this.props.initializeWallet();
+
+      this.setState({
+        progress: 100
+      });
+
+      return true;
     }
   }
 

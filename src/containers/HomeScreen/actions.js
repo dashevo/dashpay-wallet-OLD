@@ -4,12 +4,12 @@
  * @flow
  */
 import { bindActionCreators } from 'redux';
-import { getInitialState } from 'state/actions';
+import { initializeWallet } from 'state/actions';
 
 function actions(dispatch: Function): Object {
   return bindActionCreators(
     {
-      getInitialState
+      initializeWallet
     },
     dispatch
   );
