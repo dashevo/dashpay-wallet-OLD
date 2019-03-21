@@ -47,12 +47,13 @@ export function byRecipients(state = {}, action) {
 export function items(state = {}, action) {
   switch (action.type) {
     case CREATE_SEND_PAYMENT_TRANSACTION_SUCCESS:
-      const { recipient, amount, tx } = action.response;
+      const { recipient, dashAmount, fiatAmount, tx } = action.response;
       return Object.assign({}, state, {
         [tx.id]: {
           id: tx.id,
           recipient,
-          amount,
+          dashAmount,
+          fiatAmount,
           timestamp: Date.now()
         }
       });

@@ -16,15 +16,17 @@ function mapStateToProps(state, props) {
     state.contacts.local.items['yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx'] || {}; // Tmp
 
   transactions = transactions.map(transactionId => {
-    const transaction = state.payments.send.items[transactionId]
+    const transaction = state.payments.send.items[transactionId];
     return {
-      dashAmount: transaction.amount,
-      fiatAmount: transaction.amount,
+      dashAmount: transaction.dashAmount,
+      fiatAmount: transaction.fiatAmount,
       timestamp: transaction.timestamp,
       receiver,
       sender
     };
   });
+
+  transactions = orderBy(transactions, ['timestamp'], ['desc']);
 
   return {
     transactions,

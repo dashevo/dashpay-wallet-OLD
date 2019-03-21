@@ -51,8 +51,8 @@ class PayTab extends React.Component<Props, State> {
   _onSubmit = (values, form) => {
     this.props.navigation.navigate('PaymentConfirmationScreen', {
       fiatSymbol: 'usd',
-      amountDash: values.amount,
-      amountFiat: values.amount,
+      dashAmount: values.dashAmount,
+      fiatAmount: values.fiatAmount,
       feeDash: 0.999,
       feeFiat: 0.999,
       totalFiat: values.amount,
@@ -62,6 +62,10 @@ class PayTab extends React.Component<Props, State> {
       onConfirmation: () => {
         this.props
           .createSendPaymentTransaction({
+            // Tmp this will be fixed with new schema
+            dashAmount: values.dashAmount,
+            fiatAmount: values.fiatAmount,
+
             recipient: values.recipient,
             amount: values.dashAmount
           })
