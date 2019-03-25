@@ -12,7 +12,6 @@ export * from './LanguageProvider';
 export { default as ContactScreen } from './ContactScreen';
 export { default as ContactsScreen } from './ContactsScreen';
 export { default as ErrorScreen } from './ErrorScreen';
-export { default as NotificationsScreen } from './NotificationsScreen';
 export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as SendScreen } from './SendScreen';
 export { default as SettingsScreen } from './SettingsScreen';
