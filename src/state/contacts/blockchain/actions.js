@@ -69,20 +69,18 @@ export function searchBlockchainContacts(query, options = defaults) {
   };
 }
 
-const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-export function acceptBlockchainContact(contact) {
+export function acceptBlockchainContact(address) {
   return function(dispatch, getState, walletLib) {
     return dispatch({
-      contact,
+      address,
       types: [
         ACCEPT_BLOCKCHAIN_CONTACT_REQUEST,
         ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
         ACCEPT_BLOCKCHAIN_CONTACT_FAILURE
       ],
       async asyncTask(state) {
-        await wait(random(3000, 6000));
-        return Promise.resolve(contact);
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.acceptContactRequest(address);
       }
     });
   };

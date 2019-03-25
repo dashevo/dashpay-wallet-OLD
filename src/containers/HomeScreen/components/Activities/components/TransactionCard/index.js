@@ -42,10 +42,10 @@ class TransactionCard extends React.PureComponent {
   }
 
   handleAcceptBlockchainContact = e => {
-    const { item } = this.props;
+    const { item: { sender: { address } } } = this.props;
     this.setState({ isLoading: true });
     this.props
-      .onAcceptBlockchainContact(item)
+      .onAcceptBlockchainContact(address)
       .then(
         () => this.setState({ isLoading: false }),
         () => this.setState({ isLoading: false })

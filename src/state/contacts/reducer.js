@@ -47,7 +47,7 @@ const contact = (state, action) => {
       return {
         ...state,
         ...action.contact,
-      }
+      };
 
     default:
       return state;

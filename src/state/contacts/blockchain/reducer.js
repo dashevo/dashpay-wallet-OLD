@@ -95,10 +95,10 @@ export function contacts(state = {}, action) {
   switch (action.type) {
     case SEND_CONTACT_REQUEST_SUCCESS:
       alert('Contact request sent');
-      return;
+      return state;
     case SEND_CONTACT_REQUEST_FAILURE:
       alert('Contact request failed');
-      return;
+      return state;
 
     default:
       return state;
