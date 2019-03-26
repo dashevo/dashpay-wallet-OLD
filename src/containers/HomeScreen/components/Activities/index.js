@@ -20,37 +20,54 @@ import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
 
-function Transactions(props) {
-  return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        data={props.transactions}
-        keyExtractor={(item, index) => `activity-${index}`}
-        renderItem={item => (
-          <TransactionCard
-            onAcceptBlockchainContact={props.acceptBlockchainContact}
-            onRejectBlockchainContact={props.rejectBlockchainContact}
-            {...item}
-          />
-        )}
-        contentContainerStyle={styles.contentContainerStyle}
-        style={{ flex: 1 }}
-        ListEmptyComponent={() => (
-          <View style={styles.container}>
-            <Text style={styles.text}>{'No transactions.'}</Text>
-          </View>
-        )}
-        ListFooterComponent={() => (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => props.navigation.navigate('ActivityScreen')}>
-            <Icon style={styles.buttonIcon} name={'activity'} />
-            <Text style={styles.buttonText}>{'See All Activity'}</Text>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
-  );
+class Transactions extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    this.props.getPendingContactRequests();
+  }
+
+  render(): React.Element<any> {
+    const {
+      acceptBlockchainContact,
+      rejectBlockchainContact,
+      transactions,
+      navigation,
+    } = this.props;
+
+    return (
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={transactions}
+          keyExtractor={(item, index) => `activity-${index}`}
+          renderItem={item => (
+            <TransactionCard
+              onAcceptBlockchainContact={acceptBlockchainContact}
+              onRejectBlockchainContact={rejectBlockchainContact}
+              {...item}
+            />
+          )}
+          contentContainerStyle={styles.contentContainerStyle}
+          style={{ flex: 1 }}
+          ListEmptyComponent={() => (
+            <View style={styles.container}>
+              <Text style={styles.text}>{'No transactions.'}</Text>
+            </View>
+          )}
+          ListFooterComponent={() => (
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('ActivityScreen')}>
+              <Icon style={styles.buttonIcon} name={'activity'} />
+              <Text style={styles.buttonText}>{'See All Activity'}</Text>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    );
+  }
 }
 
 export default connect(
