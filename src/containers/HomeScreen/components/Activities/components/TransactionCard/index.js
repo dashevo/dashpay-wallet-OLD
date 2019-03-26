@@ -42,7 +42,7 @@ class TransactionCard extends React.PureComponent {
   }
 
   handleAcceptBlockchainContact = e => {
-    const { item: { sender: { address } } } = this.props;
+    const { address } = this.props.item;
     this.setState({ isLoading: true });
     this.props
       .onAcceptBlockchainContact(address)
@@ -53,11 +53,12 @@ class TransactionCard extends React.PureComponent {
   };
 
   handleRejectBlockchainContact = e => {
-    const { item } = this.props;
+    const { address } = this.props.item;
+    const name = address;
     Alert.alert(
       'Reject Contact Request',
       `Are you sure you want to reject the contact request from ${
-        item.sender.name
+        name
       }?`,
       [
         {
@@ -70,7 +71,7 @@ class TransactionCard extends React.PureComponent {
           onPress: () => {
             this.setState({ isLoading: true });
             this.props
-              .onRejectBlockchainContact(item)
+              .onRejectBlockchainContact(address)
               .then(
                 () => this.setState({ isLoading: false }),
                 () => this.setState({ isLoading: false })
@@ -84,7 +85,10 @@ class TransactionCard extends React.PureComponent {
 
   render() {
     const { item } = this.props;
-    const { sender = {}, timestamp } = item;
+    const { address } = item;
+    const timestamp = new Date;
+    const name = address;
+    const image = 'https://randomuser.me/api/portraits/men/32.jpg';
     if (item.type === 'accepted') {
       return (
         <Card onPress={() => {}}>
@@ -95,12 +99,12 @@ class TransactionCard extends React.PureComponent {
                   <View style={styles.header}>
                     <View style={styles.row}>
                       <View style={styles.avatar}>
-                        <SmallAvatar name={sender.name} image={sender.image} />
+                        <SmallAvatar name={name} image={image} />
                       </View>
                       <View style={styles.metadata}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                           <Text style={styles.title} numberOfLines={1}>
-                            {sender.name}
+                            {name}
                           </Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -155,12 +159,12 @@ class TransactionCard extends React.PureComponent {
                   <View style={styles.header}>
                     <View style={styles.row}>
                       <View style={styles.avatar}>
-                        <SmallAvatar name={sender.name} image={sender.image} />
+                        <SmallAvatar name={name} image={image} />
                       </View>
                       <View style={styles.metadata}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                           <Text style={styles.title} numberOfLines={1}>
-                            {sender.name}
+                            {name}
                           </Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row' }}>

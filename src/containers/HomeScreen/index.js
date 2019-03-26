@@ -158,11 +158,13 @@ class HomeScreen extends React.Component<Props, State> {
       inputRange: [0, 1.75, 2],
       outputRange: [0, 0, 1]
     };
-    return (
-      <FadeIn {...props}>
-        <Activities {...this.props} />
-      </FadeIn>
-    );
+    if (this.state.complete) {
+      return (
+        <FadeIn {...props}>
+          <Activities {...this.props} />
+        </FadeIn>
+      );
+    }
   }
 
   render(): React.Element<any> {

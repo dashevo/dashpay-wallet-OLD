@@ -20,15 +20,20 @@ const DEFAULTS = {
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 1,
-  keys: ['name', 'address']
+  keys: ["name"]
 };
 
-async function search(dashPayDap, searchString) {
-  const { received, sent } = await dashPayDap.getPendingContactRequests();
-  const data = [...received.map(address => ({ address, state: 'PENDING CONTACT' })),
-    sent.map(address => ({ address, state: 'SENT REQUEST' }))];
-  const fuzzy = new Fuzzy(data, DEFAULTS);
-  return fuzzy.search(searchString);
+const fuzzy = new Fuzzy(data, DEFAULTS);
+let timeoutId = null;
+
+function search(searchString) {
+  return new Promise((resolve, reject) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      const res = fuzzy.search(searchString);
+      return resolve(res);
+    }, 3000);
+  });
 }
 
 export default search;

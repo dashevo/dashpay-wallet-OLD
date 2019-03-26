@@ -18,56 +18,14 @@ import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
 import { SEND_CONTACT_REQUEST_SUCCESS } from './constants';
 import { SEND_CONTACT_REQUEST_FAILURE } from './constants';
 
-const tmpRequests = [
-  {
-    recipient: 'yPefq9AuH3XR8jCp6nT7WtayMrN2J5vkKz',
-    type: 'received',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yQ8K2zYnqprfCwc5NhEJVtWAjxHPgT3uFD',
-    type: 'received',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yQT54ewCdKVAvYxmzFWUsnEcypD6kR9S8Z',
-    type: 'received',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'ydY6Gga2DF59m4ApUNrtq3fER7wbyMhsJK',
-    type: 'received',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yWLT463GdAqygBVkNX2DwftmSj7CUvebF5',
-    type: 'received',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'ywN8RPv493AjgzJrbSF7DWaKTs2HLpxMtm',
-    type: 'accepted',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yDN9tsW4CcGyuXLfMxpbPkhTz2daFr63Y7',
-    type: 'accepted',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yg3maXx62fsC7cTA9dntFyYDbMWV5qHeuR',
-    type: 'accepted',
-    timestamp: new Date()
-  },
-  {
-    recipient: 'yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx',
-    type: 'accepted',
-    timestamp: new Date()
-  }
-];
-
-export function requests(state = tmpRequests, action) {
+export function requests(state = [], action) {
   switch (action.type) {
+    case 'GET_PENDING_CONTACT_REQUESTS_SUCCESS':
+      return action.response.received.map(address => {
+        return {
+          address,
+        };
+      });
     case 'ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS':
       return state.map(request => {
         if (request.recipient === action.response.sender.address) {

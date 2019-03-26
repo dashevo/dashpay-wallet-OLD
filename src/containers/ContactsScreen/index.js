@@ -77,7 +77,7 @@ class ContactsScreen extends React.Component<Props, State> {
 
   handleSubmit(values: Object) {
     const { query } = values;
-    this.props.searchBlockchainContacts(query);
+    this.props.searchLocalContacts(query);
   }
 
   handleMore(values: Object) {

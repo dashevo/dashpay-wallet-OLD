@@ -9,12 +9,6 @@ import { orderBy } from 'lodash';
 function mapStateToProps(state, props) {
   let transactions = [...state.contacts.blockchain.requests];
 
-  transactions = transactions.map(transaction => ({
-    timestamp: transaction.timestamp,
-    type: transaction.type,
-    sender: state.contacts.local.items[transaction.recipient]
-  }));
-
   return {
     transactions
   };
