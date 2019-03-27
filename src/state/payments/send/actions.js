@@ -44,9 +44,10 @@ export const createSendPaymentTransaction = opts => {
             satoshis
           });
 
+          const txid = await walletLib.account.broadcastTransaction(tx.toString());
           return {
             ...opts,
-            tx
+            tx:{id:txid}
           };
         } catch (err) {
           const { message = 'Something went wrong.' } = err;
