@@ -38,14 +38,9 @@ export function sendContactRequest(address) {
         SEND_CONTACT_REQUEST_SUCCESS,
         SEND_CONTACT_REQUEST_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          const dashPayDap = walletLib.account.getDAP('dashpaydap');
-          return dashPayDap.sendContactRequest(address);
-        } catch (error) {
-          const { message = "Something went wrong." } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.sendContactRequest(address);
       }
     });
   };
@@ -59,14 +54,9 @@ export function getPendingContactRequests(address) {
         GET_PENDING_CONTACT_REQUESTS_SUCCESS,
         GET_PENDING_CONTACT_REQUESTS_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          const dashPayDap = walletLib.account.getDAP('dashpaydap');
-          return dashPayDap.getPendingContactRequests();
-        } catch (error) {
-          const { message = "Something went wrong." } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.getPendingContactRequests();
       }
     });
   };
@@ -81,13 +71,8 @@ export function searchBlockchainContacts(query, options = defaults) {
         SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
         SEARCH_BLOCKCHAIN_CONTACTS_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          return searchApi(query);
-        } catch (error) {
-          const { message = 'Something went wrong.' } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        return searchApi(query);
       }
     });
   };
@@ -102,9 +87,13 @@ export function acceptBlockchainContact(address) {
         ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
         ACCEPT_BLOCKCHAIN_CONTACT_FAILURE
       ],
-      async asyncTask(state) {
+      async asyncTask() {
         const dashPayDap = walletLib.account.getDAP('dashpaydap');
-        return dashPayDap.acceptContactRequest(address);
+        const response = await dashPayDap.acceptContactRequest(address);
+        return {
+          address,
+          response,
+        };
       }
     });
   };
