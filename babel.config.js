@@ -3,6 +3,12 @@ module.exports = {
   plugins: [
     // ['transform-remove-console'],
     [
+      "babel-plugin-transform-builtin-extend",
+      {
+        globals: ["Error", "Array"]
+      }
+    ],
+    [
       '@babel/plugin-transform-spread',
       {
         loose: true
