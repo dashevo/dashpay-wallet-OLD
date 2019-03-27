@@ -28,7 +28,7 @@ export function requests(state = [], action) {
       });
     case 'ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS':
       return state.map(request => {
-        if (request.recipient === action.response.sender.address) {
+        if (request.address === action.address) {
           return {
             ...request,
             timestamp: new Date(),
