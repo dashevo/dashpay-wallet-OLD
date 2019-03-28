@@ -3,6 +3,9 @@
  *
  * @flow
  */
+import { getTransactionHistory } from 'state/transactions';
+import { EVENTS } from '@dashevo/wallet-lib';
+
 export const INITIALIZE_WALLET_REQUEST = 'INITIALIZE_WALLET_REQUEST';
 export const INITIALIZE_WALLET_SUCCESS = 'INITIALIZE_WALLET_SUCCESS';
 export const INITIALIZE_WALLET_FAILURE = 'INITIALIZE_WALLET_FAILURE';
@@ -32,6 +35,20 @@ export const initializeWallet = () => {
           network,
           transport
         });
+
+        console.log("Next unused address: ", walletLib.account.getUnusedAddress());
+
+        walletLib.account.event.on(
+          EVENTS.BALANCE_CHANGED,
+          (info) => {
+            console.log('Balance changed', info);
+            dispatch({
+              type: 'RECEIVE_BALANCE',
+              response: walletLib.account.getBalance()
+            });
+            dispatch(getTransactionHistory());
+          }
+        );
 
         const balance = walletLib.account.getBalance();
         return dispatch({
