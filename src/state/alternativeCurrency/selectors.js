@@ -4,4 +4,9 @@
  * @flow
  */
 
-export const selectAlternativeCurrency = ({ alternativeCurrency }) => alternativeCurrency;
+export const selectAlternativeCurrency = ({alternativeCurrency}) => ({
+  code: alternativeCurrency.code,
+  name: alternativeCurrency.name,
+  symbol: alternativeCurrency.symbol,
+  rate: 79.29 // Tmp
+});
