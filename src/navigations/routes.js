@@ -18,8 +18,12 @@ import PayScreen from 'containers/PayScreen';
 import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
 import ActivitiesScreen from 'containers/ActivitiesScreen';
+import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
 
 const routes = {
+  DeveloperMenuScreen: {
+    screen: DeveloperMenuScreen
+  },
   HomeScreen: {
     screen: HomeScreen
   },

@@ -72,7 +72,9 @@ export function searchBlockchainContacts(query, options = defaults) {
         SEARCH_BLOCKCHAIN_CONTACTS_FAILURE
       ],
       async asyncTask() {
-        return searchApi(query);
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        const contacts = await dashPayDap.getContacts();
+        return searchApi(contacts, query);
       }
     });
   };
