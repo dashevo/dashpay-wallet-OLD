@@ -4,3 +4,7 @@
  * @flow
  */
 export const selectBalance = state => state.account.balance;
+
+export const selectMnemonic = state => state.account.mnemonic;
+
+export const selectUsername = state => state.account.username;

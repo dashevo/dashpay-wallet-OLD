@@ -62,11 +62,12 @@ class ParallaxScrollView extends React.Component<any, any> {
         onScroll={Animated.event([
           { nativeEvent: { contentOffset: { y: this.scrollY } } }
         ])}>
+
+        <View style={{ height }} />
+        {this.props.renderBody(this.scrollY)}
         <Animated.View style={animatedStyle} onLayout={this._onLayout}>
           {this.props.renderHeader(this.scrollY)}
         </Animated.View>
-        <View style={{ height }} />
-        {this.props.renderBody(this.scrollY)}
       </Animated.ScrollView>
     );
   }
