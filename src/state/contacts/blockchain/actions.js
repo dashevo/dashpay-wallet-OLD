@@ -25,9 +25,7 @@ import { GET_PENDING_CONTACT_REQUESTS_REQUEST } from "./constants";
 import { GET_PENDING_CONTACT_REQUESTS_SUCCESS } from "./constants";
 import { GET_PENDING_CONTACT_REQUESTS_FAILURE } from "./constants";
 
-import searchApi from './api';
 import defaults from './defaults';
-import { random } from 'lodash';
 
 export function sendContactRequest(address) {
   return function(dispatch, getState, walletLib) {
@@ -74,7 +72,7 @@ export function searchBlockchainContacts(query, options = defaults) {
       async asyncTask() {
         const dashPayDap = walletLib.account.getDAP('dashpaydap');
         const contacts = await dashPayDap.getContacts();
-        return searchApi(contacts, query);
+        return Object.keys(contacts).map(name => ({name}));
       }
     });
   };
@@ -111,7 +109,7 @@ export function rejectBlockchainContact(contact) {
         REJECT_BLOCKCHAIN_CONTACT_FAILURE
       ],
       async asyncTask(state) {
-        // await wait(random(1500, 3000));
+        // TODO: rejection of blockchain contact
         return Promise.resolve(contact);
       }
     });
