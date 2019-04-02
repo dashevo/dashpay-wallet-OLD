@@ -3,10 +3,10 @@
  *
  * @flow
  */
-export default () => ({
-  user: {
-    name: 'Kreshnik Alidema',
-    icon: 'dash',
-    image: 'https://dashpay-wallet-static.dash.org/team/kreshnik_alidema.jpg'
-  }
-});
+import { createSelector } from 'reselect';
+import { selectUsername } from 'state/account';
+
+export default createSelector(
+  selectUsername,
+  name => ({ user: { name }})
+);
