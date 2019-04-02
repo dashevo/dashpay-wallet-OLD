@@ -4,6 +4,7 @@
  * @flow
  */
 import * as React from "react";
+import { NavigationActions } from 'react-navigation';
 import { View } from "react-native";
 import Text from "components/Text";
 import Input from 'components/Input';
@@ -52,7 +53,9 @@ class DeveloperMenuScreen extends React.Component {
   }
 
   render(): React.Element<any> {
-    const { navigate } = this.props.navigation;
+    const navReset = (routeName) => {
+      this.props.navigation.reset([NavigationActions.navigate({routeName})]);
+    };
     const { username, mnemonic } = this.state;
 
     return (
@@ -71,7 +74,7 @@ class DeveloperMenuScreen extends React.Component {
           value={username}
         />
         {DeveloperMenuScreen.touchableAction('Generate new mnemonic', () => this.props.createAccount())}
-        {DeveloperMenuScreen.touchableAction('Go to HomeScreen', () => navigate('HomeScreen'))}
+        {DeveloperMenuScreen.touchableAction('Go to HomeScreen', () => navReset('HomeScreen'))}
       </View>
     );
   }
