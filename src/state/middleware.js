@@ -31,7 +31,7 @@ const middleware = store => next => action => {
   const onSuccess = response => next(actionWith({ type: successType, response }));
   const onFailure = error => {
     return next(actionWith({ type: failureType, error: error.message }));
-  }
+  };
 
   return asyncTask.then(onSuccess, onFailure).catch(onFailure);
 };
