@@ -12,10 +12,11 @@ function mapStateToProps(state, props) {
   let transactions = selectTransactions(state);
 
   let activity = transactions.map(item => ({type: 'wallet', data: item, time: item.timestamp}));
+
   activity = activity.concat(
     requests.map(item => ({type: 'social', data: item, time: 0}))
   );
-  activity = activity.sort((a,b) => a > b ? -1 : 1) // descending by time
+  activity = activity.sort((a,b) => a.time > b.time ? -1 : 1) // descending by time
 
   return {
     activity

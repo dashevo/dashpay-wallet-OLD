@@ -51,10 +51,11 @@ export const initializeWallet = () => {
         );
 
         const balance = walletLib.account.getBalance();
-        return dispatch({
+        dispatch({
           type: 'RECEIVE_BALANCE',
           response: balance
         });
+        dispatch(getTransactionHistory());
       }
     });
 };

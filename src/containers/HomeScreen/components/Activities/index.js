@@ -48,7 +48,7 @@ class Transactions extends React.Component<Props, State> {
               return <SocialTransactionCard
                 onAcceptBlockchainContact={acceptBlockchainContact}
                 onRejectBlockchainContact={rejectBlockchainContact}
-                {...item.data}
+                item={item.data}
               />;
             } else if (item.type === 'wallet') {
               return <WalletTransactionCard item={item.data} />;

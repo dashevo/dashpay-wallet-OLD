@@ -9,8 +9,8 @@ import { selectAlternativeCurrency } from 'state/alternativeCurrency';
 export const selectTransactions = state => {
   return state.transactions.history.map(item => {
     let dashSat = item.to.reduce((accumulator,item) => (accumulator + item.valueSat), 0); // TODO don't assume we receive every TX output
-    let sender = { name: state.user.username, image: null };
-    let receiver = { name: state.user.username, image: null };
+    let sender = { name: state.account.username, image: null };
+    let receiver = { name: state.account.username, image: null };
     if (item.type == 'receive') { // TODO refer to an imported constant
       const fromAddress = item.from.length > 1 ? 'multiple addresses' : item.from[0].address;
       sender = { name: 'Unidentified Sender', image: null, address: fromAddress };
