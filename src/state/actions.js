@@ -38,7 +38,7 @@ export const initializeWallet = () => {
 
         console.log("Next unused address: ", walletLib.account.getUnusedAddress());
 
-        walletLib.account.event.on(
+        walletLib.account.events.on(
           EVENTS.BALANCE_CHANGED,
           (info) => {
             console.log('Balance changed', info);
