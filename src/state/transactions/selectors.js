@@ -20,8 +20,8 @@ export const selectTransactions = state => {
     } else if (item.type === 'moved') {
       dashSat = item.fees;
     }
-    const dashAmount = (dashSat / 1000000000).toString(10);
-    let fiatAmount = dashSat * selectAlternativeCurrency(state).rate / 1000000000; // TODO historical rates would be better
+    const dashAmount = (dashSat / 100000000).toString(10);
+    let fiatAmount = dashSat * selectAlternativeCurrency(state).rate / 100000000; // TODO historical rates would be better
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
     return {
