@@ -10,7 +10,6 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
   <application
-    android:networkSecurityConfig="@xml/react_native_config"
     android:name=".MainApplication"
     android:allowBackup="false"
     android:icon="@mipmap/ic_launcher"
