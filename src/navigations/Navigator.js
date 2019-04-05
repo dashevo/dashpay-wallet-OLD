@@ -52,7 +52,7 @@ class CustomNavigationView extends React.Component {
   }
 
   onBackPressed = () => {
-    return true;
+    return false; // return true if we want to override back behavior
   };
 
   render() {
