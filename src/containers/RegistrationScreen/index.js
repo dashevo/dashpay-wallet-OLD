@@ -4,6 +4,7 @@
  * @flow
  */
 import * as React from 'react';
+import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 
@@ -57,7 +58,7 @@ class RegistrationScreen extends React.Component<Props, State> {
           <Text>Submit</Text>
           </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('HomeScreen')}>
+          onPress={() => this.props.navigation.reset([NavigationActions.navigate('HomeScreen')])}>
           <Text>HomeScreen</Text>
         </TouchableOpacity>
       </View>
