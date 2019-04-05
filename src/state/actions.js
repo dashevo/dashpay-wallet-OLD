@@ -23,24 +23,21 @@ export const initializeWallet = () => {
         INITIALIZE_WALLET_SUCCESS,
         INITIALIZE_WALLET_FAILURE
       ],
-      async asyncTask(state) {
-        const { mnemonic, network, transport } = state.account;
-        try {
-          await walletLib.initializeWallet({
-            mnemonic,
-            network,
-            transport
-          });
+      async asyncTask() {
+        const state = getState();
+        const { mnemonic, username, network, transport } = state.account;
+        await walletLib.initializeWallet({
+          mnemonic,
+          username,
+          network,
+          transport
+        });
 
-          const balance = walletLib.account.getBalance();
-          return dispatch({
-            type: 'RECEIVE_BALANCE',
-            response: balance
-          });
-        } catch (err) {
-          const { message = 'Something went wrong.' } = err;
-          throw new Error(message);
-        }
+        const balance = walletLib.account.getBalance();
+        return dispatch({
+          type: 'RECEIVE_BALANCE',
+          response: balance
+        });
       }
     });
 };

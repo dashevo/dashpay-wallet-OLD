@@ -3,6 +3,7 @@
  *
  * @flow
  */
+import { Wallet } from '@dashevo/wallet-lib';
 import * as ActionsTypes from "./constants";
 
 /**
@@ -18,12 +19,7 @@ export const forceRefreshAccount = () =>{
         ActionsTypes.CHANGE_NETWORK_FAILURE,
       ],
       async asyncTask(state) {
-        try {
-          return walletLib.account.forceRefreshAccount();
-        } catch (err) {
-          const { message = "Something went wrong." } = err;
-          throw new Error(message);
-        }
+        return walletLib.account.forceRefreshAccount();
       }
     });
 };
@@ -41,12 +37,22 @@ export const changeNetwork = (networkName) =>{
         ActionsTypes.CHANGE_NETWORK_FAILURE,
       ],
       async asyncTask(state) {
-        try {
-          return walletLib.account.updateNetwork(networkName);
-        } catch (err) {
-          const { message = "Something went wrong." } = err;
-          throw new Error(message);
-        }
+        return walletLib.account.updateNetwork(networkName);
+      }
+    });
+};
+
+export const register = (username) => {
+  return (dispatch, getState, walletLib) =>
+    dispatch({
+      types: [
+        ActionsTypes.REGISTER_USERNAME_REQUEST,
+        ActionsTypes.REGISTER_USERNAME_SUCCESS,
+        ActionsTypes.REGISTER_USERNAME_FAILURE,
+      ],
+      async asyncTask(state) {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.registerBUser(username);
       }
     });
 };
@@ -65,12 +71,33 @@ export const getUnusedAddress = (type='external') => {
         ActionsTypes.GET_UNUSED_ADDRESS_FAILURE,
       ],
       async asyncTask(state) {
-        try {
-          return walletLib.account.getUnusedAddress(type);
-        } catch (err) {
-          const { message = "Something went wrong." } = err;
-          throw new Error(message);
-        }
+        return walletLib.account.getUnusedAddress(type);
       }
     });
 };
+
+export const createAccount = () => {
+  return (dispatch, getState, walletLib) => {
+    const state = getState();
+    const { network, transport } = state.account;
+    const wallet = new Wallet({
+      network,
+      transport,
+    });
+    mnemonic = wallet.exportWallet()
+    dispatch({
+      type: ActionsTypes.ACCOUNT_CREATED,
+      mnemonic,
+    })
+  };
+};
+
+export const setMnemonic = (mnemonic) => ({
+  type: ActionsTypes.SET_MNEMONIC,
+  mnemonic,
+});
+
+export const setUsername = (username) => ({
+  type: ActionsTypes.SET_USERNAME,
+  username,
+});

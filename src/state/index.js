@@ -14,7 +14,6 @@ export * from './settings';
 export * from './language';
 export * from './payment';
 export * from './alternativeCurrency';
-export * from './user';
 export * from './account';
 
 import thunk from 'redux-thunk';
@@ -37,32 +36,24 @@ let walletLib = {
   wallet: null,
   account: null,
   initializeWallet(opts) {
-    const username = 'DashPayTeam';
-    const network = 'testnet';
-    const mnemonic =
-      'light point battle foam find motion true because genre people banana fit';
+    const { mnemonic, username, network } = opts;
     const accountId = opts.accountId || 0;
 
     return new Promise((resolve, reject) => {
-      try {
-        const dpd = new DashPayDAP({ username });
+      const dpd = new DashPayDAP({ username });
 
-        walletLib.wallet = new Wallet({
-          network,
-          mnemonic,
-          plugins: [dpd],
-          allowSensitiveOperations: true,
-          transport
-        });
+      walletLib.wallet = new Wallet({
+        network,
+        mnemonic,
+        plugins: [dpd],
+        allowSensitiveOperations: true,
+        transport
+      });
 
-        walletLib.account = walletLib.wallet.getAccount({ index: accountId });
-        walletLib.account.events.on('ready', () => {
-          resolve(true);
-        });
-      } catch (error) {
-        console.error(error);
-        reject(error);
-      }
+      walletLib.account = walletLib.wallet.getAccount({ index: accountId });
+      walletLib.account.events.on('ready', () => {
+        resolve(true);
+      });
     });
   }
 };

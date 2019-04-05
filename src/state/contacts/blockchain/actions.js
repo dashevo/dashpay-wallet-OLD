@@ -25,9 +25,7 @@ import { GET_PENDING_CONTACT_REQUESTS_REQUEST } from "./constants";
 import { GET_PENDING_CONTACT_REQUESTS_SUCCESS } from "./constants";
 import { GET_PENDING_CONTACT_REQUESTS_FAILURE } from "./constants";
 
-import searchApi from './api';
 import defaults from './defaults';
-import { random } from 'lodash';
 
 export function sendContactRequest(address) {
   return function(dispatch, getState, walletLib) {
@@ -38,14 +36,9 @@ export function sendContactRequest(address) {
         SEND_CONTACT_REQUEST_SUCCESS,
         SEND_CONTACT_REQUEST_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          const dashPayDap = walletLib.account.getDAP('dashpaydap');
-          return dashPayDap.sendContactRequest(address);
-        } catch (error) {
-          const { message = "Something went wrong." } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.sendContactRequest(address);
       }
     });
   };
@@ -59,14 +52,9 @@ export function getPendingContactRequests(address) {
         GET_PENDING_CONTACT_REQUESTS_SUCCESS,
         GET_PENDING_CONTACT_REQUESTS_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          const dashPayDap = walletLib.account.getDAP('dashpaydap');
-          return dashPayDap.getPendingContactRequests();
-        } catch (error) {
-          const { message = "Something went wrong." } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        return dashPayDap.getPendingContactRequests();
       }
     });
   };
@@ -81,13 +69,10 @@ export function searchBlockchainContacts(query, options = defaults) {
         SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
         SEARCH_BLOCKCHAIN_CONTACTS_FAILURE
       ],
-      async asyncTask(state) {
-        try {
-          return searchApi(query);
-        } catch (error) {
-          const { message = 'Something went wrong.' } = error;
-          throw new Error(message);
-        }
+      async asyncTask() {
+        const dashPayDap = walletLib.account.getDAP('dashpaydap');
+        const contacts = await dashPayDap.getContacts();
+        return Object.keys(contacts).map(name => ({name}));
       }
     });
   };
@@ -102,9 +87,13 @@ export function acceptBlockchainContact(address) {
         ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
         ACCEPT_BLOCKCHAIN_CONTACT_FAILURE
       ],
-      async asyncTask(state) {
+      async asyncTask() {
         const dashPayDap = walletLib.account.getDAP('dashpaydap');
-        return dashPayDap.acceptContactRequest(address);
+        const response = await dashPayDap.acceptContactRequest(address);
+        return {
+          address,
+          response,
+        };
       }
     });
   };
@@ -120,7 +109,7 @@ export function rejectBlockchainContact(contact) {
         REJECT_BLOCKCHAIN_CONTACT_FAILURE
       ],
       async asyncTask(state) {
-        // await wait(random(1500, 3000));
+        // TODO: rejection of blockchain contact
         return Promise.resolve(contact);
       }
     });

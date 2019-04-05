@@ -3,10 +3,15 @@
  *
  * @flow
  */
+
 import { createSelector } from 'reselect';
-import { selectUsername } from 'state/account';
+import { selectMnemonic, selectUsername } from 'state';
 
 export default createSelector(
+  selectMnemonic,
   selectUsername,
-  name => ({ user: { name }})
+  (mnemonic, username) => ({
+    mnemonic,
+    username
+  }),
 );

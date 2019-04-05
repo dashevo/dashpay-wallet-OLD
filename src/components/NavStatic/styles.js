@@ -8,10 +8,10 @@ const styles = (theme: Object): Object => ({
   ['container']: {
     height: theme.navbarContainerHeight,
     paddingRight: 8,
+    paddingTop: 40,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'flex-end',
-    backgroundColor: "transparent",
     borderColor: "transparent",
   },
   ['button']: {

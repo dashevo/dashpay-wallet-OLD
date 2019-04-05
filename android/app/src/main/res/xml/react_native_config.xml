@@ -4,7 +4,6 @@
     <domain includeSubdomains="false">localhost</domain>
     <domain includeSubdomains="false">10.0.2.2</domain>
     <domain includeSubdomains="false">10.0.3.2</domain>
-    <domain includeSubdomains="false">54.187.113.35</domain>
     <domain includeSubdomains="false">34.216.233.163</domain>
     <domain includeSubdomains="false">54.200.201.200</domain>
     <domain includeSubdomains="false">54.187.111.107</domain>

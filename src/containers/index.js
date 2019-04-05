@@ -15,6 +15,7 @@ export { default as ErrorScreen } from './ErrorScreen';
 export { default as ReceiveScreen } from './ReceiveScreen';
 export { default as SendScreen } from './SendScreen';
 export { default as SettingsScreen } from './SettingsScreen';
+export { default as RegistrationScreen } from './RegistrationScreen';
 
 export {
   default as SettingsLanguageScreen

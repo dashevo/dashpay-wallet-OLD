@@ -28,22 +28,12 @@ const middleware = store => next => action => {
     })
   );
 
-  return asyncTask.then(
-    response =>
-      next(
-        actionWith({
-          type: successType,
-          response
-        })
-      ),
-    error =>
-      next(
-        actionWith({
-          type: failureType,
-          error
-        })
-      )
-  );
+  const onSuccess = response => next(actionWith({ type: successType, response }));
+  const onFailure = error => {
+    return next(actionWith({ type: failureType, error: error.message }));
+  };
+
+  return asyncTask.then(onSuccess, onFailure).catch(onFailure);
 };
 
 export default middleware;
