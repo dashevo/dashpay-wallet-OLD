@@ -42,7 +42,7 @@ class RegistrationScreen extends React.Component<Props, State> {
       alert('Too short!');
       return;
     }
-    this.props.dispatch(register(this.state.username));
+    this.props.register(this.state.username);
   }
 
   render(): React.Element<any> {
@@ -58,19 +58,17 @@ class RegistrationScreen extends React.Component<Props, State> {
           <Text>Submit</Text>
           </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.navigation.reset([NavigationActions.navigate('HomeScreen')])}>
-          <Text>HomeScreen</Text>
+          onPress={() => this.props.navigation.goBack()}>
+          <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
     );
   }
 };
 
-// RegistrationScreen = connect(
-//   selectors,
-//   actions
-// )(RegistrationScreen);
-
-RegistrationScreen = connect(null)(RegistrationScreen);
+RegistrationScreen = connect(
+  selectors,
+  actions
+)(RegistrationScreen);
 
 export default RegistrationScreen;

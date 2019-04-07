@@ -14,7 +14,6 @@
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib#demo",
     "assert": "^1.1.1",
     "asyncstorage-down": "^4.1.2",
-    "crypto": "^1.0.1",
     "events": "^1.0.0",
     "fuse.js": "^3.4.4",
     "intl": "^1.2.5",
