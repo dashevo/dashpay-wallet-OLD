@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Text,
   StyleSheet,
-  View,
+  SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
 
@@ -22,7 +22,7 @@ class StaticNav extends React.PureComponent {
     return (
       <Composed>
         {({ styles }) => (
-          <View style={styles.container} pointerEvents='box-none'>
+          <SafeAreaView style={styles.container} pointerEvents='box-none'>
             <TouchableOpacity style={styles.button} onPress={()=>{navigation.navigate('ActivitiesScreen')}}>
               <Icon style={styles.icon} name={'squiggle'} />
               <Text style={styles.text}>{'3'}</Text>
@@ -30,7 +30,7 @@ class StaticNav extends React.PureComponent {
             <TouchableOpacity style={styles.button} onPress={showMenu}>
               <Icon style={styles.icon} name={'bars'} />
             </TouchableOpacity>
-          </View>
+          </SafeAreaView>
         )}
       </Composed>
     );
