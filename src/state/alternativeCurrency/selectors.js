@@ -4,4 +4,7 @@
  * @flow
  */
 
-export const selectAlternativeCurrency = ({ alternativeCurrency }) => alternativeCurrency;
+export const selectAlternativeCurrency = (state) => ({
+  ...state.selectAlternativeCurrency,
+  rate: 79.29 // Tmp
+});

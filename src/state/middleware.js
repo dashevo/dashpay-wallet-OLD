@@ -33,7 +33,7 @@ const middleware = store => next => action => {
     return next(actionWith({ type: failureType, error: error.message }));
   };
 
-  return asyncTask.then(onSuccess, onFailure).catch(onFailure);
+  return asyncTask.then(onSuccess, onFailure);
 };
 
 export default middleware;

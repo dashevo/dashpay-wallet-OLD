@@ -15,7 +15,8 @@ import { Container } from 'components';
 import View from 'components/View';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import TransactionCard from './components/TransactionCard';
+import { default as SocialTransactionCard } from './components/TransactionCard';
+import { default as WalletTransactionCard } from 'components/TransactionCard';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
@@ -33,22 +34,26 @@ class Transactions extends React.Component<Props, State> {
     const {
       acceptBlockchainContact,
       rejectBlockchainContact,
-      transactions,
+      activity,
       navigation,
     } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
         <FlatList
-          data={transactions}
+          data={activity}
           keyExtractor={(item, index) => `activity-${index}`}
-          renderItem={item => (
-            <TransactionCard
-              onAcceptBlockchainContact={acceptBlockchainContact}
-              onRejectBlockchainContact={rejectBlockchainContact}
-              {...item}
-            />
-          )}
+          renderItem={({item}) => {
+            if (item.type === 'social') {
+              return <SocialTransactionCard
+                onAcceptBlockchainContact={acceptBlockchainContact}
+                onRejectBlockchainContact={rejectBlockchainContact}
+                item={item.data}
+              />;
+            } else if (item.type === 'wallet') {
+              return <WalletTransactionCard item={item.data} />;
+            }
+          }}
           contentContainerStyle={styles.contentContainerStyle}
           style={{ flex: 1 }}
           ListEmptyComponent={() => (
