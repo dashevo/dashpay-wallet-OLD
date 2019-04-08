@@ -61,11 +61,11 @@ function MainMenu(props: Props): React.Element<any> {
             <TouchableOpacity style={styles.item}>
               <Text style={styles.itemText}>{'Home'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+            <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('DeveloperMenuScreen')}>
+              <Text style={styles.itemText}>{'Developer Menu Screen'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+            <TouchableOpacity style={styles.item} onPress={() => this.props.navigation.navigate('RegistrationScreen')}>
+              <Text style={styles.itemText}>{'User Registration Screen'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
               <Text style={styles.itemText}>{'Menu item'}</Text>
