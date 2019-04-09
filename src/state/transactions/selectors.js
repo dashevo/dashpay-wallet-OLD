@@ -6,6 +6,8 @@
 
 import { selectAlternativeCurrency } from 'state/alternativeCurrency';
 
+export const selectRequests = state => state.contacts.blockchain.requests;
+
 export const selectTransactions = state => {
   return state.transactions.history.map(item => {
     let dashSat = item.to.reduce((accumulator,item) => (accumulator + item.valueSat), 0); // TODO don't assume we receive every TX output
