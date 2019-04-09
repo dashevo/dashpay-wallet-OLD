@@ -4,7 +4,6 @@
  * @flow
  */
 import * as React from 'react';
-import { NavigationActions } from 'react-navigation';
 
 import styles from './styles';
 
@@ -15,7 +14,6 @@ import { connect } from "react-redux";
 import selectors from "./selectors";
 import actions from "./actions";
 
-import { register } from 'state';
 import { View } from 'components';
 import { Text } from 'components';
 import { Input } from 'components';
@@ -45,7 +43,7 @@ class RegistrationScreen extends React.Component<Props, State> {
     this.props.register(this.state.username);
   }
 
-  render(): React.Element<any> {
+  render(): ReactElement {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Registration</Text>
@@ -66,9 +64,7 @@ class RegistrationScreen extends React.Component<Props, State> {
   }
 };
 
-RegistrationScreen = connect(
+export default connect(
   selectors,
   actions
 )(RegistrationScreen);
-
-export default RegistrationScreen;
