@@ -52,7 +52,9 @@ export const register = (username) => {
       ],
       async asyncTask(state) {
         const dashPayDap = walletLib.account.getDAP('dashpaydap');
-        return dashPayDap.registerBUser(username);
+        return dashPayDap.registerBUser(username).then(() => {
+          return dashPayDap.registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, 'Bio', 'Displayname', username);
+        });
       }
     });
 };
