@@ -18,7 +18,7 @@ export const forceRefreshAccount = () =>{
         ActionsTypes.CHANGE_NETWORK_SUCCESS,
         ActionsTypes.CHANGE_NETWORK_FAILURE,
       ],
-      async asyncTask(state) {
+      async asyncTask() {
         return walletLib.account.forceRefreshAccount();
       }
     });
@@ -36,7 +36,7 @@ export const changeNetwork = (networkName) =>{
         ActionsTypes.CHANGE_NETWORK_SUCCESS,
         ActionsTypes.CHANGE_NETWORK_FAILURE,
       ],
-      async asyncTask(state) {
+      async asyncTask() {
         return walletLib.account.updateNetwork(networkName);
       }
     });
@@ -50,10 +50,12 @@ export const register = (username) => {
         ActionsTypes.REGISTER_USERNAME_SUCCESS,
         ActionsTypes.REGISTER_USERNAME_FAILURE,
       ],
-      async asyncTask(state) {
+      async asyncTask() {
+        const displayName = username;
+        const bio = `I am ${displayName}, my bio is pretty awesome`;
         const dashPayDap = walletLib.account.getDAP('dashpaydap');
-        return dashPayDap.registerBUser(username).then(() => {
-          return dashPayDap.registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, 'Bio', 'Displayname', username);
+        await dashPayDap.registerBUser(username).then(() => {
+          return dashPayDap.registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, bio, displayName, username);
         });
       }
     });
@@ -72,21 +74,21 @@ export const getUnusedAddress = (type='external') => {
         ActionsTypes.GET_UNUSED_ADDRESS_SUCCESS,
         ActionsTypes.GET_UNUSED_ADDRESS_FAILURE,
       ],
-      async asyncTask(state) {
+      async asyncTask() {
         return walletLib.account.getUnusedAddress(type);
       }
     });
 };
 
 export const createAccount = () => {
-  return (dispatch, getState, walletLib) => {
+  return (dispatch, getState) => {
     const state = getState();
     const { network, transport } = state.account;
     const wallet = new Wallet({
       network,
       transport,
     });
-    mnemonic = wallet.exportWallet()
+    const mnemonic = wallet.exportWallet()
     dispatch({
       type: ActionsTypes.ACCOUNT_CREATED,
       mnemonic,

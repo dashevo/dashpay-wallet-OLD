@@ -12,5 +12,15 @@
     "prettier",
     "prettier/flowtype",
     "prettier/react"
-  ]
+  ],
+  "rules": {
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
 }

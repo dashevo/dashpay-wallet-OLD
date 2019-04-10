@@ -4,20 +4,23 @@
  * @flow
  */
 import * as React from 'react';
+import { connect } from "react-redux";
+import {
+  View,
+  Text,
+  Input,
+  TouchableOpacity,
+} from 'components';
 
 import styles from './styles';
 
-import type { ReactElement } from './types';
-import type { Props } from './types';
-import type { State } from './types';
-import { connect } from "react-redux";
+import type {
+  ReactElement,
+  Props,
+  State
+} from './types';
 import selectors from "./selectors";
 import actions from "./actions";
-
-import { View } from 'components';
-import { Text } from 'components';
-import { Input } from 'components';
-import { TouchableOpacity } from 'components';
 
 class RegistrationScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -26,6 +29,10 @@ class RegistrationScreen extends React.Component<Props, State> {
     this.handleUsernameEdit = this.handleUsernameEdit.bind(this);
     this.state = {
       username: '',
+      profile: {
+        displayName: '',
+        bio: '',
+      }
     };
   }
 
@@ -36,27 +43,32 @@ class RegistrationScreen extends React.Component<Props, State> {
   }
 
   handleSubmit() {
-    if (this.state.username.length < 4) {
+    const { register } = this.props;
+    const { username } = this.state;
+    if (username.length < 4) {
       alert('Too short!');
-      return;
+    } else {
+      register(username);
     }
-    this.props.register(this.state.username);
   }
 
   render(): ReactElement {
+    const { username } = this.state;
+    const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Registration</Text>
         <Input
           style={styles.input}
           onChangeText={this.handleUsernameEdit}
-          value={this.state.username} />
+          value={username} />
         <TouchableOpacity
           onPress={this.handleSubmit}>
           <Text>Submit</Text>
           </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}>
+          onPress={() => navigation.goBack()}>
           <Text>Go Back</Text>
         </TouchableOpacity>
       </View>
