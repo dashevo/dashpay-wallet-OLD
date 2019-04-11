@@ -46,7 +46,7 @@ const account = (state = initialState, action) => {
       alert('Success');
       return {
         ...state,
-        username: action.uname,
+        username: action.response.uname,
       };
     case ActionsTypes.REGISTER_USERNAME_FAILURE:
       alert(`Error: ${action.error.message}`);
