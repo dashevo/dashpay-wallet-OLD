@@ -4,14 +4,16 @@
  * @flow
  */
 
-import { SendScreen } from 'containers';
-import { ReceiveScreen } from 'containers';
-import { ErrorScreen } from 'containers';
-import { SettingsScreen } from 'containers';
-import { SettingsLanguageScreen } from 'containers';
-import { SettingsAlternativeCurrencyScreen } from 'containers';
-import { ContactsScreen } from 'containers';
-import { ContactScreen } from 'containers';
+import {
+  SendScreen,
+  ReceiveScreen,
+  ErrorScreen,
+  SettingsScreen,
+  SettingsLanguageScreen,
+  SettingsAlternativeCurrencyScreen,
+  ContactsScreen,
+  ContactScreen,
+} from 'containers';
 import HomeScreen from 'containers/HomeScreen';
 import RegistrationScreen from 'containers/RegistrationScreen';
 import PayScreen from 'containers/PayScreen';
@@ -22,47 +24,47 @@ import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
 
 const routes = {
   DeveloperMenuScreen: {
-    screen: DeveloperMenuScreen
+    screen: DeveloperMenuScreen,
   },
   HomeScreen: {
-    screen: HomeScreen
+    screen: HomeScreen,
   },
   ActivitiesScreen: {
-    screen: ActivitiesScreen
+    screen: ActivitiesScreen,
   },
   RegistrationScreen: {
-    screen: RegistrationScreen
+    screen: RegistrationScreen,
   },
   CameraRollScreen: {
-    screen: CameraRollScreen
+    screen: CameraRollScreen,
   },
   CameraScreen: {
-    screen: CameraScreen
+    screen: CameraScreen,
   },
   ContactsScreen: {
-    screen: ContactsScreen
+    screen: ContactsScreen,
   },
   ContactScreen: {
-    screen: ContactScreen
+    screen: ContactScreen,
   },
   SendScreen: {
-    screen: PayScreen
+    screen: PayScreen,
   },
   ErrorScreen: {
-    screen: ErrorScreen
+    screen: ErrorScreen,
   },
   ReceiveScreen: {
-    screen: ReceiveScreen
+    screen: ReceiveScreen,
   },
   SettingsScreen: {
-    screen: SettingsScreen
+    screen: SettingsScreen,
   },
   SettingsLanguageScreen: {
-    screen: SettingsLanguageScreen
+    screen: SettingsLanguageScreen,
   },
   SettingsAlternativeCurrencyScreen: {
-    screen: SettingsAlternativeCurrencyScreen
-  }
+    screen: SettingsAlternativeCurrencyScreen,
+  },
 };
 
 export default routes;

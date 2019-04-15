@@ -1,65 +1,53 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
+import Fuzzy from 'fuse.js';
+import { createSelector } from 'reselect';
+import {
+  sortBy,
+} from 'lodash';
+import {
+  filterParamsSelector,
+  blockchainContactsSelector,
+  localContactsSelector,
+} from 'state';
 
-// External dependencies
-import { sortBy } from 'lodash';
-import { take } from 'lodash';
+const fuzzyOptions = {
+  shouldSort: true,
+  threshold: 0.2,
+  location: 0,
+  distance: 10,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: ['name'],
+};
 
-// Internal dependencies
-import { getLocalContacts, getBlockchainContacts } from 'state';
-
-function selector(state) {
-  let contacts = [];
-  const frequentlyTitle = 'Frequently';
-  const frequentlyData = take(sortBy(state.contacts.local.items, 'name'), 5);
-  contacts.push({ title: frequentlyTitle, data: frequentlyData });
-
-  const alphabeticallyTitle = 'Alphabetically';
-  const alphabeticallyData = sortBy(state.contacts.local.items, 'name');
-  contacts.push({ title: alphabeticallyTitle, data: alphabeticallyData });
-
-  const blockchainQuery = state.contacts.blockchain.query;
-  const localQuery = state.contacts.local.query;
-  const visible = state.contacts.blockchain.visible;
-
-  const isSearching = state.contacts.blockchain.isSearching;
-
-  if (localQuery && localQuery.length) {
-    contacts = [];
-
-    let searchResultsData1 = state.contacts.local.queries[localQuery];
-
-    if (searchResultsData1 && searchResultsData1.length) {
-      searchResultsData1 = searchResultsData1.map(id => {
-        return state.contacts.local.items[id];
-      });
-
-      const searchResultsTitle1 = 'Local Search Results';
-      contacts.push({ title: searchResultsTitle1, data: searchResultsData1 });
-    }
-
-    let searchResultsData2 = state.contacts.blockchain.queries[blockchainQuery];
-
-    if (visible && searchResultsData2 && searchResultsData2.length) {
-      searchResultsData2 = searchResultsData2.map(id => {
-        return state.contacts.blockchain.items[id];
-      });
-
-      const searchResultsTitle2 = 'Blockchain Search Results';
-      contacts.push({ title: searchResultsTitle2, data: searchResultsData2 });
-    }
+const filterAndSort = (items: Array<any>, filterParams: any) => {
+  let filteredItems = items;
+  if (filterParams.isActive) {
+    const fuzzy = new Fuzzy(items, fuzzyOptions);
+    filteredItems = fuzzy.search(filterParams.query);
   }
+  return sortBy(filteredItems, 'name');
+};
 
-  return {
-    contacts,
-    searchString: localQuery,
-    query: localQuery,
-    isSearching,
-    visible
-  };
-}
+export default createSelector(
+  filterParamsSelector,
+  blockchainContactsSelector,
+  localContactsSelector,
+  (filterParams: any, blockchainContacts: Array<any>, localContacts: Array<any>) => {
+    const contacts = [
+      {
+        title: 'Blockchain contacts',
+        data: filterAndSort(blockchainContacts, filterParams),
+      },
+      {
+        title: 'Local contacts',
+        data: filterAndSort(localContacts, filterParams),
+      },
+    ].filter(contactList => contactList.data.length);
 
-export default selector;
+    return {
+      contacts,
+      filterParams,
+    };
+  },
+);

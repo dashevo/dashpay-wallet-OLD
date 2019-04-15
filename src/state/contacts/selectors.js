@@ -1,8 +1,15 @@
-import { CONTACT_STATES } from 'state/contacts/constants';
+// @flow
+import { createSelector } from 'reselect';
 
-export const selectAllContacts = state => state.contacts.local.items;
+const contactsSelector = state => state.contacts;
+export const filterParamsSelector = createSelector(
+  [contactsSelector], ({ filterParams }) => filterParams,
+);
+export const blockchainContactsSelector = createSelector(
+  [contactsSelector], ({ blockchain }) => blockchain.items,
+);
+export const localContactsSelector = createSelector(
+  [contactsSelector], ({ local }) => local.items,
+);
 
-export const selectContactRequests = state =>
-  selectAllContacts(state).filter(
-    contact => contact.state === CONTACT_STATES.REQUEST_RECEIVED
-  );
+export default contactsSelector;

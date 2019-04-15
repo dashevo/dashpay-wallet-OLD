@@ -1,34 +1,31 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
+import * as Yup from 'yup';
 import * as React from 'react';
-
-// Internal dependencies
-import { Form } from 'components';
-import { View } from 'components';
-import { AutoSubmit } from 'components';
-import { QueryField } from './components';
-import { MoreButton } from './components';
-import defaultProps from './defaults';
+import {
+  Form,
+  View,
+  AutoSubmit,
+} from 'components';
+import QueryField from './components/QueryField';
 import type { Props } from './types';
 import styles from './styles';
 
 function SearchBox(props: Props): React.Element<any> {
+  const { searchBox } = props;
   return (
-    <Form {...props} ref={props.searchBox}>
+    <Form {...props} ref={searchBox}>
       <AutoSubmit />
       <View style={styles.row}>
         <QueryField />
-        <MoreButton />
       </View>
     </Form>
   );
 }
 
-SearchBox.defaultProps = defaultProps;
+SearchBox.defaultProps = {
+  validationSchema: Yup.object().shape({
+    query: Yup.string().min(3),
+  }),
+};
 
 export default SearchBox;

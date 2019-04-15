@@ -1,20 +1,12 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
-
-// Internal dependencies
-import { Field } from 'components';
-import { Input } from 'components';
-import defaultProps from './defaults';
-import type { Props } from './types';
+import {
+  Input,
+  Field,
+} from 'components';
 import styles from './styles';
 
-function QueryField(props: Props): React.Element<any> {
+function QueryField(props: any): React.Element<any> {
   return (
     <Field {...props}>
       {({ input }) => <Input {...input} style={styles.input} />}
@@ -22,6 +14,17 @@ function QueryField(props: Props): React.Element<any> {
   );
 }
 
-QueryField.defaultProps = defaultProps;
+QueryField.defaultProps = {
+  autoCapitalize: 'none',
+  autoCorrect: false,
+  clearButtonMode: 'always',
+  editable: true,
+  maxLength: 32,
+  name: 'query',
+  numberOfLines: 1,
+  placeholder: 'Search…',
+  spellCheck: false,
+  underlineColorAndroid: 'white',
+};
 
 export default QueryField;

@@ -6,9 +6,9 @@
 
 import deepFreeze from 'deep-freeze';
 
-import { SEARCH_BLOCKCHAIN_CONTACTS_REQUEST } from 'state/action-types';
-import { SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS } from 'state/action-types';
-import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
+import { GET_BLOCKCHAIN_CONTACTS_REQUEST } from 'state/action-types';
+import { GET_BLOCKCHAIN_CONTACTS_SUCCESS } from 'state/action-types';
+import { GET_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
 import { counts } from '../reducer';
 import { isSearching } from '../reducer';
 import { items } from '../reducer';
@@ -22,7 +22,7 @@ describe('reducer', () => {
       const state = counts(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
+          type: GET_BLOCKCHAIN_CONTACTS_SUCCESS,
           query: 'Ryan Taylor',
           response: [
             {
@@ -44,7 +44,7 @@ describe('reducer', () => {
       const state = isSearching(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_REQUEST,
+          type: GET_BLOCKCHAIN_CONTACTS_REQUEST,
           query: 'Ryan Taylor'
         }
       );
@@ -54,7 +54,7 @@ describe('reducer', () => {
       const state = isSearching(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
+          type: GET_BLOCKCHAIN_CONTACTS_SUCCESS,
           query: 'Ryan Taylor',
           response: [
             {
@@ -71,7 +71,7 @@ describe('reducer', () => {
       const state = isSearching(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_FAILURE,
+          type: GET_BLOCKCHAIN_CONTACTS_FAILURE,
           query: 'Ryan Taylor',
           error: 'Something went wrong'
         }
@@ -95,7 +95,7 @@ describe('reducer', () => {
         }
       });
       const state = items(original, {
-        type: SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
+        type: GET_BLOCKCHAIN_CONTACTS_SUCCESS,
         query: 'Bob Carroll',
         response: [
           {
@@ -123,7 +123,7 @@ describe('reducer', () => {
   describe('#orders()', () => {
     it('should accumulate order of queries', () => {
       const state = orders([], {
-        type: SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
+        type: GET_BLOCKCHAIN_CONTACTS_SUCCESS,
         query: 'Ryan Taylor',
         response: [
           {
@@ -142,7 +142,7 @@ describe('reducer', () => {
       const state = queries(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS,
+          type: GET_BLOCKCHAIN_CONTACTS_SUCCESS,
           query: 'Ryan Taylor',
           response: [
             {
@@ -164,7 +164,7 @@ describe('reducer', () => {
       const state = query(
         {},
         {
-          type: SEARCH_BLOCKCHAIN_CONTACTS_REQUEST,
+          type: GET_BLOCKCHAIN_CONTACTS_REQUEST,
           query: 'Ryan Taylor'
         }
       );
