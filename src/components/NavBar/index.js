@@ -4,8 +4,11 @@
  * @flow
  */
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
-import View from 'components/View';
+import {
+  TouchableOpacity,
+  View,
+  SafeAreaView
+} from 'react-native';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import Styles from 'components/Styles';
@@ -22,7 +25,7 @@ function NavBar(props) {
   return (
     <Composed>
       {({ styles }) => (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
           <View style={styles.body}>
             <TouchableOpacity
               style={styles.button}
@@ -35,7 +38,7 @@ function NavBar(props) {
               </Text>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       )}
     </Composed>
   );

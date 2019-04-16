@@ -27,6 +27,12 @@ function MainMenu(props: Props): React.Element<any> {
   const fiatAmount = balance;
   const dashSymbol = 'dash';
   const fiatSymbol = 'usd';
+  const clickNavBuilder = (routeName) => {
+    return () => {
+      props.hideMenu();
+      props.navigation.navigate(routeName);
+    };
+  };
   return (
     <View style={styles.container}>
       <ParallaxScrollView
@@ -61,11 +67,11 @@ function MainMenu(props: Props): React.Element<any> {
             <TouchableOpacity style={styles.item}>
               <Text style={styles.itemText}>{'Home'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+            <TouchableOpacity style={styles.item} onPress={clickNavBuilder('DeveloperMenuScreen')}>
+              <Text style={styles.itemText}>{'Developer Menu Screen'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+            <TouchableOpacity style={styles.item} onPress={clickNavBuilder('RegistrationScreen')}>
+              <Text style={styles.itemText}>{'User Registration Screen'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
               <Text style={styles.itemText}>{'Menu item'}</Text>
