@@ -1,11 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
-import { StyleSheet } from "react-native";
+// @flow
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   ["view"]: {

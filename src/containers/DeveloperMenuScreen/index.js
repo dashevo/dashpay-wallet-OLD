@@ -1,22 +1,27 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import * as React from "react";
-import { NavigationActions } from 'react-navigation';
-import { View } from "react-native";
-import Text from "components/Text";
-import Input from 'components/Input';
-import Touchable from "components/Touchable";
-import styles from "./styles";
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+import { debounce } from 'lodash';
+import { View } from 'react-native';
+import Text from 'components/Text';
+import Input from 'components/Input';
+import Touchable from 'components/Touchable';
+import styles from './styles';
 import selector from './selectors';
 import actions from './actions';
-import { debounce } from 'lodash';
+import { Props } from './types';
 
-class DeveloperMenuScreen extends React.Component {
-  constructor(props) {
+class DeveloperMenuScreen extends React.Component<Props> {
+  static touchableAction(text, action) {
+    return (
+      <Touchable onPress={action}>
+        <Text style={styles.text}>{text}</Text>
+      </Touchable>
+    );
+  }
+
+  constructor(props: Props) {
     super(props);
     this.onMnemonicChange = this.onMnemonicChange.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
@@ -28,33 +33,27 @@ class DeveloperMenuScreen extends React.Component {
     };
   }
 
-  static touchableAction(text, action) {
-    return (
-      <Touchable onPress={action}>
-        <Text style={styles.text}>{text}</Text>
-      </Touchable>
-    );
-  }
-
-  onMnemonicChange(mnemonic) {
-    this.setState({ mnemonic }, () => this.setMnemonicDebounce(mnemonic));
-  }
-
-  onUsernameChange(username) {
-    this.setState({ username }, () => this.setUsernameDebounce(username));
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.mnemonic !== this.state.mnemonic) {
+    const { mnemonic } = this.state;
+    if (nextProps.mnemonic !== mnemonic) {
       this.setState({
         mnemonic: nextProps.mnemonic,
       });
     }
   }
 
-  render(): React.Element<any> {
+  onUsernameChange(username) {
+    this.setState({ username }, () => this.setUsernameDebounce(username));
+  }
+
+  onMnemonicChange(mnemonic) {
+    this.setState({ mnemonic }, () => this.setMnemonicDebounce(mnemonic));
+  }
+
+  render() {
+    const { navigation } = this.props;
     const navReset = (routeName) => {
-      this.props.navigation.reset([NavigationActions.navigate({routeName})]);
+      navigation.reset([NavigationActions.navigate({routeName})]);
     };
     const { username, mnemonic } = this.state;
 
@@ -82,5 +81,5 @@ class DeveloperMenuScreen extends React.Component {
 
 export default connect(
   selector,
-  actions
-)(DeveloperMenuScreen);;
+  actions,
+)(DeveloperMenuScreen);

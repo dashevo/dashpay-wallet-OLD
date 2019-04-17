@@ -11,7 +11,9 @@ import {
 } from 'state/action-types';
 
 // Tmp
-import mock from './data';
+import data from './data';
+
+const mock = data.map(contactData => ({ ...contactData, isContact: true }));
 
 export function items(state = mock, action) {
   let contact;

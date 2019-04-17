@@ -5,16 +5,13 @@ import {
   clearFilter,
 } from 'state/contacts/actions';
 import {
-  sendContactRequest,
   getContacts as getBlockchainContacts,
 } from 'state/contacts/blockchain/actions';
+import { searchProfiles } from 'state/profiles/actions';
 
-export default (dispatch: Function): Object => bindActionCreators(
-  {
-    getBlockchainContacts,
-    setFilter,
-    clearFilter,
-    sendContactRequest,
-  },
-  dispatch,
-);
+export default dispatch => bindActionCreators({
+  getBlockchainContacts,
+  setFilter,
+  clearFilter,
+  searchProfiles,
+}, dispatch);

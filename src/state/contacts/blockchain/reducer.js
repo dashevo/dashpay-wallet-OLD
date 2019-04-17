@@ -1,17 +1,19 @@
 // @flow
 import { combineReducers } from 'redux';
-
 import {
   SEND_CONTACT_REQUEST_SUCCESS,
   SEND_CONTACT_REQUEST_FAILURE,
   GET_BLOCKCHAIN_CONTACTS_SUCCESS,
+  GET_PENDING_CONTACT_REQUESTS_SUCCESS,
+  ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
+  REJECT_BLOCKCHAIN_CONTACT_SUCCESS,
 } from './constants';
 
 function requests(state = [], action) {
   switch (action.type) {
-    case 'GET_PENDING_CONTACT_REQUESTS_SUCCESS':
+    case GET_PENDING_CONTACT_REQUESTS_SUCCESS:
       return action.response.received.map(address => ({ address }));
-    case 'ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS':
+    case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
       return state.map((request) => {
         if (request.address === action.address) {
           return {
@@ -22,7 +24,7 @@ function requests(state = [], action) {
         }
         return request;
       });
-    case 'REJECT_BLOCKCHAIN_CONTACT_SUCCESS':
+    case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
       return state.filter(
         request => request.recipient !== action.response.sender.address
       );
@@ -42,7 +44,9 @@ function requests(state = [], action) {
 function items(state = [], action) {
   switch (action.type) {
     case GET_BLOCKCHAIN_CONTACTS_SUCCESS:
-      return Object.keys(action.response).map(name => ({ name }));
+      return Object
+        .keys(action.response)
+        .map(name => ({ name, address: name, isContact: true }));
     default:
       return state;
   }

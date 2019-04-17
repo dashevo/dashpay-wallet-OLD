@@ -1,14 +1,13 @@
 // @flow
 import Fuzzy from 'fuse.js';
 import { createSelector } from 'reselect';
-import {
-  sortBy,
-} from 'lodash';
+import { sortBy } from 'lodash';
 import {
   filterParamsSelector,
   blockchainContactsSelector,
   localContactsSelector,
-} from 'state';
+} from 'state/contacts/selectors';
+import { searchResultsSelector } from 'state/profiles/selectors';
 
 const fuzzyOptions = {
   shouldSort: true,
@@ -20,7 +19,7 @@ const fuzzyOptions = {
   keys: ['name'],
 };
 
-const filterAndSort = (items: Array<any>, filterParams: any) => {
+const filterAndSort = (items: Array<any>, filterParams) => {
   let filteredItems = items;
   if (filterParams.isActive) {
     const fuzzy = new Fuzzy(items, fuzzyOptions);
@@ -33,11 +32,23 @@ export default createSelector(
   filterParamsSelector,
   blockchainContactsSelector,
   localContactsSelector,
-  (filterParams: any, blockchainContacts: Array<any>, localContacts: Array<any>) => {
+  searchResultsSelector,
+  (filterParams: any, blockchainContacts: Array<any>,
+    localContacts: Array<any>, profiles: Array<any>) => {
+    let blockchainProfiles;
+    if (filterParams.isActive) {
+      blockchainProfiles = filterAndSort(profiles, filterParams);
+    } else {
+      blockchainProfiles = [];
+    }
     const contacts = [
       {
         title: 'Blockchain contacts',
         data: filterAndSort(blockchainContacts, filterParams),
+      },
+      {
+        title: 'Blockchain profiles',
+        data: blockchainProfiles,
       },
       {
         title: 'Local contacts',

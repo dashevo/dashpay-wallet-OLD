@@ -20,6 +20,7 @@ import NameField from './components/NameField';
 import AddressField from './components/AddressField';
 import Metadata from './components/Metadata';
 import RemoveButton from './components/RemoveButton';
+import SendRequestButton from './components/SendRequestButton';
 import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
@@ -85,14 +86,15 @@ class ProfileTab extends React.Component<Props, State> {
             )}
           </Toggle>
         </Form>
+        <View style={styles.row}>
+          <SendRequestButton />
+        </View>
       </ScrollView>
     );
   }
 }
 
-ProfileTab = connect(
+export default connect(
   selector,
-  actions
+  actions,
 )(ProfileTab);
-
-export default ProfileTab;
