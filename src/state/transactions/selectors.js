@@ -1,12 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-import { selectAlternativeCurrency } from 'state/alternativeCurrency';
-
-export const selectRequests = state => state.contacts.blockchain.requests;
+// @flow
+import { selectAlternativeCurrency } from 'state/alternativeCurrency/selectors';
 
 export const selectTransactions = state => {
   return state.transactions.history.map(item => {

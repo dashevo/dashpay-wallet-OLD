@@ -15,7 +15,12 @@ describe('state/contacts/blockchain/reducer', () => {
         test: {},
       };
       const payload = { type: GET_BLOCKCHAIN_CONTACTS_SUCCESS, response };
-      const expectedState = [{ name: 'test', address: 'test', isContact: true }];
+      const expectedState = [{
+        name: 'test',
+        address: 'test',
+        image: 'https://api.adorable.io/avatars/285/test.png',
+        isContact: true,
+      }];
       expect(reducer(undefined, payload).items).toEqual(expectedState);
     });
   });

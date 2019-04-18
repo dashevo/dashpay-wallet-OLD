@@ -9,21 +9,49 @@ import {
   REJECT_BLOCKCHAIN_CONTACT_SUCCESS,
 } from './constants';
 
-function requests(state = [], action) {
+function receivedRequest(state, action) {
+  const updateStateOnlyForCurrentRequest = (newState) => {
+    if (state.address === action.address) {
+      return {
+        ...state,
+        timestamp: new Date(),
+        ...newState,
+      };
+    }
+    return state;
+  };
+  switch (action.type) {
+    case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return updateStateOnlyForCurrentRequest({ type: 'accepted' });
+    case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return updateStateOnlyForCurrentRequest({ type: 'rejected' });
+
+    default:
+      return state;
+  }
+}
+
+function requestMapper(name) {
+  return {
+    name,
+    address: name,
+    image: `https://api.adorable.io/avatars/285/${name}.png`,
+  };
+}
+
+function pendingRequests(state = { received: [], sent: [] }, action) {
   switch (action.type) {
     case GET_PENDING_CONTACT_REQUESTS_SUCCESS:
-      return action.response.received.map(address => ({ address }));
+      return {
+        ...state,
+        received: action.response.received.map(requestMapper),
+        sent: action.response.sent.map(requestMapper),
+      };
     case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return state.map((request) => {
-        if (request.address === action.address) {
-          return {
-            ...request,
-            timestamp: new Date(),
-            type: 'accepted',
-          };
-        }
-        return request;
-      });
+      return {
+        ...state,
+        received: state.received.map(request => receivedRequest(request, action)),
+      };
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
       return state.filter(
         request => request.recipient !== action.response.sender.address
@@ -35,7 +63,6 @@ function requests(state = [], action) {
       alert('Contact request failed');
       return state;
 
-
     default:
       return state;
   }
@@ -46,13 +73,18 @@ function items(state = [], action) {
     case GET_BLOCKCHAIN_CONTACTS_SUCCESS:
       return Object
         .keys(action.response)
-        .map(name => ({ name, address: name, isContact: true }));
+        .map(name => ({
+          name,
+          address: name,
+          isContact: true,
+          image: `https://api.adorable.io/avatars/285/${name}.png`,
+        }));
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  requests,
+  pendingRequests,
   items,
 });
