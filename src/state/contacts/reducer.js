@@ -7,23 +7,23 @@ import {
   CLEAR_FILTER,
 } from './constants';
 
-const defaultFilterParams = {
+const itinialFilterParams = {
   query: '',
   isActive: false,
 };
 
-function filterParams(state = defaultFilterParams, action) {
+export function filterParams(state = itinialFilterParams, action) {
   let isActive;
   switch (action.type) {
     case SET_FILTER:
-      isActive = defaultFilterParams.query !== action.filterParams.query;
+      isActive = itinialFilterParams.query !== action.filterParams.query;
       return {
-        ...defaultFilterParams,
+        ...itinialFilterParams,
         ...action.filterParams,
         isActive,
       };
     case CLEAR_FILTER:
-      return { ...defaultFilterParams };
+      return { ...itinialFilterParams };
 
     default:
       return state;

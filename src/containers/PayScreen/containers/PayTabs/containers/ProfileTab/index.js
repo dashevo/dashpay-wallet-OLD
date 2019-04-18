@@ -87,7 +87,7 @@ class ProfileTab extends React.Component<Props, State> {
           </Toggle>
         </Form>
         <View style={styles.row}>
-          <SendRequestButton />
+          <SendRequestButton address={this.props.initialValues.address} />
         </View>
       </ScrollView>
     );
