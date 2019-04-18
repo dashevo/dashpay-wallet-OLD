@@ -49,7 +49,7 @@ class ContactsScreen extends React.Component<Props, State> {
 
   keyExtractor = ({ address }) => address;
 
-  componentWilUnmount() {
+  componentWillUnmount() {
     const { clearFilter } = this.props;
     clearFilter();
   }
