@@ -8,10 +8,11 @@ import {
   getContacts as getBlockchainContacts,
 } from 'state/contacts/blockchain/actions';
 import { searchProfiles } from 'state/profiles/actions';
+import { debounce } from 'lodash';
 
 export default dispatch => bindActionCreators({
   getBlockchainContacts,
   setFilter,
   clearFilter,
-  searchProfiles,
+  searchProfilesDebounced: debounce(searchProfiles, 300),
 }, dispatch);

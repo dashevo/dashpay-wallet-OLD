@@ -42,17 +42,17 @@ class ContactsScreen extends React.Component<Props, State> {
     );
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { getBlockchainContacts } = this.props;
     getBlockchainContacts();
   }
-
-  keyExtractor = ({ address }) => address;
 
   componentWillUnmount() {
     const { clearFilter } = this.props;
     clearFilter();
   }
+
+  keyExtractor = ({ address }) => address;
 
   async handlePress(params: string) {
     const { navigation } = this.props;
@@ -66,10 +66,10 @@ class ContactsScreen extends React.Component<Props, State> {
   }
 
   handleSubmit(values: Object) {
-    const { setFilter, searchProfiles } = this.props;
+    const { setFilter, searchProfilesDebounced } = this.props;
     const query = values.query.trim();
     setFilter({ query });
-    searchProfiles(query);
+    searchProfilesDebounced(query);
   }
 
   renderListFooter(): React.Element<any> {
