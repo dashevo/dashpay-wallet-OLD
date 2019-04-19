@@ -4,17 +4,14 @@
     "jest": true
   },
   "plugins": [
-    "jest",
-    "prettier"
+    "jest"
   ],
   "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react"
+    "airbnb"
   ],
   "rules": {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "import/prefer-default-export": ["warn"]
   },
   "settings": {
     "import/resolver": {

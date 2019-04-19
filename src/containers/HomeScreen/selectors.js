@@ -8,5 +8,5 @@ import { selectUsername } from 'state/account';
 
 export default createSelector(
   selectUsername,
-  name => ({ user: { name }})
+  name => ({ user: { name } }),
 );

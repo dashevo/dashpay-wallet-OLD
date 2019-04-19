@@ -1,17 +1,11 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
-
-// Internal dependencies
-import { TouchableOpacity } from 'components';
-import { View } from 'components';
-import { Image } from 'components';
-import { Text } from 'components';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  Text,
+} from 'components';
 import type { Props } from './types';
 import styles from './styles';
 
@@ -26,10 +20,11 @@ class Item extends React.Component<Props> {
     return false;
   }
 
-  handlePress(event) {
-    this.props.onPress({
-      name: this.props.name,
-      recipient: this.props.address
+  handlePress() {
+    const { onPress, name, address } = this.props;
+    onPress({
+      name,
+      recipient: address,
     });
   }
 

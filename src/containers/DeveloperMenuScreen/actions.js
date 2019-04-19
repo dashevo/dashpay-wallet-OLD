@@ -1,14 +1,13 @@
+// @flow
 import { bindActionCreators } from 'redux';
-import { setMnemonic } from 'state/account'
-import { setUsername } from 'state/account'
-import { createAccount } from 'state/account'
+import {
+  setMnemonic,
+  setUsername,
+  createAccount,
+} from 'state/account/actions';
 
-function actions(dispatch: Function): Object {
-  return bindActionCreators({
-    setMnemonic,
-    setUsername,
-    createAccount
-  }, dispatch);
-}
-
-export default actions;
+export default (dispatch: Function): Object => bindActionCreators({
+  setMnemonic,
+  setUsername,
+  createAccount,
+}, dispatch);

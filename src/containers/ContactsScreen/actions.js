@@ -1,26 +1,18 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
+import { bindActionCreators } from 'redux';
+import {
+  setFilter,
+  clearFilter,
+} from 'state/contacts/actions';
+import {
+  getContacts as getBlockchainContacts,
+} from 'state/contacts/blockchain/actions';
+import { searchProfiles } from 'state/profiles/actions';
+import { debounce } from 'lodash';
 
-// External dependencies
-import { bindActionCreators } from "redux";
-
-// Internal dependencies
-import { searchBlockchainContacts } from "state/contacts/blockchain/actions";
-import { searchLocalContacts } from "state/contacts/local/actions";
-import { sendContactRequest } from 'state/contacts/blockchain/actions';
-
-function actions(dispatch: Function): Object {
-  return bindActionCreators(
-    {
-      searchBlockchainContacts,
-      searchLocalContacts,
-      sendContactRequest,
-    },
-    dispatch
-  );
-}
-
-export default actions;
+export default dispatch => bindActionCreators({
+  getBlockchainContacts,
+  setFilter,
+  clearFilter,
+  searchProfilesDebounced: debounce(searchProfiles, 300),
+}, dispatch);

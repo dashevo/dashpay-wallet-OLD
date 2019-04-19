@@ -1,56 +1,61 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import { combineReducers } from 'redux';
-import { keyBy } from 'lodash';
-import { uniq } from 'lodash';
-import { add } from 'lodash';
+import {
+  SEND_CONTACT_REQUEST_SUCCESS,
+  SEND_CONTACT_REQUEST_FAILURE,
+  GET_BLOCKCHAIN_CONTACTS_SUCCESS,
+  GET_PENDING_CONTACT_REQUESTS_SUCCESS,
+  ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
+  REJECT_BLOCKCHAIN_CONTACT_SUCCESS,
+} from './constants';
 
-// Internal dependencies
-import { SEARCH_BLOCKCHAIN_CONTACTS_REQUEST } from 'state/action-types';
-import { SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS } from 'state/action-types';
-import { SEARCH_BLOCKCHAIN_CONTACTS_FAILURE } from 'state/action-types';
-
-import { SEND_CONTACT_REQUEST_SUCCESS } from './constants';
-import { SEND_CONTACT_REQUEST_FAILURE } from './constants';
-
-export function requests(state = [], action) {
+function receivedRequest(state, action) {
+  const updateStateOnlyForCurrentRequest = (newState) => {
+    if (state.address === action.address) {
+      return {
+        ...state,
+        timestamp: new Date(),
+        ...newState,
+      };
+    }
+    return state;
+  };
   switch (action.type) {
-    case 'GET_PENDING_CONTACT_REQUESTS_SUCCESS':
-      return action.response.received.map(address => {
-        return {
-          address,
-        };
-      });
-    case 'ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS':
-      return state.map(request => {
-        if (request.address === action.address) {
-          return {
-            ...request,
-            timestamp: new Date(),
-            type: 'accepted'
-          };
-        } else {
-          return request;
-        }
-      });
-
-    case 'REJECT_BLOCKCHAIN_CONTACT_SUCCESS':
-      return state.filter(
-        request => request.recipient !== action.response.sender.address
-      );
+    case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return updateStateOnlyForCurrentRequest({ type: 'accepted' });
+    case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return updateStateOnlyForCurrentRequest({ type: 'rejected' });
 
     default:
       return state;
   }
 }
 
-export function contacts(state = {}, action) {
+function requestMapper(name) {
+  return {
+    name,
+    address: name,
+    image: `https://api.adorable.io/avatars/285/${name}.png`,
+  };
+}
+
+function pendingRequests(state = { received: [], sent: [] }, action) {
   switch (action.type) {
+    case GET_PENDING_CONTACT_REQUESTS_SUCCESS:
+      return {
+        ...state,
+        received: action.response.received.map(requestMapper),
+        sent: action.response.sent.map(requestMapper),
+      };
+    case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return {
+        ...state,
+        received: state.received.map(request => receivedRequest(request, action)),
+      };
+    case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
+      return state.filter(
+        request => request.recipient !== action.response.sender.address
+      );
     case SEND_CONTACT_REQUEST_SUCCESS:
       alert('Contact request sent');
       return state;
@@ -63,92 +68,23 @@ export function contacts(state = {}, action) {
   }
 }
 
-export function counts(state = {}, action) {
+function items(state = [], action) {
   switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-      return Object.assign({}, state, {
-        [action.query]: add(state[action.query], 1)
-      });
-
-    default:
-      return state;
-  }
-}
-
-export function isSearching(state = false, action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_REQUEST:
-    case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-    case SEARCH_BLOCKCHAIN_CONTACTS_FAILURE:
-      return SEARCH_BLOCKCHAIN_CONTACTS_REQUEST === action.type;
-
-    default:
-      return state;
-  }
-}
-
-export function items(state = {}, action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-      const contacts = keyBy(action.response, 'address');
-      return Object.assign({}, state, contacts);
-
-    default:
-      return state;
-  }
-}
-
-export function orders(state = [], action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-      return uniq(state.concat(action.query));
-
-    default:
-      return state;
-  }
-}
-
-export function queries(state = {}, action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_SUCCESS:
-      const ids = action.response.map(contact => contact.address);
-      return Object.assign({}, state, { [action.query]: ids });
-
-    default:
-      return state;
-  }
-}
-
-export function query(state = '', action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_REQUEST:
-      return action.query;
-
-    default:
-      return state;
-  }
-}
-
-// TMP
-export function visible(state = '', action) {
-  switch (action.type) {
-    case SEARCH_BLOCKCHAIN_CONTACTS_REQUEST:
-    case 'SEARCH_LOCAL_CONTACTS_REQUEST':
-      return SEARCH_BLOCKCHAIN_CONTACTS_REQUEST === action.type;
-
+    case GET_BLOCKCHAIN_CONTACTS_SUCCESS:
+      return Object
+        .keys(action.response)
+        .map(name => ({
+          name,
+          address: name,
+          isContact: true,
+          image: `https://api.adorable.io/avatars/285/${name}.png`,
+        }));
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  requests,
-  counts,
-  isSearching,
+  pendingRequests,
   items,
-  orders,
-  queries,
-  query,
-  contacts,
-  visible
 });
