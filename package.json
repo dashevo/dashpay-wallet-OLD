@@ -12,7 +12,7 @@
   "dependencies": {
     "@dashevo/dapi-client": "github:dashevo/dapi-client#4af8a7e8b8b5a634f1f5a933dd811796780d0c69",
     "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap#demo",
-    "@dashevo/wallet-lib": "github:dashevo/wallet-lib#demo",
+    "@dashevo/wallet-lib": "github:dashevo/wallet-lib",
     "assert": "^1.1.1",
     "asyncstorage-down": "^4.1.2",
     "events": "^1.0.0",
