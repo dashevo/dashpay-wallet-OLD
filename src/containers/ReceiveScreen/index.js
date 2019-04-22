@@ -4,8 +4,9 @@
  * @flow
  */
 import * as React from 'react';
-import { View, SafeAreaView } from 'react-native';
-import { Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
+import { Text } from 'components';
+import { View } from 'components';
 import QRCode from 'react-native-qrcode-svg';
 // import { Image } from 'react-native';
 // import { Avatar } from 'components/avatar';
@@ -15,8 +16,8 @@ import styles from './styles';
 import type { ReactElement } from './types';
 import type { Props } from './types';
 import type { State } from './types';
-import connect from "react-redux/es/connect/connect";
-import { CopyAddressButton } from 'components';
+import {connect} from "react-redux";
+// import { CopyAddressButton } from 'components';
 import selector from "./selectors";
 import actions from "./actions";
 
@@ -50,7 +51,7 @@ class ReceiveScreen extends React.Component<Props, State> {
           logoSize={100}
           logoBackgroundColor='white'
           />
-        <CopyAddressButton address={this.props.unusedAddress} />
+        {/*<CopyAddressButton address={this.state.unusedAddress} />*/}
       </SafeAreaView>
     );
   }
