@@ -15,7 +15,7 @@ import ParallaxScrollView from './tmp';
 
 function MainMenu(props: Props): React.Element<any> {
   const { code, rate } = props.alternativeCurrency;
-  const balance = props.balance || 0;
+  const balance = (props.balance || 0) / 100000000;
   const dashAmount = balance;
   const fiatAmount = balance * rate;
   const dashSymbol = 'dash';
