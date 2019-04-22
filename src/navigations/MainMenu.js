@@ -1,32 +1,25 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
 import * as React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { FormattedNumber } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-// Tmp
-import ParallaxScrollView from './tmp';
-
-// Internal dependencies
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { Logo } from 'components';
 import { selectBalance } from 'state';
+import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
+
+import ParallaxScrollView from './tmp';
 
 function MainMenu(props: Props): React.Element<any> {
+  const { code, rate } = props.alternativeCurrency;
   const balance = props.balance || 0;
   const dashAmount = balance;
-  const fiatAmount = balance;
+  const fiatAmount = balance * rate;
   const dashSymbol = 'dash';
-  const fiatSymbol = 'usd';
+  const fiatSymbol = code.toLowerCase();
   const clickNavBuilder = (routeName) => {
     return () => {
       props.hideMenu();
@@ -200,8 +193,13 @@ const styles = {
   }
 };
 
-MainMenu = connect(state => ({
-  balance: selectBalance(state)
-}))(MainMenu);
+const selector = createSelector(
+  alternativeCurrencySelector,
+  selectBalance,
+  (alternativeCurrency, balance) => ({
+    alternativeCurrency,
+    balance,
+  }),
+);
 
-export default MainMenu;
+export default connect(selector)(MainMenu);

@@ -1,5 +1,5 @@
 // @flow
-import { selectAlternativeCurrency } from 'state/alternativeCurrency/selectors';
+import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 import TXTYPES from 'constants/txtypes';
 
 export const selectRequests = state => state.contacts.blockchain.requests;
@@ -21,7 +21,7 @@ export const selectTransactions = state => {
       receiver = { name: 'Unidentified Recipient', image: null, address: toAddress };
     }
     const dashAmount = (dashSat / 100000000).toString(10);
-    let fiatAmount = dashSat * selectAlternativeCurrency(state).rate / 100000000; // TODO historical rates would be better
+    let fiatAmount = dashSat * alternativeCurrencySelector(state).rate / 100000000; // TODO historical rates would be better
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
     transactions.push({
