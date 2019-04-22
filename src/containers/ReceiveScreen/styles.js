@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
   },
   bold:{
     fontWeight: 'bold'
+  },
+  qrWrapper: {
+    backgroundColor: 'white',
+    width: '100%',
+    paddingVertical: 10,
+    alignItems: 'center',
   }
 });
 
