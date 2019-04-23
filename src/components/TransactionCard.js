@@ -21,7 +21,7 @@ import Icon from 'components/Icon';
 function SmallAvatar(props) {
   return (
     <Avatar {...props} sm>
-      {({ bind, touched, styles, children }) => (
+      {({ styles, children }) => (
         <View style={styles.container}>
           <View style={styles.body}>{children}</View>
         </View>
@@ -32,9 +32,16 @@ function SmallAvatar(props) {
 
 function TransactionCard(props) {
   const { item } = props;
-  const { dashAmount, fiatAmount, receiver, sender, timestamp, transactionType } = item;
+  const {
+    dashAmount,
+    fiatAmount,
+    fiatSymbol,
+    receiver,
+    sender,
+    timestamp,
+    transactionType
+  } = item;
   const dashSymbol = 'dash';
-  const fiatSymbol = 'usd';
   return (
     <Card onPress={() => {}}>
       {({ bind, touched, styles }) => (

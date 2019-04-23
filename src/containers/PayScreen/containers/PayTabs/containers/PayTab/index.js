@@ -1,14 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-
-// Internal dependencies
 import { Container } from 'components';
 import ScrollView from 'components/ScrollView';
 import Form from 'components/Form';
@@ -22,7 +14,11 @@ import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
-type Props = {};
+
+type Props = {
+  transactions: Array<Object>,
+  alternativeCurrency: Object,
+};
 type State = {};
 
 class PayTab extends React.Component<Props, State> {
@@ -31,25 +27,20 @@ class PayTab extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const { alternativeCurrency: { rate } } = props;
+
     this.state = {
-      convertToDashAmount: this.convertToDashAmount,
-      convertToFiatAmount: this.convertToFiatAmount,
+      convertToDashAmount: fiatAmount => fiatAmount / rate,
+      convertToFiatAmount: dashAmount => dashAmount * rate,
       validationSchema: props.validationSchema,
       initialValues: props.initialValues,
       onSubmit: this._onSubmit
     };
   }
 
-  convertToDashAmount = dashAmount => {
-    return dashAmount / 79.29; // Tmp
-  };
-
-  convertToFiatAmount = dashAmount => {
-    return dashAmount * 79.29; // Tmp
-  };
-
   _onSubmit = (values, form) => {
-    this.props.navigation.navigate('PaymentConfirmationScreen', {
+    const { navigation: { navigate } } = this.props;
+    navigate('PaymentConfirmationScreen', {
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,
@@ -105,9 +96,7 @@ class PayTab extends React.Component<Props, State> {
   }
 }
 
-PayTab = connect(
+export default connect(
   selector,
-  actions
+  actions,
 )(PayTab);
-
-export default PayTab;

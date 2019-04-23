@@ -1,16 +1,9 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
 import * as React from 'react';
-import { FormattedDate } from 'react-intl';
-import { FormattedTime } from 'react-intl';
-import { FormattedNumber } from 'react-intl';
+import {
+  FormattedTime,
+  FormattedNumber,
+} from 'react-intl';
 
-// Internal dependencies
 import Card from 'components/Card';
 import Avatar from 'components/Avatar';
 import Touchable from 'components/Touchable';
@@ -21,7 +14,7 @@ import Icon from 'components/Icon';
 function SmallAvatar(props) {
   return (
     <Avatar {...props} sm>
-      {({ bind, touched, styles, children }) => (
+      {({ styles, children }) => (
         <View style={styles.container}>
           <View style={styles.body}>{children}</View>
         </View>
@@ -32,9 +25,15 @@ function SmallAvatar(props) {
 
 function TransactionCard(props) {
   const { item } = props;
-  const { dashAmount, fiatAmount, receiver, sender, timestamp } = item;
+  const {
+    dashAmount,
+    fiatAmount,
+    fiatSymbol,
+    receiver,
+    sender,
+    timestamp,
+  } = item;
   const dashSymbol = 'dash';
-  const fiatSymbol = 'usd';
   return (
     <Card onPress={() => {}}>
       {({ bind, touched, styles }) => (
