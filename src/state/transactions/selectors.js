@@ -24,13 +24,15 @@ export const selectTransactions = state => {
     let fiatAmount = dashSat * selectAlternativeCurrency(state).rate / 100000000; // TODO historical rates would be better
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
+    const timestamp = item.time ? new Date(item.time * 1000) : new Date(); // unconfirmed txes are missing time field
+
     transactions.push({
       dashSat,
       dashAmount,
       fiatAmount,
       sender,
       receiver,
-      timestamp: new Date(item.time * 1000), // time in seconds, JS time uses milliseconds
+      timestamp, // time in seconds, JS time uses milliseconds
       transactionType: item.type
     });
   });
