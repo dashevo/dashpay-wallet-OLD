@@ -1,11 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { createSelector } from 'reselect';
-import { selectAlternativeCurrency } from 'state';
+import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 
 export default createSelector(
-  selectAlternativeCurrency, ({ code }) => ({ currentAlternativeCurrencyCode: code })
+  alternativeCurrencySelector, ({ code }) => ({ currentAlternativeCurrencyCode: code })
 );

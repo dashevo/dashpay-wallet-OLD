@@ -1,7 +1,9 @@
-import { CHANGE_ALTERNATIVE_CURRENCY } from 'state/alternativeCurrency/constants';
-import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from 'state/alternativeCurrency/constants';
-import { ALTERNATIVE_CURRENCY_RATE_REQUEST } from 'state/alternativeCurrency/constants';
-import { ALTERNATIVE_CURRENCY_RATE_RECEIVED } from 'state/alternativeCurrency/constants';
+import {
+  CHANGE_ALTERNATIVE_CURRENCY,
+  INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+  ALTERNATIVE_CURRENCY_RATE_REQUEST,
+  ALTERNATIVE_CURRENCY_RATE_SUCCESS
+} from 'state/alternativeCurrency/constants';
 import reducer from 'state/alternativeCurrency/reducer';
 import mockDate from 'mockdate';
 
@@ -43,9 +45,12 @@ describe('alternativeCurrency reducer', () => {
     mockDate.reset();
   });
 
-  it('should handle ALTERNATIVE_CURRENCY_RATE_RECEIVED', () => {
+  it('should handle ALTERNATIVE_CURRENCY_RATE_SUCCESS', () => {
     const rate = 2000;
-    const payload = { type: ALTERNATIVE_CURRENCY_RATE_RECEIVED, rate };
+    const payload = {
+      type: ALTERNATIVE_CURRENCY_RATE_SUCCESS,
+      rate,
+    };
     const now = Date.now();
     mockDate.set(now);
     const expectedState = {

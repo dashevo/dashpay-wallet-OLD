@@ -1,17 +1,14 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
 import { ALTERNATIVE_CURRENCIES } from 'constants';
-import { CHANGE_ALTERNATIVE_CURRENCY } from './constants';
-import { ALTERNATIVE_CURRENCY_RATE_REQUEST } from './constants';
-import { ALTERNATIVE_CURRENCY_RATE_RECEIVED } from './constants';
-import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from './constants';
-import { ALTERNATIVE_CURRENCY_RATE_LIFESPAN } from './constants';
+import {
+  CHANGE_ALTERNATIVE_CURRENCY,
+  ALTERNATIVE_CURRENCY_RATE_REQUEST,
+  ALTERNATIVE_CURRENCY_RATE_SUCCESS,
+  ALTERNATIVE_CURRENCY_RATE_FAILURE,
+  INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+  ALTERNATIVE_CURRENCY_RATE_LIFESPAN,
+} from './constants';
 
-const shouldFetchRate = ({ isFetching, didInvalidate, rateUpdatedAt }) => {
+function shouldFetchRate({ isFetching, didInvalidate, rateUpdatedAt }) {
   if (isFetching) {
     return false;
   }
@@ -19,9 +16,9 @@ const shouldFetchRate = ({ isFetching, didInvalidate, rateUpdatedAt }) => {
     return true;
   }
   return Date.now() - rateUpdatedAt > ALTERNATIVE_CURRENCY_RATE_LIFESPAN;
-};
+}
 
-const getSparkRate = async currencyCode => {
+async function getSparkRate(currencyCode) {
   const response = await fetch(`https://api.get-spark.com/${currencyCode}`);
   if (!response.ok) {
     throw Error(response.statusText);
@@ -29,11 +26,11 @@ const getSparkRate = async currencyCode => {
     const json = await response.json();
     return json[currencyCode];
   }
-};
+}
 
-const getCryptoCompareRate = async currencyCode => {
+async function getCryptoCompareRate(currencyCode) {
   const response = await fetch(
-    `https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`
+    `https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`,
   );
   if (!response.ok) {
     throw Error(response.statusText);
@@ -41,9 +38,9 @@ const getCryptoCompareRate = async currencyCode => {
     const json = await response.json();
     return json[currencyCode];
   }
-};
+}
 
-const getCasaVesRate = async () => {
+async function getCasaVesRate() {
   const response = await fetch('https://dash.casa/api/?cur=VES');
   if (!response.ok) {
     throw Error(response.statusText);
@@ -51,50 +48,68 @@ const getCasaVesRate = async () => {
     const json = await response.json();
     return json.dashrate;
   }
+}
+
+const DEFAULT_STRATEGIES = [
+  {
+    name: 'Spark',
+    getRate: getSparkRate,
+  },
+  {
+    name: 'CryptoCompare',
+    getRate: getCryptoCompareRate,
+  },
+];
+
+const CASA_STRATEGY = {
+  name: 'Casa',
+  getRate: getCasaVesRate,
 };
 
-const fallbackStrategy = async currencyCode => {
-  switch (currencyCode) {
-    case 'VES':
-      return await getCasaVesRate();
-    default:
-      return await getCryptoCompareRate(currencyCode);
+async function getRate(code) {
+  const strategies = DEFAULT_STRATEGIES;
+  if (code === 'VES') {
+    strategies.unshift(CASA_STRATEGY);
   }
-};
 
-export const changeAlternativeCurrency = code => {
+  for (let i = 0; i < strategies.length; i += 1) {
+    const strategy = strategies[i];
+    /* eslint-disable no-await-in-loop */
+    const rate = await strategy.getRate(code).catch((error) => {
+      console.error(`Alternative currency strategy failed (${strategy.name})`, error);
+      return undefined;
+    });
+    /* eslint-disable no-await-in-loop */
+    if (rate) {
+      return rate;
+    }
+  }
+}
+
+export function changeAlternativeCurrency(code) {
   const alternativeCurrency = ALTERNATIVE_CURRENCIES.find(
-    currency => currency.code === code
+    currency => currency.code === code,
   );
   return {
     type: CHANGE_ALTERNATIVE_CURRENCY,
-    ...alternativeCurrency
+    ...alternativeCurrency,
   };
-};
+}
 
 export const invalidateAlternativeCurrencyRate = () => ({
-  type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE
+  type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
 });
 
-export const fetchAlternativeCurrencyRateIfNeeded = () => async (
-  dispatch,
-  getState
-) => {
+export const fetchAlternativeCurrencyRateIfNeeded = () => async (dispatch, getState) => {
   const state = getState().alternativeCurrency;
-  const currencyCode = state.code;
+  const { code } = state;
   if (shouldFetchRate(state)) {
-    let rate;
-    dispatch({
-      type: ALTERNATIVE_CURRENCY_RATE_REQUEST
-    });
-    try {
-      rate = await getSparkRate(currencyCode);
-    } catch (error) {
-      rate = await fallbackStrategy(currencyCode);
+    dispatch({ type: ALTERNATIVE_CURRENCY_RATE_REQUEST });
+    const rate = await getRate(code);
+    if (!rate) {
+      dispatch({ type: ALTERNATIVE_CURRENCY_RATE_FAILURE });
+    } else {
+      dispatch({ type: ALTERNATIVE_CURRENCY_RATE_SUCCESS, rate });
     }
-    dispatch({
-      type: ALTERNATIVE_CURRENCY_RATE_RECEIVED,
-      rate
-    });
   }
 };

@@ -48,6 +48,15 @@ class HomeScreen extends React.Component<Props, State> {
     };
   }
 
+  componentDidMount() {
+    const {
+      invalidateAlternativeCurrencyRate,
+      fetchAlternativeCurrencyRateIfNeeded
+    } = this.props;
+    invalidateAlternativeCurrencyRate();
+    fetchAlternativeCurrencyRateIfNeeded();
+  }
+
   handleProgress(value) {
     this.setState({
       progress: value
