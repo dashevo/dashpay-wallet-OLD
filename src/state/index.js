@@ -13,7 +13,6 @@ export * from './actions';
 export * from './settings';
 export * from './language';
 export * from './payment';
-export * from './alternativeCurrency';
 export * from './account';
 
 import thunk from 'redux-thunk';

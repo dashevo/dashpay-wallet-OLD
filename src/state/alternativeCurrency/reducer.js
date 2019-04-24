@@ -1,14 +1,10 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-import { DEFAULT_ALTERNATIVE_CURRENCY } from './constants';
-import { CHANGE_ALTERNATIVE_CURRENCY } from './constants';
-import { ALTERNATIVE_CURRENCY_RATE_REQUEST } from './constants';
-import { ALTERNATIVE_CURRENCY_RATE_RECEIVED } from './constants';
-import { INVALIDATE_ALTERNATIVE_CURRENCY_RATE } from './constants';
+import {
+  CHANGE_ALTERNATIVE_CURRENCY,
+  ALTERNATIVE_CURRENCY_RATE_REQUEST,
+  ALTERNATIVE_CURRENCY_RATE_SUCCESS,
+  INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+  DEFAULT_ALTERNATIVE_CURRENCY,
+} from './constants';
 
 export const initialState = DEFAULT_ALTERNATIVE_CURRENCY;
 
@@ -21,12 +17,11 @@ const alternativeCurrency = (state = initialState, action) => {
       };
 
     case CHANGE_ALTERNATIVE_CURRENCY:
-      const { code, name, symbol } = action
       return {
         ...initialState,
-        code,
-        name,
-        symbol,
+        code: action.code,
+        name: action.name,
+        symbol: action.symbol,
       };
 
     case ALTERNATIVE_CURRENCY_RATE_REQUEST:
@@ -36,7 +31,7 @@ const alternativeCurrency = (state = initialState, action) => {
         rateUpdatedAt: undefined,
       };
 
-    case ALTERNATIVE_CURRENCY_RATE_RECEIVED:
+    case ALTERNATIVE_CURRENCY_RATE_SUCCESS:
       return {
         ...state,
         rate: action.rate,
