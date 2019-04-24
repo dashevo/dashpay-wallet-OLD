@@ -18,6 +18,7 @@ import styles from './styles';
 type Props = {
   transactions: Array<Object>,
   alternativeCurrency: Object,
+  fetchAlternativeCurrencyRateIfNeeded: Function,
 };
 type State = {};
 
@@ -36,6 +37,11 @@ class PayTab extends React.Component<Props, State> {
       initialValues: props.initialValues,
       onSubmit: this._onSubmit
     };
+  }
+
+  componentDidMount() {
+    const { fetchAlternativeCurrencyRateIfNeeded } = this.props;
+    fetchAlternativeCurrencyRateIfNeeded();
   }
 
   _onSubmit = (values, form) => {

@@ -34,7 +34,7 @@ const alternativeCurrency = (state = initialState, action) => {
     case ALTERNATIVE_CURRENCY_RATE_SUCCESS:
       return {
         ...state,
-        rate: action.response,
+        rate: action.rate,
         isFetching: false,
         didInvalidate: false,
         rateUpdatedAt: Date.now(),
