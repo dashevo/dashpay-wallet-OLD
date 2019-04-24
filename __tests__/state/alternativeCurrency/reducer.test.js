@@ -49,7 +49,7 @@ describe('alternativeCurrency reducer', () => {
     const rate = 2000;
     const payload = {
       type: ALTERNATIVE_CURRENCY_RATE_SUCCESS,
-      response: rate,
+      rate,
     };
     const now = Date.now();
     mockDate.set(now);
