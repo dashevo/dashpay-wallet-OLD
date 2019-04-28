@@ -1,17 +1,12 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import * as ActionsTypes from "./constants";
-
+import * as ActionsTypes from './constants';
 
 export const initialState = {
   network: 'testnet',
   username: 'DashPayTeam',
+  isRegisterRequestSent: false,
   mnemonic: 'light point battle foam find motion true because genre people banana fit',
   unusedAddress: '',
-  balance: 0
+  balance: 0,
 };
 
 const account = (state = initialState, action) => {
@@ -30,30 +25,36 @@ const account = (state = initialState, action) => {
     case ActionsTypes.RECEIVE_BALANCE:
       return {
         ...state,
-        balance: action.response
+        balance: action.response,
       };
     case ActionsTypes.GET_UNUSED_ADDRESS_SUCCESS:
       return {
         ...state,
-        unusedAddress: action.response.address
+        unusedAddress: action.response.address,
       };
     case ActionsTypes.CHANGE_NETWORK_SUCCESS:
       return {
         ...state,
-        network: action.response.toString()
+        network: action.response.toString(),
+      };
+    case ActionsTypes.REGISTER_USERNAME_REQUEST:
+      return {
+        ...state,
+        isRegisterRequestSent: true,
       };
     case ActionsTypes.REGISTER_USERNAME_SUCCESS:
       alert('Success');
       return {
         ...state,
-        username: action.response.uname,
+        isRegisterRequestSent: false,
+        username: action.username,
       };
     case ActionsTypes.REGISTER_USERNAME_FAILURE:
       alert(`Error: ${action.error.message}`);
       return {
         ...state,
-        registered: false,
-        registerError: action.error.message,
+        isRegisterRequestSent: false,
+        username: undefined,
       };
     default:
       return state;

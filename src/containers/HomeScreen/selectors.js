@@ -1,12 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { createSelector } from 'reselect';
-import { selectUsername } from 'state/account';
+import { usernameSelector } from 'state/account/selectors';
 
 export default createSelector(
-  selectUsername,
+  usernameSelector,
   name => ({ user: { name } }),
 );

@@ -1,10 +1,9 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-export const selectBalance = state => state.account.balance;
+import { createSelector } from 'reselect';
 
-export const selectMnemonic = state => state.account.mnemonic;
+export const accountSelector = ({ account }) => account;
 
-export const selectUsername = state => state.account.username;
+export const balanceSelector = createSelector(accountSelector, ({ balance }) => balance);
+
+export const mnemonicSelector = createSelector(accountSelector, ({ mnemonic }) => mnemonic);
+
+export const usernameSelector = createSelector(accountSelector, ({ username }) => username);
