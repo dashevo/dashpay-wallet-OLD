@@ -39,12 +39,12 @@ export const initializeWallet = () => {
         console.log("Next unused address: ", walletLib.account.getUnusedAddress());
 
         walletLib.account.events.on(
-          EVENTS.BALANCE_CHANGED,
+          EVENTS.UNCONFIRMED_BALANCE_CHANGED,
           (info) => {
-            console.log('Balance changed', info);
+            console.log('Unconfirmed balance changed', info);
             dispatch({
               type: 'RECEIVE_BALANCE',
-              response: walletLib.account.getBalance()
+              response: walletLib.account.getBalance(true, true) // getBalance(uncomfirmed = true, returnDuffs = true)
             });
             dispatch(getTransactionHistory());
           }

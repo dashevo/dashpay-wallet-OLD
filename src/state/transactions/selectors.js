@@ -27,6 +27,8 @@ export const selectTransactions = (state) => {
     const { code } = alternativeCurrency;
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
+    const timestamp = item.time ? new Date(item.time * 1000) : new Date(); // unconfirmed txes are missing time field
+
     transactions.push({
       dashSat,
       dashAmount,
@@ -34,7 +36,7 @@ export const selectTransactions = (state) => {
       fiatSymbol: code.toLowerCase(),
       sender,
       receiver,
-      timestamp: new Date(item.time * 1000), // time in seconds, JS time uses milliseconds
+      timestamp, // time in seconds, JS time uses milliseconds
       transactionType: item.type,
     });
   });
