@@ -44,6 +44,8 @@ export const createSendPaymentTransaction = opts => {
             satoshis
           });
 
+          const txid = await walletLib.account.broadcastTransaction(tx);
+
           return {
             ...opts,
             tx
