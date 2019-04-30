@@ -281,17 +281,11 @@ function Transition(props) {
   function handleLeave(item) {
     transition.onLeave(item);
     if (item.label === 'Yes') {
-      props.onReject({
-        name: props.sender.name,
-        address: props.sender.address,
-        image: props.sender.imageURL
-      });
+      console.log('__props.sender.address__', props.sender.address);
+      props.onReject(props.sender.address);
     } else {
-      props.onAccept({
-        name: props.sender.name,
-        address: props.sender.address,
-        image: props.sender.imageURL
-      });
+      console.log('__props.sender.address__', props.sender.address);
+      props.onAccept(props.sender.address);
     }
   }
 

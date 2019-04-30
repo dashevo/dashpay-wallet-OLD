@@ -14,12 +14,12 @@ import actions from './actions';
 
 function Contacts(props) {
   const renderItem = useCallback(({ item }) => {
-    function onAccept(item) {
-      props.acceptBlockchainContact(item.sender).then(console.log, console.log);
+    function onAccept(address) {
+      props.acceptBlockchainContact(address).then(console.log, console.log);
     }
 
-    function onReject(item) {
-      props.rejectBlockchainContact(item.sender).then(console.log, console.log);
+    function onReject(address) {
+      props.rejectBlockchainContact(address).then(console.log, console.log);
     }
     return <ContactItem {...item} onAccept={onAccept} onReject={onReject} />;
   }, []);
