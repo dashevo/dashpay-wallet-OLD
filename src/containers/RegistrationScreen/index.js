@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { Formik } from 'formik';
 import {
   View,
@@ -33,9 +34,11 @@ class RegistrationScreen extends React.Component<Props> {
 
   render() {
     const {
-      navigation: { goBack },
+      navigation,
       isSubmitting,
     }: Props = this.props;
+
+    const goHome = () => navigation.reset([NavigationActions.navigate({ routeName: 'HomeScreen' })]);
 
     return (
       <View style={styles.container}>
@@ -90,8 +93,8 @@ class RegistrationScreen extends React.Component<Props> {
 
         <Button
           style={styles.row}
-          title="Go back"
-          onPress={goBack}
+          title="Go home"
+          onPress={goHome}
         />
       </View>
     );

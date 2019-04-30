@@ -3,7 +3,7 @@ export type Props = {
   username: string,
   isSubmitting: boolean,
   navigation: {
-    goBack: Function,
+    reset: Function,
   },
 };
 
