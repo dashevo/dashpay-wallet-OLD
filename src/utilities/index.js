@@ -38,3 +38,5 @@ export function getStatusBarHeight(skipAndroid: boolean = false): number {
     default: 0
   });
 }
+
+export { combineReducers } from 'redux';

@@ -68,7 +68,7 @@
     "jest": "^24.5.0",
     "metro-react-native-babel-preset": "^0.53.1",
     "mockdate": "^2.0.2",
-    "native-testing-library": "^2.0.0",
+    "native-testing-library": "^1.7.0",
     "react-test-renderer": "16.8.3",
     "rn-nodeify": "github:tradle/rn-nodeify"
   },
