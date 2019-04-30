@@ -1,17 +1,11 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
 import { createSelector } from 'reselect';
-import { selectMnemonic, selectUsername } from 'state';
+import { mnemonicSelector, usernameSelector } from 'state/account/selectors';
 
 export default createSelector(
-  selectMnemonic,
-  selectUsername,
+  mnemonicSelector,
+  usernameSelector,
   (mnemonic, username) => ({
     mnemonic,
-    username
+    username,
   }),
 );

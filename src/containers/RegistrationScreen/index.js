@@ -1,82 +1,107 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 import * as React from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { Button } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { Formik } from 'formik';
 import {
   View,
   Text,
   Input,
-  TouchableOpacity,
 } from 'components';
-
+import schema from './schema';
 import styles from './styles';
 
 import type {
-  ReactElement,
+  FormikProps,
+  FormValues,
   Props,
-  State
 } from './types';
-import selectors from "./selectors";
-import actions from "./actions";
+import selector from './selector';
+import actions from './actions';
 
-class RegistrationScreen extends React.Component<Props, State> {
+class RegistrationScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleUsernameEdit = this.handleUsernameEdit.bind(this);
-    this.state = {
-      username: '',
-      profile: {
-        displayName: '',
-        bio: '',
-      }
-    };
   }
 
-  handleUsernameEdit(username) {
-    this.setState({
-      username: username.toLowerCase().replace(/[^a-z_0-9]/g, '').substring(0, 23),
-    });
-  }
-
-  handleSubmit() {
+  handleSubmit(formValues: FormValues) {
     const { register } = this.props;
-    const { username } = this.state;
-    if (username.length < 4) {
-      alert('Too short!');
-    } else {
-      register(username);
-    }
+    const { username } = formValues;
+    register(username);
   }
 
-  render(): ReactElement {
-    const { username } = this.state;
-    const { navigation } = this.props;
+  render() {
+    const {
+      navigation,
+      isSubmitting,
+    }: Props = this.props;
+
+    const goHome = () => navigation.reset([NavigationActions.navigate({ routeName: 'HomeScreen' })]);
 
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Registration</Text>
-        <Input
-          style={styles.input}
-          onChangeText={this.handleUsernameEdit}
-          value={username} />
-        <TouchableOpacity
-          onPress={this.handleSubmit}>
-          <Text>Submit</Text>
-          </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}>
-          <Text>Go Back</Text>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <Text style={styles.header}>Registration</Text>
+        </View>
+        <Formik
+          onSubmit={this.handleSubmit}
+          validationSchema={schema}
+        >
+          {({
+            values,
+            handleSubmit,
+            handleChange,
+            touched,
+            errors,
+            setFieldTouched,
+            isValid,
+          }): FormikProps<FormValues> => (
+            <View>
+              <View style={styles.row}>
+                <Input
+                  style={styles.input}
+                  value={values.username}
+                  onChangeText={handleChange('username')}
+                  onBlur={() => setFieldTouched('username')}
+                  placeholder="Username"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  textAlign="center"
+                  editable={!isSubmitting}
+                />
+              </View>
+              <View style={styles.row}>
+                <Text style={[styles.text, styles.validationError]}>
+                  {touched ? errors.username : ''}
+                </Text>
+              </View>
+              <View style={styles.row}>
+                <Button
+                  style={styles.button}
+                  title="Submit"
+                  onPress={handleSubmit}
+                  disabled={!isValid || isSubmitting}
+                  loading={isSubmitting}
+                  loadingProps={{ size: 'large', color: 'white' }}
+                />
+              </View>
+            </View>
+          )}
+        </Formik>
+
+        <Button
+          style={styles.row}
+          title="Go home"
+          onPress={goHome}
+        />
       </View>
     );
   }
-};
+}
 
 export default connect(
-  selectors,
-  actions
+  selector,
+  actions,
 )(RegistrationScreen);
