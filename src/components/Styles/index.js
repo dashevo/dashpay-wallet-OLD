@@ -9,7 +9,7 @@ import { transform } from 'lodash';
 import { reduce } from 'lodash';
 import { every } from 'lodash';
 import { renderProps } from 'utilities';
-import ThemeConsumer from 'theme/ThemeConsumer';
+import { ThemeConsumer } from 'hooks/Theme';
 import parse from './parse';
 import type { Props } from './types';
 import type { State } from './types';

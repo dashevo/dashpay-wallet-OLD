@@ -102,7 +102,7 @@ import { TouchableHighlight } from 'react-native';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 
-import ThemeConsumer from 'theme/ThemeConsumer';
+import { ThemeConsumer } from 'hooks/Theme';
 import { TouchableOpacity } from 'react-native';
 
 function Item(props) {

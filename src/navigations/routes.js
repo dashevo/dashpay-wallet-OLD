@@ -18,6 +18,7 @@ import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
 import ActivitiesScreen from 'containers/ActivitiesScreen';
 import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
+import Activities from 'screens/Activities';
 
 const routes = {
   DeveloperMenuScreen: {
