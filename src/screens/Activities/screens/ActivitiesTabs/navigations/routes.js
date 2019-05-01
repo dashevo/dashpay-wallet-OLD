@@ -1,17 +1,16 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
  */
 
 // Internal dependencies
+import AllEvents from '../screens/AllEvents';
 import Contacts from '../screens/Contacts';
 
 const routes = {
   Activities: {
-    screen: Contacts,
+    screen: AllEvents,
     navigationOptions: {
-      title: 'Activities',
+      title: 'All Events',
     }
   },
   Transactions: {

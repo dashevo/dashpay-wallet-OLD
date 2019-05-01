@@ -6,11 +6,11 @@ import ContactRequestRejected from './ContactRequestRejected';
 import ContactRequestSent from './ContactRequestSent';
 
 function ContactCard(props) {
-  if (props.status === 'ACCEPTED' && props.type === 'RECEIVED') {
+  if (props.status === 'ACCEPTED') {
     return <ContactRequestAccepted {...props} />;
   }
 
-  if (props.status === 'REJECTED' && props.type === 'RECEIVED') {
+  if (props.status === 'REJECTED') {
     return <ContactRequestRejected {...props} />;
   }
 

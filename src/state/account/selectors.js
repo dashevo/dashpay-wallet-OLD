@@ -7,3 +7,9 @@ export const balanceSelector = createSelector(accountSelector, ({ balance }) => 
 export const mnemonicSelector = createSelector(accountSelector, ({ mnemonic }) => mnemonic);
 
 export const usernameSelector = createSelector(accountSelector, ({ username }) => username);
+
+export const currentUserSelector = ({ account }) => ({
+  username: account.username,
+  address: account.username,
+  image: `https://api.adorable.io/avatars/285/${account.username}.png`,
+});
