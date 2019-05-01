@@ -3,9 +3,9 @@ package com.dashpay;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.swmansion.reanimated.ReanimatedPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
+import com.swmansion.reanimated.ReanimatedPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -30,9 +30,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReanimatedPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),
+            new ReanimatedPackage(),
             new RandomBytesPackage(),
             new RNGestureHandlerPackage(),
             new RNDeviceInfo(),

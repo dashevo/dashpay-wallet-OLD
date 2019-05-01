@@ -100,6 +100,7 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
   defaultConfig {
     applicationId "com.dashpay"
     minSdkVersion rootProject.ext.minSdkVersion
@@ -149,9 +150,9 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-reanimated')
   implementation project(':react-native-vector-icons')
   implementation project(':react-native-svg')
+  implementation project(':react-native-reanimated')
   implementation project(':react-native-randombytes')
   implementation project(':react-native-gesture-handler')
   implementation project(':react-native-device-info')
