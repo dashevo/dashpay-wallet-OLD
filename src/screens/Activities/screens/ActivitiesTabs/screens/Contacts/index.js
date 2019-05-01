@@ -13,18 +13,25 @@ import selectors from './selectors';
 import actions from './actions';
 
 function Contacts(props) {
-  const renderItem = useCallback(({ item }) => {
-    function onAccept(address) {
-      props.acceptBlockchainContact(address).then(console.log, console.log);
-    }
+  const keyExtractor = (item, index) => item.id;
 
-    function onReject(address) {
-      props.rejectBlockchainContact(address).then(console.log, console.log);
-    }
-    return <ContactItem {...item} onAccept={onAccept} onReject={onReject} />;
+  const renderItem = useCallback(({ item }) => {
+    return (
+      <ContactItem
+        {...item}
+        onAccept={props.acceptBlockchainContact}
+        onReject={props.rejectBlockchainContact}
+      />
+    );
   }, []);
 
-  return <ContactList {...props} renderItem={renderItem} />;
+  return (
+    <ContactList
+      {...props}
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+    />
+  );
 }
 
 Contacts.defaultProps = {

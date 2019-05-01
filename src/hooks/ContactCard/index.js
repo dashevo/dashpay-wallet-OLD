@@ -5,20 +5,24 @@ import ContactRequestReceived from './ContactRequestReceived';
 import ContactRequestRejected from './ContactRequestRejected';
 import ContactRequestSent from './ContactRequestSent';
 
-function functionName(props) {
-  if (props.status === 'ACCEPTED') {
+function ContactCard(props) {
+  if (props.status === 'ACCEPTED' && props.type === 'RECEIVED') {
     return <ContactRequestAccepted {...props} />;
   }
 
-  if (props.status === 'REJECTED') {
+  if (props.status === 'REJECTED' && props.type === 'RECEIVED') {
     return <ContactRequestRejected {...props} />;
+  }
+
+  if (props.status === 'PANDING' && props.type === 'RECEIVED') {
+    return <ContactRequestReceived {...props} />;
   }
 
   if (props.status === 'PANDING' && props.type === 'SENT') {
     return <ContactRequestSent {...props} />;
   }
 
-  return <ContactRequestReceived {...props} />;
+  return null;
 }
 
-export default functionName;
+export default ContactCard;

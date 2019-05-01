@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import moment from 'moment';
 
 // Internal dependencies
 import { Avatar } from 'hooks/Avatar';

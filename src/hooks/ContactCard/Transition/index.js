@@ -259,6 +259,7 @@ function Item(props) {
 function Transition(props) {
   const transitionItems = useTransitionItems(props);
   const transition = useTransition(transitionItems);
+  const [failed, setFailed] = useState(false);
 
   const animatedValue = useValue(0.5);
 
@@ -281,11 +282,31 @@ function Transition(props) {
   function handleLeave(item) {
     transition.onLeave(item);
     if (item.label === 'Yes') {
-      console.log('__props.sender.address__', props.sender.address);
-      props.onReject(props.sender.address);
+      props.onReject(props.sender.address).then(
+        res => {
+          if (res.type.endsWith('FAILURE')) {
+            console.log('res', res);
+            setFailed(true);
+          }
+        },
+        err => {
+          console.log('err', err);
+          setFailed(true);
+        }
+      );
     } else {
-      console.log('__props.sender.address__', props.sender.address);
-      props.onAccept(props.sender.address);
+      props.onAccept(props.sender.address).then(
+        res => {
+          if (res.type.endsWith('FAILURE')) {
+            console.log('res', res);
+            setFailed(true);
+          }
+        },
+        err => {
+          console.log('err', err);
+          setFailed(true);
+        }
+      );
     }
   }
 
@@ -300,6 +321,30 @@ function Transition(props) {
         runAnimation={runAnimation}
         onLeave={handleLeave}
       />
+    );
+  }
+
+  if (failed) {
+    return (
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#EAEBEC',
+          borderColor: '#EAEBEC',
+          borderRadius: 5,
+          padding: 12,
+        }}>
+        <Text
+          style={{
+            fontStyle: 'normal',
+            fontWeight: 'normal',
+            color: '#999999',
+            fontSize: 16
+          }}>
+          {'The request has failed.'}
+        </Text>
+      </View>
     );
   }
 

@@ -4,13 +4,14 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import moment from 'moment';
 
 // Internal dependencies
 import { Avatar } from 'hooks/Avatar';
 import useTranslate from 'hooks/Translate';
 import useStyles from './useStyles';
 
-function ContactRequestSent({ sender, receiver, timestamp }) {
+function ContactRequestAccepted({ sender, receiver, timestamp }) {
   const translate = useTranslate();
   const styles = useStyles();
 
@@ -47,4 +48,4 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
   );
 }
 
-export default ContactRequestSent;
+export default ContactRequestAccepted;

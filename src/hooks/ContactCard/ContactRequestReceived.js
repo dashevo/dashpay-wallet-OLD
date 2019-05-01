@@ -4,6 +4,7 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
+import moment from 'moment';
 
 // Internal dependencies
 import { Avatar } from 'hooks/Avatar';
@@ -11,7 +12,7 @@ import useTranslate from 'hooks/Translate';
 import Transition from './Transition';
 import useStyles from './useStyles';
 
-function ContactRequestSent({
+function ContactRequestReceived({
   sender,
   receiver,
   onAccept,
@@ -29,7 +30,9 @@ function ContactRequestSent({
         </View>
         <View style={styles.center}>
           <Text style={styles.title}>{sender.displayName}</Text>
-          <Text style={styles.subtitle}>{translate('Added to Contacts')}</Text>
+          <Text style={styles.subtitle}>
+            {translate('Wants to be a Contacts')}
+          </Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -46,4 +49,4 @@ function ContactRequestSent({
   );
 }
 
-export default ContactRequestSent;
+export default ContactRequestReceived;
