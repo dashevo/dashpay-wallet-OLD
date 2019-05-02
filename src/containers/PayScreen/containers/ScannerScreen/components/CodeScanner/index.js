@@ -27,7 +27,7 @@ class CodeScanner extends React.Component<Props> {
 
     this.state = {
       onBarCodeRead: throttle(this.handleBarCodeRead, EVENT_THROTTLE_MS),
-      barCodeTypes: [RNCamera.Constants.BarCodeType.qr]
+      barCodeTypes: [RNCamera.Constants.BarCodeType.qr],
     };
   }
 

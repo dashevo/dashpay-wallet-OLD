@@ -1,10 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// Internal dependencies
+// @flow
 import PayScreen from '../containers/PayScreen';
 import PayTabs from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
@@ -15,32 +9,32 @@ const routes = {
     screen: PayScreen,
     navigationOptions: {
       title: 'Pay at the address',
-      params: null
-    }
+      params: null,
+    },
   },
   PayTabs: {
     screen: PayTabs,
     navigationOptions: props => ({
       title: props.navigation.getParam(
         'name',
-        props.navigation.getParam('recipient')
+        props.navigation.getParam('recipient'),
       ),
-      params: null
-    })
+      params: null,
+    }),
   },
   ScannerScreen: {
     screen: ScannerScreen,
     navigationOptions: {
       title: 'Pay at the address',
-      params: null
-    }
+      params: null,
+    },
   },
   PaymentConfirmationScreen: {
     screen: PaymentConfirmationScreen,
     navigationOptions: {
-      header: null
-    }
-  }
+      header: null,
+    },
+  },
 };
 
 export default routes;
