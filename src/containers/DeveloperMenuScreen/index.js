@@ -10,7 +10,7 @@ import Touchable from 'components/Touchable';
 import styles from './styles';
 import selector from './selectors';
 import actions from './actions';
-import { Props } from './types';
+import type { Props } from './types';
 
 class DeveloperMenuScreen extends React.Component<Props> {
   static touchableAction(text, action) {

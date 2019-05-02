@@ -14,7 +14,7 @@ import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
-import { Props, State } from './types';
+import type { Props, State } from './types';
 
 class PayTab extends React.Component<Props, State> {
   static defaultProps = defaults;
@@ -40,12 +40,12 @@ class PayTab extends React.Component<Props, State> {
 
   onSubmit = (values, form) => {
     const {
+      navigation,
+      createSendPaymentTransaction,
       receiver,
       sender,
-      navigation: { navigate, goBack },
-      createSendPaymentTransaction,
     } = this.props;
-    navigate('PaymentConfirmationScreen', {
+    navigation.navigate('PaymentConfirmationScreen', {
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,
@@ -66,7 +66,7 @@ class PayTab extends React.Component<Props, State> {
         })
           .then(console.log, console.log);
         form.resetForm();
-        goBack(null);
+        navigation.goBack(null);
       },
     });
   };

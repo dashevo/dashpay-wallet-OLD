@@ -4,7 +4,7 @@
  * @flow
  */
 export default {
-  onCodeScanned: function() {},
+  onCodeScanned() {},
   scanEnabled: true,
-  shouldRender: true
+  shouldRender: true,
 };

@@ -1,4 +1,8 @@
 // @flow
+interface Profile {
+  image: string,
+}
+
 export type Props = {
   navigation: {
     navigate: Function,
@@ -8,5 +12,8 @@ export type Props = {
   alternativeCurrency: Object,
   fetchAlternativeCurrencyRateIfNeeded: Function,
   createSendPaymentTransaction: Function,
+  receiver: Profile,
+  sender: Profile,
 };
+
 export type State = {};
