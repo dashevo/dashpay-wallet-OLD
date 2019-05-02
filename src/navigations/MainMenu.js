@@ -39,13 +39,21 @@ function MainMenu(props: Props): React.Element<any> {
             <View style={styles.amount}>
               <View style={styles.row}>
                 <Icon style={styles.dashIcon} name={dashSymbol} />
-                <FormattedNumber value={dashAmount}>
+                <FormattedNumber
+                  value={dashAmount}
+                  minimumFractionDigits={7}
+                  maximumFractionDigits={7}
+                >
                   {value => <Text style={styles.dashText}>{value}</Text>}
                 </FormattedNumber>
               </View>
               <View style={styles.row}>
                 <Icon style={styles.fiatIcon} name={fiatSymbol} />
-                <FormattedNumber value={fiatAmount}>
+                <FormattedNumber
+                  value={fiatAmount}
+                  minimumFractionDigits={2}
+                  maximumFractionDigits={2}
+                >
                   {value => <Text style={styles.fiatText}>{value}</Text>}
                 </FormattedNumber>
               </View>
