@@ -14,13 +14,7 @@ import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
-
-type Props = {
-  transactions: Array<Object>,
-  alternativeCurrency: Object,
-  fetchAlternativeCurrencyRateIfNeeded: Function,
-};
-type State = {};
+import type { Props, State } from './types';
 
 class PayTab extends React.Component<Props, State> {
   static defaultProps = defaults;
@@ -35,7 +29,7 @@ class PayTab extends React.Component<Props, State> {
       convertToFiatAmount: dashAmount => dashAmount * rate,
       validationSchema: props.validationSchema,
       initialValues: props.initialValues,
-      onSubmit: this._onSubmit
+      onSubmit: this.onSubmit
     };
   }
 
@@ -44,9 +38,14 @@ class PayTab extends React.Component<Props, State> {
     fetchAlternativeCurrencyRateIfNeeded();
   }
 
-  _onSubmit = (values, form) => {
-    const { navigation: { navigate } } = this.props;
-    navigate('PaymentConfirmationScreen', {
+  onSubmit = (values, form) => {
+    const {
+      navigation,
+      createSendPaymentTransaction,
+      receiver,
+      sender,
+    } = this.props;
+    navigation.navigate('PaymentConfirmationScreen', {
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,
@@ -54,22 +53,21 @@ class PayTab extends React.Component<Props, State> {
       feeFiat: 0.999,
       totalFiat: values.amount,
       destinationAddress: values.recipient,
-      toAvatar: { uri: this.props.receiver.image },
-      fromAvatar: { uri: this.props.sender.image },
+      toAvatar: { uri: receiver.image },
+      fromAvatar: { uri: sender.image },
       onConfirmation: () => {
-        this.props
-          .createSendPaymentTransaction({
-            // Tmp this will be fixed with new schema
-            dashAmount: values.dashAmount,
-            fiatAmount: values.fiatAmount,
+        createSendPaymentTransaction({
+          // Tmp this will be fixed with new schema
+          dashAmount: values.dashAmount,
+          fiatAmount: values.fiatAmount,
 
-            recipient: values.recipient,
-            amount: values.dashAmount
-          })
+          recipient: values.recipient,
+          amount: values.dashAmount,
+        })
           .then(console.log, console.log);
         form.resetForm();
-        this.props.navigation.goBack(null);
-      }
+        navigation.goBack(null);
+      },
     });
   };
 

@@ -23,12 +23,17 @@ function mapStateToProps(state, props) {
 
   transactions = orderBy(transactions, ['timestamp'], ['desc']);
 
+  const dashAmount = props.navigation.getParam('amount') || 0;
+  const fiatAmount = dashAmount * alternativeCurrency.rate;
+
   return {
     alternativeCurrency,
     transactions,
     receiver,
     sender,
     initialValues: {
+      dashAmount,
+      fiatAmount,
       recipient,
       name: '',
       image: '',

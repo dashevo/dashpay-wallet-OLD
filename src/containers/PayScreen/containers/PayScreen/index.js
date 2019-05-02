@@ -11,7 +11,7 @@ import RecipientField from './components/RecipientField';
 import selector from './selectors';
 import defaults from './defaults';
 import styles from './styles';
-import { Props, State } from './types';
+import type { Props, State } from './types';
 
 class PayScreen extends React.Component<Props, State> {
   static defaultProps = defaults;
