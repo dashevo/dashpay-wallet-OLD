@@ -53,7 +53,7 @@ export const register = (username: string) => (dispatch, getState, walletLib) =>
     const displayName = username;
     const bio = `I am ${displayName}, my bio is pretty awesome`;
     const dashPayDap = walletLib.account.getDAP('dashpaydap');
-    const registerProfile = dashPayDap
+    const registerProfile = () => dashPayDap
       .registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, bio, displayName, username);
     return dashPayDap.registerBUser(username).then(registerProfile);
   },
