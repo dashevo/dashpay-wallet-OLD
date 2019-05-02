@@ -42,24 +42,22 @@ export const changeNetwork = (networkName) =>{
     });
 };
 
-export const register = (username) => {
-  return (dispatch, getState, walletLib) =>
-    dispatch({
-      types: [
-        ActionsTypes.REGISTER_USERNAME_REQUEST,
-        ActionsTypes.REGISTER_USERNAME_SUCCESS,
-        ActionsTypes.REGISTER_USERNAME_FAILURE,
-      ],
-      async asyncTask() {
-        const displayName = username;
-        const bio = `I am ${displayName}, my bio is pretty awesome`;
-        const dashPayDap = walletLib.account.getDAP('dashpaydap');
-        await dashPayDap.registerBUser(username).then(() => {
-          return dashPayDap.registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, bio, displayName, username);
-        });
-      }
-    });
-};
+export const register = (username: string) => (dispatch, getState, walletLib) => dispatch({
+  username,
+  types: [
+    ActionsTypes.REGISTER_USERNAME_REQUEST,
+    ActionsTypes.REGISTER_USERNAME_SUCCESS,
+    ActionsTypes.REGISTER_USERNAME_FAILURE,
+  ],
+  async asyncTask() {
+    const displayName = username;
+    const bio = `I am ${displayName}, my bio is pretty awesome`;
+    const dashPayDap = walletLib.account.getDAP('dashpaydap');
+    const registerProfile = dashPayDap
+      .registerProfile(`https://api.adorable.io/avatars/285/${username}.png`, bio, displayName, username);
+    return dashPayDap.registerBUser(username).then(registerProfile);
+  },
+});
 
 /**
  * Will get a new unused address to get payments

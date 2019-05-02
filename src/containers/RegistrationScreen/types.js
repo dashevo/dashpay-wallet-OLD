@@ -1,10 +1,12 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import type { Element } from 'react';
-export type ReactElement = Element<*>;
+// @flow
+export type Props = {
+  username: string,
+  isSubmitting: boolean,
+  navigation: {
+    reset: Function,
+  },
+};
 
-export type Props = {};
-export type State = {};
+export type FormValues = {
+  username: string,
+};

@@ -11,8 +11,9 @@ export type Props = {
   transactions: Array<Object>,
   alternativeCurrency: Object,
   fetchAlternativeCurrencyRateIfNeeded: Function,
+  createSendPaymentTransaction: Function,
   receiver: Profile,
-  sender: Profile
+  sender: Profile,
 };
 
 export type State = {};

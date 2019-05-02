@@ -29,7 +29,7 @@ class PayTab extends React.Component<Props, State> {
       convertToFiatAmount: dashAmount => dashAmount * rate,
       validationSchema: props.validationSchema,
       initialValues: props.initialValues,
-      onSubmit: this.onSubmit
+      onSubmit: this.onSubmit,
     };
   }
 

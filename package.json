@@ -16,6 +16,7 @@
     "assert": "^1.1.1",
     "asyncstorage-down": "^4.1.2",
     "events": "^1.0.0",
+    "formik": "^1.5.3",
     "intl": "^1.2.5",
     "lodash": "^4.17.11",
     "path-browserify": "0.0.0",

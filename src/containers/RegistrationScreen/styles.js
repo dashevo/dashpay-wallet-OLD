@@ -1,27 +1,36 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { StyleSheet } from 'react-native';
 import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: THEMES.vivid.background,
-    justifyContent: 'center',
-    flex: 1
+  },
+  row: {
+    height: 80,
+    width: 300,
+    alignItems: 'center',
+  },
+  header: {
+    color: THEMES.vivid.foreground,
+    fontSize: 30,
   },
   text: {
-    justifyContent: 'center',
+    color: 'white',
+    textAlign: 'center',
+  },
+  validationError: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  input: {
     color: THEMES.vivid.foreground,
   },
-  input:{
-    backgroundColor: 'white',
-    width: 200,
-    margin: 20,
-  }
+  button: {
+    color: THEMES.vivid.foreground,
+  },
 });
 
 export default styles;
