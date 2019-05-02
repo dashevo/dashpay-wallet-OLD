@@ -29,6 +29,7 @@ import config from './config';
 
 import MainMenu from './MainMenu';
 import NavStatic from 'components/NavStatic';
+import NavBar from 'components/NavBar';
 
 class CustomNavigationView extends React.Component {
   constructor(props) {
@@ -181,20 +182,22 @@ class CustomNavigationView extends React.Component {
               ]
             }
           ]}>
-          {//TODO figure out how to get scene.descriptor.options populated
-          ['HomeScreen', 'DeveloperMenuScreen'].indexOf(scene.descriptor.navigation.state.routeName) < 0 && (
-            <View pointerEvents="box-none" style={styles.navStatic}>
-              <NavStatic
+          {scene.descriptor.options.header && (
+            <View style={styles.header}>
+              <NavBar
+                scene={scene}
                 navigation={scene.descriptor.navigation}
                 showMenu={this.showMenu}
               />
             </View>
           )}
-          <Scene
-            navigation={scene.descriptor.navigation}
-            showMenu={this.showMenu}
-            hideMenu={this.hideMenu}
-          />
+          <View style={styles.body}>
+            <Scene
+              navigation={scene.descriptor.navigation}
+              showMenu={this.showMenu}
+              hideMenu={this.hideMenu}
+            />
+          </View>
         </Animated.View>
       </Animated.View>
     );
@@ -209,8 +212,8 @@ const CustomTransitioner = createAppContainer(
 
 const styles = StyleSheet.create({
   view: {
-    backgroundColor: '#211F24',
-    borderColor: '#211F24',
+    backgroundColor: '#fff',
+    borderColor: '#fff',
     position: 'absolute',
     overflow: 'hidden',
     left: 0,
@@ -218,12 +221,11 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0
   },
-  navStatic: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    zIndex: 1
+  header: {},
+  body: {
+    position: 'relative',
+    overflow: 'hidden',
+    flex: 1
   }
 });
 

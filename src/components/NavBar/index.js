@@ -4,11 +4,7 @@
  * @flow
  */
 import * as React from 'react';
-import {
-  TouchableOpacity,
-  View,
-  SafeAreaView
-} from 'react-native';
+import { TouchableOpacity, View, SafeAreaView } from 'react-native';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import Styles from 'components/Styles';
@@ -20,6 +16,7 @@ export const Composed = compose([
 ]);
 
 function NavBar(props) {
+  const { navigation, showMenu } = props;
   const { options } = props.scene.descriptor;
   const { title = '', params = {} } = options;
   return (
@@ -29,7 +26,7 @@ function NavBar(props) {
           <View style={styles.body}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => props.navigation.dismiss()}>
+              onPress={() => props.navigation.goBack()}>
               <Icon style={styles.icon} name={'chevron-left'} />
             </TouchableOpacity>
             <View style={styles.wrapper}>
@@ -37,6 +34,19 @@ function NavBar(props) {
                 {title}
               </Text>
             </View>
+          </View>
+          <View style={styles.right}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate('ActivitiesScreen');
+              }}>
+              <Icon style={styles.icon} name={'squiggle'} />
+              <Text style={styles.text}>{'3'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={showMenu}>
+              <Icon style={styles.icon} name={'bars'} />
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       )}
