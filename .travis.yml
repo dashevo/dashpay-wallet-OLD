@@ -16,6 +16,6 @@ jobs:
       install:
         - git remote set-branches --add origin master
         - git fetch
-      script: git diff --name-only origin/master '*.js' | xargs npx eslint
+      script: git diff --diff-filter=ACMR --name-only origin/master '*.js' | xargs npx eslint
     - stage: jest
       script: npm test
