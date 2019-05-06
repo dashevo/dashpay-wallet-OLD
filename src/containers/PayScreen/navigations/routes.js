@@ -4,6 +4,8 @@ import PayTabs from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
 import PaymentConfirmationScreen from '../containers/PaymentConfirmationScreen';
 
+const MAX_TITLE_LENGTH = 15;
+
 const routes = {
   PayScreen: {
     screen: PayScreen,
@@ -14,13 +16,16 @@ const routes = {
   },
   PayTabs: {
     screen: PayTabs,
-    navigationOptions: props => ({
-      title: props.navigation.getParam(
-        'name',
-        props.navigation.getParam('recipient'),
-      ),
-      params: null,
-    }),
+    navigationOptions: (props) => {
+      const { getParam } = props.navigation;
+      let title = getParam('name', getParam('recipient'));
+      if (title.length > MAX_TITLE_LENGTH) {
+        title = `${title.substr(0, MAX_TITLE_LENGTH)}...`;
+      }
+      return {
+        title,
+      };
+    },
   },
   ScannerScreen: {
     screen: ScannerScreen,
