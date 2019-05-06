@@ -16,7 +16,6 @@ export const Composed = compose([
 ]);
 
 function NavBar(props) {
-  const { navigation, showMenu } = props;
   const { options } = props.scene.descriptor;
   const { title = '', params = {} } = options;
   return (
@@ -39,12 +38,12 @@ function NavBar(props) {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                navigation.navigate('ActivitiesScreen');
+                props.navigation.navigate('ActivitiesScreen');
               }}>
               <Icon style={styles.icon} name={'squiggle'} />
               <Text style={styles.text}>{'3'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={showMenu}>
+            <TouchableOpacity style={styles.button} onPress={props.showMenu}>
               <Icon style={styles.icon} name={'bars'} />
             </TouchableOpacity>
           </View>
