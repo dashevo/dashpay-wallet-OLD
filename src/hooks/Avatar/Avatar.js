@@ -11,9 +11,9 @@ import { DashIcon } from 'hooks/Icon';
 import useAvatar from './useAvatar';
 
 function Avatar(props) {
-  const { bind, firstInitial, hasDisplayName, hasImage, styles } = useAvatar(
-    props
-  );
+  const {
+    bind, firstInitial, hasDisplayName, hasImage, styles,
+  } = useAvatar(props);
 
   if (hasImage) {
     return (

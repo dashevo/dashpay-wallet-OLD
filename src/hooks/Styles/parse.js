@@ -7,15 +7,15 @@ const options = {
   wordPattern: '[A-Za-z]*',
   delims: {
     modifier: '__',
-    state: '.'
-  }
+    state: '.',
+  },
 };
 
 function buildRegex(delims, wordPattern) {
-  const block = '(' + wordPattern + ')';
-  const modifier = '(?:' + delims.modifier + '(' + wordPattern + '))?';
-  const state = '(?:' + delims.state + '(' + wordPattern + '))?';
-  return new RegExp('^' + block + modifier + state + '$');
+  const block = `(${wordPattern})`;
+  const modifier = `(?:${delims.modifier}(${wordPattern}))?`;
+  const state = `(?:${delims.state}(${wordPattern}))?`;
+  return new RegExp(`^${block}${modifier}${state}$`);
 }
 
 function parse(str, regex) {

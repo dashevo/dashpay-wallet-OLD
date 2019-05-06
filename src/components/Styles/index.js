@@ -5,21 +5,23 @@
  */
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-import { transform } from 'lodash';
-import { reduce } from 'lodash';
-import { every } from 'lodash';
+import {
+  transform, reduce, every, isFunction,
+} from 'lodash';
+
+
 import { renderProps } from 'utilities';
 import { ThemeConsumer } from 'hooks/Theme';
 import parse from './parse';
-import type { Props } from './types';
-import type { State } from './types';
-import { isFunction } from 'lodash';
+import type { Props, State } from './types';
+
+
 import themes from './themes';
 
 // The code below should be refactored.
 class Styles extends React.Component<Props, State> {
   static defaultProps = {
-    styles: {}
+    styles: {},
   };
 
   constructor(props) {
@@ -32,14 +34,14 @@ class Styles extends React.Component<Props, State> {
         result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
-          state && { state }
+          state && { state },
         );
         return result;
       },
-      {}
+      {},
     );
     this.state = {
-      transformedStyles
+      transformedStyles,
     };
   }
 
@@ -52,11 +54,11 @@ class Styles extends React.Component<Props, State> {
         result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
-          state && { state }
+          state && { state },
         );
         return result;
       },
-      {}
+      {},
     );
 
     // TODO: groupStyles(transformedStyles)
@@ -79,12 +81,12 @@ class Styles extends React.Component<Props, State> {
         result[block].push(styleId);
         return result;
       },
-      {}
+      {},
     );
     return {
       transformedStyles,
       styles,
-      theme
+      theme,
     };
   }
 
@@ -95,19 +97,17 @@ class Styles extends React.Component<Props, State> {
 
 // The code below should be refactored.
 function Theme(props) {
-  let tmpStyles = {};
+  const tmpStyles = {};
 
   if (isFunction(props.styles)) {
-    Object.keys(themes).forEach(theme => {
+    Object.keys(themes).forEach((theme) => {
       tmpStyles[theme] = StyleSheet.create(props.styles(themes[theme]));
     });
   }
 
   return (
     <ThemeConsumer>
-      {themeProps => (
-        <Styles {...themeProps} {...props} styles={tmpStyles} themes={themes} />
-      )}
+      {themeProps => <Styles {...themeProps} {...props} styles={tmpStyles} themes={themes} />}
     </ThemeConsumer>
   );
 }

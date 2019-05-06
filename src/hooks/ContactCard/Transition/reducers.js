@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 function items(state = [], action) {
   switch (action.type) {
     case 'UPDATE':
-      let newState = [];
+      const newState = [];
 
       const prevItems = state;
       const nextItems = action.payload;
@@ -16,15 +16,11 @@ function items(state = [], action) {
       const prevKeys = prevItems.map(item => item.key);
       const nextKeys = nextItems.map(item => item.key);
 
-      const enteringKeys = new Set(
-        nextKeys.filter(key => prevKeys.indexOf(key) === -1)
-      );
+      const enteringKeys = new Set(nextKeys.filter(key => prevKeys.indexOf(key) === -1));
 
-      const leavingKeys = new Set(
-        prevKeys.filter(key => nextKeys.indexOf(key) === -1)
-      );
+      const leavingKeys = new Set(prevKeys.filter(key => nextKeys.indexOf(key) === -1));
 
-      nextItems.forEach(item => {
+      nextItems.forEach((item) => {
         if (enteringKeys.has(item.key)) {
           newState.push(Object.assign({}, item, { status: 'entering' }));
         } else {
@@ -32,15 +28,11 @@ function items(state = [], action) {
         }
       });
 
-      leavingKeys.forEach(key => {
+      leavingKeys.forEach((key) => {
         const insertionIndex = prevKeys.indexOf(key);
         const item = prevItems[insertionIndex];
 
-        newState.splice(
-          insertionIndex,
-          0,
-          Object.assign({}, item, { status: 'leaving' })
-        );
+        newState.splice(insertionIndex, 0, Object.assign({}, item, { status: 'leaving' }));
       });
 
       return newState;
@@ -54,5 +46,5 @@ function items(state = [], action) {
 }
 
 export default combineReducers({
-  items
+  items,
 });

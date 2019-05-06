@@ -14,11 +14,7 @@ function Form(props) {
   const { children, ...rest } = props;
   const form = useForm(rest);
 
-  return (
-    <FormProvider value={form}>
-      {children}
-    </FormProvider>
-  );
+  return <FormProvider value={form}>{children}</FormProvider>;
 }
 
 export default Form;

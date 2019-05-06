@@ -7,7 +7,7 @@ import { makeStyles } from 'hooks/Styles';
 
 function styles(theme) {
   return {
-    ['card']: {
+    card: {
       marginBottom: 15,
       backgroundColor: '#fff',
       borderColor: '#fff',
@@ -16,9 +16,9 @@ function styles(theme) {
       borderWidth: 0,
       display: 'flex',
       flexDirection: 'column',
-      position: 'relative'
+      position: 'relative',
     },
-    ['header']: {
+    header: {
       backgroundColor: '#fff',
       borderBottomColor: '#fff',
       borderBottomWidth: 0,
@@ -28,53 +28,52 @@ function styles(theme) {
       borderTopRightRadius: 5,
       paddingLeft: 12,
       paddingRight: 12,
-      paddingTop: 12
+      paddingTop: 12,
     },
-    ['row']: {
+    row: {
       flexDirection: 'row',
       alignItems: 'flex-start',
       marginRight: -5,
-      marginLeft: -5
+      marginLeft: -5,
     },
-    ['col']: {
+    col: {
       paddingLeft: 5,
-      paddingRight: 5
+      paddingRight: 5,
     },
-    ['body']: {
+    body: {
       padding: 12,
-      flex: 1
+      flex: 1,
     },
-
-    ['underlined']: {
+    underlined: {
       backgroundColor: '#EAEBEC',
       borderColor: '#EAEBEC',
       borderRadius: 5,
-      padding: 12
+      padding: 12,
     },
-    ['footer']: {
+    footer: {
       paddingLeft: 12,
       paddingRight: 12,
       paddingBottom: 12,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
-    ['center']: {
+    center: {
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
-    ['underlinedText']: {
+    underlinedText: {
       fontStyle: 'normal',
       fontWeight: 'normal',
       color: '#999999',
-      fontSize: 16
+      fontSize: 16,
     },
-    ['metadata']: {
+    metadata: {
       fontStyle: 'normal',
       fontWeight: 'normal',
       color: '#999999',
       fontSize: 11,
-      textAlign: 'center'
-    }
+      textAlign: 'center',
+    },
   };
 }
 

@@ -7,7 +7,7 @@
 function useTranslate() {
   return (str = '', data = {}) => {
     const keys = Object.keys(data);
-    const length = keys.length;
+    const { length } = keys;
 
     if (!length) {
       return str;
@@ -15,10 +15,8 @@ function useTranslate() {
 
     for (let i = 0; i < length; i++) {
       str = str.replace(
-        new RegExp('{{ ' + String(keys[i]) + ' }}', 'g'),
-        function(match, behind) {
-          return match ? String(data[keys[i]]) : '';
-        }
+        new RegExp(`{{ ${String(keys[i])} }}`, 'g'),
+        (match, behind) => (match ? String(data[keys[i]]) : ''),
       );
     }
 

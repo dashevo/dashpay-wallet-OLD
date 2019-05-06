@@ -7,11 +7,11 @@ export function yupToFormErrors(yupErrors) {
 
   if (yupErrors.inner.length === 0) {
     return {
-      [yupErrors.path]: yupErrors.message
+      [yupErrors.path]: yupErrors.message,
     };
   }
 
-  for (let error of yupErrors.inner) {
+  for (const error of yupErrors.inner) {
     errors[error.path] = error.message;
   }
   return errors;

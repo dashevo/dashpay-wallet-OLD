@@ -38,7 +38,7 @@ function ContactList(props) {
 }
 
 ContactList.defaultProps = {
-  ListEmptyComponent: ListEmpty
+  ListEmptyComponent: ListEmpty,
 };
 
 export default ContactList;

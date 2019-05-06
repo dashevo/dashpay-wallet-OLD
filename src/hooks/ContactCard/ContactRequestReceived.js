@@ -13,11 +13,7 @@ import Transition from './Transition';
 import useStyles from './useStyles';
 
 function ContactRequestReceived({
-  sender,
-  receiver,
-  onAccept,
-  onReject,
-  timestamp
+  sender, receiver, onAccept, onReject, timestamp,
 }) {
   const translate = useTranslate();
   const styles = useStyles();
@@ -30,9 +26,7 @@ function ContactRequestReceived({
         </View>
         <View style={styles.center}>
           <Text style={styles.title}>{sender.displayName}</Text>
-          <Text style={styles.subtitle}>
-            {translate('Wants to be a Contacts')}
-          </Text>
+          <Text style={styles.subtitle}>{translate('Wants to be a Contacts')}</Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -41,7 +35,7 @@ function ContactRequestReceived({
       <View style={styles.footer}>
         <Text style={styles.metadata}>
           {translate('Requested | {{ timestamp }}', {
-            timestamp
+            timestamp,
           })}
         </Text>
       </View>

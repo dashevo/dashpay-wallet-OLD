@@ -7,16 +7,16 @@ import TabBar from 'navigations/TabBar';
 const config = {
   mode: 'card',
   cardStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   containerStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   tabBarComponent: TabBar,
   tabBarOptions: {
     upperCaseLabel: false,
     showIcon: false,
-    scrollEnabled: false
+    scrollEnabled: false,
   },
 };
 

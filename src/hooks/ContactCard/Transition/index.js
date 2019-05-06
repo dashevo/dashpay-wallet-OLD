@@ -20,22 +20,22 @@ const {
   interpolate,
   concat,
   and,
-  eq
+  eq,
 } = Animated;
 
 function useTransitionItems(props) {
   const [state, setState] = useState(() => {
     function onPressYes() {
-      let items = state.filter(item => item.key === 'yes').map(item => {
-        return { ...item, showPulse: true };
-      });
+      const items = state
+        .filter(item => item.key === 'yes')
+        .map(item => ({ ...item, showPulse: true }));
       setState(items);
     }
 
     function onPressNo() {
-      let items = state.filter(item => item.key === 'no').map(item => {
-        return { ...item, showPulse: true };
-      });
+      const items = state
+        .filter(item => item.key === 'no')
+        .map(item => ({ ...item, showPulse: true }));
       setState(items);
     }
 
@@ -44,14 +44,14 @@ function useTransitionItems(props) {
         key: 'yes',
         label: 'Yes',
         onPress: onPressYes,
-        primary: true
+        primary: true,
       },
       {
         key: 'no',
         label: 'No',
         onPress: onPressNo,
-        seconadry: true
-      }
+        seconadry: true,
+      },
     ];
   });
 
@@ -62,11 +62,11 @@ function useValue(config) {
   const ref = useRef(null);
 
   function getObserver() {
-    let observer = ref.current;
+    const observer = ref.current;
     if (observer !== null) {
       return observer;
     }
-    let newObserver = new Value(config);
+    const newObserver = new Value(config);
     ref.current = newObserver;
     return newObserver;
   }
@@ -78,11 +78,11 @@ function useClock() {
   const ref = useRef(null);
 
   function getObserver() {
-    let observer = ref.current;
+    const observer = ref.current;
     if (observer !== null) {
       return observer;
     }
-    let newObserver = new Clock();
+    const newObserver = new Clock();
     ref.current = newObserver;
     return newObserver;
   }
@@ -94,11 +94,11 @@ function useAnimation(callback) {
   const ref = useRef(null);
 
   function getObserver() {
-    let observer = ref.current;
+    const observer = ref.current;
     if (observer !== null) {
       return observer;
     }
-    let newObserver = callback();
+    const newObserver = callback();
     ref.current = newObserver;
     return newObserver;
   }
@@ -111,13 +111,13 @@ function runTiming(clock, value, dest) {
     finished: new Value(0),
     position: new Value(0),
     time: new Value(0),
-    frameTime: new Value(0)
+    frameTime: new Value(0),
   };
 
   const config = {
     duration: 2000,
     toValue: new Value(0),
-    easing: Easing.inOut(Easing.ease)
+    easing: Easing.inOut(Easing.ease),
   };
 
   return block([
@@ -127,7 +127,7 @@ function runTiming(clock, value, dest) {
       set(state.position, value),
       set(state.frameTime, 0),
       set(config.toValue, dest),
-      startClock(clock)
+      startClock(clock),
     ]),
     timing(clock, state, config),
     cond(state.finished, [
@@ -136,26 +136,24 @@ function runTiming(clock, value, dest) {
       set(state.position, value),
       set(state.frameTime, 0),
       set(config.toValue, dest),
-      startClock(clock)
+      startClock(clock),
     ]),
-    state.position
+    state.position,
   ]);
 }
 
 function Pulse(props) {
   const clock = useClock();
-  const animation = useAnimation(() => {
-    return runTiming(clock, -1, 1);
-  });
+  const animation = useAnimation(() => runTiming(clock, -1, 1));
 
   const translateX = interpolate(animation, {
     inputRange: [-1, 1],
-    outputRange: [-300, 0]
+    outputRange: [-300, 0],
   });
 
   const opacity = interpolate(animation, {
     inputRange: [-1, 1],
-    outputRange: [props.opacity, 0]
+    outputRange: [props.opacity, 0],
   });
 
   return (
@@ -168,7 +166,7 @@ function Pulse(props) {
         right: 0,
         top: 0,
         transform: [{ translateX }],
-        opacity
+        opacity,
       }}
     />
   );
@@ -181,7 +179,7 @@ function Item(props) {
         runAnimation();
       }
     },
-    [props.item.status]
+    [props.item.status],
   );
 
   async function runAnimation() {
@@ -190,66 +188,61 @@ function Item(props) {
     props.onLeave(props.item);
   }
 
-  const index = props.index;
+  const { index } = props;
   const left = index - 0.5;
   const right = index + 0.5;
 
-  const length = props.length;
+  const { length } = props;
   const minWidth = 100 / length;
 
-  let width = concat(
+  const width = concat(
     interpolate(props.animatedValue, {
       inputRange: [left, index, right],
       outputRange: [minWidth, 100, minWidth],
-      extrapolate: 'clamp'
+      extrapolate: 'clamp',
     }),
-    '%'
+    '%',
   );
 
-  let padding = interpolate(props.animatedValue, {
+  const padding = interpolate(props.animatedValue, {
     inputRange: [left, index, right],
     outputRange: [5, 0, 5],
-    extrapolate: 'clamp'
+    extrapolate: 'clamp',
   });
 
   const zIndex = props.item.status === 'leaving' ? 1 : 2;
 
-  const animatedStyles =
-    index === 0
-      ? {
-          overflow: 'hidden',
-          position: 'absolute',
-          paddingLeft: 7.5,
-          paddingRight: 7.5,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width,
-          zIndex
-        }
-      : {
-          overflow: 'hidden',
-          position: 'absolute',
-          paddingLeft: 7.5,
-          paddingRight: 7.5,
-          top: 0,
-          right: 0,
-          bottom: 0,
-          width,
-          zIndex
-        };
+  const animatedStyles = index === 0
+    ? {
+      overflow: 'hidden',
+      position: 'absolute',
+      paddingLeft: 7.5,
+      paddingRight: 7.5,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width,
+      zIndex,
+    }
+    : {
+      overflow: 'hidden',
+      position: 'absolute',
+      paddingLeft: 7.5,
+      paddingRight: 7.5,
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width,
+      zIndex,
+    };
 
-  const styleName =
-    props.item.primary === true ? 'primaryButton' : 'seconadryButton';
-  const styleName2 =
-    props.item.primary === true ? 'primaryButtonText' : 'seconadryButtonText';
+  const styleName = props.item.primary === true ? 'primaryButton' : 'seconadryButton';
+  const styleName2 = props.item.primary === true ? 'primaryButtonText' : 'seconadryButtonText';
 
   return (
     <Animated.View style={animatedStyles}>
       <TouchableOpacity style={styles[styleName]} onPress={props.item.onPress}>
-        {props.item.showPulse && (
-          <Pulse opacity={props.item.primary === true ? 0.2 : 0.1} />
-        )}
+        {props.item.showPulse && <Pulse opacity={props.item.primary === true ? 0.2 : 0.1} />}
         <Text style={styles[styleName2]}>{props.item.label}</Text>
       </TouchableOpacity>
     </Animated.View>
@@ -268,7 +261,7 @@ function Transition(props) {
       const animation = timing(animatedValue, {
         easing: Easing.inOut(Easing.ease),
         duration: 500,
-        toValue: toValue
+        toValue,
       });
 
       animation.start(resolve);
@@ -283,29 +276,29 @@ function Transition(props) {
     transition.onLeave(item);
     if (item.label === 'Yes') {
       props.onReject(props.sender.address).then(
-        res => {
+        (res) => {
           if (res.type.endsWith('FAILURE')) {
             console.log('res', res);
             setFailed(true);
           }
         },
-        err => {
+        (err) => {
           console.log('err', err);
           setFailed(true);
-        }
+        },
       );
     } else {
       props.onAccept(props.sender.address).then(
-        res => {
+        (res) => {
           if (res.type.endsWith('FAILURE')) {
             console.log('res', res);
             setFailed(true);
           }
         },
-        err => {
+        (err) => {
           console.log('err', err);
           setFailed(true);
-        }
+        },
       );
     }
   }
@@ -334,14 +327,16 @@ function Transition(props) {
           borderColor: '#EAEBEC',
           borderRadius: 5,
           padding: 12,
-        }}>
+        }}
+      >
         <Text
           style={{
             fontStyle: 'normal',
             fontWeight: 'normal',
             color: '#999999',
-            fontSize: 16
-          }}>
+            fontSize: 16,
+          }}
+        >
           {'The request has failed.'}
         </Text>
       </View>
@@ -355,8 +350,9 @@ function Transition(props) {
         backgroundColor: 'transparent',
         height: 40,
         marginLeft: -7.5,
-        marginRight: -7.5
-      }}>
+        marginRight: -7.5,
+      }}
+    >
       {transition.items.map(renderItem)}
     </View>
   );

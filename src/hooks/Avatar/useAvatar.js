@@ -12,20 +12,18 @@ import useStyles from './useStyles';
 function useAvatar(props) {
   const styles = useStyles(props);
   const { bind, showImage } = useImage({
-    imageURL: props.user.imageURL
+    imageURL: props.user.imageURL,
   });
 
   const showFirstInitial = !!props.user.displayName;
-  const firstInitial = showFirstInitial
-    ? props.user.displayName.charAt(0).toUpperCase()
-    : '';
+  const firstInitial = showFirstInitial ? props.user.displayName.charAt(0).toUpperCase() : '';
 
   return {
     bind,
     hasImage: showImage,
     hasDisplayName: showFirstInitial,
     firstInitial,
-    styles
+    styles,
   };
 }
 

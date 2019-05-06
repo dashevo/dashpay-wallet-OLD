@@ -12,9 +12,9 @@ const routes = {
     screen: ActivitiesTabs,
     navigationOptions: {
       title: 'Activity',
-      params: null
-    }
-  }
+      params: null,
+    },
+  },
 };
 
 export default routes;

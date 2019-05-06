@@ -20,12 +20,12 @@ import {
   SUBMIT_REQUEST,
   SUBMIT_SUCCESS,
   SUBMIT_FAILURE,
-  RESET
+  RESET,
 } from './actionTypes';
 
 const options = {
   abortEarly: false,
-  context: {}
+  context: {},
 };
 
 function useForm(props) {
@@ -42,55 +42,55 @@ function useForm(props) {
     isDirty = false,
     isSubmitting = false,
     isValid = false,
-    isValidating = false
+    isValidating = false,
   } = state;
 
   useEffect(
     () => {
       if (!isSubmitting && isMounted) validate();
     },
-    [values]
+    [values],
   );
 
   function setValues(values) {
     dispatch({
       type: SET_VALUES,
-      payload: values
+      payload: values,
     });
   }
 
   function setErrors(errors) {
     dispatch({
       type: SET_ERRORS,
-      payload: errors
+      payload: errors,
     });
   }
 
   function setTouched(touched) {
     dispatch({
       type: SET_TOUCHED,
-      payload: touched
+      payload: touched,
     });
   }
 
   function setFocused(focused) {
     dispatch({
       type: SET_FOCUSED,
-      payload: focused
+      payload: focused,
     });
   }
 
   function reset(state = initialState) {
     dispatch({
       type: RESET,
-      payload: state
+      payload: state,
     });
   }
 
   async function validate() {
     try {
       dispatch({
-        type: VALIDATE_REQUEST
+        type: VALIDATE_REQUEST,
       });
 
       const schema = props.validationSchema(values);
@@ -98,14 +98,14 @@ function useForm(props) {
 
       dispatch({
         type: VALIDATE_SUCCESS,
-        payload: response
+        payload: response,
       });
 
       return true;
     } catch (errors) {
       return dispatch({
         type: VALIDATE_FAILURE,
-        payload: yupToFormErrors(errors)
+        payload: yupToFormErrors(errors),
       });
       return false;
     }
@@ -113,7 +113,7 @@ function useForm(props) {
 
   async function submit() {
     dispatch({
-      type: SUBMIT_REQUEST
+      type: SUBMIT_REQUEST,
     });
 
     const isValid = await validate();
@@ -121,11 +121,11 @@ function useForm(props) {
     if (isValid) {
       props.onSubmit(state.values);
       dispatch({
-        type: SUBMIT_SUCCESS
+        type: SUBMIT_SUCCESS,
       });
     } else {
       dispatch({
-        type: SUBMIT_FAILURE
+        type: SUBMIT_FAILURE,
       });
     }
 
@@ -146,7 +146,7 @@ function useForm(props) {
     setValues,
     setErrors,
     setFocused,
-    submit
+    submit,
   };
 }
 

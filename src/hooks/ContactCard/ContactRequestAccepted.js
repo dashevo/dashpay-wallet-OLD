@@ -31,7 +31,7 @@ function ContactRequestAccepted({ sender, receiver, timestamp }) {
           <View style={styles.center}>
             <Text style={styles.underlinedText}>
               {translate('ADDED | {{ timestamp }}', {
-                timestamp
+                timestamp,
               })}
             </Text>
           </View>
@@ -40,7 +40,7 @@ function ContactRequestAccepted({ sender, receiver, timestamp }) {
       <View style={styles.footer}>
         <Text style={styles.metadata}>
           {translate('Requested | {{ timestamp }}', {
-            timestamp
+            timestamp,
           })}
         </Text>
       </View>

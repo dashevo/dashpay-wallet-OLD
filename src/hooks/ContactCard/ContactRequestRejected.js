@@ -23,9 +23,7 @@ function ContactRequestRejected({ sender, receiver, timestamp }) {
         </View>
         <View style={styles.center}>
           <Text style={styles.title}>{sender.displayName}</Text>
-          <Text style={styles.subtitle}>
-            {translate('Ignored from contacts')}
-          </Text>
+          <Text style={styles.subtitle}>{translate('Ignored from contacts')}</Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -33,7 +31,7 @@ function ContactRequestRejected({ sender, receiver, timestamp }) {
           <View style={styles.center}>
             <Text style={styles.underlinedText}>
               {translate('IGNORED | {{ timestamp }}', {
-                timestamp
+                timestamp,
               })}
             </Text>
           </View>
@@ -42,7 +40,7 @@ function ContactRequestRejected({ sender, receiver, timestamp }) {
       <View style={styles.footer}>
         <Text style={styles.metadata}>
           {translate('Requested | {{ timestamp }}', {
-            timestamp
+            timestamp,
           })}
         </Text>
       </View>

@@ -5,8 +5,8 @@ module.exports = {
     [
       '@babel/plugin-transform-spread',
       {
-        loose: true
-      }
+        loose: true,
+      },
     ],
     [
       'module-resolver',
@@ -26,9 +26,9 @@ module.exports = {
           state: './src/state',
           themes: './src/themes',
           translations: './src/translations',
-          utilities: './src/utilities'
-        }
-      }
-    ]
-  ]
+          utilities: './src/utilities',
+        },
+      },
+    ],
+  ],
 };

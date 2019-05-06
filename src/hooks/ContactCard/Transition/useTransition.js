@@ -3,23 +3,23 @@ import reducers from './reducers';
 
 function useTransition(items, config) {
   const [state, dispatch] = useReducer(reducers, {
-    items
+    items,
   });
 
   useEffect(
     () => {
       dispatch({
         type: 'UPDATE',
-        payload: items
+        payload: items,
       });
     },
-    [items]
+    [items],
   );
 
   function onLeave(item) {
     dispatch({
       type: 'LEAVE',
-      payload: item
+      payload: item,
     });
   }
 

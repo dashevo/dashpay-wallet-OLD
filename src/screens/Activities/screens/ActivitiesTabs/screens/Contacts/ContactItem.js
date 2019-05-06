@@ -8,8 +8,6 @@ import React from 'react';
 // Internal dependencies
 import ContactCard from 'hooks/ContactCard';
 
-const ContactItem = React.memo(function ContactItem(props) {
-  return <ContactCard {...props} />;
-});
+const ContactItem = React.memo(props => <ContactCard {...props} />);
 
 export default ContactItem;

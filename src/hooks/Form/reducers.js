@@ -19,7 +19,7 @@ import {
   SUBMIT_REQUEST,
   SUBMIT_SUCCESS,
   SUBMIT_FAILURE,
-  RESET
+  RESET,
 } from './actionTypes';
 
 function touched(state = {}, action) {
@@ -139,5 +139,5 @@ export default combineReducers({
   isDirty,
   isValidating,
   isValid,
-  isSubmitting
+  isSubmitting,
 });

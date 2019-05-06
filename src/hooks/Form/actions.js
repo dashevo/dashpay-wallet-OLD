@@ -5,27 +5,27 @@
 export function setValues(values) {
   return {
     type: SET_VALUES,
-    payload: values
+    payload: values,
   };
 }
 
 export function setErrors(errors) {
   return {
     type: SET_ERRORS,
-    payload: errors
+    payload: errors,
   };
 }
 
 export function setTouched(touched) {
   return {
     type: SET_TOUCHED,
-    payload: touched
+    payload: touched,
   };
 }
 
 export function setFocused(focused) {
   return {
     type: SET_FOCUSED,
-    payload: focused
+    payload: focused,
   };
 }

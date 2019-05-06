@@ -15,7 +15,7 @@ const {
   stopClock,
   block,
   interpolate,
-  concat
+  concat,
 } = Animated;
 
 function useTransitionItems(props) {
@@ -32,13 +32,13 @@ function useTransitionItems(props) {
       {
         key: 'yes',
         label: 'Item yes',
-        onPress: onPressYes
+        onPress: onPressYes,
       },
       {
         key: 'no',
         label: 'Item no',
-        onPress: onPressNo
-      }
+        onPress: onPressNo,
+      },
     ];
   });
 
@@ -49,11 +49,11 @@ function useValue(config) {
   const ref = useRef(null);
 
   function getObserver() {
-    let observer = ref.current;
+    const observer = ref.current;
     if (observer !== null) {
       return observer;
     }
-    let newObserver = new Value(config);
+    const newObserver = new Value(config);
     ref.current = newObserver;
     return newObserver;
   }
@@ -65,11 +65,11 @@ function useAnimation(callback) {
   const ref = useRef(null);
 
   function getObserver() {
-    let observer = ref.current;
+    const observer = ref.current;
     if (observer !== null) {
       return observer;
     }
-    let newObserver = callback();
+    const newObserver = callback();
     ref.current = newObserver;
     return newObserver;
   }
@@ -84,7 +84,7 @@ function Item(props) {
         runAnimation();
       }
     },
-    [props.item.status]
+    [props.item.status],
   );
 
   async function runAnimation() {
@@ -93,47 +93,46 @@ function Item(props) {
     props.onLeave(props.item);
   }
 
-  const index = props.index; // 0
+  const { index } = props; // 0
   const left = index - 0.5;
   const right = index + 0.5;
 
-  const length = props.length;
+  const { length } = props;
 
-  let width = concat(
+  const width = concat(
     interpolate(props.animatedValue, {
       inputRange: [left, index, right],
       outputRange: [100 / length, 100, 100 / length],
-      extrapolate: 'clamp'
+      extrapolate: 'clamp',
     }),
-    '%'
+    '%',
   );
 
   const zIndex = props.item.status === 'leaving' ? 1 : 2;
 
-  const animatedStyles =
-    index === 0
-      ? {
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'red',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          width,
-          zIndex
-        }
-      : {
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'red',
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          width,
-          zIndex
-        };
+  const animatedStyles = index === 0
+    ? {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'red',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width,
+      zIndex,
+    }
+    : {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'red',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      width,
+      zIndex,
+    };
 
   return (
     <Animated.View style={animatedStyles}>
@@ -155,7 +154,7 @@ function Transition(props) {
       const animation = timing(animatedValue, {
         easing: Easing.inOut(Easing.ease),
         duration: 500,
-        toValue: toValue
+        toValue,
       });
 
       animation.start(resolve);
@@ -189,8 +188,9 @@ function Transition(props) {
       style={{
         position: 'relative',
         backgroundColor: 'red',
-        height: 48
-      }}>
+        height: 48,
+      }}
+    >
       {transition.items.map(renderItem)}
     </View>
   );

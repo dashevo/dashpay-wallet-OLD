@@ -11,20 +11,20 @@ const routes = {
     screen: AllEvents,
     navigationOptions: {
       title: 'All Events',
-    }
+    },
   },
   Transactions: {
     screen: () => null,
     navigationOptions: {
       title: 'Transactions',
-    }
+    },
   },
   Contacts: {
     screen: Contacts,
     navigationOptions: {
-      title: 'Contacts'
-    }
-  }
+      title: 'Contacts',
+    },
+  },
 };
 
 export default routes;

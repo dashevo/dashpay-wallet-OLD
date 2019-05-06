@@ -8,7 +8,7 @@ import { useState } from 'react';
 function _useState(props) {
   const [state] = useState(() => ({
     theme: props.theme || 'blue',
-    themes: props.themes
+    themes: props.themes,
   }));
 
   return state;

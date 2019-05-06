@@ -6,7 +6,7 @@
 import { makeStyles } from 'hooks/Styles';
 
 const styles = theme => ({
-  ['container']: {
+  container: {
     alignItems: 'center',
     backgroundColor: theme.avatarBackgroundColor,
     borderColor: theme.avatarBorderColor,
@@ -19,100 +19,100 @@ const styles = theme => ({
     height: theme.avatarSize,
     justifyContent: 'center',
     position: 'relative',
-    width: theme.avatarSize
+    width: theme.avatarSize,
   },
-  ['image']: {
+  image: {
     borderRadius: theme.avatarBorderRadius,
     height: theme.avatarSize,
     resizeMode: 'cover',
-    width: theme.avatarSize
+    width: theme.avatarSize,
   },
-  ['text']: {
+  text: {
     color: theme.avatarColor,
-    fontSize: theme.avatarFontSize
+    fontSize: theme.avatarFontSize,
   },
-  ['icon']: {
+  icon: {
     color: theme.avatarColor,
-    fontSize: theme.avatarFontSize
+    fontSize: theme.avatarFontSize,
   },
 
   // Size ls
-  ['container__lg']: {
+  container__lg: {
     borderRadius: theme.avatarLgBorderRadius,
     height: theme.avatarLgSize,
-    width: theme.avatarLgSize
+    width: theme.avatarLgSize,
   },
-  ['image__lg']: {
+  image__lg: {
     borderRadius: theme.avatarLgBorderRadius,
     height: theme.avatarLgSize,
-    width: theme.avatarLgSize
+    width: theme.avatarLgSize,
   },
-  ['text__lg']: {
-    fontSize: theme.avatarLgFontSize
+  text__lg: {
+    fontSize: theme.avatarLgFontSize,
   },
-  ['icon__lg']: {
-    fontSize: theme.avatarLgFontSize
+  icon__lg: {
+    fontSize: theme.avatarLgFontSize,
   },
 
   // Size sm
-  ['container__sm']: {
+  container__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,
-    width: theme.avatarSmSize
+    width: theme.avatarSmSize,
   },
-  ['image__sm']: {
+  image__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,
-    width: theme.avatarSmSize
+    width: theme.avatarSmSize,
   },
-  ['text__sm']: {
-    fontSize: theme.avatarSmFontSize
+  text__sm: {
+    fontSize: theme.avatarSmFontSize,
   },
-  ['icon__sm']: {
-    fontSize: theme.avatarSmFontSize
+  icon__sm: {
+    fontSize: theme.avatarSmFontSize,
   },
 
   // Variant primary
-  ['container__primary']: {
+  container__primary: {
     backgroundColor: theme.avatarPrimaryBackgroundColor,
-    borderColor: theme.avatarPrimaryBorderColor
+    borderColor: theme.avatarPrimaryBorderColor,
   },
-  ['text__primary']: {
-    color: theme.avatarPrimaryColor
+  text__primary: {
+    color: theme.avatarPrimaryColor,
   },
-  ['icon__primary']: {
-    color: theme.avatarPrimaryColor
+  icon__primary: {
+    color: theme.avatarPrimaryColor,
   },
 
   // Variant secondary
-  ['container__secondary']: {
+  container__secondary: {
     backgroundColor: theme.avatarSecondaryBackgroundColor,
-    borderColor: theme.avatarSecondaryBorderColor
+    borderColor: theme.avatarSecondaryBorderColor,
   },
-  ['text__secondary']: {
-    color: theme.avatarSecondaryColor
+  text__secondary: {
+    color: theme.avatarSecondaryColor,
   },
-  ['icon__secondary']: {
-    color: theme.avatarSecondaryColor
+  icon__secondary: {
+    color: theme.avatarSecondaryColor,
   },
 
   // Avatar Cover ***
-  ['container__cover']: {
+  container__cover: {
     borderRadius: theme.avatarCoverBorderRadius,
     height: theme.avatarCoverHeight,
-    width: theme.avatarCoverWidth
+    width: theme.avatarCoverWidth,
   },
-  ['image__cover']: {
+  image__cover: {
     borderRadius: theme.avatarCoverBorderRadius,
     height: theme.avatarCoverHeight,
-    width: theme.avatarCoverWidth
+    width: theme.avatarCoverWidth,
   },
-  ['text__cover']: {
-    fontSize: theme.avatarCoverFontSize
+  text__cover: {
+    fontSize: theme.avatarCoverFontSize,
   },
-  ['icon__cover']: {
-    fontSize: theme.avatarCoverFontSize
-  }
+  icon__cover: {
+    fontSize: theme.avatarCoverFontSize,
+  },
 });
 
 export default makeStyles(styles);

@@ -9,7 +9,7 @@ import React from 'react';
 import Icon from './Icon';
 
 function DashIcon(props) {
-  return <Icon {...props} name={'dash'} />;
+  return <Icon {...props} name="dash" />;
 }
 
 export default DashIcon;

@@ -6,47 +6,47 @@
 import { makeStyles } from 'hooks/Styles';
 
 const styles = theme => ({
-  ['container']: {
+  container: {
     backgroundColor: '#F0F4F5',
-    flex: 1
+    flex: 1,
   },
-  ['header']: {
+  header: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 64,
     paddingBottom: 64,
     paddingLeft: 32,
-    paddingRight: 32
+    paddingRight: 32,
   },
-  ['circle']: {
+  circle: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 25,
     height: 50,
-    width: 50
+    width: 50,
   },
-  ['icon']: {
+  icon: {
     color: '#000',
-    fontSize: 24
+    fontSize: 24,
   },
-  ['title']: {
+  title: {
     color: '#000',
     fontSize: 16,
-    marginTop: 16
+    marginTop: 16,
   },
-  ['content']: {
+  content: {
     flexGrow: 1,
-    padding: 16
+    padding: 16,
   },
-  ['emptyList']: {
+  emptyList: {
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
   },
-  ['emptyMessage']: {
-    fontSize: 16
-  }
+  emptyMessage: {
+    fontSize: 16,
+  },
 });
 
 export default makeStyles(styles);

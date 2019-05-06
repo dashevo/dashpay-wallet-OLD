@@ -4,14 +4,15 @@
 
 // External dependencies
 import * as React from 'react';
-import { useState, useContext, useEffect, useCallback } from 'react';
+import {
+  useState, useContext, useEffect, useCallback,
+} from 'react';
 import { StyleSheet } from 'react-native';
 import { transform, reduce, every } from 'lodash';
 
 // Internal dependencies
+import { ThemeContext, themes } from 'hooks/Theme';
 import parse from './parse';
-import { ThemeContext } from 'hooks/Theme';
-import { themes } from 'hooks/Theme';
 
 const defaultObj = {};
 const defaultFunc = () => ({});
@@ -22,76 +23,82 @@ function useStyles(styles, props) {
   const [transformedStyles, setTransformedStyles] = useState({});
   const { theme } = useContext(ThemeContext);
 
-  useEffect(() => {
-    const allStyles = {};
-    Object.keys(themes).forEach(theme => {
-      allStyles[theme] = StyleSheet.create(styles(themes[theme]));
-    });
+  useEffect(
+    () => {
+      const allStyles = {};
+      Object.keys(themes).forEach((theme) => {
+        allStyles[theme] = StyleSheet.create(styles(themes[theme]));
+      });
 
-    const transformedStyles = transform(
-      allStyles[theme],
-      (result, styleId, selector) => {
-        const [block, modifier, state] = parse(selector);
-        result[selector] = Object.assign(
-          { block, styleId },
-          modifier && { modifier },
-          state && { state }
-        );
-        return result;
-      },
-      {}
-    );
-
-    const groupedStyles = reduce(
-      transformedStyles,
-      (result, value, key) => {
-        const { block, styleId, ...requredProps } = value;
-        const propIsTrue = propKey => props[propKey] === true;
-        const hasRequredProps = every(requredProps, propIsTrue);
-
-        if (!hasRequredProps) {
+      const transformedStyles = transform(
+        allStyles[theme],
+        (result, styleId, selector) => {
+          const [block, modifier, state] = parse(selector);
+          result[selector] = Object.assign(
+            { block, styleId },
+            modifier && { modifier },
+            state && { state },
+          );
           return result;
-        }
+        },
+        {},
+      );
 
-        if (!result[block]) {
-          result[block] = [];
-        }
+      const groupedStyles = reduce(
+        transformedStyles,
+        (result, value, key) => {
+          const { block, styleId, ...requredProps } = value;
+          const propIsTrue = propKey => props[propKey] === true;
+          const hasRequredProps = every(requredProps, propIsTrue);
 
-        result[block].push(styleId);
-        return result;
-      },
-      {}
-    );
+          if (!hasRequredProps) {
+            return result;
+          }
 
-    setAllStyles(allStyles);
-    setTransformedStyles(transformedStyles);
-    setGroupedStyles(groupedStyles);
-  }, [theme]);
+          if (!result[block]) {
+            result[block] = [];
+          }
 
-  useEffect(() => {
-    const groupedStyles = reduce(
-      transformedStyles,
-      (result, value, key) => {
-        const { block, styleId, ...requredProps } = value;
-        const propIsTrue = propKey => props[propKey] === true;
-        const hasRequredProps = every(requredProps, propIsTrue);
-
-        if (!hasRequredProps) {
+          result[block].push(styleId);
           return result;
-        }
+        },
+        {},
+      );
 
-        if (!result[block]) {
-          result[block] = [];
-        }
+      setAllStyles(allStyles);
+      setTransformedStyles(transformedStyles);
+      setGroupedStyles(groupedStyles);
+    },
+    [theme],
+  );
 
-        result[block].push(styleId);
-        return result;
-      },
-      {}
-    );
+  useEffect(
+    () => {
+      const groupedStyles = reduce(
+        transformedStyles,
+        (result, value, key) => {
+          const { block, styleId, ...requredProps } = value;
+          const propIsTrue = propKey => props[propKey] === true;
+          const hasRequredProps = every(requredProps, propIsTrue);
 
-    setGroupedStyles(groupedStyles);
-  }, [props]);
+          if (!hasRequredProps) {
+            return result;
+          }
+
+          if (!result[block]) {
+            result[block] = [];
+          }
+
+          result[block].push(styleId);
+          return result;
+        },
+        {},
+      );
+
+      setGroupedStyles(groupedStyles);
+    },
+    [props],
+  );
 
   return [groupedStyles, themes[theme]];
 }

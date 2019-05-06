@@ -12,11 +12,7 @@ import useState from './useState';
 function Theme(props) {
   const state = useState(props);
 
-  return (
-    <ThemeProvider value={state}>
-      {React.Children.only(props.children)}
-    </ThemeProvider>
-  );
+  return <ThemeProvider value={state}>{React.Children.only(props.children)}</ThemeProvider>;
 }
 
 export default Theme;

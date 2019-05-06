@@ -22,7 +22,7 @@ function ListEmpty(props) {
 }
 
 ListEmpty.defaultProps = {
-  emptyMessage: 'No contacts'
+  emptyMessage: 'No contacts',
 };
 
 export default ListEmpty;

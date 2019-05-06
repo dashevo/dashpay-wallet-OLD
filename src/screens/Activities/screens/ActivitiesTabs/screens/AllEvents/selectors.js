@@ -30,8 +30,8 @@ export default createSelector(
       sender: {
         address: item.address,
         imageURL: item.image,
-        displayName: item.name
-      }
+        displayName: item.name,
+      },
     }));
 
     const sent = sentContactRequests.map(item => ({
@@ -48,23 +48,23 @@ export default createSelector(
       sender: {
         address: currentUser.address,
         imageURL: currentUser.image,
-        displayName: currentUser.username
+        displayName: currentUser.username,
       },
       receiver: {
         address: item.address,
         imageURL: item.image,
-        displayName: item.name
-      }
+        displayName: item.name,
+      },
     }));
 
     let data = received.concat(sent);
 
-    console.log("sentContactRequests, currentUser", sentContactRequests, currentUser);
+    console.log('sentContactRequests, currentUser', sentContactRequests, currentUser);
 
     data = data.sort((a, b) => b.timestamp - a.timestamp);
 
     return {
-      data
+      data,
     };
-  }
+  },
 );

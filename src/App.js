@@ -6,8 +6,7 @@
 import * as React from 'react';
 
 // Internal dependencies
-import { StoreProvider } from 'containers';
-import { LanguageProvider } from 'containers';
+import { StoreProvider, LanguageProvider } from 'containers';
 import { ThemeProvider } from 'hooks/Theme';
 import { Navigator } from 'navigations';
 import translations from 'translations';

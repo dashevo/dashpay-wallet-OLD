@@ -15,31 +15,26 @@ import actions from './actions';
 function Contacts(props) {
   const keyExtractor = (item, index) => item.id;
 
-  const renderItem = useCallback(({ item }) => {
-    return (
+  const renderItem = useCallback(
+    ({ item }) => (
       <ContactItem
         {...item}
         onAccept={props.acceptBlockchainContact}
         onReject={props.rejectBlockchainContact}
       />
-    );
-  }, []);
-
-  return (
-    <ContactList
-      {...props}
-      keyExtractor={keyExtractor}
-      renderItem={renderItem}
-    />
+    ),
+    [],
   );
+
+  return <ContactList {...props} keyExtractor={keyExtractor} renderItem={renderItem} />;
 }
 
 Contacts.defaultProps = {
   title: 'All Events',
-  icon: 'squiggle'
+  icon: 'squiggle',
 };
 
 export default connect(
   selectors,
-  actions
+  actions,
 )(Contacts);

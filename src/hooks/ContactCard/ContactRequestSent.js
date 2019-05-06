@@ -24,9 +24,7 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
           </View>
           <View style={styles.col}>
             <Text style={styles.title}>{sender.displayName}</Text>
-            <Text style={styles.subtitle}>
-              {translate('Requesting Contact')}
-            </Text>
+            <Text style={styles.subtitle}>{translate('Requesting Contact')}</Text>
           </View>
         </View>
       </View>
@@ -38,9 +36,7 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
             </View>
             <View style={styles.col}>
               <Text style={styles.title}>{receiver.displayName}</Text>
-              <Text style={styles.subtitle}>
-                {translate('Pending Request')}
-              </Text>
+              <Text style={styles.subtitle}>{translate('Pending Request')}</Text>
             </View>
           </View>
         </View>
@@ -48,7 +44,7 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
       <View style={styles.footer}>
         <Text style={styles.metadata}>
           {translate('Sent | {{ timestamp }}', {
-            timestamp
+            timestamp,
           })}
         </Text>
       </View>

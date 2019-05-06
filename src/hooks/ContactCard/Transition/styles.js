@@ -1,33 +1,33 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  ['container']: {
+  container: {
     flexDirection: 'row',
     backgroundColor: 'transparent',
-    padding: 12
+    padding: 12,
   },
-  ['primaryButton']: {
+  primaryButton: {
     overflow: 'hidden',
     height: 40,
     flex: 1,
     borderRadius: 6,
     justifyContent: 'center',
     backgroundColor: '#088BE2',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  ['primaryButtonText']: {
-    color: 'white'
+  primaryButtonText: {
+    color: 'white',
   },
-  ['seconadryButton']: {
+  seconadryButton: {
     overflow: 'hidden',
     height: 40,
     flex: 1,
     borderRadius: 6,
     justifyContent: 'center',
     backgroundColor: '#EAEAE9',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  ['seconadryButtonText']: {
-    color: 'gray'
-  }
+  seconadryButtonText: {
+    color: 'gray',
+  },
 });
