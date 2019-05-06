@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import moment from 'moment';
 
 // Internal dependencies
 import { Avatar } from 'hooks/Avatar';
@@ -51,5 +51,17 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
     </View>
   );
 }
+
+ContactRequestSent.propTypes = {
+  timestamp: PropTypes.string.isRequired,
+  sender: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+  }).isRequired,
+  receiver: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default ContactRequestSent;

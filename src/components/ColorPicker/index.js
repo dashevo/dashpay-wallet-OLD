@@ -1,18 +1,16 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
  */
 
 // External dependencies
 import * as React from 'react';
+import PropTypes from 'prop-types';
+
 import {
-  FlatList, TouchableHighlight, View, Text, TouchableOpacity,
+  FlatList, TouchableHighlight, View, Text,
 } from 'react-native';
 
-
 import { ThemeConsumer } from 'hooks/Theme';
-
 
 const COLOR_PALETTES = [
   '#FF8B04',
@@ -105,10 +103,10 @@ const styles = {
 };
 
 function Item(props) {
-  const { color } = props;
+  const { onChange, color } = props;
   return (
     <TouchableHighlight
-      onPress={() => props.onChange(color)}
+      onPress={() => onChange(color)}
       style={[styles.card, { backgroundColor: color }]}
     >
       <View style={[styles.card, { backgroundColor: color }]} />
@@ -116,7 +114,21 @@ function Item(props) {
   );
 }
 
+Item.propTypes = {
+  color: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 class ColorPicker extends React.Component {
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+  };
+
+  onChange = (color) => {
+    const { onChange } = this.props;
+    if (onChange) onChange(color);
+  };
+
   render() {
     return (
       <FlatList
@@ -124,8 +136,8 @@ class ColorPicker extends React.Component {
         style={{ flex: 1 }}
         numColumns={3}
         columnWrapperStyle={{ height: 39 }}
-        keyExtractor={(item, index) => item}
-        renderItem={({ index, item }) => <Item color={item} onChange={this.props.onChange} />}
+        keyExtractor={item => item}
+        renderItem={({ item }) => <Item color={item} onChange={this.onChange} />}
         ListHeaderComponent={() => (
           <React.Fragment>
             <ThemeConsumer>

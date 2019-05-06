@@ -3,8 +3,8 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
-import moment from 'moment';
 
 // Internal dependencies
 import { Avatar } from 'hooks/Avatar';
@@ -13,7 +13,7 @@ import Transition from './Transition';
 import useStyles from './useStyles';
 
 function ContactRequestReceived({
-  sender, receiver, onAccept, onReject, timestamp,
+  sender, onAccept, onReject, timestamp,
 }) {
   const translate = useTranslate();
   const styles = useStyles();
@@ -42,5 +42,15 @@ function ContactRequestReceived({
     </View>
   );
 }
+
+ContactRequestReceived.propTypes = {
+  timestamp: PropTypes.string.isRequired,
+  onAccept: PropTypes.func.isRequired,
+  onReject: PropTypes.func.isRequired,
+  sender: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default ContactRequestReceived;

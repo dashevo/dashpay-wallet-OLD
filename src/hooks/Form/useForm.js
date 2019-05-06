@@ -8,7 +8,7 @@ import { useReducer, useEffect } from 'react';
 // Internal dependencies
 import reducers from './reducers';
 import useMounted from './useMounted';
-import { yupToFormErrors } from './utilities';
+import yupToFormErrors from './utilities';
 import {
   SET_TOUCHED,
   SET_VALUES,
@@ -45,48 +45,6 @@ function useForm(props) {
     isValidating = false,
   } = state;
 
-  useEffect(
-    () => {
-      if (!isSubmitting && isMounted) validate();
-    },
-    [values],
-  );
-
-  function setValues(values) {
-    dispatch({
-      type: SET_VALUES,
-      payload: values,
-    });
-  }
-
-  function setErrors(errors) {
-    dispatch({
-      type: SET_ERRORS,
-      payload: errors,
-    });
-  }
-
-  function setTouched(touched) {
-    dispatch({
-      type: SET_TOUCHED,
-      payload: touched,
-    });
-  }
-
-  function setFocused(focused) {
-    dispatch({
-      type: SET_FOCUSED,
-      payload: focused,
-    });
-  }
-
-  function reset(state = initialState) {
-    dispatch({
-      type: RESET,
-      payload: state,
-    });
-  }
-
   async function validate() {
     try {
       dispatch({
@@ -102,13 +60,55 @@ function useForm(props) {
       });
 
       return true;
-    } catch (errors) {
-      return dispatch({
+    } catch (err) {
+      dispatch({
         type: VALIDATE_FAILURE,
-        payload: yupToFormErrors(errors),
+        payload: yupToFormErrors(err),
       });
       return false;
     }
+  }
+
+  useEffect(
+    () => {
+      if (!isSubmitting && isMounted) validate();
+    },
+    [values],
+  );
+
+  function setValues(data) {
+    dispatch({
+      type: SET_VALUES,
+      payload: data,
+    });
+  }
+
+  function setErrors(data) {
+    dispatch({
+      type: SET_ERRORS,
+      payload: data,
+    });
+  }
+
+  function setTouched(data) {
+    dispatch({
+      type: SET_TOUCHED,
+      payload: data,
+    });
+  }
+
+  function setFocused(data) {
+    dispatch({
+      type: SET_FOCUSED,
+      payload: data,
+    });
+  }
+
+  function reset(data = initialState) {
+    dispatch({
+      type: RESET,
+      payload: data,
+    });
   }
 
   async function submit() {
@@ -116,9 +116,7 @@ function useForm(props) {
       type: SUBMIT_REQUEST,
     });
 
-    const isValid = await validate();
-
-    if (isValid) {
+    if (await validate()) {
       props.onSubmit(state.values);
       dispatch({
         type: SUBMIT_SUCCESS,

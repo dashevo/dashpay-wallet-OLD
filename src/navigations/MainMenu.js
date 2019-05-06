@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import { FormattedNumber } from 'react-intl';
 import { createSelector } from 'reselect';
@@ -13,25 +14,109 @@ import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors
 
 import ParallaxScrollView from './tmp';
 
-function MainMenu(props: Props): React.Element<any> {
-  const { code, rate } = props.alternativeCurrency;
-  const balance = (props.balance || 0) / 100000000;
-  const dashAmount = balance;
-  const fiatAmount = balance * rate;
+const styles = {
+  container: {
+    position: 'relative',
+    backgroundColor: '#211F24',
+    borderColor: '#211F24',
+    flex: 1,
+  },
+  contentContainerStyle: {
+    padding: 16,
+  },
+  header: {},
+  logo: {
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    marginTop: 48,
+    marginBottom: 0,
+    width: 210,
+    height: 70,
+  },
+  item: {
+    marginBottom: 0,
+    marginTop: 4,
+    alignItems: 'center',
+    backgroundColor: '#2A282B',
+    borderColor: '#2A282B',
+    borderRadius: 3,
+    borderWidth: 0,
+    flex: 1,
+    height: 50,
+    justifyContent: 'center',
+    paddingLeft: 32,
+    paddingRight: 32,
+    position: 'relative',
+  },
+  itemText: {
+    color: '#666469',
+    fontSize: 14,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 0,
+  },
+  amount: {
+    paddingBottom: 48,
+    paddingTop: 48,
+  },
+  dashIcon: {
+    color: '#EFEEF1',
+    fontSize: 27,
+    marginRight: 8,
+  },
+  dashText: {
+    color: '#EFEEF1',
+    fontSize: 27,
+  },
+  fiatIcon: {
+    color: '#3C3B40',
+    fontSize: 19,
+    marginRight: 8,
+  },
+  fiatText: {
+    color: '#3C3B40',
+    fontSize: 19,
+  },
+  button: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    height: 50,
+    width: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonIcon: {
+    color: '#666469',
+    fontSize: 18,
+  },
+};
+
+function MainMenu({
+  alternativeCurrency, balance, hideMenu, navigation,
+}) {
+  const newBalance = (balance || 0) / 100000000;
+  const { code, rate } = alternativeCurrency;
+  const dashAmount = newBalance;
+  const fiatAmount = newBalance * rate;
   const dashSymbol = 'dash';
   const fiatSymbol = code.toLowerCase();
-  const clickNavBuilder = (routeName) => {
-    return () => {
-      props.hideMenu();
-      props.navigation.navigate(routeName);
-    };
+  const clickNavBuilder = routeName => () => {
+    hideMenu();
+    navigation.navigate(routeName);
   };
   return (
     <View style={styles.container}>
       <ParallaxScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainerStyle}
-        renderHeader={scrollY => (
+        renderHeader={() => (
           <View style={styles.header}>
             <View style={styles.row}>
               <Logo style={styles.logo} />
@@ -58,57 +143,57 @@ function MainMenu(props: Props): React.Element<any> {
                 </FormattedNumber>
               </View>
             </View>
-            <TouchableOpacity style={styles.button} onPress={props.hideMenu}>
-              <Icon style={styles.buttonIcon} name={'times'} />
+            <TouchableOpacity style={styles.button} onPress={hideMenu}>
+              <Icon style={styles.buttonIcon} name="times" />
             </TouchableOpacity>
           </View>
         )}
-        renderBody={scrollY => (
+        renderBody={() => (
           <View style={styles.body}>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Home'}</Text>
+              <Text style={styles.itemText}>Home</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item} onPress={clickNavBuilder('DeveloperMenuScreen')}>
-              <Text style={styles.itemText}>{'Developer Menu Screen'}</Text>
+              <Text style={styles.itemText}>Developer Menu Screen</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item} onPress={clickNavBuilder('RegistrationScreen')}>
-              <Text style={styles.itemText}>{'User Registration Screen'}</Text>
+              <Text style={styles.itemText}>User Registration Screen</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.item}>
-              <Text style={styles.itemText}>{'Menu item'}</Text>
+              <Text style={styles.itemText}>Menu item</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -117,88 +202,16 @@ function MainMenu(props: Props): React.Element<any> {
   );
 }
 
-const styles = {
-  ['container']: {
-    position: 'relative',
-    backgroundColor: '#211F24',
-    borderColor: '#211F24',
-    flex: 1
-  },
-  ['contentContainerStyle']: {
-    padding: 16
-  },
-  ['header']: {},
-  ['logo']: {
-    alignSelf: 'center',
-    resizeMode: 'contain',
-    marginTop: 48,
-    marginBottom: 0,
-    width: 210,
-    height: 70
-  },
-  ['item']: {
-    marginBottom: 0,
-    marginTop: 4,
-    alignItems: 'center',
-    backgroundColor: '#2A282B',
-    borderColor: '#2A282B',
-    borderRadius: 3,
-    borderWidth: 0,
-    flex: 1,
-    height: 50,
-    justifyContent: 'center',
-    paddingLeft: 32,
-    paddingRight: 32,
-    position: 'relative'
-  },
-  ['itemText']: {
-    color: '#666469',
-    fontSize: 14
-  },
-  ['row']: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 0
-  },
-  ['amount']: {
-    paddingBottom: 48,
-    paddingTop: 48
-  },
-  ['dashIcon']: {
-    color: '#EFEEF1',
-    fontSize: 27,
-    marginRight: 8
-  },
-  ['dashText']: {
-    color: '#EFEEF1',
-    fontSize: 27
-  },
-  ['fiatIcon']: {
-    color: '#3C3B40',
-    fontSize: 19,
-    marginRight: 8
-  },
-  ['fiatText']: {
-    color: '#3C3B40',
-    fontSize: 19
-  },
-  ['button']: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    height: 50,
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  ['buttonIcon']: {
-    color: '#666469',
-    fontSize: 18
-  }
+MainMenu.propTypes = {
+  balance: PropTypes.number.isRequired,
+  hideMenu: PropTypes.func.isRequired,
+  alternativeCurrency: PropTypes.shape({
+    code: PropTypes.string.isRequired,
+    rate: PropTypes.string.isRequired,
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const selector = createSelector(

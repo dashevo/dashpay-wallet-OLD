@@ -3,7 +3,7 @@
  *
  * @flow
  */
-const options = {
+const defaults = {
   wordPattern: '[A-Za-z]*',
   delims: {
     modifier: '__',
@@ -29,4 +29,4 @@ function createParser(options) {
 }
 
 // Should be configured by props.
-export default createParser(options);
+export default createParser(defaults);

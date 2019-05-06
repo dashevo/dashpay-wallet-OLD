@@ -1,7 +1,7 @@
-import { useReducer, useEffect, useMemo } from 'react';
+import { useReducer, useEffect } from 'react';
 import reducers from './reducers';
 
-function useTransition(items, config) {
+function useTransition(items) {
   const [state, dispatch] = useReducer(reducers, {
     items,
   });

@@ -1,16 +1,13 @@
 import React from 'react';
-
-import {
-  Text, StyleSheet, SafeAreaView, TouchableOpacity,
-} from 'react-native';
-
+import PropTypes from 'prop-types';
+import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Icon } from 'components';
 import Styles from 'components/Styles';
 import { compose } from 'utilities';
-import styles from './styles';
+import defaultStyles from './styles';
 
 const Composed = compose([
-  (props: Props): React.Element<any> => <Styles {...props} styles={styles} />,
+  (props): React.Element<any> => <Styles {...props} styles={defaultStyles} />,
 ]);
 
 class StaticNav extends React.PureComponent {
@@ -38,5 +35,12 @@ class StaticNav extends React.PureComponent {
     );
   }
 }
+
+StaticNav.propTypes = {
+  showMenu: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default StaticNav;

@@ -7,20 +7,18 @@
 function useTranslate() {
   return (str = '', data = {}) => {
     const keys = Object.keys(data);
-    const { length } = keys;
 
-    if (!length) {
+    if (!keys.length) {
       return str;
     }
 
-    for (let i = 0; i < length; i++) {
-      str = str.replace(
-        new RegExp(`{{ ${String(keys[i])} }}`, 'g'),
-        (match, behind) => (match ? String(data[keys[i]]) : ''),
-      );
-    }
+    let newStr = str;
 
-    return str;
+    keys.forEach((key) => {
+      newStr = newStr.replace(`{{ ${key} }}`, data[key]);
+    });
+
+    return newStr;
   };
 }
 

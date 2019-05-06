@@ -27,7 +27,7 @@ function touched(state = {}, action) {
     case SET_TOUCHED:
     case SET_VALUES:
     case SET_ERRORS:
-      return Object.assign({}, state, mapValues(action.payload, o => true));
+      return Object.assign({}, state, mapValues(action.payload, () => true));
 
     case RESET:
       return {};

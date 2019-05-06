@@ -11,10 +11,8 @@ import FormProvider from './FormProvider';
 import useForm from './useForm';
 
 function Form(props) {
-  const { children, ...rest } = props;
-  const form = useForm(rest);
-
-  return <FormProvider value={form}>{children}</FormProvider>;
+  const form = useForm(props);
+  return <FormProvider value={form} {...props} />;
 }
 
 export default Form;

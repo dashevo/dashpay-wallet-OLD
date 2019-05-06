@@ -2,6 +2,10 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
+import {
+  SET_VALUES, SET_ERRORS, SET_TOUCHED, SET_FOCUSED,
+} from './actionTypes';
+
 export function setValues(values) {
   return {
     type: SET_VALUES,

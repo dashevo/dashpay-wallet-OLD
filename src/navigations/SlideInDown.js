@@ -4,12 +4,16 @@
  * @flow
  */
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
 class SlideInDown extends React.PureComponent {
   static defaultProps = {
+    fromValue: 0,
+    toValue: 1,
     delay: 400,
-    duration: 400
+    duration: 400,
+    style: {},
   };
 
   constructor(props) {
@@ -21,36 +25,46 @@ class SlideInDown extends React.PureComponent {
     Animated.timing(this.animatedValue, {
       ...this.props,
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.toValue !== this.props.toValue) {
+    const { toValue: nextToValue } = this.props;
+    const { toValue: prevToValue } = prevProps;
+    if (nextToValue !== prevToValue) {
       Animated.timing(this.animatedValue, {
         ...this.props,
         toValue: 1,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start();
     }
   }
 
   render() {
-    const style = this.props.style;
+    const { style, fromValue } = this.props;
     const animatedStyle = {
       overflow: 'hidden',
       opacity: this.animatedValue,
       transform: [
         {
           translateY: this.animatedValue.interpolate({
-            outputRange: [this.props.fromValue, 0],
-            inputRange: [0, 1]
-          })
-        }
-      ]
+            outputRange: [fromValue, 0],
+            inputRange: [0, 1],
+          }),
+        },
+      ],
     };
     return <Animated.View {...this.props} style={[style, animatedStyle]} />;
   }
 }
+
+SlideInDown.propTypes = {
+  delay: PropTypes.number,
+  duration: PropTypes.number,
+  fromValue: PropTypes.number,
+  toValue: PropTypes.number,
+  style: PropTypes.oneOf([PropTypes.number, PropTypes.object]),
+};
 
 export default SlideInDown;

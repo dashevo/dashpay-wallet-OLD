@@ -2,9 +2,6 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-// External dependencies
-import { useState, useCallback, useMemo } from 'react';
-
 // Internal dependencies
 import { useImage } from 'hooks/Image';
 import useStyles from './useStyles';

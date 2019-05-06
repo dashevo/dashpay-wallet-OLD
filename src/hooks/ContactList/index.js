@@ -5,7 +5,8 @@
  */
 
 // External dependencies
-import React, { useCallback } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { FlatList } from 'react-navigation';
 
@@ -39,6 +40,12 @@ function ContactList(props) {
 
 ContactList.defaultProps = {
   ListEmptyComponent: ListEmpty,
+};
+
+ContactList.propTypes = {
+  icon: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  ListEmptyComponent: PropTypes.node,
 };
 
 export default ContactList;

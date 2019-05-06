@@ -1,6 +1,7 @@
 // This file will be splitted in a few components and custom hooks.
 
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity, View, Text } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import useTransition from './useTransition';
@@ -14,16 +15,12 @@ const {
   startClock,
   clockRunning,
   timing,
-  debug,
-  stopClock,
   block,
   interpolate,
   concat,
-  and,
-  eq,
 } = Animated;
 
-function useTransitionItems(props) {
+function useTransitionItems() {
   const [state, setState] = useState(() => {
     function onPressYes() {
       const items = state
@@ -142,19 +139,9 @@ function runTiming(clock, value, dest) {
   ]);
 }
 
-function Pulse(props) {
+function Pulse({ opacity }) {
   const clock = useClock();
   const animation = useAnimation(() => runTiming(clock, -1, 1));
-
-  const translateX = interpolate(animation, {
-    inputRange: [-1, 1],
-    outputRange: [-300, 0],
-  });
-
-  const opacity = interpolate(animation, {
-    inputRange: [-1, 1],
-    outputRange: [props.opacity, 0],
-  });
 
   return (
     <Animated.View
@@ -165,38 +152,51 @@ function Pulse(props) {
         position: 'absolute',
         right: 0,
         top: 0,
-        transform: [{ translateX }],
-        opacity,
+        transform: [
+          {
+            translateX: interpolate(animation, {
+              inputRange: [-1, 1],
+              outputRange: [-300, 0],
+            }),
+          },
+        ],
+        opacity: interpolate(animation, {
+          inputRange: [-1, 1],
+          outputRange: [opacity, 0],
+        }),
       }}
     />
   );
 }
 
-function Item(props) {
-  useEffect(
-    () => {
-      if (props.item.status === 'leaving') {
-        runAnimation();
-      }
-    },
-    [props.item.status],
-  );
+Pulse.propTypes = {
+  opacity: PropTypes.number.isRequired,
+};
 
-  async function runAnimation() {
-    const nextIndex = (props.index + 1) % 2;
-    await props.runAnimation(nextIndex);
-    props.onLeave(props.item);
+function Item({
+  item, index, length, runAnimation, animatedValue, onLeave,
+}) {
+  async function onLeaving() {
+    const nextIndex = (index + 1) % length;
+    await runAnimation(nextIndex);
+    onLeave(item);
   }
 
-  const { index } = props;
+  useEffect(
+    () => {
+      if (item.status === 'leaving') {
+        onLeaving();
+      }
+    },
+    [item.status],
+  );
+
   const left = index - 0.5;
   const right = index + 0.5;
-
-  const { length } = props;
   const minWidth = 100 / length;
 
   const width = concat(
-    interpolate(props.animatedValue, {
+    interpolate(animatedValue, {
       inputRange: [left, index, right],
       outputRange: [minWidth, 100, minWidth],
       extrapolate: 'clamp',
@@ -204,13 +204,7 @@ function Item(props) {
     '%',
   );
 
-  const padding = interpolate(props.animatedValue, {
-    inputRange: [left, index, right],
-    outputRange: [5, 0, 5],
-    extrapolate: 'clamp',
-  });
-
-  const zIndex = props.item.status === 'leaving' ? 1 : 2;
+  const zIndex = item.status === 'leaving' ? 1 : 2;
 
   const animatedStyles = index === 0
     ? {
@@ -236,18 +230,32 @@ function Item(props) {
       zIndex,
     };
 
-  const styleName = props.item.primary === true ? 'primaryButton' : 'seconadryButton';
-  const styleName2 = props.item.primary === true ? 'primaryButtonText' : 'seconadryButtonText';
+  const styleName = item.primary === true ? 'primaryButton' : 'seconadryButton';
+  const styleName2 = item.primary === true ? 'primaryButtonText' : 'seconadryButtonText';
 
   return (
     <Animated.View style={animatedStyles}>
-      <TouchableOpacity style={styles[styleName]} onPress={props.item.onPress}>
-        {props.item.showPulse && <Pulse opacity={props.item.primary === true ? 0.2 : 0.1} />}
-        <Text style={styles[styleName2]}>{props.item.label}</Text>
+      <TouchableOpacity style={styles[styleName]} onPress={item.onPress}>
+        {item.showPulse && <Pulse opacity={item.primary === true ? 0.2 : 0.1} />}
+        <Text style={styles[styleName2]}>{item.label}</Text>
       </TouchableOpacity>
     </Animated.View>
   );
 }
+
+Item.propTypes = {
+  animatedValue: PropTypes.instanceOf(Animated.Value).isRequired,
+  index: PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
+  runAnimation: PropTypes.func.isRequired,
+  onLeave: PropTypes.func.isRequired,
+  item: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    primary: PropTypes.bool.isRequired,
+  }).isRequired,
+};
 
 function Transition(props) {
   const transitionItems = useTransitionItems(props);
@@ -257,7 +265,7 @@ function Transition(props) {
   const animatedValue = useValue(0.5);
 
   function runAnimation(toValue = 1) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const animation = timing(animatedValue, {
         easing: Easing.inOut(Easing.ease),
         duration: 500,
@@ -268,22 +276,16 @@ function Transition(props) {
     });
   }
 
-  function handleEnter(item) {
-    transition.onEnter(item);
-  }
-
   function handleLeave(item) {
     transition.onLeave(item);
     if (item.label === 'Yes') {
       props.onReject(props.sender.address).then(
         (res) => {
           if (res.type.endsWith('FAILURE')) {
-            console.log('res', res);
             setFailed(true);
           }
         },
-        (err) => {
-          console.log('err', err);
+        () => {
           setFailed(true);
         },
       );
@@ -291,12 +293,10 @@ function Transition(props) {
       props.onAccept(props.sender.address).then(
         (res) => {
           if (res.type.endsWith('FAILURE')) {
-            console.log('res', res);
             setFailed(true);
           }
         },
-        (err) => {
-          console.log('err', err);
+        () => {
           setFailed(true);
         },
       );
@@ -357,5 +357,15 @@ function Transition(props) {
     </View>
   );
 }
+
+Transition.propTypes = {
+  onReject: PropTypes.func.isRequired,
+  onAccept: PropTypes.func.isRequired,
+  sender: PropTypes.shape({
+    displayName: PropTypes.string.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Transition;

@@ -5,7 +5,7 @@
 // Internal dependencies
 import { makeStyles } from 'hooks/Styles';
 
-function styles(theme) {
+function styles() {
   return {
     card: {
       marginBottom: 15,

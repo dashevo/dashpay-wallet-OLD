@@ -2,7 +2,7 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-export function yupToFormErrors(yupErrors) {
+function yupToFormErrors(yupErrors) {
   const errors = {};
 
   if (yupErrors.inner.length === 0) {
@@ -11,8 +11,11 @@ export function yupToFormErrors(yupErrors) {
     };
   }
 
-  for (const error of yupErrors.inner) {
+  yupErrors.inner.forEach((error) => {
     errors[error.path] = error.message;
-  }
+  });
+
   return errors;
 }
+
+export default yupToFormErrors;

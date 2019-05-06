@@ -9,12 +9,10 @@ import {
   transform, reduce, every, isFunction,
 } from 'lodash';
 
-
 import { renderProps } from 'utilities';
 import { ThemeConsumer } from 'hooks/Theme';
 import parse from './parse';
 import type { Props, State } from './types';
-
 
 import themes from './themes';
 

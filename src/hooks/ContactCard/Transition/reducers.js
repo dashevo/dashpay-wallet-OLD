@@ -7,7 +7,7 @@ import { combineReducers } from 'redux';
 
 function items(state = [], action) {
   switch (action.type) {
-    case 'UPDATE':
+    case 'UPDATE': {
       const newState = [];
 
       const prevItems = state;
@@ -36,12 +36,15 @@ function items(state = [], action) {
       });
 
       return newState;
+    }
 
-    case 'LEAVE':
+    case 'LEAVE': {
       return state.filter(item => item.key !== action.payload.key);
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 }
 
