@@ -7,8 +7,10 @@ import { createSelector } from 'reselect';
 import moment from 'moment';
 
 // Internal dependencies
-import { receivedContactRequestsSelector } from 'state/contacts/selectors';
-import { sentContactRequestsSelector } from 'state/contacts/selectors';
+import {
+  receivedContactRequestsSelector,
+  sentContactRequestsSelector,
+} from 'state/contacts/selectors';
 import { currentUserSelector } from 'state/account/selectors';
 
 export default createSelector(
@@ -58,8 +60,6 @@ export default createSelector(
     }));
 
     let data = received.concat(sent);
-
-    console.log('sentContactRequests, currentUser', sentContactRequests, currentUser);
 
     data = data.sort((a, b) => b.timestamp - a.timestamp);
 

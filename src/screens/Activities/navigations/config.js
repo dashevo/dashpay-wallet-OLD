@@ -4,12 +4,8 @@
  * @flow
  */
 import * as React from 'react';
-import { Animated, Easing, Platform } from 'react-native';
-
-
-import { StackViewTransitionConfigs, NavigationTransitionProps, TransitionConfig } from 'react-navigation';
-
-
+import { Animated } from 'react-native';
+import { TransitionConfig } from 'react-navigation';
 import NavBar from 'components/NavBar';
 
 function getSceneIndicesForInterpolationInputRange(props) {
@@ -29,15 +25,14 @@ function getSceneIndicesForInterpolationInputRange(props) {
         first: Math.min(targetSceneIndex, index - 1),
         last: index + 1,
       };
-    } if (
-      index === targetSceneIndex
-      && currentSceneIndexInScenes === targetSceneIndexInScenes
-    ) {
+    }
+    if (index === targetSceneIndex && currentSceneIndexInScenes === targetSceneIndexInScenes) {
       return {
         first: index - 1,
         last: Math.max(lastSceneIndex, index + 1),
       };
-    } if (index === targetSceneIndex || currentSceneIndexInScenes > targetSceneIndexInScenes) {
+    }
+    if (index === targetSceneIndex || currentSceneIndexInScenes > targetSceneIndexInScenes) {
       return null;
     }
     return { first: index - 1, last: index + 1 };
@@ -108,11 +103,7 @@ const SlideFromBottom = {
   },
 };
 
-function transitionConfig(
-  transitionProps: NavigationTransitionProps,
-  prevTransitionProps: ?NavigationTransitionProps,
-  isModal: boolean,
-): TransitionConfig {
+function transitionConfig(): TransitionConfig {
   return SlideFromBottom;
 }
 

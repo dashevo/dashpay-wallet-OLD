@@ -4,6 +4,7 @@
  * @flow
  */
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 import {
   transform, reduce, every, isFunction,
@@ -27,14 +28,14 @@ class Styles extends React.Component<Props, State> {
     // TODO: transformStyles(styles)
     const transformedStyles = transform(
       props.styles[props.theme],
-      (result, styleId, selector) => {
+      (accumulator, styleId, selector) => {
         const [block, modifier, state] = parse(selector);
-        result[selector] = Object.assign(
+        const styles = Object.assign(
           { block, styleId },
           modifier && { modifier },
           state && { state },
         );
-        return result;
+        return Object.assign({}, accumulator, { [selector]: styles });
       },
       {},
     );
@@ -43,47 +44,48 @@ class Styles extends React.Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromProps(props: Props, state: State): State {
+  static getDerivedStateFromProps(props) {
     const theme = props.themes[props.theme];
     const transformedStyles = transform(
       props.styles[props.theme],
-      (result, styleId, selector) => {
+      (accumulator, styleId, selector) => {
         const [block, modifier, state] = parse(selector);
-        result[selector] = Object.assign(
+        const styles = Object.assign(
           { block, styleId },
           modifier && { modifier },
           state && { state },
         );
-        return result;
+        return Object.assign({}, accumulator, { [selector]: styles });
       },
       {},
     );
 
     // TODO: groupStyles(transformedStyles)
     // Prevents the component from unnecessary updating.
-    const styles = reduce(
+    const groupStyles = reduce(
       transformedStyles,
-      (result, value, key) => {
+      (accumulator, value) => {
         const { block, styleId, ...requredProps } = value;
         const propIsTrue = propKey => props[propKey] === true;
         const hasRequredProps = every(requredProps, propIsTrue);
+        const styles = {};
 
         if (!hasRequredProps) {
-          return result;
+          return accumulator;
         }
 
-        if (!result[block]) {
-          result[block] = [];
+        if (!styles[block]) {
+          styles[block] = [];
         }
 
-        result[block].push(styleId);
-        return result;
+        styles[block].push(styleId);
+        return Object.assign({}, accumulator, styles);
       },
       {},
     );
     return {
       transformedStyles,
-      styles,
+      styles: groupStyles,
       theme,
     };
   }
@@ -94,20 +96,27 @@ class Styles extends React.Component<Props, State> {
 }
 
 // The code below should be refactored.
-function Theme(props) {
+function Theme({ styles, ...rest }) {
   const tmpStyles = {};
 
-  if (isFunction(props.styles)) {
+  if (isFunction(styles)) {
     Object.keys(themes).forEach((theme) => {
-      tmpStyles[theme] = StyleSheet.create(props.styles(themes[theme]));
+      tmpStyles[theme] = StyleSheet.create(styles(themes[theme]));
     });
   }
 
   return (
     <ThemeConsumer>
-      {themeProps => <Styles {...themeProps} {...props} styles={tmpStyles} themes={themes} />}
+      {themeProps => <Styles {...themeProps} {...rest} styles={tmpStyles} themes={themes} />}
     </ThemeConsumer>
   );
 }
+
+Theme.propTypes = {
+  styles: PropTypes.oneOfType([
+    PropTypes.func.isRequired,
+    PropTypes.object.isRequired,
+  ]).isRequired,
+};
 
 export default Theme;

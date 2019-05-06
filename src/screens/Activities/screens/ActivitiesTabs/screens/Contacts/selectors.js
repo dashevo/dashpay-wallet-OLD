@@ -61,8 +61,6 @@ export default createSelector(
 
     let data = received.concat(sent);
 
-    console.log('sentContactRequests, currentUser', sentContactRequests, currentUser);
-
     data = data.sort((a, b) => b.timestamp - a.timestamp);
 
     return {

@@ -6,16 +6,16 @@ import {
   GET_BLOCKCHAIN_CONTACTS_SUCCESS,
   GET_PENDING_CONTACT_REQUESTS_SUCCESS,
   ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
-  REJECT_BLOCKCHAIN_CONTACT_SUCCESS
+  REJECT_BLOCKCHAIN_CONTACT_SUCCESS,
 } from './constants';
 
 function receivedRequest(state, action) {
-  const updateStateOnlyForCurrentRequest = newState => {
+  const updateStateOnlyForCurrentRequest = (newState) => {
     if (state.address === action.address) {
       return {
         ...state,
         timestamp: new Date(),
-        ...newState
+        ...newState,
       };
     }
     return state;
@@ -25,12 +25,12 @@ function receivedRequest(state, action) {
       // This will be fixed with the redux schema. type vs status.
       return updateStateOnlyForCurrentRequest({
         type: 'accepted',
-        status: 'ACCEPTED'
+        status: 'ACCEPTED',
       });
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
       return updateStateOnlyForCurrentRequest({
         type: 'rejected',
-        status: 'REJECTED'
+        status: 'REJECTED',
       });
 
     default:
@@ -43,7 +43,7 @@ function requestMapper(name) {
     name,
     address: name,
     image: `https://api.adorable.io/avatars/285/${name}.png`,
-    status: 'PANDING' // This will be fixed with the redux schema
+    status: 'PANDING', // This will be fixed with the redux schema
   };
 }
 
@@ -53,24 +53,18 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
       return {
         ...state,
         received: action.response.received.map(requestMapper),
-        sent: action.response.sent.map(requestMapper)
+        sent: action.response.sent.map(requestMapper),
       };
     case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
       return {
         ...state,
-        received: state.received.map(request =>
-          receivedRequest(request, action)
-        )
+        received: state.received.map(request => receivedRequest(request, action)),
       };
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return state.filter(
-        request => request.recipient !== action.response.sender.address
-      );
+      return state.filter(request => request.recipient !== action.response.sender.address);
     case SEND_CONTACT_REQUEST_SUCCESS:
-      alert('Contact request sent');
       return state;
     case SEND_CONTACT_REQUEST_FAILURE:
-      alert('Contact request failed');
       return state;
 
     default:
@@ -85,7 +79,7 @@ function items(state = [], action) {
         name,
         address: name,
         isContact: true,
-        image: `https://api.adorable.io/avatars/285/${name}.png`
+        image: `https://api.adorable.io/avatars/285/${name}.png`,
       }));
     default:
       return state;
@@ -94,5 +88,5 @@ function items(state = [], action) {
 
 export default combineReducers({
   pendingRequests,
-  items
+  items,
 });

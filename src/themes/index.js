@@ -51,7 +51,7 @@ export default {
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
     navbarTitleLineHeight: 19,
-    ...main
+    ...main,
   },
   dark: {
     avatarContainerBackgroundColor: '#7c55fb',
@@ -96,7 +96,7 @@ export default {
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
     navbarTitleLineHeight: 19,
-    ...main
+    ...main,
   },
   red: {
     avatarContainerBackgroundColor: '#C92C2D',
@@ -141,6 +141,6 @@ export default {
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
     navbarTitleLineHeight: 19,
-    ...red
-  }
+    ...red,
+  },
 };

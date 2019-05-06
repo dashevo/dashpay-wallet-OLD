@@ -4,6 +4,7 @@
 
 // External dependencies
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Internal dependencies
@@ -12,8 +13,8 @@ import ContactItem from './ContactItem';
 import selectors from './selectors';
 import actions from './actions';
 
-function Contacts(props) {
-  const keyExtractor = (item, index) => item.id;
+function AllEvents(props) {
+  const keyExtractor = item => item.id;
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -26,15 +27,23 @@ function Contacts(props) {
     [],
   );
 
-  return <ContactList {...props} keyExtractor={keyExtractor} renderItem={renderItem} />;
+  return (
+    <ContactList
+      {...props}
+      title="All Events"
+      icon="squiggle"
+      keyExtractor={keyExtractor}
+      renderItem={renderItem}
+    />
+  );
 }
 
-Contacts.defaultProps = {
-  title: 'All Events',
-  icon: 'squiggle',
+AllEvents.propTypes = {
+  acceptBlockchainContact: PropTypes.func.isRequired,
+  rejectBlockchainContact: PropTypes.func.isRequired,
 };
 
 export default connect(
   selectors,
   actions,
-)(Contacts);
+)(AllEvents);
