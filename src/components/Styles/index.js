@@ -17,7 +17,10 @@ import type { Props, State } from './types';
 
 import themes from './themes';
 
-// The code below should be refactored.
+// The code below is deprecated.
+// This is temp solution for no-param-reassign error.
+// https://github.com/airbnb/javascript/issues/1342
+/* eslint no-param-reassign: "error" */
 class Styles extends React.Component<Props, State> {
   static defaultProps = {
     styles: {},
@@ -28,14 +31,14 @@ class Styles extends React.Component<Props, State> {
     // TODO: transformStyles(styles)
     const transformedStyles = transform(
       props.styles[props.theme],
-      (accumulator, styleId, selector) => {
+      (result, styleId, selector) => {
         const [block, modifier, state] = parse(selector);
-        const styles = Object.assign(
+        result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
           state && { state },
         );
-        return Object.assign({}, accumulator, { [selector]: styles });
+        return result;
       },
       {},
     );
@@ -44,48 +47,47 @@ class Styles extends React.Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props: Props) {
     const theme = props.themes[props.theme];
     const transformedStyles = transform(
       props.styles[props.theme],
-      (accumulator, styleId, selector) => {
+      (result, styleId, selector) => {
         const [block, modifier, state] = parse(selector);
-        const styles = Object.assign(
+        result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
           state && { state },
         );
-        return Object.assign({}, accumulator, { [selector]: styles });
+        return result;
       },
       {},
     );
 
     // TODO: groupStyles(transformedStyles)
     // Prevents the component from unnecessary updating.
-    const groupStyles = reduce(
+    const styles = reduce(
       transformedStyles,
-      (accumulator, value) => {
+      (result, value) => {
         const { block, styleId, ...requredProps } = value;
         const propIsTrue = propKey => props[propKey] === true;
         const hasRequredProps = every(requredProps, propIsTrue);
-        const styles = {};
 
         if (!hasRequredProps) {
-          return accumulator;
+          return result;
         }
 
-        if (!styles[block]) {
-          styles[block] = [];
+        if (!result[block]) {
+          result[block] = [];
         }
 
-        styles[block].push(styleId);
-        return Object.assign({}, accumulator, styles);
+        result[block].push(styleId);
+        return result;
       },
       {},
     );
     return {
       transformedStyles,
-      styles: groupStyles,
+      styles,
       theme,
     };
   }
@@ -113,10 +115,7 @@ function Theme({ styles, ...rest }) {
 }
 
 Theme.propTypes = {
-  styles: PropTypes.oneOfType([
-    PropTypes.func.isRequired,
-    PropTypes.object.isRequired,
-  ]).isRequired,
+  styles: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.object.isRequired]).isRequired,
 };
 
 export default Theme;

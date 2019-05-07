@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
+ * Copyright (c) 2017-present, Elephant, Inc.
+ *
  */
 
 // External dependencies
@@ -12,6 +13,9 @@ import { useTheme } from 'hooks/Theme';
 import themes from 'themes';
 import parse from './parse';
 
+// This is temp solution for no-param-reassign error.
+// https://github.com/airbnb/javascript/issues/1342
+/* eslint no-param-reassign: "error" */
 function makeStyles(componentStyles) {
   const allStyles = {};
   const transformedStyles = {};
@@ -25,14 +29,14 @@ function makeStyles(componentStyles) {
   Object.keys(themes).forEach((themeName) => {
     transformedStyles[themeName] = transform(
       allStyles[themeName],
-      (accumulator, styleId, selector) => {
+      (result, styleId, selector) => {
         const [block, modifier, state] = parse(selector);
-        const styles = Object.assign(
+        result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
           state && { state },
         );
-        return Object.assign({}, accumulator, { [selector]: styles });
+        return result;
       },
       {},
     );
@@ -42,54 +46,52 @@ function makeStyles(componentStyles) {
     const { theme } = useTheme();
     const [groupedStyles, setGroupedStyles] = useState(() => reduce(
       transformedStyles[theme],
-      (accumulator, value) => {
+      (result, value) => {
         const { block, styleId, ...requredProps } = value;
         const propIsTrue = propKey => props[propKey] === true;
         const hasRequredProps = every(requredProps, propIsTrue);
-        const styles = {};
 
         if (!hasRequredProps) {
-          return accumulator;
+          return result;
         }
 
-        if (!styles[block]) {
-          styles[block] = [];
+        if (!result[block]) {
+          result[block] = [];
         }
 
-        styles[block].push(styleId);
-        return Object.assign({}, accumulator, styles);
+        result[block].push(styleId);
+        return result;
       },
       {},
     ));
     useEffect(
       () => {
-        const newStyles = reduce(
+        const newGroupedStyles = reduce(
           transformedStyles[theme],
-          (accumulator, value) => {
+          (result, value) => {
             const { block, styleId, ...requredProps } = value;
             const propIsTrue = propKey => props[propKey] === true;
             const hasRequredProps = every(requredProps, propIsTrue);
-            const styles = {};
 
             if (!hasRequredProps) {
-              return accumulator;
+              return result;
             }
 
-            if (!styles[block]) {
-              styles[block] = [];
+            if (!result[block]) {
+              result[block] = [];
             }
 
-            styles[block].push(styleId);
-            return Object.assign({}, accumulator, styles);
+            result[block].push(styleId);
+            return result;
           },
           {},
         );
-        setGroupedStyles(newStyles);
+        setGroupedStyles(newGroupedStyles);
       },
       [props.active],
     );
 
-    return [groupedStyles, themes[theme]];
+    return groupedStyles;
   };
 
   return useStyles;
