@@ -4,29 +4,26 @@
  * @flow
  */
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableOpacity, View, SafeAreaView } from 'react-native';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import Styles from 'components/Styles';
-import styles from './styles';
 import { compose } from 'utilities';
+import defaultStyles from './styles';
 
-export const Composed = compose([
-  (props: Props): React.Element<any> => <Styles {...props} styles={styles} />
-]);
+export const Composed = compose([props => <Styles {...props} styles={defaultStyles} />]);
 
-function NavBar(props) {
-  const { options } = props.scene.descriptor;
-  const { title = '', params = {} } = options;
+function NavBar({ scene, navigation, showMenu }) {
+  const { options } = scene.descriptor;
+  const { title = '' } = options;
   return (
     <Composed>
       {({ styles }) => (
         <SafeAreaView style={styles.container}>
           <View style={styles.body}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => props.navigation.goBack()}>
-              <Icon style={styles.icon} name={'chevron-left'} />
+            <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+              <Icon style={styles.icon} name="chevron-left" />
             </TouchableOpacity>
             <View style={styles.wrapper}>
               <Text style={styles.title} numberOfLines={1}>
@@ -38,13 +35,14 @@ function NavBar(props) {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                props.navigation.navigate('ActivitiesScreen');
-              }}>
-              <Icon style={styles.icon} name={'squiggle'} />
-              <Text style={styles.text}>{'3'}</Text>
+                navigation.navigate('ActivitiesScreen');
+              }}
+            >
+              <Icon style={styles.icon} name="squiggle" />
+              <Text style={styles.text}>3</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={props.showMenu}>
-              <Icon style={styles.icon} name={'bars'} />
+            <TouchableOpacity style={styles.button} onPress={showMenu}>
+              <Icon style={styles.icon} name="bars" />
             </TouchableOpacity>
           </View>
         </SafeAreaView>
@@ -52,5 +50,15 @@ function NavBar(props) {
     </Composed>
   );
 }
+
+NavBar.propTypes = {
+  showMenu: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  scene: PropTypes.shape({
+    descriptor: PropTypes.object.isRequired,
+  }).isRequired,
+};
 
 export default NavBar;
