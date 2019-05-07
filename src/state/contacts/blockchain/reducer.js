@@ -22,9 +22,16 @@ function receivedRequest(state, action) {
   };
   switch (action.type) {
     case ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return updateStateOnlyForCurrentRequest({ type: 'accepted' });
+      // This will be fixed with the redux schema. type vs status.
+      return updateStateOnlyForCurrentRequest({
+        type: 'accepted',
+        status: 'ACCEPTED',
+      });
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return updateStateOnlyForCurrentRequest({ type: 'rejected' });
+      return updateStateOnlyForCurrentRequest({
+        type: 'rejected',
+        status: 'REJECTED',
+      });
 
     default:
       return state;
@@ -36,6 +43,7 @@ function requestMapper(name) {
     name,
     address: name,
     image: `https://api.adorable.io/avatars/285/${name}.png`,
+    status: 'PANDING', // This will be fixed with the redux schema
   };
 }
 
@@ -53,14 +61,10 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
         received: state.received.map(request => receivedRequest(request, action)),
       };
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return state.filter(
-        request => request.recipient !== action.response.sender.address
-      );
+      return state.filter(request => request.recipient !== action.response.sender.address);
     case SEND_CONTACT_REQUEST_SUCCESS:
-      alert('Contact request sent');
       return state;
     case SEND_CONTACT_REQUEST_FAILURE:
-      alert('Contact request failed');
       return state;
 
     default:
@@ -71,14 +75,12 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
 function items(state = [], action) {
   switch (action.type) {
     case GET_BLOCKCHAIN_CONTACTS_SUCCESS:
-      return Object
-        .keys(action.response)
-        .map(name => ({
-          name,
-          address: name,
-          isContact: true,
-          image: `https://api.adorable.io/avatars/285/${name}.png`,
-        }));
+      return Object.keys(action.response).map(name => ({
+        name,
+        address: name,
+        isContact: true,
+        image: `https://api.adorable.io/avatars/285/${name}.png`,
+      }));
     default:
       return state;
   }

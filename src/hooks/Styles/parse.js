@@ -3,19 +3,19 @@
  *
  * @flow
  */
-const options = {
+const defaults = {
   wordPattern: '[A-Za-z]*',
   delims: {
     modifier: '__',
-    state: '.'
-  }
+    state: '.',
+  },
 };
 
 function buildRegex(delims, wordPattern) {
-  const block = '(' + wordPattern + ')';
-  const modifier = '(?:' + delims.modifier + '(' + wordPattern + '))?';
-  const state = '(?:' + delims.state + '(' + wordPattern + '))?';
-  return new RegExp('^' + block + modifier + state + '$');
+  const block = `(${wordPattern})`;
+  const modifier = `(?:${delims.modifier}(${wordPattern}))?`;
+  const state = `(?:${delims.state}(${wordPattern}))?`;
+  return new RegExp(`^${block}${modifier}${state}$`);
 }
 
 function parse(str, regex) {
@@ -29,4 +29,4 @@ function createParser(options) {
 }
 
 // Should be configured by props.
-export default createParser(options);
+export default createParser(defaults);

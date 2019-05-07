@@ -4,22 +4,26 @@
  * @flow
  */
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
-import { transform } from 'lodash';
-import { reduce } from 'lodash';
-import { every } from 'lodash';
+import {
+  transform, reduce, every, isFunction,
+} from 'lodash';
+
 import { renderProps } from 'utilities';
-import ThemeConsumer from 'theme/ThemeConsumer';
+import { ThemeConsumer } from 'hooks/Theme';
 import parse from './parse';
-import type { Props } from './types';
-import type { State } from './types';
-import { isFunction } from 'lodash';
+import type { Props, State } from './types';
+
 import themes from './themes';
 
-// The code below should be refactored.
+// The code below is deprecated.
+// This is temp solution for no-param-reassign error.
+// https://github.com/airbnb/javascript/issues/1342
+/* eslint no-param-reassign: "error" */
 class Styles extends React.Component<Props, State> {
   static defaultProps = {
-    styles: {}
+    styles: {},
   };
 
   constructor(props) {
@@ -32,18 +36,18 @@ class Styles extends React.Component<Props, State> {
         result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
-          state && { state }
+          state && { state },
         );
         return result;
       },
-      {}
+      {},
     );
     this.state = {
-      transformedStyles
+      transformedStyles,
     };
   }
 
-  static getDerivedStateFromProps(props: Props, state: State): State {
+  static getDerivedStateFromProps(props: Props) {
     const theme = props.themes[props.theme];
     const transformedStyles = transform(
       props.styles[props.theme],
@@ -52,18 +56,18 @@ class Styles extends React.Component<Props, State> {
         result[selector] = Object.assign(
           { block, styleId },
           modifier && { modifier },
-          state && { state }
+          state && { state },
         );
         return result;
       },
-      {}
+      {},
     );
 
     // TODO: groupStyles(transformedStyles)
     // Prevents the component from unnecessary updating.
     const styles = reduce(
       transformedStyles,
-      (result, value, key) => {
+      (result, value) => {
         const { block, styleId, ...requredProps } = value;
         const propIsTrue = propKey => props[propKey] === true;
         const hasRequredProps = every(requredProps, propIsTrue);
@@ -79,12 +83,12 @@ class Styles extends React.Component<Props, State> {
         result[block].push(styleId);
         return result;
       },
-      {}
+      {},
     );
     return {
       transformedStyles,
       styles,
-      theme
+      theme,
     };
   }
 
@@ -94,22 +98,24 @@ class Styles extends React.Component<Props, State> {
 }
 
 // The code below should be refactored.
-function Theme(props) {
-  let tmpStyles = {};
+function Theme({ styles, ...rest }) {
+  const tmpStyles = {};
 
-  if (isFunction(props.styles)) {
-    Object.keys(themes).forEach(theme => {
-      tmpStyles[theme] = StyleSheet.create(props.styles(themes[theme]));
+  if (isFunction(styles)) {
+    Object.keys(themes).forEach((theme) => {
+      tmpStyles[theme] = StyleSheet.create(styles(themes[theme]));
     });
   }
 
   return (
     <ThemeConsumer>
-      {themeProps => (
-        <Styles {...themeProps} {...props} styles={tmpStyles} themes={themes} />
-      )}
+      {themeProps => <Styles {...themeProps} {...rest} styles={tmpStyles} themes={themes} />}
     </ThemeConsumer>
   );
 }
+
+Theme.propTypes = {
+  styles: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.object.isRequired]).isRequired,
+};
 
 export default Theme;

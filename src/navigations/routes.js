@@ -16,8 +16,8 @@ import RegistrationScreen from 'containers/RegistrationScreen';
 import PayScreen from 'containers/PayScreen';
 import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
-import ActivitiesScreen from 'containers/ActivitiesScreen';
 import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
+import Activities from 'screens/Activities';
 
 const routes = {
   DeveloperMenuScreen: {
@@ -35,9 +35,9 @@ const routes = {
     },
   },
   ActivitiesScreen: {
-    screen: ActivitiesScreen,
+    screen: Activities,
     navigationOptions: {
-      header: true,
+      header: false,
       title: 'Activities',
     },
   },
