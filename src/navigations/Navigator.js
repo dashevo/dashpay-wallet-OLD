@@ -194,7 +194,7 @@ class CustomNavigationView extends React.Component {
 }
 
 CustomNavigationView.propTypes = {
-  showMenu: PropTypes.func.isRequired,
+  descriptors: PropTypes.shape({}).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
