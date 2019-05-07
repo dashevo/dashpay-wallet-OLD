@@ -16,7 +16,7 @@ import type { Props } from './types';
 const windowDimensions = Dimensions.get('window');
 const styles = createStyles(windowDimensions);
 
-class BarCodeScreen extends React.Component<Props, State> {
+class ScannerScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.navigationOptions = {
@@ -28,8 +28,10 @@ class BarCodeScreen extends React.Component<Props, State> {
 
   barcodeRecognized({ data }) {
     const { address, amount } = parseDashAddress(data);
-    const { navigation } = this.props;
-    navigation.replace('PayTabs', { recipient: address, amount });
+    if (address) {
+      const { navigation } = this.props;
+      navigation.replace('PayTabs', { recipient: address, amount });
+    }
   }
 
   handlePressCancel() {
@@ -73,4 +75,4 @@ class BarCodeScreen extends React.Component<Props, State> {
   }
 }
 
-export default BarCodeScreen;
+export default ScannerScreen;

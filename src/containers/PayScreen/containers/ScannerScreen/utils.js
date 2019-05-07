@@ -1,6 +1,10 @@
 // @flow
 export const parseDashAddress = (str: string) => {
-  const [, address, , amountStr] = str.match(/dash:([a-zA-Z0-9]+)(\?amount=([\d.]*))?/);
+  const regexp = new RegExp('(dash:)?([a-zA-Z\\d]+)(\\?amount=([\\d.]*))?');
+  if (!regexp.test(str)) {
+    return {};
+  }
+  const [,, address, , amountStr] = str.match(regexp);
   const amount = parseFloat(amountStr) || undefined;
   return {
     address,
