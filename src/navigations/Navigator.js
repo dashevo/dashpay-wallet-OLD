@@ -4,31 +4,37 @@
  * @flow
  */
 
-import * as React from 'react';
-import { forVertical } from './config';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Animated,
-  Easing,
-  Image,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  View,
-  Text,
-  BackHandler
+  Animated, Easing, StyleSheet, View, BackHandler,
 } from 'react-native';
-import {
-  createAppContainer,
-  SafeAreaView,
-  StackRouter,
-  createNavigator
-} from 'react-navigation';
+import { createAppContainer, StackRouter, createNavigator } from 'react-navigation';
 import { Transitioner } from 'react-navigation-stack';
+import NavBar from 'components/NavBar';
 import routes from './routes';
-import config from './config';
 
 import MainMenu from './MainMenu';
-import NavStatic from 'components/NavStatic';
+import { forVertical } from './config';
+
+const styles = StyleSheet.create({
+  view: {
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    position: 'absolute',
+    overflow: 'hidden',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  header: {},
+  body: {
+    position: 'relative',
+    overflow: 'hidden',
+    flex: 1,
+  },
+});
 
 class CustomNavigationView extends React.Component {
   constructor(props) {
@@ -36,53 +42,57 @@ class CustomNavigationView extends React.Component {
     this.animatedValue = new Animated.Value(0);
     this.state = {
       height: 0,
-      active: false
+      active: false,
     };
   }
 
   componentDidMount() {
-    this.backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.onBackPressed
-    );
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBackPressed);
   }
 
   componentWillUnmount() {
     this.backHandler.remove();
   }
 
-  onBackPressed = () => {
-    return false; // return true if we want to override back behavior
+  showMenu = () => {
+    this.setState(
+      {
+        active: true,
+      },
+      () => {
+        Animated.spring(this.animatedValue, {
+          toValue: 1,
+        }).start();
+      },
+    );
   };
 
-  render() {
-    const { navigation, router, descriptors } = this.props;
-
-    return (
-      <Transitioner
-        configureTransition={this._configureTransition}
-        descriptors={descriptors}
-        navigation={navigation}
-        render={this._render}
-      />
+  hideMenu = () => {
+    this.setState(
+      {
+        active: true,
+      },
+      () => {
+        Animated.spring(this.animatedValue, {
+          toValue: 0,
+        }).start();
+      },
     );
-  }
+  };
 
-  _configureTransition(transitionProps, prevTransitionProps) {
-    return {
-      duration: 200,
-      easing: Easing.out(Easing.ease)
-    };
-  }
+  onBackPressed = () => false; // return true if we want to override back behavior
 
-  _render = (transitionProps, prevTransitionProps) => {
-    const scenes = transitionProps.scenes.map(scene =>
-      this._renderScene(transitionProps, scene)
-    );
+  configureTransition = () => ({
+    duration: 200,
+    easing: Easing.out(Easing.ease),
+  });
+
+  renderScenes = (transitionProps) => {
+    const scenes = transitionProps.scenes.map(scene => this.renderScene(transitionProps, scene));
     return <View style={{ flex: 1 }}>{scenes}</View>;
   };
 
-  _onLayout = event => {
+  onLayout = (event) => {
     const { height: prevHeight } = this.state;
     const { height: nextHeight } = event.nativeEvent.layout;
 
@@ -91,56 +101,19 @@ class CustomNavigationView extends React.Component {
     }
   };
 
-  showMenu = () => {
-    this.setState(
-      {
-        active: true
-      },
-      () => {
-        Animated.spring(this.animatedValue, {
-          toValue: 1
-        }).start();
-      }
-    );
-  };
-
-  hideMenu = () => {
-    this.setState(
-      {
-        active: true
-      },
-      () => {
-        Animated.spring(this.animatedValue, {
-          toValue: 0
-        }).start();
-      }
-    );
-  };
-
-  _renderScene = (transitionProps, scene) => {
-    const { navigation, router } = this.props;
-    const { routes } = navigation.state;
-    const { position } = transitionProps;
-    const { index, options } = scene;
-
-    const animatedValue = position.interpolate({
-      inputRange: [index - 1, index, index + 1],
-      outputRange: [0, 1, 0]
-    });
+  renderScene = (transitionProps, scene) => {
+    const { index } = scene;
 
     const animation = forVertical({
       ...transitionProps,
-      scene
+      scene,
     });
 
     const Scene = scene.descriptor.getComponent();
-    const { height } = this.state;
+    const { active, height } = this.state;
 
     return (
-      <Animated.View
-        key={index}
-        style={[styles.view, animation]}
-        onLayout={this._onLayout}>
+      <Animated.View key={index} style={[styles.view, animation]} onLayout={this.onLayout}>
         <Animated.View
           style={[
             styles.view,
@@ -152,16 +125,18 @@ class CustomNavigationView extends React.Component {
                     inputRange: [0, 1],
                     outputRange: [-height, 0],
                     extrapolateLeft: 'clamp',
-                    useNativeDriver: true
-                  })
-                }
-              ]
-            }
-          ]}>
+                    useNativeDriver: true,
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
           <MainMenu
             navigation={scene.descriptor.navigation}
             showMenu={this.showMenu}
             hideMenu={this.hideMenu}
+            active={active}
           />
         </Animated.View>
         <Animated.View
@@ -175,56 +150,63 @@ class CustomNavigationView extends React.Component {
                     inputRange: [0, 1],
                     outputRange: [0, height],
                     extrapolateLeft: 'clamp',
-                    useNativeDriver: true
-                  })
-                }
-              ]
-            }
-          ]}>
-          {//TODO figure out how to get scene.descriptor.options populated
-          ['HomeScreen', 'DeveloperMenuScreen'].indexOf(scene.descriptor.navigation.state.routeName) < 0 && (
-            <View pointerEvents="box-none" style={styles.navStatic}>
-              <NavStatic
+                    useNativeDriver: true,
+                  }),
+                },
+              ],
+            },
+          ]}
+        >
+          {scene.descriptor.options.header && (
+            <View style={styles.header}>
+              <NavBar
+                scene={scene}
                 navigation={scene.descriptor.navigation}
                 showMenu={this.showMenu}
               />
             </View>
           )}
-          <Scene
-            navigation={scene.descriptor.navigation}
-            showMenu={this.showMenu}
-            hideMenu={this.hideMenu}
-          />
+          <View style={styles.body}>
+            <Scene
+              navigation={scene.descriptor.navigation}
+              showMenu={this.showMenu}
+              hideMenu={this.hideMenu}
+              active={active}
+            />
+          </View>
         </Animated.View>
       </Animated.View>
     );
   };
+
+  render() {
+    const { navigation, descriptors } = this.props;
+
+    return (
+      <Transitioner
+        configureTransition={this.configureTransition}
+        descriptors={descriptors}
+        navigation={navigation}
+        render={this.renderScenes}
+      />
+    );
+  }
 }
+
+CustomNavigationView.propTypes = {
+  descriptors: PropTypes.shape({}).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  scene: PropTypes.shape({
+    descriptor: PropTypes.object.isRequired,
+  }).isRequired,
+};
 
 const CustomRouter = StackRouter(routes);
 
 const CustomTransitioner = createAppContainer(
-  createNavigator(CustomNavigationView, CustomRouter, {})
+  createNavigator(CustomNavigationView, CustomRouter, {}),
 );
-
-const styles = StyleSheet.create({
-  view: {
-    backgroundColor: '#211F24',
-    borderColor: '#211F24',
-    position: 'absolute',
-    overflow: 'hidden',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0
-  },
-  navStatic: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    zIndex: 1
-  }
-});
 
 export default CustomTransitioner;
