@@ -1,4 +1,5 @@
 // @flow
+import type NavigationProps from 'types/navigation';
 import PayScreen from '../containers/PayScreen';
 import PayTabs from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
@@ -16,9 +17,9 @@ const routes = {
   },
   PayTabs: {
     screen: PayTabs,
-    navigationOptions: (props) => {
+    navigationOptions: (props: NavigationProps) => {
       const { getParam } = props.navigation;
-      let title = getParam('name', getParam('recipient'));
+      let title = getParam('name', getParam('recipient')) || '';
       if (title.length > MAX_TITLE_LENGTH) {
         title = `${title.substr(0, MAX_TITLE_LENGTH)}...`;
       }

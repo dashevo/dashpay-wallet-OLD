@@ -1,13 +1,14 @@
 {
   "parser": "babel-eslint",
   "env": {
-    "jest": true
+    "jest/globals": true
   },
   "plugins": [
     "jest"
   ],
   "extends": [
-    "airbnb"
+    "airbnb",
+    "plugin:jest/recommended"
   ],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
