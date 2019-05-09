@@ -1,12 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import React from 'react';
-import { View, Image, Text } from 'react-native';
-
-// Internal dependencies
+import { View, Text } from 'react-native';
+import { Image } from 'hooks/Image';
 import { DashIcon } from 'hooks/Icon';
 import useAvatar from './useAvatar';
 
