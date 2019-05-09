@@ -31,8 +31,7 @@ const routes = {
   ScannerScreen: {
     screen: ScannerScreen,
     navigationOptions: {
-      title: 'Pay at the address',
-      params: null,
+      header: null,
     },
   },
   PaymentConfirmationScreen: {

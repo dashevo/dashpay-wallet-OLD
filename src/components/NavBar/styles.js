@@ -5,7 +5,7 @@
  */
 
 const styles = (theme: Object): Object => ({
-  ['container']: {
+  container: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -16,20 +16,20 @@ const styles = (theme: Object): Object => ({
     paddingBottom: 0,
     paddingLeft: 0,
     paddingRight: 0,
-    paddingTop: 0
+    paddingTop: 0,
   },
-  ['body']: {
+  body: {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
-  ['right']: {
+  right: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
-  ['wrapper']: {
+  wrapper: {
     backgroundColor: theme.navbarContainerBackgroundColor,
     borderColor: theme.navbarContainerBackgroundColor,
     paddingLeft: 14,
@@ -37,38 +37,39 @@ const styles = (theme: Object): Object => ({
     paddingTop: 7,
     paddingBottom: 7,
     borderRadius: 14,
-    elevation: 2
+    elevation: 2,
   },
-  ['title']: {
+  title: {
     color: theme.navbarTitleColor,
     fontSize: theme.navbarTitleFontSize,
     fontWeight: theme.navbarTitleFontWeight,
-    lineHeight: theme.navbarTitleLineHeight
+    lineHeight: theme.navbarTitleLineHeight,
   },
-  ['button']: {
+  button: {
     alignItems: 'center',
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     height: theme.navbarContainerHeight,
     paddingBottom: 0,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
     paddingTop: 0,
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
-  ['text']: {
+  text: {
     color: theme.navbarTextColor,
     fontSize: theme.navbarTextFontSize,
     fontWeight: theme.navbarTextFontWeight,
-    lineHeight: theme.navbarTextLineHeight
+    lineHeight: theme.navbarTextLineHeight,
+    marginLeft: 4,
   },
-  ['icon']: {
+  icon: {
     color: theme.navbarIconColor,
     fontSize: theme.navbarIconFontSize,
     fontWeight: theme.navbarIconFontWeight,
-    lineHeight: theme.navbarIconLineHeight
-  }
+    lineHeight: theme.navbarIconLineHeight,
+  },
 });
 
 export default styles;
