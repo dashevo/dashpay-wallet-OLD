@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import {
+  View, Text, SafeAreaView, TouchableOpacity,
+} from 'react-native';
 import { Icon } from 'components';
 import Styles from 'components/Styles';
 import { compose } from 'utilities';
@@ -16,19 +18,24 @@ class StaticNav extends React.PureComponent {
     return (
       <Composed>
         {({ styles }) => (
-          <SafeAreaView style={styles.container} pointerEvents="box-none">
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                navigation.navigate('Activities');
-              }}
-            >
-              <Icon style={styles.icon} name="squiggle" />
-              <Text style={styles.text}>3</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={showMenu}>
-              <Icon style={styles.icon} name="bars" />
-            </TouchableOpacity>
+          <SafeAreaView style={styles.container}>
+            <View style={styles.body} />
+            <View style={styles.right}>
+              <SafeAreaView style={styles.container} pointerEvents="box-none">
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    navigation.navigate('Activities');
+                  }}
+                >
+                  <Icon style={styles.icon} name="squiggle" />
+                  <Text style={styles.text}>3</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={showMenu}>
+                  <Icon style={styles.icon} name="bars" />
+                </TouchableOpacity>
+              </SafeAreaView>
+            </View>
           </SafeAreaView>
         )}
       </Composed>

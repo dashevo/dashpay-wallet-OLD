@@ -51,24 +51,25 @@ const styles = (theme: Object): Object => ({
     borderColor: 'transparent',
     height: theme.navbarContainerHeight,
     paddingBottom: 0,
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingLeft: 8,
+    paddingRight: 8,
     paddingTop: 0,
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   ['text']: {
     color: theme.navbarTextColor,
     fontSize: theme.navbarTextFontSize,
     fontWeight: theme.navbarTextFontWeight,
-    lineHeight: theme.navbarTextLineHeight
+    lineHeight: theme.navbarTextLineHeight,
+    marginLeft: 4,
   },
   ['icon']: {
     color: theme.navbarIconColor,
     fontSize: theme.navbarIconFontSize,
     fontWeight: theme.navbarIconFontWeight,
-    lineHeight: theme.navbarIconLineHeight
-  }
+    lineHeight: theme.navbarIconLineHeight,
+  },
 });
 
 export default styles;
