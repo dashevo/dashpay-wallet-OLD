@@ -1,32 +1,20 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
-
-// Internal dependencies
 import Touchable from 'components/Touchable';
 import Field from 'components/Field';
 import Avatar from 'components/Avatar';
 import View from 'components/View';
 import Icon from 'components/Icon';
-import Text from 'components/Text';
-import styles from './styles';
 
 function ImageField(props) {
   return (
-    <Field {...props} name={'image'}>
-      {({ form, styles }) => {
-        const { name, image, recipient } = form.values;
+    <Field {...props} name="image">
+      {({ form }) => {
+        const { name, image } = form.values;
 
-        function onPress(event) {
+        function onPress() {
           form.navigation.navigate('CameraRollScreen', {
-            onSelect: image =>
-              form.setFieldValue('image', image.selected[0].uri)
+            onSelect: selected => form.setFieldValue('image', selected.selected[0].uri),
           });
         }
 
@@ -45,9 +33,10 @@ function ImageField(props) {
                             bottom: 10,
                             left: 10,
                             right: 10,
-                            top: 10
-                          }}>
-                          <Icon style={styles.icon} name={'dash'} />
+                            top: 10,
+                          }}
+                        >
+                          <Icon style={styles.icon} name="dash" />
                         </Touchable>
                       </View>
                     </View>

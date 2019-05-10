@@ -36,3 +36,10 @@ export const sentContactRequestsUsernamesSelector = createSelector(
 export const localContactsSelector = createSelector(
   contactsSelector, ({ local }) => local.items,
 );
+
+export const contactSelectorFactory = (address: string) => createSelector(
+  blockchainContactsSelector, localContactsSelector, (blockchainContacts, localContacts) => {
+    const findContact = contacts => contacts.find(contact => contact.address === address);
+    return findContact(blockchainContacts) || findContact(localContacts);
+  },
+);

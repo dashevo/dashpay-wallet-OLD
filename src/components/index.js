@@ -1,8 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+import * as React from 'react';
+import Composer from 'utilities/compose';
+import { View } from 'react-native';
+import Styles from './Styles';
 
 export { ActivityIndicator as Spinner } from 'react-native';
 export { default as AutoSubmit } from './Field/AutoSubmit';
@@ -18,7 +17,7 @@ export { default as SelectableList } from './SelectableList';
 export { default as TabbedCard } from './TabbedCard';
 export { default as ThemedButton } from './ThemedButton';
 export { default as Touch } from './Touch';
-export { Image } from 'react-native';
+export { default as Image } from 'react-native-fast-image';
 export { ScrollView } from 'react-native';
 export { Text } from 'react-native';
 export { TouchableHighlight as Touchable } from 'react-native';
@@ -42,27 +41,19 @@ export { default as CurrencyInput } from './CurrencyInput';
 export { default as Input } from './Input';
 export { default as Avatar } from './deprecated/Avatar';
 
-import * as React from 'react';
-import Composer from 'utilities/compose';
-import { View } from 'react-native';
-import Styles from './Styles';
-
 const containerStyles = theme => ({
-  ['container']: {
+  container: {
     backgroundColor: theme.containerBackgroundColor,
     borderColor: theme.containerBorderColor,
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export function Container(props) {
   return (
     <Composer
-      components={[
-        (props: Props): React.Element<any> => (
-          <Styles {...props} styles={containerStyles} />
-        )
-      ]}>
+      components={[componentProps => (<Styles {...componentProps} styles={containerStyles} />)]}
+    >
       {([{ styles }]) => <View style={styles.container} {...props} />}
     </Composer>
   );

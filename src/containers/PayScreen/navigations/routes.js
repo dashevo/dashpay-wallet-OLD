@@ -19,8 +19,8 @@ const routes = {
     screen: PayTabs,
     navigationOptions: (props: NavigationProps) => {
       const { getParam } = props.navigation;
-      let title = getParam('name', getParam('recipient')) || '';
-      if (title.length > MAX_TITLE_LENGTH) {
+      let title = getParam('name', getParam('recipient'));
+      if (title && title.length > MAX_TITLE_LENGTH) {
         title = `${title.substr(0, MAX_TITLE_LENGTH)}...`;
       }
       return {

@@ -1,24 +1,20 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
-
-// Internal dependencies
-import Field from 'components/Field';
 import Avatar from 'components/Avatar';
 import View from 'components/View';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import styles from './styles';
+import type { Props } from './types';
 
-function ImageField(props) {
-  const { initialValues = {} } = props;
-  const { name, recipient, image } = initialValues;
+function ImageField(props: Props) {
+  const {
+    initialValues: {
+      name,
+      recipient,
+      image,
+    },
+  } = props;
+  const displayName = name || recipient;
   return (
     <Avatar name={name} image={image}>
       {({ children, styles }) => (
@@ -27,23 +23,15 @@ function ImageField(props) {
             <View style={styles.container}>
               <View style={styles.body}>{children}</View>
               <View style={styles.left}>
-                <Icon style={styles.icon} name={'dash'} />
+                <Icon style={styles.icon} name="dash" />
               </View>
             </View>
           </View>
-          {name ? (
-            <View style={styles.center}>
-              <Text style={styles.title} numberOfLines={1}>
-                {name}
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.center}>
-              <Text style={styles.title} numberOfLines={1}>
-                {recipient}
-              </Text>
-            </View>
-          )}
+          <View style={styles.center}>
+            <Text style={styles.title} numberOfLines={1}>
+              {displayName}
+            </Text>
+          </View>
         </View>
       )}
     </Avatar>
