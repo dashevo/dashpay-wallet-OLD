@@ -6,9 +6,10 @@
 
 // External dependencies
 import * as React from 'react';
-import { FormattedDate } from 'react-intl';
-import { FormattedTime } from 'react-intl';
-import { FormattedNumber } from 'react-intl';
+import {
+  FormattedTime,
+  FormattedNumber,
+} from 'react-intl';
 
 // Internal dependencies
 import Card from 'components/Card';
@@ -30,8 +31,19 @@ function SmallAvatar(props) {
   );
 }
 
-function TransactionCard(props) {
-  const { item } = props;
+type Props = {
+  item: {
+    dashAmount: ?string,
+    fiatAmount: ?string,
+    fiatSymbol: ?string,
+    receiver: ?any,
+    sender: ?any,
+    timestamp: Date,
+    transactionType: ?string,
+  },
+};
+
+function TransactionCard({ item }: Props) {
   const {
     dashAmount,
     fiatAmount,
@@ -39,12 +51,16 @@ function TransactionCard(props) {
     receiver,
     sender,
     timestamp,
-    transactionType
+    transactionType,
   } = item;
   const dashSymbol = 'dash';
   return (
     <Card onPress={() => {}}>
-      {({ bind, touched, styles }) => (
+      {({
+        bind,
+        // touched,
+        styles,
+      }) => (
         <View style={styles.tmp}>
           <Touchable {...bind}>
             <View style={styles.container}>
@@ -85,9 +101,7 @@ function TransactionCard(props) {
                       </View>
                       <View style={styles.row}>
                         <Icon style={styles.icon} name={dashSymbol} />
-                        <FormattedNumber value={dashAmount}>
-                          {value => <Text style={styles.text}>{value}</Text>}
-                        </FormattedNumber>
+                        <Text style={styles.text}>{dashAmount}</Text>
                       </View>
                     </View>
                   </View>
@@ -98,9 +112,14 @@ function TransactionCard(props) {
                   value={timestamp}
                   year="numeric"
                   month="long"
-                  day="numeric">
+                  day="numeric"
+                >
                   {formattedTime => (
-                    <Text style={styles.small}>{transactionType} | {formattedTime}</Text>
+                    <Text style={styles.small}>
+                      {transactionType}
+                      {' | '}
+                      {formattedTime}
+                    </Text>
                   )}
                 </FormattedTime>
               </View>

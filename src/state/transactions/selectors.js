@@ -14,20 +14,24 @@ export const selectTransactions = (state) => {
     const dashSat = item.to.reduce((accumulator, { valueSat }) => (accumulator + valueSat), 0);
     let sender = { name: state.account.username, image: null };
     let receiver = { name: state.account.username, image: null };
+    let typeText = 'OTHER';
     if (item.type === TXTYPES.RECEIVED) { // TODO refer to an imported constant
+      typeText = 'RECEIVED';
       const fromAddress = item.from.length > 1 ? 'multiple addresses' : item.from[0].address;
       sender = { name: 'Unidentified Sender', image: null, address: fromAddress };
     } else if (item.type === TXTYPES.SENT) { // TODO refer to an imported constant
+      typeText = 'PAID';
       const toAddress = item.to.length > 1 ? 'multiple recipients' : item.to[0].address;
       receiver = { name: 'Unidentified Recipient', image: null, address: toAddress };
     }
-    const dashAmount = (dashSat / 100000000).toString(10);
+    const dashAmount = dashSat.toString(10).padStart(9, '0').replace(/(\d{8})$/, '.$1').replace(/\.?0+$/, '');
     const alternativeCurrency = alternativeCurrencySelector(state);
     let fiatAmount = dashSat * alternativeCurrency.rate / 100000000;
     const { code } = alternativeCurrency;
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
-    const timestamp = item.time ? new Date(item.time * 1000) : new Date(); // unconfirmed txes are missing time field
+    const timestamp = item.time ? new Date(item.time * 1000) : new Date();
+    // unconfirmed txes are missing time field
 
     transactions.push({
       dashSat,
@@ -37,7 +41,7 @@ export const selectTransactions = (state) => {
       sender,
       receiver,
       timestamp, // time in seconds, JS time uses milliseconds
-      transactionType: item.type,
+      transactionType: typeText,
     });
   });
   return transactions;
