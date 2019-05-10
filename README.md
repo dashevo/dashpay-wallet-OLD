@@ -1,6 +1,7 @@
 # dashpay-wallet
 
 [![Build Status](https://travis-ci.com/dashevo/dashpay-wallet.svg?token=UzYXxxa3Wnmm1sy8HJPN&branch=master)](https://travis-ci.com/dashevo/dashpay-wallet)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Setup:
 Install NodeJS, Android Studio, Java SDK 8 and Python 2.
