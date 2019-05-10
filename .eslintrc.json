@@ -1,8 +1,5 @@
 {
   "parser": "babel-eslint",
-  "env": {
-    "jest/globals": true
-  },
   "plugins": [
     "jest"
   ],
@@ -10,12 +7,16 @@
     "airbnb",
     "plugin:jest/recommended"
   ],
+  "env": {
+    "jest/globals": true
+  },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "import/prefer-default-export": ["warn"]
   },
   "globals": {
-    "fetch": false
+    "fetch": true,
+    "alert": true
   },
   "settings": {
     "import/resolver": {

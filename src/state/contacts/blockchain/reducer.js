@@ -61,16 +61,24 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
         received: state.received.map(request => receivedRequest(request, action)),
       };
     case REJECT_BLOCKCHAIN_CONTACT_SUCCESS:
-      return state.filter(request => request.recipient !== action.response.sender.address);
+      return {
+        ...state,
+        received: state
+          .received
+          .filter(request => request.recipient !== action.response.sender.address),
+      };
     case SEND_CONTACT_REQUEST_SUCCESS:
+      alert('Success');
       return state;
     case SEND_CONTACT_REQUEST_FAILURE:
+      alert(`Error: ${action.error.message}`);
       return state;
 
     default:
       return state;
   }
 }
+
 
 function items(state = [], action) {
   switch (action.type) {

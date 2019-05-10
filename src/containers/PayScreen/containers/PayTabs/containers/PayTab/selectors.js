@@ -1,14 +1,14 @@
 import { orderBy } from 'lodash';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
+import { contactSelectorFactory } from 'state/contacts/selectors';
 
 function mapStateToProps(state, props) {
   const alternativeCurrency = alternativeCurrencySelector(state);
   const recipient = props.navigation.getParam('recipient');
-  const contact = state.contacts.local.items[recipient] || {};
   let transactions = state.payments.send.byRecipients[recipient] || [];
 
-  const receiver = state.contacts.local.items[recipient] || {}; // Tmp
-  const sender = state.contacts.local.items.yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx || {}; // Tmp
+  const receiver = contactSelectorFactory(recipient)(state) || {};
+  const sender = contactSelectorFactory('yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx')(state) || {}; // Tmp
 
   transactions = transactions.map((transactionId) => {
     const transaction = state.payments.send.items[transactionId];
@@ -37,7 +37,7 @@ function mapStateToProps(state, props) {
       recipient,
       name: '',
       image: '',
-      ...contact,
+      ...receiver,
     },
   };
 }
