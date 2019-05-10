@@ -6,7 +6,6 @@
 
 // External dependencies
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import {
   FormattedTime,
   FormattedNumber,
@@ -32,7 +31,19 @@ function SmallAvatar(props) {
   );
 }
 
-function TransactionCard({ item }) {
+type Props = {
+  item: {
+    dashAmount: ?string,
+    fiatAmount: ?string,
+    fiatSymbol: ?string,
+    receiver: ?any,
+    sender: ?any,
+    timestamp: Date,
+    transactionType: ?string,
+  },
+};
+
+function TransactionCard({ item }: Props) {
   const {
     dashAmount,
     fiatAmount,
@@ -119,17 +130,5 @@ function TransactionCard({ item }) {
     </Card>
   );
 }
-
-TransactionCard.propTypes = {
-  item: PropTypes.shape({
-    dashAmount: PropTypes.string,
-    fiatAmount: PropTypes.string,
-    fiatSymbol: PropTypes.string,
-    receiver: PropTypes.any,
-    sender: PropTypes.any,
-    timestamp: PropTypes.instanceOf(Date),
-    transactionType: PropTypes.string,
-  }).isRequired,
-};
 
 export default TransactionCard;
