@@ -5,13 +5,13 @@
  */
 
 const styles = (theme: Object): Object => ({
-  ['tmp']: {
+  tmp: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
     borderRadius: 5,
     marginBottom: 15,
   },
-  ['container']: {
+  container: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
@@ -21,7 +21,7 @@ const styles = (theme: Object): Object => ({
     minWidth: 0,
     position: 'relative',
   },
-  ['header']: {
+  header: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
@@ -35,7 +35,7 @@ const styles = (theme: Object): Object => ({
     paddingRight: 16,
     paddingTop: 16,
   },
-  ['body']: {
+  body: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
@@ -43,7 +43,7 @@ const styles = (theme: Object): Object => ({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  ['footer']: {
+  footer: {
     backgroundColor: theme.cardContainerBackgroundColor,
     borderColor: theme.cardContainerBorderColor,
     borderStyle: 'solid',
@@ -57,58 +57,58 @@ const styles = (theme: Object): Object => ({
     paddingRight: 16,
     paddingTop: 16,
   },
-  ['row']: {
+  row: {
     alignItems: 'center',
     flexDirection: 'row',
     flexGrow: 1,
     flexShrink: 0,
     justifyContent: 'flex-start',
   },
-  ['metadata']: {
+  metadata: {
     paddingLeft: 15,
     flex: 1,
   },
-  ['highlighted']: {
+  highlighted: {
     backgroundColor: theme.cardHighlightedBackgroundColor,
     borderColor: theme.cardHighlightedBorderColor,
     borderStyle: 'solid',
     borderWidth: 1,
-    borderRadius: 3,
+    borderRadius: 5,
     padding: 12,
     flex: 1,
   },
-  ['title']: {
+  title: {
     color: theme.cardTitleColor,
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 18,
     marginBottom: 3,
-    marginTop: 0
+    marginTop: 0,
   },
-  ['subtitle']: {
+  subtitle: {
     color: theme.cardSubtitleColor,
     fontSize: 12,
     fontWeight: '500',
     lineHeight: 16,
     marginBottom: 0,
-    marginTop: 0
+    marginTop: 0,
   },
-  ['text']: {
+  text: {
     color: theme.cardTextColor,
     fontSize: 18,
-    textAlign: 'left'
+    textAlign: 'left',
   },
-  ['small']: {
+  small: {
     color: theme.cardSmallColor,
     fontSize: 10,
-    fontWeight: '400'
+    fontWeight: '400',
   },
-  ['icon']: {
+  icon: {
     color: theme.cardIconColor,
     fontSize: 18,
     textAlign: 'center',
-    width: 24
-  }
+    width: 24,
+  },
 });
 
 export default styles;
