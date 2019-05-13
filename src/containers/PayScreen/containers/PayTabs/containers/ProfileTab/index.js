@@ -17,14 +17,16 @@ import AutoSubmit from 'components/AutoSubmit';
 import ColorField from './components/ColorField';
 import ImageField from './components/ImageField';
 import NameField from './components/NameField';
-import AddressField from './components/AddressField';
-import Metadata from './components/Metadata';
-import RemoveButton from './components/RemoveButton';
+import UsernameField from './components/UsernameField';
 import SendRequestButton from './components/SendRequestButton';
 import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
+import {
+  Props,
+  State,
+} from './types';
 
 class ProfileTab extends React.Component<Props, State> {
   static defaultProps = defaults;
@@ -32,29 +34,39 @@ class ProfileTab extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const {
+      initialValues,
+      validationSchema,
+      updateLocalContact,
+      deleteLocalContact,
+    } = props;
+
+    this.onSubmit = values => updateLocalContact(values);
+    this.onDelete = values => deleteLocalContact(values);
+
     this.state = {
-      validationSchema: props.validationSchema,
-      initialValues: props.initialValues,
-      onDelete: this._onDelete,
-      onSubmit: this._onSubmit
+      validationSchema,
+      initialValues,
+      onDelete: this.onDelete,
+      onSubmit: this.onSubmit,
     };
   }
 
-  _onSubmit = values => {
-    this.props.updateLocalContact(values);
-  };
-
-  _onDelete = values => {
-    this.props.deleteLocalContact(values);
-  };
-
   render() {
+    const {
+      initialValues,
+    } = this.props;
     return (
       <ScrollView style={styles.container}>
         <Form {...this.state} {...this.props}>
           <AutoSubmit />
-          <Toggle initial={true}>
-            {({ on, off, setOn, setOff }) => (
+          <Toggle initial>
+            {({
+              on,
+              off,
+              setOn,
+              setOff,
+            }) => (
               <View style={styles.fieldset}>
                 {on && (
                   <View style={styles.row}>
@@ -73,13 +85,7 @@ class ProfileTab extends React.Component<Props, State> {
                 )}
                 {on && (
                   <View style={styles.row}>
-                    <AddressField />
-                  </View>
-                )}
-                {on && (
-                  <View style={styles.row}>
-                    <Metadata />
-                    <RemoveButton />
+                    <UsernameField />
                   </View>
                 )}
               </View>
@@ -87,7 +93,7 @@ class ProfileTab extends React.Component<Props, State> {
           </Toggle>
         </Form>
         <View style={styles.row}>
-          <SendRequestButton address={this.props.initialValues.address} />
+          <SendRequestButton address={initialValues.address} />
         </View>
       </ScrollView>
     );
