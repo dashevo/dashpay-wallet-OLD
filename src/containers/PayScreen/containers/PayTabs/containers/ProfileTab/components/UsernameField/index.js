@@ -20,7 +20,6 @@ function UsernameField(props: Props): React.Element<any> {
   return (
     <Field {...props}>
       {({
-        // form,
         touchable,
         input,
         styles,
