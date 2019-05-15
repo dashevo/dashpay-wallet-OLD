@@ -1,26 +1,18 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
 import * as React from 'react';
-
-// Internal dependencies
 import Field from 'components/Field';
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
-import CurrencyInput from 'components/CurrencyInput';
-import styles from './styles';
-type Props = {};
+import CurrencyInput from 'hooks/CurrencyInput';
+import fieldStyles from './styles';
 
-function AmountField(props: Props): React.Element<any> {
+function AmountField(props): React.Element<any> {
   return (
     <React.Fragment>
-      <Field {...props} name={'dashAmount'} styles={styles}>
-        {({ input, form, styles, theme }) => {
+      <Field {...props} name="dashAmount" styles={fieldStyles}>
+        {({
+          input, form, styles, theme,
+        }) => {
           function handleChangeText(dashAmount) {
             const fiatAmount = form.convertToFiatAmount(dashAmount);
 
@@ -34,10 +26,10 @@ function AmountField(props: Props): React.Element<any> {
             <View style={styles.container}>
               <View style={styles.separator} />
               <View style={styles.left}>
-                <Text style={styles.text}>{'DASH'}</Text>
+                <Text style={styles.text}>DASH</Text>
               </View>
               <View style={styles.body}>
-                <Icon style={styles.icon} name={'dash'} />
+                <Icon style={styles.icon} name="dash" />
               </View>
               <View style={styles.right}>
                 <CurrencyInput
@@ -51,8 +43,10 @@ function AmountField(props: Props): React.Element<any> {
           );
         }}
       </Field>
-      <Field {...props} name={'fiatAmount'} styles={styles}>
-        {({ input, form, styles, theme }) => {
+      <Field {...props} name="fiatAmount" styles={fieldStyles}>
+        {({
+          input, form, styles, theme,
+        }) => {
           function handleChangeText(fiatAmount) {
             const dashAmount = form.convertToDashAmount(fiatAmount);
 
@@ -65,16 +59,17 @@ function AmountField(props: Props): React.Element<any> {
           return (
             <View style={styles.container}>
               <View style={styles.left}>
-                <Text style={styles.text}>{'USD'}</Text>
+                <Text style={styles.text}>USD</Text>
               </View>
               <View style={styles.body}>
-                <Icon style={styles.icon} name={'usd'} />
+                <Icon style={styles.icon} name="usd" />
               </View>
               <View style={styles.right}>
                 <CurrencyInput
                   {...input}
                   placeholderTextColor={theme.fieldInputColor}
                   onChangeText={handleChangeText}
+                  maximumFractionDigits={2}
                   style={styles.input}
                 />
               </View>
