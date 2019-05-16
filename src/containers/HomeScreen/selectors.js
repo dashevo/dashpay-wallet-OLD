@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
-import { usernameSelector } from 'state/account/selectors';
+import { currentUserSelector } from 'state/account/selectors';
 
 export default createSelector(
-  usernameSelector,
-  name => ({ user: { name } }),
+  currentUserSelector,
+  user => ({ user }),
 );
