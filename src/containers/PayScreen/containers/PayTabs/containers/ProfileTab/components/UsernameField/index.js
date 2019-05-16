@@ -16,7 +16,7 @@ import Text from 'components/Text';
 import defaultProps from './defaults';
 import type { Props } from './types';
 
-function AddressField(props: Props): React.Element<any> {
+function UsernameField(props: Props): React.Element<any> {
   return (
     <Field {...props}>
       {({
@@ -30,7 +30,7 @@ function AddressField(props: Props): React.Element<any> {
               <Input style={styles.input} {...input} />
             </View>
             <View style={styles.row}>
-              <Text style={styles.text}>Dash address</Text>
+              <Text style={styles.text}>Dash username</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -39,6 +39,6 @@ function AddressField(props: Props): React.Element<any> {
   );
 }
 
-AddressField.defaultProps = defaultProps;
+UsernameField.defaultProps = defaultProps;
 
-export default AddressField;
+export default UsernameField;

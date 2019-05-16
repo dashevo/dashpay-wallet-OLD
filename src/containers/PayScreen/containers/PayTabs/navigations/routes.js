@@ -13,21 +13,21 @@ const routes = {
   PayTab: {
     screen: PayTab,
     navigationOptions: {
-      tabBarLabel: 'Pay'
-    }
+      tabBarLabel: 'Pay',
+    },
   },
   ReceiveTab: {
     screen: ReceiveTab,
     navigationOptions: {
-      tabBarLabel: 'Receive'
-    }
+      tabBarLabel: 'Receive',
+    },
   },
   ProfileTab: {
     screen: ProfileTab,
     navigationOptions: {
-      tabBarLabel: 'Profile'
-    }
-  }
+      tabBarLabel: 'Profile',
+    },
+  },
 };
 
 export default routes;
