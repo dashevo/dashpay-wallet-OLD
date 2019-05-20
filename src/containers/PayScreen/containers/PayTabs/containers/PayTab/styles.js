@@ -5,6 +5,7 @@ export default {
   contentContainerStyle: {
     paddingHorizontal: 24,
   },
-  row: {
+  transactionRow: {
+    marginTop: 250,
   },
 };

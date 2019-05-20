@@ -77,7 +77,8 @@ class PayTab extends React.Component<Props, State> {
       <Container>
         <ScrollView
           style={styles.container}
-          contentContainerStyle={styles.contentContainerStyle}>
+          contentContainerStyle={styles.contentContainerStyle}
+        >
           <SlideInUp fromValue={100}>
             <Form {...this.state}>
               <View style={styles.row}>
@@ -89,7 +90,7 @@ class PayTab extends React.Component<Props, State> {
               <View style={styles.row}>
                 <PayButton />
               </View>
-              <View style={styles.row}>
+              <View style={styles.transactionRow}>
                 <Transactions data={transactions} />
               </View>
             </Form>

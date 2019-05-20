@@ -8,4 +8,5 @@ export type Props = {
   maximumFractionDigits: ?number,
   onChangeText: Function,
   getRef: ?Function,
+  onSubmit: ?Function,
 };

@@ -36,15 +36,23 @@ function CurrencyInput(props: Props) {
     });
   });
 
+  const onSubmit = () => {
+    input.blur();
+    if (props.onSubmit) {
+      props.onSubmit();
+    }
+  };
 
   return (
     <TextInput
       {...props}
       keyboardType="numeric"
       style={style}
+      returnKeyType="done"
       value={undefined}
       placeholder="0.00"
       onChangeText={handleChange}
+      onSubmitEditing={onSubmit}
       ref={(ref) => {
         input = ref;
         if (getRef) {
