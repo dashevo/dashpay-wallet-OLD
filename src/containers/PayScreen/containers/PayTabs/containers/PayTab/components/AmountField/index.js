@@ -70,6 +70,7 @@ function AmountField(props): React.Element<any> {
                   placeholderTextColor={theme.fieldInputColor}
                   onChangeText={handleChangeText}
                   maximumFractionDigits={2}
+                  onSubmit={form.submitForm}
                   style={styles.input}
                 />
               </View>
