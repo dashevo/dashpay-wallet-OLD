@@ -8,7 +8,6 @@ import View from 'components/View';
 import SlideInUp from './components/SlideInUp';
 import ImageField from './components/ImageField';
 import AmountField from './components/AmountField';
-import PayButton from './components/PayButton';
 import Transactions from './components/Transactions';
 import defaults from './defaults';
 import selector from './selectors';
@@ -86,9 +85,6 @@ class PayTab extends React.Component<Props, State> {
               </View>
               <View style={styles.row}>
                 <AmountField />
-              </View>
-              <View style={styles.row}>
-                <PayButton />
               </View>
               <View style={styles.transactionRow}>
                 <Transactions data={transactions} />
