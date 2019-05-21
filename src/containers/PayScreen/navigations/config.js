@@ -122,14 +122,22 @@ function transitionConfig(
 const config = {
   transitionConfig,
   mode: 'card',
+  transparentCard: true,
   cardStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: 'transparent'
   },
   containerStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: 'transparent'
   },
   defaultNavigationOptions: {
     header: props => <NavBar {...props} />,
+    transparentCard: true,
+    cardStyle: {
+      backgroundColor: 'transparent'
+    },
+    containerStyle: {
+      backgroundColor: 'transparent'
+    },
   },
 };
 

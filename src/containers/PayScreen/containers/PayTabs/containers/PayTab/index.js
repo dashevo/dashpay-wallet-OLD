@@ -22,7 +22,9 @@ class PayTab extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const { alternativeCurrency: { rate } } = props;
+    const {
+      alternativeCurrency: { rate },
+    } = props;
 
     this.state = {
       convertToDashAmount: fiatAmount => fiatAmount / rate,
@@ -40,12 +42,9 @@ class PayTab extends React.Component<Props, State> {
 
   onSubmit = (values, form) => {
     const {
-      navigation,
-      createSendPaymentTransaction,
-      receiver,
-      sender,
+      navigation, createSendPaymentTransaction, receiver, sender,
     } = this.props;
-    navigation.navigate('PaymentConfirmationScreen', {
+    navigation.navigate('Confirm', {
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,
@@ -56,17 +55,15 @@ class PayTab extends React.Component<Props, State> {
       toAvatar: { uri: receiver.image },
       fromAvatar: { uri: sender.image },
       onConfirmation: () => {
-        createSendPaymentTransaction({
+        form.resetForm();
+        return createSendPaymentTransaction({
           // Tmp this will be fixed with new schema
           dashAmount: values.dashAmount,
           fiatAmount: values.fiatAmount,
 
           recipient: values.recipient,
           amount: values.dashAmount,
-        })
-          .then(console.log, console.log);
-        form.resetForm();
-        navigation.goBack(null);
+        });
       },
     });
   };

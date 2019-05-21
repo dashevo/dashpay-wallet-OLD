@@ -1,11 +1,13 @@
 export default {
   container: {
-    flex: 1,
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    flex: 1
   },
   contentContainerStyle: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 24
   },
-  transactionRow: {
-    marginTop: 250,
-  },
+  row: {
+    marginTop: 24
+  }
 };

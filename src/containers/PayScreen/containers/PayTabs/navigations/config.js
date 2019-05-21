@@ -7,11 +7,12 @@ import TabBar from './TabBar';
 
 const config = {
   mode: 'card',
+  transparentCard: true,
   cardStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: 'transparent'
   },
   containerStyle: {
-    backgroundColor: '#fff'
+    backgroundColor: 'transparent',
   },
   tabBarComponent: TabBar,
   tabBarOptions: {

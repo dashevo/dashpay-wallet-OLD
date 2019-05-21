@@ -16,9 +16,9 @@ import MainMenu from './MainMenu';
 import { forVertical } from './config';
 
 const styles = StyleSheet.create({
-  view: {
-    backgroundColor: '#fff',
-    borderColor: '#fff',
+  card: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     position: 'absolute',
     overflow: 'hidden',
     left: 0,
@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
-  header: {},
   body: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     position: 'relative',
     overflow: 'hidden',
     flex: 1,
@@ -87,7 +88,7 @@ class CustomNavigationView extends React.Component {
 
   renderScenes = (transitionProps) => {
     const scenes = transitionProps.scenes.map(scene => this.renderScene(transitionProps, scene));
-    return <View style={{ flex: 1 }}>{scenes}</View>;
+    return <View style={{ flex: 1, position: 'relative' }}>{scenes}</View>;
   };
 
   onLayout = (event) => {
@@ -102,19 +103,19 @@ class CustomNavigationView extends React.Component {
   renderScene = (transitionProps, scene) => {
     const { index } = scene;
 
-    const animation = forVertical({
-      ...transitionProps,
-      scene,
-    });
+    // const animation = forVertical({
+    //   ...transitionProps,
+    //   scene,
+    // });
 
     const Scene = scene.descriptor.getComponent();
     const { active, height } = this.state;
 
     return (
-      <Animated.View key={index} style={[styles.view, animation]} onLayout={this.onLayout}>
+      <Animated.View key={index} style={styles.card} onLayout={this.onLayout}>
         <Animated.View
           style={[
-            styles.view,
+            styles.card,
             { height },
             {
               transform: [
@@ -139,7 +140,7 @@ class CustomNavigationView extends React.Component {
         </Animated.View>
         <Animated.View
           style={[
-            styles.view,
+            styles.card,
             { height },
             {
               transform: [
@@ -204,7 +205,9 @@ CustomNavigationView.propTypes = {
 const CustomRouter = StackRouter(routes);
 
 const CustomTransitioner = createAppContainer(
-  createNavigator(CustomNavigationView, CustomRouter, {}),
+  createNavigator(CustomNavigationView, CustomRouter, {
+    transparentCard: true,
+  }),
 );
 
 export default CustomTransitioner;

@@ -110,6 +110,7 @@ function defaultNavigationOptions() {
   return {
     header: props => createElement(NavStatic, props, null),
     headerTransparent: true,
+    transparentCard: true,
   };
 }
 
@@ -117,8 +118,9 @@ const config = {
   transitionConfig,
   headerMode: 'float',
   mode: 'card',
+  transparentCard: true,
   cardStyle: {
-    backgroundColor: '#011E60',
+    backgroundColor: 'transparent',
   },
   defaultNavigationOptions,
 };
