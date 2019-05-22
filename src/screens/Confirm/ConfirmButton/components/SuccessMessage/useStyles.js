@@ -5,7 +5,7 @@
 // Internal dependencies
 import { makeStyles } from 'hooks/Styles';
 
-const styles = theme => ({
+const styles = () => ({
   container: {
     alignItems: 'center',
     backgroundColor: 'transparent',

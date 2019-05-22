@@ -7,16 +7,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  ['container']: {
+  container: {
     backgroundColor: '#fff',
     borderColor: '#fff',
     flexGrow: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  ['text']: {
-    fontSize: 16
-  }
+  text: {
+    fontSize: 16,
+  },
 });
 
 export default styles;

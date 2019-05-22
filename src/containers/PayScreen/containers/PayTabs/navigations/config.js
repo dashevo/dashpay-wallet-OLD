@@ -9,7 +9,7 @@ const config = {
   mode: 'card',
   transparentCard: true,
   cardStyle: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   containerStyle: {
     backgroundColor: 'transparent',
@@ -18,8 +18,8 @@ const config = {
   tabBarOptions: {
     upperCaseLabel: false,
     showIcon: false,
-    scrollEnabled: false
-  }
+    scrollEnabled: false,
+  },
 };
 
 export default config;

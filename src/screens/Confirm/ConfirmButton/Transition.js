@@ -2,26 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 
-import { DURATION } from '../index';
-
-const {
-  Clock,
-  Value,
-  set,
-  cond,
-  startClock,
-  clockRunning,
-  timing,
-  debug,
-  stopClock,
-  block,
-} = Animated;
-
-function ConfirmMessage(props) {
-  return <Text>Confirm Message</Text>;
-}
-
-const isSet = false;
+const { Value, timing } = Animated;
 
 function useValue(initialValue) {
   const value = useRef(null);
@@ -41,25 +22,32 @@ function useAnimation(callback) {
   return animation.current;
 }
 
-function Transition(props) {
+type TransitionProps = {
+  transitionStart: Function,
+  transitionEnd: Function,
+  getTransitionProps: Function,
+  item: Object,
+  status: string,
+  dispatch: Function,
+};
+
+function Transition(props: TransitionProps) {
   const {
     transitionStart, transitionEnd, getTransitionProps, item, status, dispatch,
   } = props;
   const { getComponet, ...rest } = item;
 
   const Componet = getComponet();
-
   const animatedValue = useValue(-360);
-  const toValue = useValue(0);
 
   const animation1 = useAnimation(() => timing(animatedValue, {
-    duration: DURATION,
+    duration: 500,
     toValue: 0,
     easing: Easing.inOut(Easing.ease),
   }));
 
   const animation2 = useAnimation(() => timing(animatedValue, {
-    duration: DURATION,
+    duration: 500,
     toValue: 360,
     easing: Easing.inOut(Easing.ease),
   }));

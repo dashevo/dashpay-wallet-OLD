@@ -1,10 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Animated } from 'react-native';
-import {
-  NavigationTransitionProps,
-  TransitionConfig,
-} from 'react-navigation';
+import { TransitionConfig } from 'react-navigation';
 import NavBar from 'components/NavBar';
 
 function getSceneIndicesForInterpolationInputRange(props) {
@@ -19,28 +16,19 @@ function getSceneIndicesForInterpolationInputRange(props) {
     const targetSceneIndex = scenes[targetSceneIndexInScenes].index;
     const lastSceneIndex = scenes[lastSceneIndexInScenes].index;
 
-    if (
-      index !== targetSceneIndex
-      && currentSceneIndexInScenes === lastSceneIndexInScenes
-    ) {
+    if (index !== targetSceneIndex && currentSceneIndexInScenes === lastSceneIndexInScenes) {
       return {
         first: Math.min(targetSceneIndex, index - 1),
         last: index + 1,
       };
     }
-    if (
-      index === targetSceneIndex
-      && currentSceneIndexInScenes === targetSceneIndexInScenes
-    ) {
+    if (index === targetSceneIndex && currentSceneIndexInScenes === targetSceneIndexInScenes) {
       return {
         first: index - 1,
         last: Math.max(lastSceneIndex, index + 1),
       };
     }
-    if (
-      index === targetSceneIndex
-      || currentSceneIndexInScenes > targetSceneIndexInScenes
-    ) {
+    if (index === targetSceneIndex || currentSceneIndexInScenes > targetSceneIndexInScenes) {
       return null;
     }
     return { first: index - 1, last: index + 1 };
@@ -57,7 +45,7 @@ function forInitial(props) {
   const translate = focused ? 0 : 1000000;
   return {
     opacity,
-    transform: [{ translateX: translate }, { translateY: translate }]
+    transform: [{ translateX: translate }, { translateY: translate }],
   };
 }
 
@@ -75,18 +63,18 @@ function forVertical(props) {
   const { index } = scene;
   const opacity = position.interpolate({
     inputRange: [first, first + 0.01, index, last - 0.01, last],
-    outputRange: [0, 1, 1, 0.85, 0]
+    outputRange: [0, 1, 1, 0.85, 0],
   });
 
   const scale = position.interpolate({
     inputRange: [first, first + 0.01, index, last - 0.01, last],
-    outputRange: [0, 1, 1, 0.85, 0]
+    outputRange: [0, 1, 1, 0.85, 0],
   });
 
   const height = layout.initHeight;
   const translateY = position.interpolate({
     inputRange: [first, index, last],
-    outputRange: [height, 0, 0]
+    outputRange: [height, 0, 0],
   });
   const translateX = 0;
 
@@ -111,11 +99,7 @@ const SlideFromBottom = {
   },
 };
 
-function transitionConfig(
-  transitionProps: NavigationTransitionProps,
-  prevTransitionProps: ?NavigationTransitionProps,
-  isModal: boolean,
-): TransitionConfig {
+function transitionConfig(): TransitionConfig {
   return SlideFromBottom;
 }
 
@@ -124,19 +108,19 @@ const config = {
   mode: 'card',
   transparentCard: true,
   cardStyle: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   containerStyle: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   defaultNavigationOptions: {
     header: props => <NavBar {...props} />,
     transparentCard: true,
     cardStyle: {
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
     },
     containerStyle: {
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
     },
   },
 };

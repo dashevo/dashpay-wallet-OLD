@@ -11,9 +11,8 @@ import { createAppContainer, StackRouter, createNavigator } from 'react-navigati
 import { Transitioner } from 'react-navigation-stack';
 import NavBar from 'components/NavBar';
 import routes from './routes';
-
 import MainMenu from './MainMenu';
-import { forVertical } from './config';
+// import { forVertical } from './config';
 
 const styles = StyleSheet.create({
   card: {

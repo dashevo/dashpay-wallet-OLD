@@ -2,11 +2,13 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-// External dependencies
-import { combineReducers } from 'redux';
-
 const UPDATE = 'UPDATE';
+const ENTER = 'ENTER';
+const ENTERING = 'ENTERING';
+const ENTERED = 'ENTERED';
 const EXIT = 'EXIT';
+const EXITING = 'EXITING';
+const EXITED = 'EXITED';
 
 function items(state = [], action, { onEnter, onExit }) {
   switch (action.type) {
@@ -19,7 +21,7 @@ function items(state = [], action, { onEnter, onExit }) {
       const prevKeys = prevItems.map(item => item.key);
       const nextKeys = nextItems.map(item => item.key);
 
-      const enteringKeys = new Set(nextKeys.filter(key => prevKeys.indexOf(key) === -1));
+      // const enteringKeys = new Set(nextKeys.filter(key => prevKeys.indexOf(key) === -1));
       const leavingKeys = new Set(prevKeys.filter(key => nextKeys.indexOf(key) === -1));
 
       nextItems.forEach(({ key, ...item }, index) => {
@@ -28,16 +30,16 @@ function items(state = [], action, { onEnter, onExit }) {
             {},
             { item },
             {
-              status: 'ENTER',
+              status: ENTER,
               key,
               index,
               getTransitionProps: onEnter,
               transitionStart: () => ({
-                type: 'ENTERING',
+                type: ENTERING,
                 payload: key,
               }),
               transitionEnd: () => ({
-                type: 'ENTERED',
+                type: ENTERED,
                 payload: key,
               }),
             },
@@ -56,16 +58,16 @@ function items(state = [], action, { onEnter, onExit }) {
             {},
             { item },
             {
-              status: 'EXIT',
+              status: EXIT,
               index: insertionIndex,
               key,
               getTransitionProps: onExit,
               transitionStart: () => ({
-                type: 'EXITING',
+                type: EXITING,
                 payload: key,
               }),
               transitionEnd: () => ({
-                type: 'EXITED',
+                type: EXITED,
                 payload: key,
               }),
             },
@@ -76,7 +78,7 @@ function items(state = [], action, { onEnter, onExit }) {
       return newState;
     }
 
-    case 'EXITED': {
+    case EXITED: {
       return state.filter(item => item.key !== action.payload);
     }
 

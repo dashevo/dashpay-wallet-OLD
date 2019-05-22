@@ -12,6 +12,9 @@ module.exports = {
       {
         cwd: 'babelrc',
         root: ['./src'],
+        alias: {
+          hooks: './src/hooks',
+        },
       },
     ],
   ],

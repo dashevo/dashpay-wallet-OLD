@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import useTransition from 'hooks/Transition';
 import Transition from './Transition';
@@ -7,6 +7,7 @@ import ConfirmButton from './components/ConfirmButton';
 
 import FailureMessage from './components/FailureMessage';
 import SuccessMessage from './components/SuccessMessage';
+import useStyles from './useStyles';
 
 function delay(ms) {
   return new Promise(res => setTimeout(res, ms));
@@ -28,7 +29,7 @@ function onEnter({ animatedValue }) {
   };
 }
 
-function onChange(props) {
+function onChange() {
   // Props apply for changing elements
   return {};
 }
@@ -58,14 +59,15 @@ const config = {
 const successMessage = [{ key: 'qoke1', getComponet: () => SuccessMessage }];
 const failureMessage = [{ key: 'qoke2', getComponet: () => FailureMessage }];
 
-function Confirm(props) {
-  const [items, setItems] = useState(() => {
-    async function handleOnDone(e) {
-      props.onConfirmation().then(handleSuccess, handleFailure);
-    }
+type ConfirmProps = {
+  onConfirmation: Function,
+  goBack: Function,
+};
 
+function Confirm(props: ConfirmProps) {
+  const styles = useStyles();
+  const [items, setItems] = useState(() => {
     async function handleSuccess() {
-      console.log('__handleSuccess__');
       await delay(3000);
       setItems(successMessage);
       await delay(10000);
@@ -74,7 +76,6 @@ function Confirm(props) {
     }
 
     async function handleFailure() {
-      console.log('__handleFailure__');
       await delay(3000);
       setItems(failureMessage);
       await delay(10000);
@@ -85,6 +86,10 @@ function Confirm(props) {
           onPress: handleOnDone,
         },
       ]);
+    }
+
+    async function handleOnDone() {
+      props.onConfirmation().then(handleSuccess, handleFailure);
     }
 
     return [
@@ -98,8 +103,6 @@ function Confirm(props) {
 
   const transition = useTransition(items, config);
 
-  console.log('transition.items', transition.items);
-
   return (
     <View style={styles.container}>
       {transition.items.map(({ key, ...itemProps }) => (
@@ -108,18 +111,5 @@ function Confirm(props) {
     </View>
   );
 }
-
-const styles = {
-  container: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    height: 50,
-    position: 'relative',
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    overflow: 'hidden',
-    borderRadius: 25,
-  },
-};
 
 export default Confirm;

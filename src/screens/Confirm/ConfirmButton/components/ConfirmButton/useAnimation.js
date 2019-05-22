@@ -12,14 +12,11 @@ const {
   cond,
   eq,
   add,
-  multiply,
-  lessThan,
   spring,
   startClock,
   stopClock,
   clockRunning,
   sub,
-  defined,
   Value,
   Clock,
   event,
@@ -29,7 +26,6 @@ const {
   divide,
   call,
   and,
-  debug,
 } = Animated;
 
 const SWIPE_DISTANCE_MINIMUM = 20;
@@ -75,7 +71,7 @@ function runSpring(clock, value, velocity, dest, callback) {
 
 function useAnimation(props) {
   const { onSwipe } = props;
-  const [state] = useState(() => {
+  const [animation] = useState(() => {
     const clock = new Clock();
 
     const dragX = new Value(0);
@@ -95,7 +91,7 @@ function useAnimation(props) {
     const dest = sub(containerWidth, buttonWidth);
     const snapPoint = cond(greaterThan(translateX, divide(dest, 2)), dest, 0);
 
-    const _translateX = cond(
+    const translateXCond = cond(
       eq(state, State.ACTIVE),
       [
         stopClock(clock),
@@ -109,19 +105,19 @@ function useAnimation(props) {
       ],
     );
 
-    function onLayoutContainer(event) {
-      const { width } = event.nativeEvent.layout;
+    function onLayoutContainer(e) {
+      const { width } = e.nativeEvent.layout;
       containerWidth.setValue(width);
     }
 
-    function onLayoutButton(event) {
-      const { width } = event.nativeEvent.layout;
+    function onLayoutButton(e) {
+      const { width } = e.nativeEvent.layout;
       buttonWidth.setValue(width);
     }
 
-    const __translateX = max(min(dest, _translateX), 0);
+    const translateXFinal = max(min(dest, translateXCond), 0);
 
-    const __bind = {
+    const bind = {
       maxPointers: 1,
       enabled: true,
       activeOffsetX: [-SWIPE_DISTANCE_MINIMUM, SWIPE_DISTANCE_MINIMUM],
@@ -130,23 +126,23 @@ function useAnimation(props) {
       onHandlerStateChange: onGestureEvent,
     };
 
-    const __containerBind = {
+    const container = {
       onLayout: onLayoutContainer,
     };
 
-    const __buttonBind = {
+    const button = {
       onLayout: onLayoutButton,
     };
 
     return {
-      translateX: __translateX,
-      bind: __bind,
-      container: __containerBind,
-      button: __buttonBind,
+      translateX: translateXFinal,
+      bind,
+      container,
+      button,
     };
   });
 
-  return state;
+  return animation;
 }
 
 export default useAnimation;

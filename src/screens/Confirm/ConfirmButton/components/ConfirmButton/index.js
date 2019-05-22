@@ -4,7 +4,7 @@
 
 // External dependencies
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { Text, Image } from 'react-native';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
@@ -13,7 +13,12 @@ import useTranslate from 'hooks/Translate';
 import useAnimation from './useAnimation';
 import useStyles from './useStyles';
 
-function ConfirmButton(props) {
+type ConfirmButtonProps = {
+  onPress: Function,
+};
+
+function ConfirmButton(props: ConfirmButtonProps) {
+  const { onPress } = props;
   const [touched, setTouched] = useState(false);
   const translate = useTranslate();
   const styles = useStyles();
@@ -23,15 +28,14 @@ function ConfirmButton(props) {
   } = useAnimation({
     onSwipe: () => {
       setTouched(true);
-      props.onPress();
+      if (onPress) {
+        onPress();
+      }
     },
   });
 
-  const pulse = null;
-
   return (
     <Animated.View style={styles.container} {...container}>
-      {pulse}
       <PanGestureHandler {...bind} enabled={!touched}>
         <Animated.View style={[styles.button, { transform: [{ translateX }] }]} {...button}>
           <Image

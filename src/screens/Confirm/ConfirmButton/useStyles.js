@@ -7,21 +7,14 @@ import { makeStyles } from 'hooks/Styles';
 
 const styles = () => ({
   container: {
-    alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    height: 50,
+    position: 'relative',
     backgroundColor: 'transparent',
     borderColor: 'transparent',
-    borderRadius: 25,
-    borderWidth: 0,
-    height: 50,
-    justifyContent: 'center',
     overflow: 'hidden',
-    position: 'relative',
-  },
-  text: {
-    color: 'white',
-    marginLeft: 8,
-    marginRight: 8,
-    textAlign: 'center',
+    borderRadius: 25,
   },
 });
 
