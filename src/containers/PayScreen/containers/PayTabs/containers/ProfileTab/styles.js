@@ -7,23 +7,23 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  ['container']: {
+  container: {
     backgroundColor: '#f7f7f7',
     borderColor: '#f7f7f7',
     flexGrow: 1,
-    paddingBottom: 50
+    paddingBottom: 50,
   },
-  ['fieldset']: {
+  fieldset: {
     alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
+    borderColor: '#f7f7f7',
     flex: 1,
     justifyContent: 'center',
-    padding: 32
+    padding: 32,
   },
-  ['row']: {
-    alignSelf: 'stretch'
-  }
+  row: {
+    alignSelf: 'stretch',
+  },
 });
 
 export default styles;

@@ -9,7 +9,7 @@ export default {
   label: 'Dash username',
   maxLength: 25, // @ followed by 24 characters
   multiline: false,
-  name: 'username',
+  name: 'address',
   numberOfLines: 1,
   placeholder: '@',
 };
