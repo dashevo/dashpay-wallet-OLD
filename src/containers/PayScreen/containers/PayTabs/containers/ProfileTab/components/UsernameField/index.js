@@ -30,7 +30,7 @@ function UsernameField(props: Props): React.Element<any> {
               <Input style={styles.input} {...input} />
             </View>
             <View style={styles.row}>
-              <Text style={styles.text}>Dash username</Text>
+              <Text style={styles.text}>Dash Username</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
