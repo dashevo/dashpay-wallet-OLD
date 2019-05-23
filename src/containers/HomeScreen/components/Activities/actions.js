@@ -1,22 +1,18 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
+import {
+  acceptBlockchainContact,
+  rejectBlockchainContact,
+  getPendingContactRequests,
+} from 'state/contacts/blockchain/actions';
 
-import { acceptBlockchainContact } from 'state/contacts/blockchain/actions';
-import { rejectBlockchainContact } from 'state/contacts/blockchain/actions';
-import { getPendingContactRequests } from 'state/contacts/blockchain/actions';
-
-function actions(dispatch: Function): Object {
+function actions(dispatch) {
   return bindActionCreators(
     {
       getPendingContactRequests,
       acceptBlockchainContact,
-      rejectBlockchainContact
+      rejectBlockchainContact,
     },
-    dispatch
+    dispatch,
   );
 }
 

@@ -1,8 +1,6 @@
 // @flow
 import { combineReducers } from 'redux';
 import {
-  SEND_CONTACT_REQUEST_SUCCESS,
-  SEND_CONTACT_REQUEST_FAILURE,
   GET_BLOCKCHAIN_CONTACTS_SUCCESS,
   GET_PENDING_CONTACT_REQUESTS_SUCCESS,
   ACCEPT_BLOCKCHAIN_CONTACT_SUCCESS,
@@ -43,7 +41,8 @@ function requestMapper(name) {
     name,
     address: name,
     image: `https://api.adorable.io/avatars/285/${name}.png`,
-    status: 'PANDING', // This will be fixed with the redux schema
+    timestamp: new Date(), // We cannot get timestamp from DAPI yet
+    status: 'PENDING', // This will be fixed with the redux schema
   };
 }
 
@@ -52,6 +51,7 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
     case GET_PENDING_CONTACT_REQUESTS_SUCCESS:
       return {
         ...state,
+        type: 'pending',
         received: action.response.received.map(requestMapper),
         sent: action.response.sent.map(requestMapper),
       };
@@ -65,20 +65,13 @@ function pendingRequests(state = { received: [], sent: [] }, action) {
         ...state,
         received: state
           .received
-          .filter(request => request.recipient !== action.response.sender.address),
+          .filter(request => request.address !== action.contact),
       };
-    case SEND_CONTACT_REQUEST_SUCCESS:
-      alert('Success');
-      return state;
-    case SEND_CONTACT_REQUEST_FAILURE:
-      alert(`Error: ${action.error.message}`);
-      return state;
 
     default:
       return state;
   }
 }
-
 
 function items(state = [], action) {
   switch (action.type) {

@@ -1,241 +1,75 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
-import * as React from 'react';
-import { TouchableOpacity, Alert } from 'react-native';
-import { ActivityIndicator } from 'react-native';
-import { FormattedDate } from 'react-intl';
-import { FormattedTime } from 'react-intl';
-import { FormattedNumber } from 'react-intl';
-
-// Internal dependencies
-import Button from 'components/Button';
+// @flow
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
 import Card from 'components/Card';
-import Avatar from 'components/Avatar';
 import Touchable from 'components/Touchable';
 import View from 'components/View';
-import Text from 'components/Text';
-import Icon from 'components/Icon';
+import Header from './Header';
+import ActionsBody from './ActionsBody';
+import Footer from './Footer';
+import Loader from './Loader';
+import type { Props } from './types';
 
-function SmallAvatar(props) {
-  return (
-    <Avatar {...props} sm>
-      {({ bind, touched, styles, children }) => (
-        <View style={styles.container}>
-          <View style={styles.body}>{children}</View>
-        </View>
-      )}
-    </Avatar>
-  );
-}
+const TransactionCard = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    acceptBlockchainContact,
+    rejectBlockchainContact,
+    item,
+  } = props;
+  const { address, status } = item;
 
-class TransactionCard extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false
-    };
-  }
-
-  handleAcceptBlockchainContact = e => {
-    const { address } = this.props.item;
-    this.setState({ isLoading: true });
-    this.props
-      .onAcceptBlockchainContact(address)
-      .then(
-        () => this.setState({ isLoading: false }),
-        () => this.setState({ isLoading: false })
-      );
+  const performActionFactory = action => () => {
+    setIsLoading(true);
+    return action(address).then(
+      () => {},
+      error => Alert.alert(`Error: ${error.message}`),
+    ).finally(() => setIsLoading(false));
   };
 
-  handleRejectBlockchainContact = e => {
-    const { address } = this.props.item;
-    const name = address;
+  const handlePressAccept = performActionFactory(acceptBlockchainContact);
+
+  const handlePressReject = () => {
     Alert.alert(
       'Reject Contact Request',
-      `Are you sure you want to reject the contact request from ${
-        name
-      }?`,
+      `Are you sure you want to reject the contact request from ${address}?`,
       [
         {
           text: 'No',
-          onPress: () => {},
-          style: 'cancel'
+          style: 'cancel',
         },
         {
           text: 'Yes',
-          onPress: () => {
-            this.setState({ isLoading: true });
-            this.props
-              .onRejectBlockchainContact(address)
-              .then(
-                () => this.setState({ isLoading: false }),
-                () => this.setState({ isLoading: false })
-              );
-          }
-        }
+          onPress: performActionFactory(rejectBlockchainContact),
+        },
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   };
 
-  render() {
-    const { item } = this.props;
-    const { address } = item;
-    const timestamp = new Date;
-    const name = address;
-    const image = 'https://randomuser.me/api/portraits/men/32.jpg';
-    if (item.type === 'accepted') {
-      return (
-        <Card onPress={() => {}}>
-          {({ bind, touched, styles }) => (
-            <View style={styles.tmp}>
-              <Touchable {...bind}>
-                <View style={styles.container}>
-                  <View style={styles.header}>
-                    <View style={styles.row}>
-                      <View style={styles.avatar}>
-                        <SmallAvatar name={name} image={image} />
-                      </View>
-                      <View style={styles.metadata}>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                          <Text style={styles.title} numberOfLines={1}>
-                            {name}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                          <Text style={styles.subtitle} numberOfLines={1}>
-                            {'Added to Contacts.'}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.footer}>
-                    <FormattedTime
-                      value={timestamp}
-                      year="numeric"
-                      month="long"
-                      day="numeric">
-                      {formattedTime => (
-                        <Text style={styles.small}>
-                          ADDED | {formattedTime}
-                        </Text>
-                      )}
-                    </FormattedTime>
-                  </View>
-                  {this.state.isLoading && (
-                    <View
-                      style={{
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        borderColor: 'rgba(0, 0, 0, 0.5)',
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        top: 0,
-                        borderRadius: 3
-                      }}>
-                      <Text style={styles.small}>loading</Text>
-                    </View>
-                  )}
-                </View>
-              </Touchable>
+  return (
+    <Card onPress={() => {}}>
+      {({ bind, styles }) => (
+        <View style={styles.tmp}>
+          <Touchable {...bind}>
+            <View style={styles.container}>
+              <Header {...item} styles={styles} />
+              {status === 'PENDING' && (
+                <ActionsBody
+                  {...item}
+                  handlePressAccept={handlePressAccept}
+                  handlePressReject={handlePressReject}
+                  styles={styles}
+                />
+              )}
+              <Footer {...item} styles={styles} />
+              {isLoading && (<Loader />)}
             </View>
-          )}
-        </Card>
-      );
-    } else {
-      return (
-        <Card onPress={() => {}}>
-          {({ bind, touched, styles }) => (
-            <View style={styles.tmp}>
-              <Touchable {...bind}>
-                <View style={styles.container}>
-                  <View style={styles.header}>
-                    <View style={styles.row}>
-                      <View style={styles.avatar}>
-                        <SmallAvatar name={name} image={image} />
-                      </View>
-                      <View style={styles.metadata}>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                          <Text style={styles.title} numberOfLines={1}>
-                            {name}
-                          </Text>
-                        </View>
-                        <View style={{ flex: 1, flexDirection: 'row' }}>
-                          <Text style={styles.subtitle} numberOfLines={1}>
-                            {'Wants to be a Contact.'}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.body}>
-                    <View style={styles.row}>
-                      <Button primary full sm>
-                        {({ styles }) => (
-                          <TouchableOpacity
-                            style={styles.container}
-                            onPress={this.handleAcceptBlockchainContact}>
-                            <Text style={styles.text}>Yes</Text>
-                          </TouchableOpacity>
-                        )}
-                      </Button>
-                      <View style={{ width: 16 }} />
-                      <Button secondary full sm>
-                        {({ styles }) => (
-                          <TouchableOpacity
-                            style={styles.container}
-                            onPress={this.handleRejectBlockchainContact}>
-                            <Text style={styles.text}>No</Text>
-                          </TouchableOpacity>
-                        )}
-                      </Button>
-                    </View>
-                  </View>
-                  <View style={styles.footer}>
-                    <FormattedTime
-                      value={timestamp}
-                      year="numeric"
-                      month="long"
-                      day="numeric">
-                      {formattedTime => (
-                        <Text style={styles.small}>
-                          RECEIVED | {formattedTime}
-                        </Text>
-                      )}
-                    </FormattedTime>
-                  </View>
-                  {this.state.isLoading && (
-                    <View
-                      style={{
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: 'rgba(255, 255, 255, 0.75)',
-                        borderColor: 'rgba(255, 255, 255, 0.75)',
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        top: 0,
-                        borderRadius: 3
-                      }}>
-                      <ActivityIndicator size="large" color="#088BE2" />
-                    </View>
-                  )}
-                </View>
-              </Touchable>
-            </View>
-          )}
-        </Card>
-      );
-    }
-  }
-}
+          </Touchable>
+        </View>
+      )}
+    </Card>
+  );
+};
 
 export default TransactionCard;

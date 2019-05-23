@@ -1,4 +1,3 @@
-// @flow
 const middleware = store => next => (action) => {
   const { types } = action;
   let { asyncTask } = action;
@@ -21,10 +20,16 @@ const middleware = store => next => (action) => {
 
   next(actionWith({ type: requestType }));
 
-  const onSuccess = response => next(actionWith({ type: successType, response }));
-  const onFailure = error => next(actionWith({ type: failureType, error }));
-
-  return asyncTask.then(onSuccess, onFailure);
+  return new Promise((resolve, reject) => asyncTask.then(
+    (response) => {
+      next(actionWith({ type: successType, response }));
+      resolve(response);
+    },
+    (error) => {
+      next(actionWith({ type: failureType, error }));
+      reject(error);
+    },
+  ));
 };
 
 export default middleware;

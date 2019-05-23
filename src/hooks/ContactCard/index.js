@@ -14,11 +14,11 @@ function ContactCard({ status, type, ...rest }) {
     return <ContactRequestRejected {...rest} />;
   }
 
-  if (status === 'PANDING' && type === 'RECEIVED') {
+  if (status === 'PENDING' && type === 'RECEIVED') {
     return <ContactRequestReceived {...rest} />;
   }
 
-  if (status === 'PANDING' && type === 'SENT') {
+  if (status === 'PENDING' && type === 'SENT') {
     return <ContactRequestSent {...rest} />;
   }
 
