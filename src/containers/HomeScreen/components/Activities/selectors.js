@@ -7,12 +7,10 @@ export default createSelector(
   selectTransactions,
   receivedContactRequestsSelector,
   (transactions, receivedContactRequests) => {
-    let activity = transactions.map(item => ({ type: 'wallet', data: item, time: item.timestamp }));
-
-    activity = activity.concat(
-      receivedContactRequests.map(item => ({ type: 'social', data: item, time: new Date() })),
-    );
-    activity = activity.sort((a, b) => b.time - a.time);
+    const activity = [
+      ...transactions.map(data => ({ type: 'wallet', data })),
+      ...receivedContactRequests.map(data => ({ type: 'social', data })),
+    ].sort((a, b) => b.data.timestamp - a.data.timestamp);
 
     return {
       activity,
