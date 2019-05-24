@@ -22,6 +22,7 @@ const routes = {
     navigationOptions: {
       header: false,
       title: 'Developer Menu',
+      dapiPollingInterval: null,
     },
   },
   HomeScreen: {
@@ -43,6 +44,7 @@ const routes = {
     navigationOptions: {
       header: false,
       title: 'Registration',
+      dapiPollingInterval: null,
     },
   },
   CameraRollScreen: {
@@ -78,6 +80,7 @@ const routes = {
     navigationOptions: {
       header: false,
       title: 'Pay',
+      dapiPollingInterval: 1000,
     },
   },
   ErrorScreen: {
