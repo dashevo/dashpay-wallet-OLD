@@ -26,7 +26,7 @@ function ContactRequestReceived({
         </View>
         <View style={styles.center}>
           <Text style={styles.title}>{sender.displayName}</Text>
-          <Text style={styles.subtitle}>{translate('Wants to be a Contacts')}</Text>
+          <Text style={styles.subtitle}>{translate('Wants to be a Contact')}</Text>
         </View>
       </View>
       <View style={styles.body}>
