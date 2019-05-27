@@ -3,7 +3,7 @@ import Field from 'components/Field';
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
-import CurrencyInput from 'hooks/CurrencyInput';
+import AmountInput from 'hooks/AmountInput';
 import fieldStyles from './styles';
 
 function AmountField(props): React.Element<any> {
@@ -32,7 +32,7 @@ function AmountField(props): React.Element<any> {
                 <Icon style={styles.icon} name="dash" />
               </View>
               <View style={styles.right}>
-                <CurrencyInput
+                <AmountInput
                   {...input}
                   placeholderTextColor={theme.fieldInputColor}
                   onChangeText={handleChangeText}
@@ -65,12 +65,12 @@ function AmountField(props): React.Element<any> {
                 <Icon style={styles.icon} name="usd" />
               </View>
               <View style={styles.right}>
-                <CurrencyInput
+                <AmountInput
                   {...input}
                   placeholderTextColor={theme.fieldInputColor}
                   onChangeText={handleChangeText}
-                  maximumFractionDigits={2}
-                  onSubmit={form.submitForm}
+                  precision={2}
+                  onSubmitEditing={form.submitForm}
                   style={styles.input}
                 />
               </View>

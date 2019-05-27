@@ -5,8 +5,8 @@ export type Props = {
   i18n: {
     formatNumber: Function,
   },
-  maximumFractionDigits: ?number,
+  precision: ?number,
   onChangeText: Function,
   getRef: ?Function,
-  onSubmit: ?Function,
+  onSubmitEditing: ?Function,
 };
