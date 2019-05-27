@@ -22,7 +22,7 @@ const Header = ({
         </View>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={styles.subtitle} numberOfLines={1}>
-            {type === 'accepted' ? 'Added to Contacts' : 'Wants to be a Contact.'}
+            {type === 'accepted' ? 'Added to Contacts' : 'Wants to be a Contact'}
           </Text>
         </View>
       </View>
