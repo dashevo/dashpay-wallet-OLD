@@ -2,7 +2,7 @@ import * as ActionsTypes from './constants';
 
 export const initialState = {
   network: 'testnet',
-  username: 'DashPayTeam',
+  username: 'dashpayteam',
   isRegisterRequestSent: false,
   mnemonic: 'light point battle foam find motion true because genre people banana fit',
   unusedAddress: '',

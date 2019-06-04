@@ -3,9 +3,15 @@
  *
  * @flow
  */
-import { createStore, compose } from 'redux';
-import { createLogger } from 'redux-logger';
+import { createStore, compose, applyMiddleware } from 'redux';
+
+import thunk from 'redux-thunk';
+
+import { Wallet } from '@dashevo/wallet-lib';
+import DAPIClient from '@dashevo/dapi-client';
+import DashPayDAP from '@dashevo/dashpay-dap';
 import reducer from './reducer';
+import middleware from './middleware';
 
 export * from './contacts';
 export * from './transactions';
@@ -15,30 +21,22 @@ export * from './language';
 export * from './payment';
 export * from './account';
 
-import thunk from 'redux-thunk';
-import middleware from './middleware';
-import { applyMiddleware } from 'redux';
-
-import { Wallet } from '@dashevo/wallet-lib';
-import DAPIClient from '@dashevo/dapi-client';
-import DashPayDAP from '@dashevo/dashpay-dap';
-
 //
 // // Tmp
 const transport = new DAPIClient({
-  seeds: [{ ip: '54.187.113.35', port: 3000 }],
+  seeds: [{ service: '18.237.69.61:3000' }],
   timeout: 20000,
-  retries: 5
+  retries: 5,
 });
 
-let walletLib = {
+const walletLib = {
   wallet: null,
   account: null,
   initializeWallet(opts) {
     const { mnemonic, username, network } = opts;
     const accountId = opts.accountId || 0;
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const dpd = new DashPayDAP({ username });
 
       walletLib.wallet = new Wallet({
@@ -46,7 +44,7 @@ let walletLib = {
         mnemonic,
         plugins: [dpd],
         allowSensitiveOperations: true,
-        transport
+        transport,
       });
 
       walletLib.account = walletLib.wallet.getAccount({ index: accountId });
@@ -54,7 +52,7 @@ let walletLib = {
         resolve(true);
       });
     });
-  }
+  },
 };
 
 // the following code should be splitted into two files:
@@ -65,7 +63,9 @@ const enhancedMiddleware = applyMiddleware(
   extraArgument,
 );
 let composeEnhancers = compose;
+// eslint-disable-next-line no-undef,no-underscore-dangle
 if (__DEV__ && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
+// eslint-disable-next-line no-undef,no-underscore-dangle
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 }
 const enhancer = composeEnhancers(enhancedMiddleware);
