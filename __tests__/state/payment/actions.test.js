@@ -1,11 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @wolf
- */
-
 import { MAKE_PAYMENT } from 'state/payment/constants';
-import { makePayment } from 'state';
+import { makePayment } from 'state/payment/actions';
 
 describe('payment actions', () => {
   it('should create an action to start a new payment', () => {
@@ -14,7 +8,7 @@ describe('payment actions', () => {
     const expectedAction = {
       recipient,
       amount,
-      type: MAKE_PAYMENT
+      type: MAKE_PAYMENT,
     };
     expect(makePayment(recipient, amount)).toEqual(expectedAction);
   });
