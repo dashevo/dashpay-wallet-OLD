@@ -1,15 +1,9 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @wolf
- */
-
 import { CHANGE_SETTINGS } from 'state/settings/constants';
-import { changeSettings } from 'state';
+import { changeSettings } from 'state/settings/actions';
 
 describe('settings actions', () => {
   it('should create an action to set the new settings', () => {
-    const settings = { balanceVisible: true }
+    const settings = { balanceVisible: true };
     const expectedAction = {
       settings,
       type: CHANGE_SETTINGS,
