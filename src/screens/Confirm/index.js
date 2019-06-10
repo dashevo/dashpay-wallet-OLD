@@ -3,7 +3,7 @@
  */
 
 // External dependencies
-import React, { useCallback } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import Animated from 'react-native-reanimated';
@@ -23,8 +23,6 @@ const { interpolate } = Animated;
 type ConfirmProps = {
   navigation: Object,
 };
-
-const ONCE = [];
 
 function Confirm(props: ConfirmProps) {
   const navigation = useNavigation(props);
@@ -77,10 +75,6 @@ function Confirm(props: ConfirmProps) {
   function handleBack() {
     goBack();
   }
-
-  // const handleRequest = useCallback(() => {}, ONCE);
-  // const handleSuccess = useCallback(() => {}, ONCE);
-  // const handleFailure = useCallback(() => {}, ONCE);
 
   function handleRequest() {}
 
