@@ -12,8 +12,8 @@ const initialState = {
   ongoingTransaction: {
     recipient: '',
     amount: 0,
-    currency: 'DASH'
-  }
+    currency: 'DASH',
+  },
 };
 
 describe('transactions reducer', () => {
@@ -24,7 +24,7 @@ describe('transactions reducer', () => {
   it('should handle GET_TRANSACTIONS_SUCCESS', () => {
     const response = [{ txid: 'test1' }, { txid: 'test2' }];
     expect(
-      reducer(undefined, { type: GET_TRANSACTIONS_SUCCESS, response })
+      reducer(undefined, { type: GET_TRANSACTIONS_SUCCESS, response }),
     ).toEqual({ ...initialState, history: response });
   });
 });

@@ -1,10 +1,10 @@
 // @flow
+import type Navigation from 'types/navigation';
+
 export type Props = {
   username: string,
   isSubmitting: boolean,
-  navigation: {
-    reset: Function,
-  },
+  navigation: Navigation,
 };
 
 export type FormValues = {

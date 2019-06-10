@@ -1,11 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { createSelector } from 'reselect';
-import { selectLanguage } from 'state';
+import { languageSelector } from 'state/language/selectors';
 
-const selector = createSelector(selectLanguage, locale => ({ locale }));
-
-export default selector;
+export default createSelector(languageSelector, locale => ({ locale }));

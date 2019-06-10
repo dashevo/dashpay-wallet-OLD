@@ -1,38 +1,31 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import { createStore, compose, applyMiddleware } from 'redux';
-
 import thunk from 'redux-thunk';
-
+import {
+  createStore,
+  compose,
+  applyMiddleware,
+} from 'redux';
 import { Wallet } from '@dashevo/wallet-lib';
 import DAPIClient from '@dashevo/dapi-client';
 import DashPayDAP from '@dashevo/dashpay-dap';
 import reducer from './reducer';
 import middleware from './middleware';
 
-export * from './contacts';
-export * from './transactions';
-export * from './actions';
-export * from './settings';
-export * from './language';
-export * from './payment';
-export * from './account';
-
-//
-// // Tmp
+// Tmp
+const seeds = [
+  '18.237.69.61',
+  '18.236.234.255',
+  '34.222.93.218',
+].map(ip => ({ service: `${ip}:3000` }));
 const transport = new DAPIClient({
-  seeds: [{ service: '18.237.69.61:3000' }],
-  timeout: 20000,
+  seeds,
+  timeout: 10000,
   retries: 5,
 });
 
 const walletLib = {
   wallet: null,
   account: null,
-  initializeWallet(opts) {
+  initializeWallet: (opts) => {
     const { mnemonic, username, network } = opts;
     const accountId = opts.accountId || 0;
 
@@ -49,6 +42,7 @@ const walletLib = {
 
       walletLib.account = walletLib.wallet.getAccount({ index: accountId });
       walletLib.account.events.on('ready', () => {
+        walletLib.account.dashPayDap = walletLib.account.getDAP('dashpaydap');
         resolve(true);
       });
     });
@@ -63,11 +57,11 @@ const enhancedMiddleware = applyMiddleware(
   extraArgument,
 );
 let composeEnhancers = compose;
-// eslint-disable-next-line no-undef,no-underscore-dangle
+/* eslint-disable */
 if (__DEV__ && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-// eslint-disable-next-line no-undef,no-underscore-dangle
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 }
+/* eslint-enable */
 const enhancer = composeEnhancers(enhancedMiddleware);
 const store = createStore(reducer, enhancer);
 export default store;

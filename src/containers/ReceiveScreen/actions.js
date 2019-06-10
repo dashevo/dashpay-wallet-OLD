@@ -1,12 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
-import { getUnusedAddress } from 'state';
+import { getUnusedAddress } from 'state/account/actions';
 
-function actions(dispatch: Function): Object {
+function actions(dispatch) {
   return bindActionCreators({ getUnusedAddress }, dispatch);
 }
 

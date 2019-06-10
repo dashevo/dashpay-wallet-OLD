@@ -1,9 +1,10 @@
+// @flow
+import type Navigation from 'types/navigation';
+
 export type Props = {
-  getPendingContactRequests: Function,
-  acceptBlockchainContact: Function,
-  rejectBlockchainContact: Function,
+  getPendingRequests: Function,
+  acceptRequest: Function,
+  rejectRequest: Function,
   activity: Array,
-  navigation: {
-    navigate: Function,
-  },
+  navigation: Navigation,
 }

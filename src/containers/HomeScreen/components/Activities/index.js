@@ -15,15 +15,15 @@ import type { Props } from './types';
 
 const Transactions = (props: Props) => {
   const {
-    getPendingContactRequests,
-    acceptBlockchainContact,
-    rejectBlockchainContact,
+    getPendingRequests,
+    acceptRequest,
+    rejectRequest,
     activity,
     navigation: navigate,
   } = props;
 
   useEffect(() => {
-    getPendingContactRequests();
+    getPendingRequests();
   }, []);
 
   return (
@@ -36,8 +36,8 @@ const Transactions = (props: Props) => {
             case 'social':
               return (
                 <SocialTransactionCard
-                  acceptBlockchainContact={acceptBlockchainContact}
-                  rejectBlockchainContact={rejectBlockchainContact}
+                  acceptRequest={acceptRequest}
+                  rejectRequest={rejectRequest}
                   item={item.data}
                 />
               );

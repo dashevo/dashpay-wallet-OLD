@@ -1,5 +1,5 @@
 // @flow
-import type NavigationProps from 'types/navigation';
+import type { NavigationProps } from 'types/navigation';
 import PayScreen from '../containers/PayScreen';
 import PayTabs from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';

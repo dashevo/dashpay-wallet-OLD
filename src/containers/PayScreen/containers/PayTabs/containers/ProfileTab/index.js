@@ -1,14 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-
-// Internal dependencies
 import ScrollView from 'components/ScrollView';
 import Form from 'components/Form';
 import View from 'components/View';
@@ -16,17 +8,12 @@ import Toggle from 'components/Toggle';
 import AutoSubmit from 'components/AutoSubmit';
 import ColorField from './components/ColorField';
 import ImageField from './components/ImageField';
-import NameField from './components/NameField';
 import UsernameField from './components/UsernameField';
 import SendRequestButton from './components/SendRequestButton';
 import defaults from './defaults';
 import selector from './selectors';
-import actions from './actions';
 import styles from './styles';
-import {
-  Props,
-  State,
-} from './types';
+import type { State, Props } from './types';
 
 class ProfileTab extends React.Component<Props, State> {
   static defaultProps = defaults;
@@ -37,12 +24,10 @@ class ProfileTab extends React.Component<Props, State> {
     const {
       initialValues,
       validationSchema,
-      updateLocalContact,
-      deleteLocalContact,
     } = props;
 
-    this.onSubmit = values => updateLocalContact(values);
-    this.onDelete = values => deleteLocalContact(values);
+    this.onSubmit = () => { throw Error('Not implemented'); };
+    this.onDelete = () => { throw Error('Not implemented'); };
 
     this.state = {
       validationSchema,
@@ -80,11 +65,6 @@ class ProfileTab extends React.Component<Props, State> {
                 )}
                 {on && (
                   <View style={styles.row}>
-                    <NameField />
-                  </View>
-                )}
-                {on && (
-                  <View style={styles.row}>
                     <UsernameField />
                   </View>
                 )}
@@ -100,7 +80,4 @@ class ProfileTab extends React.Component<Props, State> {
   }
 }
 
-export default connect(
-  selector,
-  actions,
-)(ProfileTab);
+export default connect(selector)(ProfileTab);

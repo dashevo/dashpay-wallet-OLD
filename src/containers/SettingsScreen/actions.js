@@ -1,12 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
-import { changeBalanceVisible } from 'state';
+import { changeBalanceVisible } from 'state/settings/actions';
 
-function actions(dispatch: Function): Object {
+function actions(dispatch) {
   return bindActionCreators({ changeBalanceVisible }, dispatch);
 }
 

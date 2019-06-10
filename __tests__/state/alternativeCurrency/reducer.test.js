@@ -2,7 +2,7 @@ import {
   CHANGE_ALTERNATIVE_CURRENCY,
   INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
   ALTERNATIVE_CURRENCY_RATE_REQUEST,
-  ALTERNATIVE_CURRENCY_RATE_SUCCESS
+  ALTERNATIVE_CURRENCY_RATE_SUCCESS,
 } from 'state/alternativeCurrency/constants';
 import reducer from 'state/alternativeCurrency/reducer';
 import mockDate from 'mockdate';
@@ -29,7 +29,7 @@ describe('alternativeCurrency reducer', () => {
 
   it('should handle CHANGE_ALTERNATIVE_CURRENCY', () => {
     const alternativeCurrency = { code: 'EUR', name: 'Euro', symbol: '€' };
-    const payload = { ...alternativeCurrency, type: CHANGE_ALTERNATIVE_CURRENCY};
+    const payload = { ...alternativeCurrency, type: CHANGE_ALTERNATIVE_CURRENCY };
     const expectedState = {
       ...initialState,
       ...alternativeCurrency,

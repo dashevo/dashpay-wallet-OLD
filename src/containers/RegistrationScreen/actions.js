@@ -1,5 +1,5 @@
 import { bindActionCreators } from 'redux';
-import { register } from 'state';
+import { register } from 'state/account/actions';
 
 function actions(dispatch) {
   return bindActionCreators({ register }, dispatch);

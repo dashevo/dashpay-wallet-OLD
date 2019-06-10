@@ -3,9 +3,8 @@ import { createSelector } from 'reselect';
 import { sortBy } from 'lodash';
 import {
   filterParamsSelector,
-  blockchainContactsSelector,
-  localContactsSelector,
-  receivedContactRequestsUsernamesSelector,
+  contactsSelector,
+  receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
 } from 'state/contacts/selectors';
 import { searchResultsSelector } from 'state/profiles/selectors';
@@ -26,13 +25,12 @@ const filterAndSort = (items: Array<any>, filterParams) => {
 
 export default createSelector(
   filterParamsSelector,
-  blockchainContactsSelector,
-  localContactsSelector,
+  contactsSelector,
   searchResultsSelector,
-  receivedContactRequestsUsernamesSelector,
+  receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
-  (filterParams: any, blockchainContacts: Array<any>,
-    localContacts: Array<any>, profiles: Array<any>,
+  (filterParams: any, contacts: Array<any>,
+    profiles: Array<any>,
     receivedContactRequestsUsernames: Array<any>,
     sentContactRequestsUsernames: Array<any>) => {
     let blockchainProfiles;
@@ -49,23 +47,19 @@ export default createSelector(
     } else {
       blockchainProfiles = [];
     }
-    const contacts = [
+    const lists = [
       {
         title: 'Blockchain contacts',
-        data: filterAndSort(blockchainContacts, filterParams),
+        data: filterAndSort(contacts, filterParams),
       },
       {
         title: 'Blockchain profiles',
         data: blockchainProfiles,
       },
-      {
-        title: 'Local contacts',
-        data: filterAndSort(localContacts, filterParams),
-      },
     ].filter(contactList => contactList.data.length);
 
     return {
-      contacts,
+      contacts: lists,
       filterParams,
     };
   },

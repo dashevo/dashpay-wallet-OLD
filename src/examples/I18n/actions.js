@@ -1,13 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
-import { changeLocale } from 'state';
+import { changeLocale } from 'state/language/actions';
 
-function actions(dispatch: Function): Object {
-  return bindActionCreators({ changeLocale }, dispatch);
-}
-
-export default actions;
+export default dispatch => bindActionCreators({ changeLocale }, dispatch);

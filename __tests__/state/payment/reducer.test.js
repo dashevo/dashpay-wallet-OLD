@@ -1,10 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @wolf
- */
-
- import { MAKE_PAYMENT } from 'state/payment/constants';
+import { MAKE_PAYMENT } from 'state/payment/constants';
 import reducer from 'state/payment/reducer';
 
 describe('payment reducer', () => {
@@ -14,6 +8,7 @@ describe('payment reducer', () => {
 
   it('should handle MAKE_PAYMENT', () => {
     const payload = { recipient: 'recipient', amount: 22 };
-    expect(reducer(undefined, { type: MAKE_PAYMENT, ...payload })).toEqual({ ...payload, isInProgress: true });
-  })
+    expect(reducer(undefined, { type: MAKE_PAYMENT, ...payload }))
+      .toEqual({ ...payload, isInProgress: true });
+  });
 });

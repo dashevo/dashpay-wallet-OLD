@@ -1,7 +1,27 @@
+import { isArray, isObject } from 'lodash';
+
+const extractStatusTypes = (types) => {
+  if (!isObject(types)) {
+    throw new Error('types is not an Object');
+  }
+  if (isArray(types)) {
+    const [requestType, successType, failureType] = types;
+    return {
+      requestType,
+      successType,
+      failureType,
+    };
+  }
+  return {
+    requestType: types.REQUEST,
+    successType: types.SUCCESS,
+    failureType: types.FAILURE,
+  };
+};
+
 const middleware = store => next => (action) => {
   const { types } = action;
   let { asyncTask } = action;
-
   if (typeof asyncTask === 'undefined') {
     return next(action);
   }
@@ -10,7 +30,12 @@ const middleware = store => next => (action) => {
     asyncTask = asyncTask(store.getState());
   }
 
-  const [requestType, successType, failureType] = types;
+  const {
+    requestType,
+    successType,
+    failureType,
+  } = extractStatusTypes(types);
+
   const actionWith = (data) => {
     const finalAction = Object.assign({}, action, data);
     delete finalAction.asyncTask;

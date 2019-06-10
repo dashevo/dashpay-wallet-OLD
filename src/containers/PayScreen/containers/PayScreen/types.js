@@ -1,7 +1,5 @@
 // @flow
-export type Props = {
-  navigation: {
-    replace: Function
-  },
-};
+import type { NavigationProps } from 'types/navigation';
+
+export type Props = NavigationProps;
 export type State = {};

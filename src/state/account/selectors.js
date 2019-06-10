@@ -2,14 +2,26 @@ import { createSelector } from 'reselect';
 
 export const accountSelector = ({ account }) => account;
 
-export const balanceSelector = createSelector(accountSelector, ({ balance }) => balance);
+export const balanceSelector = createSelector(
+  accountSelector,
+  ({ balance }) => balance,
+);
 
-export const mnemonicSelector = createSelector(accountSelector, ({ mnemonic }) => mnemonic);
+export const mnemonicSelector = createSelector(
+  accountSelector,
+  ({ mnemonic }) => mnemonic,
+);
 
-export const usernameSelector = createSelector(accountSelector, ({ username }) => username);
+export const usernameSelector = createSelector(
+  accountSelector,
+  ({ username }) => username,
+);
 
-export const currentUserSelector = ({ account }) => ({
-  username: account.username,
-  address: account.username,
-  image: `https://api.adorable.io/avatars/285/${account.username}.png`,
-});
+export const currentUserSelector = createSelector(
+  accountSelector,
+  ({ username }) => ({
+    username,
+    address: username,
+    image: `https://api.adorable.io/avatars/285/${username}.png`,
+  }),
+);

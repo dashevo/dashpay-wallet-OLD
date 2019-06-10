@@ -1,16 +1,16 @@
 import { bindActionCreators } from 'redux';
 import {
-  acceptBlockchainContact,
-  rejectBlockchainContact,
-  getPendingContactRequests,
-} from 'state/contacts/blockchain/actions';
+  acceptRequest,
+  rejectRequest,
+  getPendingRequests,
+} from 'state/contacts/actions';
 
 function actions(dispatch) {
   return bindActionCreators(
     {
-      getPendingContactRequests,
-      acceptBlockchainContact,
-      rejectBlockchainContact,
+      getPendingRequests,
+      acceptRequest,
+      rejectRequest,
     },
     dispatch,
   );

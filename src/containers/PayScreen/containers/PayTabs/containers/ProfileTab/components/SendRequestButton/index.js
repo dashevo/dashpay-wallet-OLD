@@ -7,8 +7,8 @@ import Button from 'components/Button';
 import actions from './actions';
 import Types from './types';
 
-const SendRequestButton = ({ address, sendContactRequest }: Types) => (
-  <Button onPress={() => sendContactRequest(address)}>
+const SendRequestButton = ({ address, sendRequest }: Types) => (
+  <Button onPress={() => sendRequest(address)}>
     {({ bind, styles }) => (
       <TouchableOpacity style={styles.container} {...bind}>
         <Text style={styles.text}>Send Request</Text>

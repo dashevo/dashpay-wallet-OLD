@@ -1,11 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { createSelector } from 'reselect';
-import { selectSettings } from 'state';
+import { settingsSelector } from 'state/settings/selectors';
 
 export default createSelector(
-  selectSettings, ({ balanceVisible }) => ({ balanceVisible })
+  settingsSelector, ({ balanceVisible }) => ({ balanceVisible }),
 );
