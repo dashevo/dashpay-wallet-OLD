@@ -76,11 +76,17 @@ function Confirm(props: ConfirmProps) {
     goBack();
   }
 
-  function handleRequest() {}
+  function handleRequest() {
+    return onConfirmation();
+  }
 
-  function handleSuccess() {}
+  function handleSuccess() {
+    goBack();
+  }
 
-  function handleFailure() {}
+  function handleFailure() {
+    goBack();
+  }
 
   return (
     <View style={styles.container}>

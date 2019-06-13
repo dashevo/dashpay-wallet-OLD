@@ -54,16 +54,15 @@ class PayTab extends React.Component<Props, State> {
       toAvatar: { uri: receiver.image },
       fromAvatar: { uri: sender.image },
       onConfirmation: () => {
-        createSendPaymentTransaction({
+        form.resetForm();
+        return createSendPaymentTransaction({
           // Tmp this will be fixed with new schema
           dashAmount: values.dashAmount,
           fiatAmount: values.fiatAmount,
 
           recipient: values.recipient,
           amount: values.dashAmount,
-        }).then(console.log, console.log);
-        form.resetForm();
-        navigation.goBack(null);
+        });
       },
     });
   };

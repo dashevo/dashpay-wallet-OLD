@@ -6,20 +6,21 @@
 import { makeStyles } from 'hooks/Styles';
 
 const styles = () => ({
-  confirmButtonInner: {
+  container: {
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     borderColor: 'rgba(0, 0, 0, 0.3)',
     borderRadius: 28,
+    height: 56,
     padding: 3,
   },
-  container: {
+  inner: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     overflow: 'hidden',
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
-    borderColor: 'rgba(0, 0, 0, 0.25)',
     borderRadius: 25,
-    borderWidth: 0,
-    height: 50,
     position: 'relative',
+    flexGrow: 1,
+    height: 50,
   },
   button: {
     alignItems: 'center',
