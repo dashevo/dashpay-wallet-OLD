@@ -2,7 +2,7 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-// External dependenciesimport React from 'react';
+// External dependencies
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
