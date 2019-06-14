@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import Touchable from 'components/Touchable';
 import Field from 'components/Field';
 import Avatar from 'components/Avatar';
 import View from 'components/View';
