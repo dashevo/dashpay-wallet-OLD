@@ -18,6 +18,7 @@ import CameraRollScreen from 'containers/CameraRollScreen';
 import CameraScreen from 'containers/CameraScreen';
 import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
 import Activities from 'screens/Activities';
+import Confirm from 'screens/Confirm';
 
 const routes = {
   DeveloperMenuScreen: {
@@ -116,6 +117,13 @@ const routes = {
     navigationOptions: {
       header: false,
       title: 'Settings Alternative Currency',
+    },
+  },
+  Confirm: {
+    screen: Confirm,
+    navigationOptions: {
+      header: false,
+      title: 'Confirm',
     },
   },
 };

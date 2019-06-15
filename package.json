@@ -11,8 +11,9 @@
   },
   "dependencies": {
     "@dashevo/dapi-client": "github:dashevo/dapi-client#v0.5.0",
-    "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap#feat/porto-js",
-    "@dashevo/wallet-lib": "github:dashevo/wallet-lib#feat/porto",
+    "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap",
+    "@dashevo/wallet-lib": "github:dashevo/wallet-lib",
+    "@xstate/react": "^0.6.1",
     "assert": "^1.1.1",
     "asyncstorage-down": "^4.1.2",
     "crypto": "^1.0.1",
@@ -52,6 +53,7 @@
     "string_decoder": "^1.2.0",
     "url": "^0.10.3",
     "vm-browserify": "0.0.4",
+    "xstate": "^4.6.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {

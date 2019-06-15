@@ -3,6 +3,8 @@
  *
  * @flow
  */
+import { Dimensions } from 'react-native';
+
 export { default as COLORS } from './colors';
 export { default as THEMES } from './theming';
 export { default as LENGTHS } from './lengths';
@@ -11,8 +13,4 @@ export { default as TXTYPES } from './txtypes';
 
 export * from './defaults';
 
-// TMP
-export const CURRENCIES = {
-  DASH: { code: 'DASH', name: 'DASH' },
-  USD: { code: 'USD', name: 'US Dollar' }
-};
+export const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');
