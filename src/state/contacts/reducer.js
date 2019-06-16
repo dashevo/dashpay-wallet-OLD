@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import blockchain from './blockchain/reducer';
-import local from './local/reducer';
 import {
-  SET_FILTER,
-  CLEAR_FILTER,
-} from './constants';
+  CONTACTS_SET_FILTER,
+  CONTACTS_CLEAR_FILTER,
+  CONTACTS_GET_CONTACTS_ASYNC,
+  CONTACTS_ACCEPT_REQUEST_ASYNC,
+  CONTACTS_REJECT_REQUEST_ASYNC,
+  CONTACTS_GET_PENDING_REQUESTS_ASYNC,
+} from 'state/action-types';
 
 const itinialFilterParams = {
   query: '',
@@ -15,14 +17,14 @@ const itinialFilterParams = {
 export function filterParams(state = itinialFilterParams, action) {
   let isActive;
   switch (action.type) {
-    case SET_FILTER:
+    case CONTACTS_SET_FILTER:
       isActive = itinialFilterParams.query !== action.filterParams.query;
       return {
         ...itinialFilterParams,
         ...action.filterParams,
         isActive,
       };
-    case CLEAR_FILTER:
+    case CONTACTS_CLEAR_FILTER:
       return { ...itinialFilterParams };
 
     default:
@@ -30,8 +32,86 @@ export function filterParams(state = itinialFilterParams, action) {
   }
 }
 
+const receivedRequest = (state, action) => {
+  const updateStateOnlyForCurrentRequest = (newState) => {
+    if (state.address === action.address) {
+      return {
+        ...state,
+        timestamp: new Date(),
+        ...newState,
+      };
+    }
+    return state;
+  };
+  switch (action.type) {
+    case CONTACTS_ACCEPT_REQUEST_ASYNC.SUCCESS:
+      // This will be fixed with the redux schema. type vs status.
+      return updateStateOnlyForCurrentRequest({
+        type: 'accepted',
+        status: 'ACCEPTED',
+      });
+    case CONTACTS_REJECT_REQUEST_ASYNC.SUCCESS:
+      return updateStateOnlyForCurrentRequest({
+        type: 'rejected',
+        status: 'REJECTED',
+      });
+
+    default:
+      return state;
+  }
+};
+
+const requestMapper = name => ({
+  name,
+  address: name,
+  image: `https://api.adorable.io/avatars/285/${name}.png`,
+  timestamp: new Date(), // We cannot get timestamp from DAPI yet
+  status: 'PENDING', // This will be fixed with the redux schema
+});
+
+const pendingRequests = (state = { received: [], sent: [] }, action) => {
+  switch (action.type) {
+    case CONTACTS_GET_PENDING_REQUESTS_ASYNC.SUCCESS:
+      return {
+        ...state,
+        type: 'pending',
+        received: action.response.received.map(requestMapper),
+        sent: action.response.sent.map(requestMapper),
+      };
+    case CONTACTS_ACCEPT_REQUEST_ASYNC.SUCCESS:
+      return {
+        ...state,
+        received: state.received.map(request => receivedRequest(request, action)),
+      };
+    case CONTACTS_REJECT_REQUEST_ASYNC.SUCCESS:
+      return {
+        ...state,
+        received: state
+          .received
+          .filter(request => request.address !== action.contact),
+      };
+
+    default:
+      return state;
+  }
+};
+
+const items = (state = [], action) => {
+  switch (action.type) {
+    case CONTACTS_GET_CONTACTS_ASYNC.SUCCESS:
+      return Object.keys(action.response).map(name => ({
+        name,
+        address: name,
+        isContact: true,
+        image: `https://api.adorable.io/avatars/285/${name}.png`,
+      }));
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  pendingRequests,
+  items,
   filterParams,
-  blockchain,
-  local,
 });

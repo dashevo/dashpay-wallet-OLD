@@ -13,8 +13,8 @@ type Styles = {
 
 export type Props = {
   item: Item,
-  acceptBlockchainContact: ?Function,
-  rejectBlockchainContact: ?Function,
+  acceptRequest: ?Function,
+  rejectRequest: ?Function,
 };
 
 export type ItemWithStylesProps = Item & Styles;

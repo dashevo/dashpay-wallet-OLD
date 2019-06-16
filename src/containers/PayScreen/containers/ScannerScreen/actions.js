@@ -1,10 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
-import { transactionRecipientScanned } from 'state';
+import { transactionRecipientScanned } from 'state/transactions/actions';
 
 function actions(dispatch: Function): Object {
   return bindActionCreators({ transactionRecipientScanned }, dispatch);

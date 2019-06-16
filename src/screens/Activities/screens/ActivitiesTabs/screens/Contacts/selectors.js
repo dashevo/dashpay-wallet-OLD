@@ -1,21 +1,14 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import { createSelector } from 'reselect';
 import moment from 'moment';
-
-// Internal dependencies
 import {
-  receivedContactRequestsSelector,
-  sentContactRequestsSelector,
+  receivedRequestsSelector,
+  sentRequestsSelector,
 } from 'state/contacts/selectors';
 import { currentUserSelector } from 'state/account/selectors';
 
 export default createSelector(
-  receivedContactRequestsSelector,
-  sentContactRequestsSelector,
+  receivedRequestsSelector,
+  sentRequestsSelector,
   currentUserSelector,
   (receivedContactRequests, sentContactRequests, currentUser) => {
     const received = receivedContactRequests.map(item => ({

@@ -1,19 +1,20 @@
-// @flow
+import { createSelector } from 'reselect';
 import { contactSelectorFactory } from 'state/contacts/selectors';
 
-function mapStateToProps(state, props) {
-  const address = props.navigation.getParam('recipient', '');
-  const contact = contactSelectorFactory(address)(state) || {};
-  const { name = '', image = '' } = contact;
-  const initialValues = {
-    address,
-    name,
-    image,
-  };
+const addressSelector = (state, props) => props.navigation.getParam('recipient', '');
 
-  return {
-    initialValues,
-  };
-}
-
-export default mapStateToProps;
+export default createSelector(
+  addressSelector,
+  contactSelectorFactory,
+  (address, contactSelector) => {
+    const contact = contactSelector(address) || {};
+    const { name = '', image = '' } = contact;
+    return {
+      initialValues: {
+        address,
+        name,
+        image,
+      },
+    };
+  },
+);

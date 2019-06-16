@@ -1,7 +1,9 @@
 import { NavigationState, NavigationScreenProp } from 'react-navigation';
 
-type Props = {
-  navigation: NavigationScreenProp<NavigationState>
-};
+type Navigation = NavigationScreenProp<NavigationState>;
 
-export default Props;
+export type NavigationProps = {
+  navigation: Navigation
+}
+
+export default Navigation;

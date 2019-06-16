@@ -5,17 +5,18 @@ import {
   Animated,
   InteractionManager,
 } from 'react-native';
-
 import {
   Image,
   View,
 } from 'components';
+import ListEmpty from 'hooks/ContactList/ListEmpty';
+import ActivityIndicatorView from 'hooks/ActivityIndicatorView';
+import dashLogo from 'assets/flags/dash.png';
 import actions from './actions';
 import selector from './selectors';
 import styles from './styles';
 import type { Props, State } from './types';
 import {
-  ListEmpty,
   ListFooter,
   ListHeader,
   Item,
@@ -40,11 +41,16 @@ class ContactsScreen extends React.Component<Props, State> {
       [{ nativeEvent: { contentOffset: { y: this.scrollPos } } }],
       { useNativeDriver: true },
     );
+    this.state = {
+      isSearching: false,
+      isFetchingContacts: true,
+    };
   }
 
-  async componentDidMount() {
-    const { getBlockchainContacts } = this.props;
-    getBlockchainContacts();
+  componentDidMount() {
+    const { getContacts } = this.props;
+    getContacts()
+      .finally(() => this.setState({ isFetchingContacts: false }));
   }
 
   componentWillUnmount() {
@@ -66,27 +72,49 @@ class ContactsScreen extends React.Component<Props, State> {
   }
 
   handleSubmit(values: Object) {
-    const { setFilter, searchProfilesDebounced } = this.props;
+    const { setFilter, searchProfiles } = this.props;
     const query = values.query.trim();
+    this.setState({ isSearching: true });
     setFilter({ query });
-    searchProfilesDebounced(query);
+    searchProfiles(query)
+      .finally(() => this.setState({ isSearching: false }));
   }
 
-  renderListFooter(): React.Element<any> {
+  renderListFooter() {
     return <ListFooter {...this.props} />;
   }
 
-  renderItem({ item }: { item: Object }): React.Element<any> {
+  renderItem({ item }: { item: Object }) {
     return <Item {...item} onPress={this.handlePress} />;
   }
 
-  renderListHeader: React.Element<any> = props => (<ListHeader {...props} />);
+  renderListHeader = props => (<ListHeader {...props} />);
 
-  renderListEmpty(): React.Element<any> {
+  renderListEmpty() {
     return <ListEmpty {...this.props} />;
   }
 
-  render(): React.Element<any> {
+  renderBody() {
+    const { isSearching, isFetchingContacts } = this.state;
+    if (isSearching || isFetchingContacts) {
+      return <ActivityIndicatorView />;
+    }
+    const { contacts } = this.props;
+    return (
+      <Animated.SectionList
+        contentContainerStyle={styles.contentContainer}
+        renderSectionHeader={this.renderListHeader}
+        ListFooterComponent={this.renderListFooter}
+        ListEmptyComponent={this.renderListEmpty}
+        keyExtractor={this.keyExtractor}
+        sections={contacts}
+        renderItem={this.renderItem}
+        onScroll={this.scrollSinkY}
+      />
+    );
+  }
+
+  render() {
     const animatedStyle = {
       transform: [
         {
@@ -99,26 +127,16 @@ class ContactsScreen extends React.Component<Props, State> {
         },
       ],
     };
-    const { contacts } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.body}>
-          <Animated.SectionList
-            contentContainerStyle={styles.contentContainer}
-            renderSectionHeader={this.renderListHeader}
-            ListFooterComponent={this.renderListFooter}
-            ListEmptyComponent={this.renderListEmpty}
-            keyExtractor={this.keyExtractor}
-            sections={contacts}
-            renderItem={this.renderItem}
-            onScroll={this.scrollSinkY}
-          />
+          {this.renderBody()}
         </View>
         <Animated.View style={[styles.header, animatedStyle]}>
           <View style={[styles.row, styles.first]}>
             <Image
               style={styles.dash}
-              source={require('assets/flags/dash.png')}
+              source={dashLogo}
             />
           </View>
           <View style={[styles.row, styles.second]}>

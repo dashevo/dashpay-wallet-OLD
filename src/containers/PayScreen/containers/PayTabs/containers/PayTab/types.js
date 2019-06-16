@@ -1,13 +1,12 @@
 // @flow
+import type Navigation from 'types/navigation';
+
 interface Profile {
   image: string,
 }
 
 export type Props = {
-  navigation: {
-    navigate: Function,
-    goBack: Function,
-  },
+  navigation: Navigation,
   transactions: Array<Object>,
   alternativeCurrency: Object,
   fetchAlternativeCurrencyRateIfNeeded: Function,

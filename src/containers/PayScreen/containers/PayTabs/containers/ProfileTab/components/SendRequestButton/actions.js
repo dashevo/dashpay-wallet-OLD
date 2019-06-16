@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
-import { sendContactRequest } from 'state/contacts/blockchain/actions';
+import { sendRequest } from 'state/contacts/actions';
 
 function actions(dispatch) {
-  return bindActionCreators({ sendContactRequest }, dispatch);
+  return bindActionCreators({ sendRequest }, dispatch);
 }
 
 export default actions;

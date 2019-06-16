@@ -1,11 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
-import * as React from 'react';
-
-// Internal dependencies
+import React from 'react';
 import { StoreProvider, LanguageProvider } from 'containers';
 import { ThemeProvider } from 'hooks/Theme';
 import { Navigator } from 'navigations';

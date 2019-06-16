@@ -13,8 +13,8 @@ import type { Props } from './types';
 const TransactionCard = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
-    acceptBlockchainContact,
-    rejectBlockchainContact,
+    acceptRequest,
+    rejectRequest,
     item,
   } = props;
   const { address, status } = item;
@@ -27,7 +27,7 @@ const TransactionCard = (props: Props) => {
     ).finally(() => setIsLoading(false));
   };
 
-  const handlePressAccept = performActionFactory(acceptBlockchainContact);
+  const handlePressAccept = performActionFactory(acceptRequest);
 
   const handlePressReject = () => {
     Alert.alert(
@@ -40,7 +40,7 @@ const TransactionCard = (props: Props) => {
         },
         {
           text: 'Yes',
-          onPress: performActionFactory(rejectBlockchainContact),
+          onPress: performActionFactory(rejectRequest),
         },
       ],
       { cancelable: false },

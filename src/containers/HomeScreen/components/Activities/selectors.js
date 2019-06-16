@@ -1,11 +1,10 @@
-// @flow
 import { createSelector } from 'reselect';
-import { receivedContactRequestsSelector } from 'state/contacts/selectors';
+import { receivedRequestsSelector } from 'state/contacts/selectors';
 import { selectTransactions } from 'state/transactions';
 
 export default createSelector(
   selectTransactions,
-  receivedContactRequestsSelector,
+  receivedRequestsSelector,
   (transactions, receivedContactRequests) => {
     const activity = [
       ...transactions.map(data => ({ type: 'wallet', data })),

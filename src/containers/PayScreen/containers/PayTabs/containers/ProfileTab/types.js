@@ -1,17 +1,13 @@
 // @flow
+import type Navigation from 'types/navigation';
 
 export type State = {
-  address: String,
-  image: String,
-  name: String,
+  address: string,
+  image: string,
+  name: string,
 };
 
 export type Props = {
-  navigation: {
-    navigate: Function,
-    goBack: Function,
-  },
+  navigation: Navigation,
   initialValues: State,
-  updateLocalContact: Function,
-  deleteLocalContact: Function,
 };

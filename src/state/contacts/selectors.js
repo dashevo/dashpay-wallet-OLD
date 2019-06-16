@@ -1,45 +1,42 @@
 // @flow
 import { createSelector } from 'reselect';
+import { memoize } from 'lodash';
 
-const contactsSelector = state => state.contacts;
+const scopeSelector = state => state.contacts;
 
-export const filterParamsSelector = createSelector(
-  contactsSelector, ({ filterParams }) => filterParams,
+export const contactsSelector = createSelector(
+  scopeSelector, ({ items }) => items,
 );
 
-export const blockchainContactsSelector = createSelector(
-  contactsSelector, ({ blockchain }) => blockchain.items,
+export const filterParamsSelector = createSelector(
+  scopeSelector, ({ filterParams }) => filterParams,
 );
 
 export const pendingRequestsSelector = createSelector(
-  contactsSelector, ({ blockchain }) => blockchain.pendingRequests,
+  scopeSelector, ({ pendingRequests }) => pendingRequests,
 );
 
-export const receivedContactRequestsSelector = createSelector(
+export const receivedRequestsSelector = createSelector(
   pendingRequestsSelector, ({ received }) => received,
 );
 
-export const sentContactRequestsSelector = createSelector(
+export const sentRequestsSelector = createSelector(
   pendingRequestsSelector, ({ sent }) => sent,
 );
 
-export const receivedContactRequestsUsernamesSelector = createSelector(
-  receivedContactRequestsSelector,
+export const receivedRequestsUsernamesSelector = createSelector(
+  receivedRequestsSelector,
   receivedContactRequests => receivedContactRequests.map(({ address }) => address),
 );
 
 export const sentContactRequestsUsernamesSelector = createSelector(
-  sentContactRequestsSelector,
+  sentRequestsSelector,
   sentContactRequests => sentContactRequests.map(({ address }) => address),
 );
 
-export const localContactsSelector = createSelector(
-  contactsSelector, ({ local }) => local.items,
-);
-
-export const contactSelectorFactory = (address: string) => createSelector(
-  blockchainContactsSelector, localContactsSelector, (blockchainContacts, localContacts) => {
-    const findContact = contacts => contacts.find(contact => contact.address === address);
-    return findContact(blockchainContacts) || findContact(localContacts);
-  },
+export const contactSelectorFactory = createSelector(
+  contactsSelector,
+  items => memoize(
+    (address: string) => items.find(contact => contact.address === address),
+  ),
 );

@@ -1,15 +1,8 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @wolf
- */
-
-import { RECEIVE_BALANCE } from 'state/account/constants';
-import { GET_UNUSED_ADDRESS_SUCCESS } from 'state/account/constants';
-import { CHANGE_NETWORK_SUCCESS } from 'state/account/constants';
-import { initialState } from 'state/account/reducer';
-import reducer from 'state/account/reducer';
-import mockDate from 'mockdate';
+import {
+  RECEIVE_BALANCE,
+  GET_UNUSED_ADDRESS_SUCCESS,
+} from 'state/account/constants';
+import reducer, { initialState } from 'state/account/reducer';
 
 describe('account reducer', () => {
   it('should return the initial state', () => {
@@ -23,7 +16,7 @@ describe('account reducer', () => {
   });
 
   it('should handle GET_UNUSED_ADDRESS_SUCCESS', () => {
-    const payload = { response: { address: 'unusedAddress' }, type: GET_UNUSED_ADDRESS_SUCCESS};
+    const payload = { response: { address: 'unusedAddress' }, type: GET_UNUSED_ADDRESS_SUCCESS };
     const expectedState = { ...initialState, unusedAddress: 'unusedAddress' };
     expect(reducer(undefined, payload)).toEqual(expectedState);
   });

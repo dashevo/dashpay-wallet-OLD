@@ -7,15 +7,15 @@ import { bindActionCreators } from 'redux';
 
 // Internal dependencies
 import {
-  acceptBlockchainContact,
-  rejectBlockchainContact,
-} from 'state/contacts/blockchain/actions';
+  acceptRequest,
+  rejectRequest,
+} from 'state/contacts/actions';
 
 function actions(dispatch) {
   return bindActionCreators(
     {
-      acceptBlockchainContact,
-      rejectBlockchainContact,
+      acceptRequest,
+      rejectRequest,
     },
     dispatch,
   );

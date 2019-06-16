@@ -20,8 +20,8 @@ function AllEvents(props) {
     ({ item }) => (
       <ContactItem
         {...item}
-        onAccept={props.acceptBlockchainContact}
-        onReject={props.rejectBlockchainContact}
+        onAccept={props.acceptRequest}
+        onReject={props.rejectRequest}
       />
     ),
     [],
@@ -39,8 +39,8 @@ function AllEvents(props) {
 }
 
 AllEvents.propTypes = {
-  acceptBlockchainContact: PropTypes.func.isRequired,
-  rejectBlockchainContact: PropTypes.func.isRequired,
+  acceptRequest: PropTypes.func.isRequired,
+  rejectRequest: PropTypes.func.isRequired,
 };
 
 export default connect(

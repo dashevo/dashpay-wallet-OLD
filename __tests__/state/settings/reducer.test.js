@@ -13,7 +13,7 @@ describe('settings reducer', () => {
   });
 
   it('should handle CHANGE_SETTINGS', () => {
-    const settings = { balanceVisible: true }
-    expect(reducer(undefined, { type: CHANGE_SETTINGS, settings})).toEqual(settings);
-  })
+    const settings = { balanceVisible: true };
+    expect(reducer(undefined, { type: CHANGE_SETTINGS, settings })).toEqual(settings);
+  });
 });

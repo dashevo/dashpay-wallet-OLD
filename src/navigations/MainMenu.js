@@ -9,7 +9,7 @@ import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { Logo } from 'components';
-import { balanceSelector } from 'state';
+import { balanceSelector } from 'state/account/selectors';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 
 import ParallaxScrollView from './tmp';

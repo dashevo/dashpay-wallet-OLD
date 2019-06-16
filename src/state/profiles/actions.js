@@ -1,19 +1,11 @@
-// @flow
 import {
-  PROFILES_SEARCH_REQUEST,
-  PROFILES_SEARCH_SUCCESS,
-  PROFILES_SEARCH_FAILURE,
-} from './constants';
+  PROFILES_SEARCH_ASYNC,
+} from 'state/action-types';
 
-export const searchProfiles = searchString => (dispatch, getState, walletLib) => dispatch({
+export const searchProfiles = searchString => (
+  dispatch, getState, { account: { dashPayDap } },
+) => dispatch({
   searchString,
-  types: [
-    PROFILES_SEARCH_REQUEST,
-    PROFILES_SEARCH_SUCCESS,
-    PROFILES_SEARCH_FAILURE,
-  ],
-  asyncTask: async () => walletLib
-    .account
-    .getDAP('dashpaydap')
-    .searchProfile(searchString),
+  types: PROFILES_SEARCH_ASYNC,
+  asyncTask: () => dashPayDap.searchProfile(searchString),
 });

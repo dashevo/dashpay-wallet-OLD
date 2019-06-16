@@ -1,16 +1,10 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 import { bindActionCreators } from 'redux';
-import { changeAlternativeCurrency, fetchAlternativeCurrencyRateIfNeeded } from 'state';
+import {
+  changeAlternativeCurrency,
+  fetchAlternativeCurrencyRateIfNeeded,
+} from 'state/alternativeCurrency/actions';
 
-function actions(dispatch: Function): Object {
-  return bindActionCreators({
-    changeAlternativeCurrency,
-    fetchAlternativeCurrencyRateIfNeeded,
-  }, dispatch);
-}
-
-export default actions;
+export default dispatch => bindActionCreators({
+  changeAlternativeCurrency,
+  fetchAlternativeCurrencyRateIfNeeded,
+}, dispatch);
