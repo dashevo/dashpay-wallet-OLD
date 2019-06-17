@@ -4,10 +4,22 @@
 import React from 'react';
 import Icon from './Icon';
 
-export { default as Icon } from './Icon';
+// export { default as Icon } from './Icon';
 export { default as DashIcon } from './DashIcon';
 
 // Tmp
-type Props = {};
+type Props = {
+  children?: string,
+  name?: string,
+};
 
-export default ({ name, children, ...rest }: Props) => <Icon name={name || children} {...rest} />;
+function TmpIcon({ children, ...rest }: Props) {
+  return <Icon name={children} {...rest} />;
+}
+
+TmpIcon.defaultProps = {
+  children: null,
+  name: null,
+};
+
+export default TmpIcon;
