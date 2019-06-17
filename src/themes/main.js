@@ -3,11 +3,11 @@
  */
 
 // External dependencies
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 // Internal dependencies
-import { SCREEN_HEIGHT } from "constants";
-import { SCREEN_WIDTH } from "constants";
+import { SCREEN_HEIGHT } from 'constants';
+import { SCREEN_WIDTH } from 'constants';
 
 const DEVICE_SCALE = SCREEN_WIDTH / 375;
 
@@ -18,22 +18,22 @@ function normalize(size) {
 // Color system
 //
 // =============================================================================
-export const white = "#fff";
-export const gray100 = "#f2f2f2";
-export const gray200 = "#e9ecef";
-export const gray300 = "#dee2e6";
-export const gray400 = "#ced4da";
-export const gray500 = "#adb5bd";
-export const gray600 = "#6c757d";
-export const gray700 = "#495057";
-export const gray800 = "#343a40";
-export const gray900 = "#212529";
-export const black = "#000";
+export const white = '#fff';
+export const gray100 = '#f2f2f2';
+export const gray200 = '#e9ecef';
+export const gray300 = '#dee2e6';
+export const gray400 = '#ced4da';
+export const gray500 = '#adb5bd';
+export const gray600 = '#6c757d';
+export const gray700 = '#495057';
+export const gray800 = '#343a40';
+export const gray900 = '#212529';
+export const black = '#000';
 
-export const primary = "#088BE2";
-export const secondary = "#555";
+export const primary = '#088BE2';
+export const secondary = '#555';
 
-export const whiteAlpha50 = "rgba(255, 255, 255, 0.5)";
+export const whiteAlpha50 = 'rgba(255, 255, 255, 0.5)';
 
 export const screenHeight = SCREEN_HEIGHT;
 export const screenWidth = SCREEN_WIDTH;
@@ -71,13 +71,13 @@ export const avatarSmSize = normalize(40);
 // Number Pad
 //
 // =============================================================================
-export const numberPadBackgroundColor = "#403c6e";
+export const numberPadBackgroundColor = '#403c6e';
 export const numberPadPadding = normalize(25);
 
 // Number Pad Button
-export const numberPadButtonBorderColor = "#322f56";
+export const numberPadButtonBorderColor = '#322f56';
 export const numberPadButtonBorderWidth = borderWidth;
-export const numberPadButtonColor = "#c7c6e5";
+export const numberPadButtonColor = '#c7c6e5';
 export const numberPadButtonFontSize = normalize(13);
 export const numberPadButtonHeight = normalize(40);
 
@@ -92,19 +92,19 @@ export const navbarContainerHeight = normalize(48);
 // Navbar Icon
 export const navbarIconColor = white;
 export const navbarIconFontSize = normalize(14);
-export const navbarIconFontWeight = "300";
+export const navbarIconFontWeight = '300';
 export const navbarIconLineHeight = normalize(18);
 
 // Navbar Text
 export const navbarTextColor = white;
 export const navbarTextFontSize = normalize(12);
-export const navbarTextFontWeight = "300";
+export const navbarTextFontWeight = '300';
 export const navbarTextLineHeight = normalize(13);
 
 // Navbar Title
 export const navbarTitleColor = white;
 export const navbarTitleFontSize = normalize(15);
-export const navbarTitleFontWeight = "300";
+export const navbarTitleFontWeight = '300';
 export const navbarTitleLineHeight = normalize(17);
 
 // Tabs
@@ -127,7 +127,7 @@ export const tabBarItemColor = white;
 export const tabBarIndicatorBackgroundColor = gray100;
 export const tabBarIndicatorBottom = 0;
 export const tabBarIndicatorHeight = normalize(2);
-export const tabBarIndicatorWidth = "50%";
+export const tabBarIndicatorWidth = '50%';
 
 // Tab Container
 export const tabContainerBackgroundColor = gray100;

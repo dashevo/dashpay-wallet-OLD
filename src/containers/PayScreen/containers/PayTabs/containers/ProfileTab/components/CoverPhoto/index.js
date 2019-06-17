@@ -3,14 +3,14 @@
  */
 
 // External dependencies
-import * as React from "react";
+import * as React from 'react';
 
 // Internal dependencies
-import Avatar from "hooks/Avatar";
-import useStyles from "./useStyles";
+import Avatar from 'hooks/Avatar';
+import useStyles from './useStyles';
 
 type Props = {
-  user: Object
+  user: Object,
 };
 
 function CoverPhoto(props: Props) {

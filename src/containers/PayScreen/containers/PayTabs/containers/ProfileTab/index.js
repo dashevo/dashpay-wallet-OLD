@@ -1,19 +1,17 @@
 // @flow
-import * as React from "react";
-import { connect } from "react-redux";
-import ScrollView from "components/ScrollView";
-import Form from "components/Form";
-import View from "components/View";
-import Toggle from "components/Toggle";
-import AutoSubmit from "components/AutoSubmit";
-import ColorField from "./components/ColorField";
-import CoverPhoto from "./components/CoverPhoto";
-import UsernameField from "./components/UsernameField";
-import SendRequestButton from "./components/SendRequestButton";
-import defaults from "./defaults";
-import selector from "./selectors";
-import styles from "./styles";
-import type { State, Props } from "./types";
+import * as React from 'react';
+import { connect } from 'react-redux';
+import ScrollView from 'components/ScrollView';
+import Form from 'components/Form';
+import View from 'components/View';
+import AutoSubmit from 'components/AutoSubmit';
+import CoverPhoto from './components/CoverPhoto';
+import UsernameField from './components/UsernameField';
+import SendRequestButton from './components/SendRequestButton';
+import defaults from './defaults';
+import selector from './selectors';
+import styles from './styles';
+import type { State, Props } from './types';
 
 class ProfileTab extends React.Component<Props, State> {
   static defaultProps = defaults;
@@ -24,17 +22,17 @@ class ProfileTab extends React.Component<Props, State> {
     const { initialValues, validationSchema } = props;
 
     this.onSubmit = () => {
-      throw Error("Not implemented");
+      throw Error('Not implemented');
     };
     this.onDelete = () => {
-      throw Error("Not implemented");
+      throw Error('Not implemented');
     };
 
     this.state = {
       validationSchema,
       initialValues,
       onDelete: this.onDelete,
-      onSubmit: this.onSubmit
+      onSubmit: this.onSubmit,
     };
   }
 
@@ -47,9 +45,6 @@ class ProfileTab extends React.Component<Props, State> {
           <View style={styles.fieldset}>
             <View style={styles.row}>
               <CoverPhoto user={user} />
-            </View>
-            <View style={styles.row}>
-              <ColorField onPress={setOn} />
             </View>
             <View style={styles.row}>
               <UsernameField />
