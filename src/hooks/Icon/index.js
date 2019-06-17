@@ -1,6 +1,10 @@
 /**
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
+import React from 'react';
+import Icon from './Icon';
 
 export { default as Icon } from './Icon';
 export { default as DashIcon } from './DashIcon';
+
+export default ({ name, children, ...rest }) => <Icon name={name || children} {...rest} />;

@@ -3,23 +3,26 @@
  */
 
 // Internal dependencies
-import { useImage } from 'hooks/Image';
+import actions from './actions';
 import useStyles from './useStyles';
+import useMachine from './useMachine';
 
 function useAvatar(props) {
-  const styles = useStyles(props);
-  const { bind, showImage } = useImage({
-    imageURL: props.user.imageURL,
-  });
+  const source = { uri: props.user.imageURL };
 
-  const showFirstInitial = !!props.user.displayName;
-  const firstInitial = showFirstInitial ? props.user.displayName.charAt(0).toUpperCase() : '';
+  const styles = useStyles(props);
+  const [state, dispatch] = useMachine(props);
+
+  const bind = {
+    source,
+    onError() {
+      dispatch(actions.imageError());
+    },
+  };
 
   return {
     bind,
-    hasImage: showImage,
-    hasDisplayName: showFirstInitial,
-    firstInitial,
+    state,
     styles,
   };
 }

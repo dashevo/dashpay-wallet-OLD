@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 
 // Internal dependencies
-import { Avatar } from 'hooks/Avatar';
+import Avatar from 'hooks/Avatar';
 import useTranslate from 'hooks/Translate';
 import useStyles from './useStyles';
 

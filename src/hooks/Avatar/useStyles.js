@@ -3,7 +3,7 @@
  */
 
 // Internal dependencies
-import { makeStyles } from 'hooks/Styles';
+import { createUseStyles } from 'hooks/Styles';
 
 const styles = theme => ({
   container: {
@@ -35,8 +35,6 @@ const styles = theme => ({
     color: theme.avatarColor,
     fontSize: theme.avatarFontSize,
   },
-
-  // Size ls
   container__lg: {
     borderRadius: theme.avatarLgBorderRadius,
     height: theme.avatarLgSize,
@@ -53,8 +51,6 @@ const styles = theme => ({
   icon__lg: {
     fontSize: theme.avatarLgFontSize,
   },
-
-  // Size sm
   container__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,
@@ -71,48 +67,6 @@ const styles = theme => ({
   icon__sm: {
     fontSize: theme.avatarSmFontSize,
   },
-
-  // Variant primary
-  container__primary: {
-    backgroundColor: theme.avatarPrimaryBackgroundColor,
-    borderColor: theme.avatarPrimaryBorderColor,
-  },
-  text__primary: {
-    color: theme.avatarPrimaryColor,
-  },
-  icon__primary: {
-    color: theme.avatarPrimaryColor,
-  },
-
-  // Variant secondary
-  container__secondary: {
-    backgroundColor: theme.avatarSecondaryBackgroundColor,
-    borderColor: theme.avatarSecondaryBorderColor,
-  },
-  text__secondary: {
-    color: theme.avatarSecondaryColor,
-  },
-  icon__secondary: {
-    color: theme.avatarSecondaryColor,
-  },
-
-  // Avatar Cover ***
-  container__cover: {
-    borderRadius: theme.avatarCoverBorderRadius,
-    height: theme.avatarCoverHeight,
-    width: theme.avatarCoverWidth,
-  },
-  image__cover: {
-    borderRadius: theme.avatarCoverBorderRadius,
-    height: theme.avatarCoverHeight,
-    width: theme.avatarCoverWidth,
-  },
-  text__cover: {
-    fontSize: theme.avatarCoverFontSize,
-  },
-  icon__cover: {
-    fontSize: theme.avatarCoverFontSize,
-  },
 });
 
-export default makeStyles(styles);
+export default createUseStyles(styles);

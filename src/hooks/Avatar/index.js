@@ -2,5 +2,9 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-export { default as Avatar } from './Avatar';
+// Internal dependencies
+import Avatar from './Avatar';
+
 export { default as useAvatar } from './useAvatar';
+
+export default Avatar;
