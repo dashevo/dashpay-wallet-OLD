@@ -12,9 +12,6 @@ import Icon from 'hooks/Icon';
 import useAvatar from './useAvatar';
 
 type Props = {
-  lg?: boolean,
-  sm?: boolean,
-  styles?: Object,
   user: Object,
 };
 

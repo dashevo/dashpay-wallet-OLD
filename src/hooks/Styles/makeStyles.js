@@ -4,7 +4,7 @@
  */
 
 // External dependencies
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   transform, reduce, every, isArray, mergeWith,
@@ -19,6 +19,7 @@ function customizer(objValue, srcValue) {
   if (isArray(objValue)) {
     return objValue.concat(srcValue);
   }
+  return objValue;
 }
 
 // This is temp solution for no-param-reassign error.
@@ -53,7 +54,7 @@ function makeStyles(componentStyles) {
   const useStyles = (props = {}) => {
     const { theme } = useTheme();
     const { styles } = props;
-    const [groupedStyles, setGroupedStyles] = useState(() => {
+    const [groupedStyles] = useState(() => {
       const tmpStyles = reduce(
         transformedStyles[theme],
         (result, value) => {
@@ -76,12 +77,12 @@ function makeStyles(componentStyles) {
       );
 
       if (styles) {
-        console.log('__styles2__', styles);
         return mergeWith({}, tmpStyles, styles, customizer);
       }
 
       return tmpStyles;
     });
+
     // useEffect(
     //   () => {
     //     const newGroupedStyles = reduce(

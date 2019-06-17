@@ -63,8 +63,8 @@ export default (props) => {
     () => machine
       .withConfig({
         guards: {
-          hasDisplayName: ({ letter }) => !!letter,
-          hasImage: ({ imageURL }) => !!imageURL,
+          hasDisplayName: ctx => !!ctx.letter,
+          hasImage: ctx => !!ctx.imageURL,
         },
       })
       .withContext({

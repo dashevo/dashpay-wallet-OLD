@@ -6,8 +6,7 @@
 import { StyleSheet } from 'react-native';
 
 // Internal dependencies
-import { SCREEN_HEIGHT } from 'constants';
-import { SCREEN_WIDTH } from 'constants';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'constants';
 
 const DEVICE_SCALE = SCREEN_WIDTH / 375;
 
