@@ -17,11 +17,11 @@ const TransactionCard = (props: Props) => {
     rejectRequest,
     item,
   } = props;
-  const { address, status } = item;
+  const { userId, status } = item;
 
   const performActionFactory = action => () => {
     setIsLoading(true);
-    return action(address).then(
+    return action(userId).then(
       () => {},
       error => Alert.alert(`Error: ${error.message}`),
     ).finally(() => setIsLoading(false));
@@ -32,7 +32,7 @@ const TransactionCard = (props: Props) => {
   const handlePressReject = () => {
     Alert.alert(
       'Reject Contact Request',
-      `Are you sure you want to reject the contact request from ${address}?`,
+      `Are you sure you want to reject the contact request from ${userId}?`,
       [
         {
           text: 'No',

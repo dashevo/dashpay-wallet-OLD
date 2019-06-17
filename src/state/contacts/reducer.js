@@ -61,10 +61,15 @@ const receivedRequest = (state, action) => {
   }
 };
 
-const requestMapper = name => ({
-  name,
-  address: name,
-  image: `https://api.adorable.io/avatars/285/${name}.png`,
+const profileMapper = ({
+  $meta: { userId },
+}) => ({
+  userId,
+  image: `https://api.adorable.io/avatars/285/${userId}.png`,
+});
+
+const contactRequestMapper = data => ({
+  ...profileMapper(data),
   timestamp: new Date(), // We cannot get timestamp from DAPI yet
   status: 'PENDING', // This will be fixed with the redux schema
 });
@@ -75,8 +80,8 @@ const pendingRequests = (state = { received: [], sent: [] }, action) => {
       return {
         ...state,
         type: 'pending',
-        received: action.response.received.map(requestMapper),
-        sent: action.response.sent.map(requestMapper),
+        received: action.response.received.map(({ sender }) => contactRequestMapper(sender)),
+        sent: action.response.sent.map(({ receiver }) => contactRequestMapper(receiver)),
       };
     case CONTACTS_ACCEPT_REQUEST_ASYNC.SUCCESS:
       return {
@@ -99,12 +104,7 @@ const pendingRequests = (state = { received: [], sent: [] }, action) => {
 const items = (state = [], action) => {
   switch (action.type) {
     case CONTACTS_GET_CONTACTS_ASYNC.SUCCESS:
-      return Object.keys(action.response).map(name => ({
-        name,
-        address: name,
-        isContact: true,
-        image: `https://api.adorable.io/avatars/285/${name}.png`,
-      }));
+      return action.response.map(profileMapper);
     default:
       return state;
   }

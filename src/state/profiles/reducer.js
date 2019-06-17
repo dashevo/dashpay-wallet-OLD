@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
-import { PROFILES_SEARCH_ASYNC } from 'state/action-types';
+import {
+  PROFILES_SEARCH_ASYNC,
+  PROFILES_REGISTER_ASYNC,
+} from 'state/action-types';
 
 function searchResults(state = {}, action) {
   switch (action.type) {
@@ -7,14 +10,21 @@ function searchResults(state = {}, action) {
       // TODO: mapping should be refactored/imp when the Schema is stable
       return action
         .response
-        .reduce((results, { bio, bUserName, displayName }) => {
-          const name = bUserName;
+        .reduce((results, {
+          bio,
+          avatarUrl,
+          bUser: { username },
+          $meta: { userId },
+        }) => {
+          const name = username;
+          const displayName = name;
           const address = name;
-          const image = `https://api.adorable.io/avatars/285/${name}.png`;
+          const image = avatarUrl;
           return {
             ...results,
             [name]: {
               address,
+              userId,
               image,
               name,
               bio,
@@ -22,7 +32,12 @@ function searchResults(state = {}, action) {
             },
           };
         }, state);
-
+    case PROFILES_REGISTER_ASYNC.SUCCESS:
+      alert('Profile registration - success');
+      return state;
+    case PROFILES_REGISTER_ASYNC.FAILURE:
+      alert(`Profile registration - error: ${action.error.message}`);
+      return state;
     default:
       return state;
   }

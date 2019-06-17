@@ -51,6 +51,7 @@ const middleware = store => next => (action) => {
       resolve(response);
     },
     (error) => {
+      console.warn('Async request failed', error);
       next(actionWith({ type: failureType, error }));
       reject(error);
     },

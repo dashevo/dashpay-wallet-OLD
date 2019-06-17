@@ -1,10 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 import { getTransactionHistory } from 'state/transactions';
 import { EVENTS } from '@dashevo/wallet-lib';
+import { ACCOUNTS_RECEIVE_BALANCE } from 'state/action-types';
 
 import { random } from 'lodash';
 
@@ -28,7 +25,7 @@ export const initializeWallet = () => (dispatch, getState, walletLib) => dispatc
 
     walletLib.account.events.on(EVENTS.UNCONFIRMED_BALANCE_CHANGED, () => {
       dispatch({
-        type: 'RECEIVE_BALANCE',
+        type: ACCOUNTS_RECEIVE_BALANCE,
 
         // getBalance(uncomfirmed = true, returnDuffs = true)
         response: walletLib.account.getBalance(true, true),
@@ -38,7 +35,7 @@ export const initializeWallet = () => (dispatch, getState, walletLib) => dispatc
 
     const balance = walletLib.account.getBalance();
     dispatch({
-      type: 'RECEIVE_BALANCE',
+      type: ACCOUNTS_RECEIVE_BALANCE,
       response: balance,
     });
     dispatch(getTransactionHistory());

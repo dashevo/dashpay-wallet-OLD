@@ -38,9 +38,9 @@ export default createSelector(
       blockchainProfiles = filterAndSort(profiles, filterParams);
       blockchainProfiles.forEach((blockchainProfile) => {
         const profile = blockchainProfile;
-        if (receivedContactRequestsUsernames.includes(profile.address)) {
+        if (receivedContactRequestsUsernames.includes(profile.userId)) {
           profile.state = PENDING_CONTACT_REQUEST;
-        } else if (sentContactRequestsUsernames.includes(profile.address)) {
+        } else if (sentContactRequestsUsernames.includes(profile.userId)) {
           profile.state = SENT_CONTACT_REQUEST;
         }
       });

@@ -21,7 +21,6 @@ const transport = new DAPIClient({
   timeout: 10000,
   retries: 5,
 });
-
 const walletLib = {
   wallet: null,
   account: null,
