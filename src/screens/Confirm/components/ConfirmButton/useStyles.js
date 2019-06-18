@@ -40,8 +40,9 @@ const styles = () => ({
     width: 50,
   },
   text: {
-    minWidth: 96,
     textAlign: 'center',
+    marginBottom: 3,
+    marginTop: 3,
   },
   feedback: {
     alignItems: 'center',
@@ -62,6 +63,16 @@ const styles = () => ({
     color: 'white',
     textAlign: 'center',
     fontSize: 14,
+  },
+  col: {
+    flexDirection: 'column',
+    minWidth: 110,
+  },
+  row: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
 });
 

@@ -17,31 +17,23 @@ export const clearFilter = () => ({
   type: CONTACTS_CLEAR_FILTER,
 });
 
-export const sendRequest = address => (
-  dispatch, getState, { account: { dashPayDap } },
-) => dispatch({
+export const sendRequest = address => (dispatch, getState, { account: { dashPayDap } }) => dispatch({
   address,
   types: CONTACTS_SEND_REQUEST_ASYNC,
   asyncTask: () => dashPayDap.sendContactRequest(address),
 });
 
-export const getPendingRequests = () => (
-  dispatch, getState, { account: { dashPayDap } },
-) => dispatch({
+export const getPendingRequests = () => (dispatch, getState, { account: { dashPayDap } }) => dispatch({
   types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
-  asyncTask: () => dashPayDap.getPendingContactRequests(),
+  asyncTask: () => dashPayDap.contactRequest.getAllPending(),
 });
 
-export const getContacts = () => (
-  dispatch, getState, { account: { dashPayDap } },
-) => dispatch({
+export const getContacts = () => (dispatch, getState, { account: { dashPayDap } }) => dispatch({
   types: CONTACTS_GET_CONTACTS_ASYNC,
   asyncTask: () => dashPayDap.getContacts(),
 });
 
-export const acceptRequest = address => (
-  dispatch, getState, { account: { dashPayDap } },
-) => dispatch({
+export const acceptRequest = address => (dispatch, getState, { account: { dashPayDap } }) => dispatch({
   address,
   types: CONTACTS_ACCEPT_REQUEST_ASYNC,
   async asyncTask() {

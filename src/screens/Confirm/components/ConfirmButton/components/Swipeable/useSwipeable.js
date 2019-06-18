@@ -43,6 +43,8 @@ type Config = {
   onSwipeStart?: Function,
 };
 
+const once = false;
+
 function runSpring(clock, value, velocity, dist) {
   const state = {
     finished: new Value(0),
@@ -112,6 +114,27 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
     min(
       dist,
       block([
+        cond(
+          and(eq(state, State.ACTIVE)),
+          [
+            stopClock(clock),
+            set(currDragX, add(currDragX, sub(dragX, prevDragX))),
+            set(prevDragX, dragX),
+            set(isSwiping, TRUE),
+            call([], () => {
+              console.log('ACTIVE');
+            }),
+            currDragX,
+          ],
+          [
+            set(prevDragX, 0),
+            set(isSwiping, FALSE),
+            call([], () => {
+              console.log('NOT');
+            }),
+            set(currDragX, runSpring(clock, currDragX, dragVX, snapPoint)),
+          ],
+        ),
         onChange(
           isSwiping,
           call([isSwiping], ([value]) => {
@@ -125,26 +148,13 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
         onChange(
           isSwiped,
           call([isSwiped], ([value]) => {
+            console.log('onSwiped');
             if (value === TRUE) {
               onSwiped();
             }
           }),
         ),
-        cond(
-          and(eq(state, State.ACTIVE)),
-          [
-            stopClock(clock),
-            set(currDragX, add(currDragX, sub(dragX, prevDragX))),
-            set(prevDragX, dragX),
-            set(isSwiping, TRUE),
-            currDragX,
-          ],
-          [
-            set(prevDragX, 0),
-            set(isSwiping, FALSE),
-            set(currDragX, runSpring(clock, currDragX, dragVX, snapPoint)),
-          ],
-        ),
+        currDragX,
       ]),
     ),
     0,
