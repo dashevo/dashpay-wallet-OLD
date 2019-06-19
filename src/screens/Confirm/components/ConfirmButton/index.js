@@ -23,14 +23,12 @@ type Props = {
   onFailure: Function,
 };
 
-const transition = {
-  duration: 3000,
-};
-
+// This is a tmp until we find a final solution for this issue
+// https://github.com/kmagiera/react-native-reanimated/issues/272
 const SlideInOut = posed.View({
   enter: {
     x: 0,
-    transition: ({ toValue }) => ({
+    transition: () => ({
       type: 'keyframes',
       values: [-SCREEN_WIDTH, 0],
       duration: 2000,
@@ -38,7 +36,7 @@ const SlideInOut = posed.View({
   },
   exit: {
     x: 0,
-    transition: ({ toValue }) => ({
+    transition: () => ({
       type: 'keyframes',
       values: [0, SCREEN_WIDTH],
       duration: 2000,

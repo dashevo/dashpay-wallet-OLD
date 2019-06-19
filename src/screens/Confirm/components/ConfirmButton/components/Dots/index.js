@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import { SCREEN_WIDTH } from 'constants';
 import { range } from 'lodash';
 import useAnimation from './useAnimation';
 import useStyles from './useStyles';

@@ -43,9 +43,7 @@ type Config = {
   onSwipeStart?: Function,
 };
 
-const once = false;
-
-function runSpring(clock, value, velocity, dist) {
+function runSpring(clock, value, velocity, dst) {
   const state = {
     finished: new Value(0),
     velocity: new Value(0),
@@ -121,17 +119,11 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
             set(currDragX, add(currDragX, sub(dragX, prevDragX))),
             set(prevDragX, dragX),
             set(isSwiping, TRUE),
-            call([], () => {
-              console.log('ACTIVE');
-            }),
             currDragX,
           ],
           [
             set(prevDragX, 0),
             set(isSwiping, FALSE),
-            call([], () => {
-              console.log('NOT');
-            }),
             set(currDragX, runSpring(clock, currDragX, dragVX, snapPoint)),
           ],
         ),
@@ -148,7 +140,6 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
         onChange(
           isSwiped,
           call([isSwiped], ([value]) => {
-            console.log('onSwiped');
             if (value === TRUE) {
               onSwiped();
             }

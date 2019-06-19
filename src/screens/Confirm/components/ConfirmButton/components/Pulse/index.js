@@ -6,7 +6,11 @@ import useStyles from './useStyles';
 
 const { interpolate } = Animated;
 
-function Pulse({ opacity }) {
+type Props = {
+  opacity: number,
+};
+
+function Pulse({ opacity }: Props) {
   const animation = useAnimation(-1, 1);
   const styles = useStyles();
 

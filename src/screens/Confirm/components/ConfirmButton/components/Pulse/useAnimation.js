@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Animated, { Easing } from 'react-native-reanimated';
 
 const {
-  Clock, Value, set, cond, startClock, clockRunning, timing, block, concat,
+  Clock, Value, set, cond, startClock, clockRunning, timing, block,
 } = Animated;
 
 function useAnimation(value, dest) {
