@@ -43,7 +43,7 @@ type Config = {
   onSwipeStart?: Function,
 };
 
-function runSpring(clock, value, velocity, dst) {
+function runSpring(clock, value, velocity, dist) {
   const state = {
     finished: new Value(0),
     velocity: new Value(0),
