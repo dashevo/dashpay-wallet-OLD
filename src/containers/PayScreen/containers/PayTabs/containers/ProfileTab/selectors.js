@@ -10,14 +10,14 @@ export default createSelector(
     const contact = contactSelector(address) || {};
     const { name = '', image = '' } = contact;
     return {
+      user: {
+        imageURL: image,
+        displayName: name,
+      },
       initialValues: {
         address,
         name,
         image,
-        user: {
-          imageURL: image,
-          displayName: name,
-        },
       },
     };
   },

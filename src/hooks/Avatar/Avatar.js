@@ -9,10 +9,11 @@ import { View, Text } from 'react-native';
 // Internal dependencies
 import Image from 'hooks/Image';
 import Icon from 'hooks/Icon';
+import type { User } from 'state/types';
 import useAvatar from './useAvatar';
 
 type Props = {
-  user: Object,
+  user: User,
 };
 
 const Avatar = React.memo((props: Props) => {

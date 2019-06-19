@@ -40,12 +40,10 @@ class ProfileTab extends React.Component<Props, State> {
     const { initialValues, user } = this.props;
     return (
       <ScrollView style={styles.container}>
+        <CoverPhoto user={user} />
         <Form {...this.state} {...this.props}>
           <AutoSubmit />
           <View style={styles.fieldset}>
-            <View style={styles.row}>
-              <CoverPhoto user={user} />
-            </View>
             <View style={styles.row}>
               <UsernameField />
             </View>

@@ -3,11 +3,22 @@
  */
 
 // External dependencies
+import React from 'react';
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
 // Internal dependencies
-import DashPay from 'assets/fonts/DashPay.json';
+import DashPayFontIcon from 'assets/fonts/DashPay.json';
 
-const Icon = createIconSetFromIcoMoon(DashPay);
+const FontIcon = createIconSetFromIcoMoon(DashPayFontIcon);
+
+type Props = {
+  children?: string,
+  rest?: string,
+};
+
+function Icon(props: Props) {
+  const { children = '', ...rest } = props;
+  return <FontIcon name={children} {...rest} />;
+}
 
 export default Icon;
