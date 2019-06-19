@@ -14,18 +14,26 @@ export function useInterval(callback, delay) {
   // Set up the interval.
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    function tick() {
-      savedCallback.current();
+    let id;
+    async function tick() {
+      try {
+        return await savedCallback.current();
+      } catch (error) {
+        return null;
+      } finally {
+        id = setTimeout(tick, delay);
+      }
     }
     if (delay) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      tick();
+      return () => {
+        clearTimeout(id);
+      };
     }
   }, [delay]);
 }
 
 export default function Interval({ callback, delay }) {
-  console.log(`Interval created with delay ${delay}`);
   useInterval(callback, delay);
   return null;
 }

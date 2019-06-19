@@ -10,7 +10,6 @@ import {
 import { createAppContainer, StackRouter, createNavigator } from 'react-navigation';
 import { Transitioner } from 'react-navigation-stack';
 import NavBar from 'components/NavBar';
-import Interval from 'hooks/Interval';
 
 import routes from './routes';
 import MainMenu from './MainMenu';
@@ -111,10 +110,6 @@ class CustomNavigationView extends React.Component {
     const Scene = scene.descriptor.getComponent();
     const { active, height } = this.state;
 
-    const dapiPollingAction = () => console.log('Hello from callback');
-    const dapiPollingInterval = scene.descriptor.options.dapiPollingInterval === undefined
-      ? 5000 : scene.descriptor.options.dapiPollingInterval;
-
     return (
       <Animated.View key={index} style={[styles.view, animation]} onLayout={this.onLayout}>
         <Animated.View
@@ -170,7 +165,6 @@ class CustomNavigationView extends React.Component {
             </View>
           )}
           <View style={styles.body}>
-            <Interval callback={dapiPollingAction} delay={dapiPollingInterval} />
             <Scene
               navigation={scene.descriptor.navigation}
               showMenu={this.showMenu}

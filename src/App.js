@@ -6,9 +6,12 @@ import translations from 'translations';
 import themes from 'themes';
 import state from 'state';
 
+import DapiPoll from 'components/DapiPoll';
+
 function App(props) {
   return (
     <StoreProvider store={state}>
+      <DapiPoll />
       <LanguageProvider translations={translations}>
         <ThemeProvider themes={themes}>
           <Navigator {...props} />
