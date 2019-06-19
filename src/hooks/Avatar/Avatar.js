@@ -38,7 +38,7 @@ const Avatar = React.memo((props: Props) => {
     case 'icon':
       return (
         <View style={styles.container}>
-          <Icon style={styles.icon}>dash</Icon>
+          <Icon style={styles.icon} name="dash" />
         </View>
       );
 

@@ -5,7 +5,7 @@
 // Internal dependencies
 import { createUseStyles } from 'hooks/Styles';
 
-const styles = theme => ({
+const styles = () => ({
   container: {},
   row: {
     alignItems: 'center',

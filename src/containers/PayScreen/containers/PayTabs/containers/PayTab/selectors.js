@@ -34,14 +34,13 @@ export default createSelector(
 
     const fiatAmount = dashAmount * alternativeCurrency.rate;
 
-    console.log(receiver);
-
     return {
       alternativeCurrency,
       transactions,
       receiver,
       sender,
       user: {
+        // Tmp
         displayName: receiver.name || recipient,
         imageURL: receiver.image,
       },

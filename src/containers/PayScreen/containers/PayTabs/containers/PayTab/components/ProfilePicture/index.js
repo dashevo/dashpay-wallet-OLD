@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Avatar from 'hooks/Avatar';
 import View from 'components/View';
-import Icon from 'components/Icon';
 import Text from 'components/Text';
 import type { Props } from './types';
 import useStyles from './useStyles';
