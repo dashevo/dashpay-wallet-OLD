@@ -24,6 +24,13 @@ type ConfirmProps = {
   navigation: Object,
 };
 
+// Tmp
+function delay(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 function Confirm(props: ConfirmProps) {
   const navigation = useNavigation(props);
   const styles = useStyles();
@@ -76,7 +83,8 @@ function Confirm(props: ConfirmProps) {
     goBack();
   }
 
-  function handleRequest() {
+  async function handleRequest() {
+    await delay(10000); // Tmp
     return onConfirmation();
   }
 
@@ -85,7 +93,7 @@ function Confirm(props: ConfirmProps) {
   }
 
   function handleFailure() {
-    goBack();
+    // goBack();
   }
 
   return (

@@ -6,10 +6,14 @@
 import React, { useMemo } from 'react';
 import { View, Text, Image } from 'react-native';
 import { useMachine } from '@xstate/react';
+import posed, { Transition } from 'react-native-pose';
 
 // Internal dependencies
 import useTranslate from 'hooks/Translate';
+import { SCREEN_WIDTH } from 'constants';
 import Swipeable from './components/Swipeable';
+import Pulse from './components/Pulse';
+import Dots from './components/Dots';
 import payMachine from './useMachine';
 import useStyles from './useStyles';
 
@@ -18,6 +22,27 @@ type Props = {
   onSuccess: Function,
   onFailure: Function,
 };
+
+// This is a tmp until we find a final solution for this issue
+// https://github.com/kmagiera/react-native-reanimated/issues/272
+const SlideInOut = posed.View({
+  enter: {
+    x: 0,
+    transition: () => ({
+      type: 'keyframes',
+      values: [-SCREEN_WIDTH, 0],
+      duration: 2000,
+    }),
+  },
+  exit: {
+    x: 0,
+    transition: () => ({
+      type: 'keyframes',
+      values: [0, SCREEN_WIDTH],
+      duration: 2000,
+    }),
+  },
+});
 
 function SwipeButton({ onRequest, onSuccess, onFailure }: Props) {
   const translate = useTranslate();
@@ -29,7 +54,7 @@ function SwipeButton({ onRequest, onSuccess, onFailure }: Props) {
       maxAttempts: ctx => ctx.attempts >= 3,
     },
     delays: {
-      TIMEOUT: 5000,
+      TIMEOUT: 10000,
     },
     actions: {
       animateNextTransition: () => {},
@@ -50,34 +75,52 @@ function SwipeButton({ onRequest, onSuccess, onFailure }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
-        {(state.matches('idle') || state.matches('pending')) && (
-          <Swipeable onSwiped={handleSwiped} enabled={state.matches('idle')}>
-            <View style={styles.button}>
-              <Image
-                style={styles.image}
-                source={{ uri: 'https://api.adorable.io/avatars/285/anonymous.png' }}
-              />
-              <Text style={styles.text}>
-                {translate(state.matches('idle') ? 'Slide to Pay' : 'Sending')}
-              </Text>
-            </View>
-          </Swipeable>
-        )}
-        {state.matches({ fulfilled: 'success' }) && (
-          <View style={styles.feedback}>
-            <Text style={styles.feedbackText}>{translate('Payment sent')}</Text>
-          </View>
-        )}
-        {state.matches({ rejected: 'retry' }) && (
-          <View style={styles.feedback}>
-            <Text style={styles.feedbackText}>{translate('Something went wrong')}</Text>
-          </View>
-        )}
-        {state.matches({ rejected: 'failure' }) && (
-          <View style={styles.feedback}>
-            <Text style={styles.feedbackText}>{translate('Contact support')}</Text>
-          </View>
-        )}
+        {state.matches('pending') && <Pulse opacity={0.35} />}
+        <Transition>
+          {(state.matches('idle') || state.matches('pending')) && (
+            <SlideInOut key="item-1">
+              <Swipeable onSwiped={handleSwiped} enabled={state.matches('idle')}>
+                <View style={styles.button}>
+                  <Image
+                    style={styles.image}
+                    source={{ uri: 'https://api.adorable.io/avatars/285/anonymous.png' }}
+                  />
+                  <View style={styles.col}>
+                    <Text style={styles.text}>
+                      {translate(state.matches('idle') ? 'Slide to Pay' : 'SENDING')}
+                    </Text>
+                    {state.matches('pending') && (
+                      <View style={styles.row}>
+                        <Dots />
+                      </View>
+                    )}
+                  </View>
+                </View>
+              </Swipeable>
+            </SlideInOut>
+          )}
+          {state.matches({ fulfilled: 'success' }) && (
+            <SlideInOut key="item-2">
+              <View style={styles.feedback}>
+                <Text style={styles.feedbackText}>{translate('Payment sent')}</Text>
+              </View>
+            </SlideInOut>
+          )}
+          {state.matches({ rejected: 'retry' }) && (
+            <SlideInOut key="item-3">
+              <View style={styles.feedback}>
+                <Text style={styles.feedbackText}>{translate('Something went wrong')}</Text>
+              </View>
+            </SlideInOut>
+          )}
+          {state.matches({ rejected: 'failure' }) && (
+            <SlideInOut key="item-4">
+              <View style={styles.feedback}>
+                <Text style={styles.feedbackText}>{translate('Contact support')}</Text>
+              </View>
+            </SlideInOut>
+          )}
+        </Transition>
       </View>
     </View>
   );

@@ -112,6 +112,21 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
     min(
       dist,
       block([
+        cond(
+          and(eq(state, State.ACTIVE)),
+          [
+            stopClock(clock),
+            set(currDragX, add(currDragX, sub(dragX, prevDragX))),
+            set(prevDragX, dragX),
+            set(isSwiping, TRUE),
+            currDragX,
+          ],
+          [
+            set(prevDragX, 0),
+            set(isSwiping, FALSE),
+            set(currDragX, runSpring(clock, currDragX, dragVX, snapPoint)),
+          ],
+        ),
         onChange(
           isSwiping,
           call([isSwiping], ([value]) => {
@@ -130,21 +145,7 @@ function interaction(onSwipeStart, onSwipeEnd, onSwiped) {
             }
           }),
         ),
-        cond(
-          and(eq(state, State.ACTIVE)),
-          [
-            stopClock(clock),
-            set(currDragX, add(currDragX, sub(dragX, prevDragX))),
-            set(prevDragX, dragX),
-            set(isSwiping, TRUE),
-            currDragX,
-          ],
-          [
-            set(prevDragX, 0),
-            set(isSwiping, FALSE),
-            set(currDragX, runSpring(clock, currDragX, dragVX, snapPoint)),
-          ],
-        ),
+        currDragX,
       ]),
     ),
     0,
