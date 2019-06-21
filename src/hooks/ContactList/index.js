@@ -11,7 +11,7 @@ import { View, Text } from 'react-native';
 import { FlatList } from 'react-navigation';
 
 // Internal dependencies
-import { Icon } from 'hooks/Icon';
+import Icon from 'hooks/Icon';
 import ListEmpty from './ListEmpty';
 import useStyles from './useStyles';
 
