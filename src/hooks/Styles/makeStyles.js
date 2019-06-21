@@ -4,14 +4,23 @@
  */
 
 // External dependencies
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { transform, reduce, every } from 'lodash';
+import {
+  transform, reduce, every, isArray, mergeWith,
+} from 'lodash';
 
 // Internal dependencies
 import { useTheme } from 'hooks/Theme';
 import themes from 'themes';
 import parse from './parse';
+
+function customizer(objValue, srcValue) {
+  if (isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+  return objValue;
+}
 
 // This is temp solution for no-param-reassign error.
 // https://github.com/airbnb/javascript/issues/1342
@@ -44,52 +53,62 @@ function makeStyles(componentStyles) {
 
   const useStyles = (props = {}) => {
     const { theme } = useTheme();
-    const [groupedStyles, setGroupedStyles] = useState(() => reduce(
-      transformedStyles[theme],
-      (result, value) => {
-        const { block, styleId, ...requredProps } = value;
-        const propIsTrue = propKey => props[propKey] === true;
-        const hasRequredProps = every(requredProps, propIsTrue);
+    const { styles } = props;
+    const [groupedStyles] = useState(() => {
+      const tmpStyles = reduce(
+        transformedStyles[theme],
+        (result, value) => {
+          const { block, styleId, ...requredProps } = value;
+          const propIsTrue = propKey => props[propKey] === true;
+          const hasRequredProps = every(requredProps, propIsTrue);
 
-        if (!hasRequredProps) {
-          return result;
-        }
-
-        if (!result[block]) {
-          result[block] = [];
-        }
-
-        result[block].push(styleId);
-        return result;
-      },
-      {},
-    ));
-    useEffect(
-      () => {
-        const newGroupedStyles = reduce(
-          transformedStyles[theme],
-          (result, value) => {
-            const { block, styleId, ...requredProps } = value;
-            const propIsTrue = propKey => props[propKey] === true;
-            const hasRequredProps = every(requredProps, propIsTrue);
-
-            if (!hasRequredProps) {
-              return result;
-            }
-
-            if (!result[block]) {
-              result[block] = [];
-            }
-
-            result[block].push(styleId);
+          if (!hasRequredProps) {
             return result;
-          },
-          {},
-        );
-        setGroupedStyles(newGroupedStyles);
-      },
-      [props.active],
-    );
+          }
+
+          if (!result[block]) {
+            result[block] = [];
+          }
+
+          result[block].push(styleId);
+          return result;
+        },
+        {},
+      );
+
+      if (styles) {
+        return mergeWith({}, tmpStyles, styles, customizer);
+      }
+
+      return tmpStyles;
+    });
+
+    // useEffect(
+    //   () => {
+    //     const newGroupedStyles = reduce(
+    //       transformedStyles[theme],
+    //       (result, value) => {
+    //         const { block, styleId, ...requredProps } = value;
+    //         const propIsTrue = propKey => props[propKey] === true;
+    //         const hasRequredProps = every(requredProps, propIsTrue);
+    //
+    //         if (!hasRequredProps) {
+    //           return result;
+    //         }
+    //
+    //         if (!result[block]) {
+    //           result[block] = [];
+    //         }
+    //
+    //         result[block].push(styleId);
+    //         return result;
+    //       },
+    //       {},
+    //     );
+    //     setGroupedStyles(newGroupedStyles);
+    //   },
+    //   [props.active],
+    // );
 
     return groupedStyles;
   };

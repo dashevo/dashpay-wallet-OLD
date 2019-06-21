@@ -1,35 +1,50 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ */
+
+// External dependencies
 import React from 'react';
 import { View, Text } from 'react-native';
-import { Image } from 'hooks/Image';
-import { DashIcon } from 'hooks/Icon';
+
+// Internal dependencies
+import Image from 'hooks/Image';
+import Icon from 'hooks/Icon';
+import type { User } from 'state/types';
 import useAvatar from './useAvatar';
 
-function Avatar(props) {
-  const {
-    bind, firstInitial, hasDisplayName, hasImage, styles,
-  } = useAvatar(props);
+type Props = {
+  user: User,
+};
 
-  if (hasImage) {
-    return (
-      <View style={styles.container}>
-        <Image style={styles.image} {...bind} />
-      </View>
-    );
+const Avatar = React.memo((props: Props) => {
+  const { bind, state, styles } = useAvatar(props);
+  const { letter } = state.context;
+
+  switch (state.value) {
+    case 'image':
+      return (
+        <View style={styles.container}>
+          <Image style={styles.image} {...bind} />
+        </View>
+      );
+
+    case 'text':
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>{letter}</Text>
+        </View>
+      );
+
+    case 'icon':
+      return (
+        <View style={styles.container}>
+          <Icon style={styles.icon} name="dash" />
+        </View>
+      );
+
+    default:
+      return null;
   }
-
-  if (hasDisplayName) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{firstInitial}</Text>
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <DashIcon style={styles.icon} />
-    </View>
-  );
-}
+});
 
 export default Avatar;

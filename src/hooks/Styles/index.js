@@ -3,4 +3,5 @@
  */
 
 export { default as makeStyles } from './makeStyles';
+export { default as createUseStyles } from './makeStyles';
 export { default as parse } from './parse';

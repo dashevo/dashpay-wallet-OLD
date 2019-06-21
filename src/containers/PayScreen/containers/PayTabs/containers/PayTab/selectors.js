@@ -13,13 +13,7 @@ export default createSelector(
   alternativeCurrencySelector,
   sentPaymentsSelector,
   dashAmountSelector,
-  (
-    recipient,
-    contactSelector,
-    alternativeCurrency,
-    sentPayments,
-    dashAmount,
-  ) => {
+  (recipient, contactSelector, alternativeCurrency, sentPayments, dashAmount) => {
     let transactions = sentPayments.byRecipients[recipient] || [];
 
     const receiver = contactSelector(recipient) || {};
@@ -45,6 +39,11 @@ export default createSelector(
       transactions,
       receiver,
       sender,
+      user: {
+        // Tmp
+        displayName: receiver.name || recipient,
+        imageURL: receiver.image,
+      },
       initialValues: {
         dashAmount,
         fiatAmount,

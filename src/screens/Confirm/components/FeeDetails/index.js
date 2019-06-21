@@ -8,7 +8,7 @@ import { View, Text } from 'react-native';
 import { FormattedNumber } from 'react-intl';
 
 // Internal dependencies
-import { Icon } from 'hooks/Icon';
+import Icon from 'hooks/Icon';
 import useStyles from './useStyles';
 
 type Props = {

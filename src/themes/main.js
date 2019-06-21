@@ -3,9 +3,12 @@
  */
 
 // External dependencies
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const DEVICE_SCALE = Dimensions.get('window').width / 375;
+// Internal dependencies
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'constants';
+
+const DEVICE_SCALE = SCREEN_WIDTH / 375;
 
 function normalize(size) {
   return Math.round(DEVICE_SCALE * size);
@@ -30,6 +33,9 @@ export const primary = '#088BE2';
 export const secondary = '#555';
 
 export const whiteAlpha50 = 'rgba(255, 255, 255, 0.5)';
+
+export const screenHeight = SCREEN_HEIGHT;
+export const screenWidth = SCREEN_WIDTH;
 
 // Typography
 //
@@ -60,22 +66,6 @@ export const avatarLgSize = normalize(120);
 export const avatarSmBorderRadius = normalize(24);
 export const avatarSmFontSize = normalize(20);
 export const avatarSmSize = normalize(40);
-
-// Avatar primary
-export const avatarPrimaryBackgroundColor = primary;
-export const avatarPrimaryBorderColor = primary;
-export const avatarPrimaryColor = white;
-
-// Avatar secondary
-export const avatarSecondaryBackgroundColor = secondary;
-export const avatarSecondaryBorderColor = secondary;
-export const avatarSecondaryColor = white;
-
-// Avatar Cover ***
-export const avatarCoverBorderRadius = normalize(0);
-export const avatarCoverFontSize = normalize(100);
-export const avatarCoverHeight = normalize(375 * 0.6666666666666667);
-export const avatarCoverWidth = normalize(375);
 
 // Number Pad
 //

@@ -7,7 +7,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 // Internal dependencies
-import { Icon } from 'hooks/Icon';
+import Icon from 'hooks/Icon';
 import useStyles from './useStyles';
 
 type Props = {

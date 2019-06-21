@@ -6,8 +6,8 @@
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
 // Internal dependencies
-import DashPay from 'assets/fonts/DashPay.json';
+import DashPayFontIcon from 'assets/fonts/DashPay.json';
 
-const Icon = createIconSetFromIcoMoon(DashPay);
+const Icon = createIconSetFromIcoMoon(DashPayFontIcon);
 
 export default Icon;

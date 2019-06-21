@@ -3,7 +3,7 @@ export default {
     flex: 1,
   },
   contentContainerStyle: {
-    paddingHorizontal: 24,
+    padding: 24,
   },
   transactionRow: {
     marginTop: 250,

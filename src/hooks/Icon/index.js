@@ -2,5 +2,8 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
-export { default as Icon } from './Icon';
+import Icon from './Icon';
+
 export { default as DashIcon } from './DashIcon';
+
+export default Icon;

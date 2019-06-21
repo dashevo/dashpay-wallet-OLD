@@ -6,7 +6,7 @@ import ScrollView from 'components/ScrollView';
 import Form from 'components/Form';
 import View from 'components/View';
 import SlideInUp from './components/SlideInUp';
-import ImageField from './components/ImageField';
+import ProfilePicture from './components/ProfilePicture';
 import AmountField from './components/AmountField';
 import Transactions from './components/Transactions';
 import defaults from './defaults';
@@ -75,7 +75,7 @@ class PayTab extends React.Component<Props, State> {
           <SlideInUp fromValue={100}>
             <Form {...this.state}>
               <View style={styles.row}>
-                <ImageField {...this.props} />
+                <ProfilePicture {...this.props} />
               </View>
               <View style={styles.row}>
                 <AmountField />
