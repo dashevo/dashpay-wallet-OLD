@@ -4,7 +4,7 @@
 
 // External dependencies
 import React, { useMemo } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { useMachine } from '@xstate/react';
 import posed, { Transition } from 'react-native-pose';
 
@@ -22,6 +22,7 @@ type Props = {
   onRequest: Function,
   onSuccess: Function,
   onFailure: Function,
+  user: Object,
 };
 
 // This is a tmp until we find a final solution for this issue
@@ -50,8 +51,6 @@ function SwipeButton({
 }: Props) {
   const translate = useTranslate();
   const styles = useStyles();
-
-  console.log(user);
 
   const memoMachine = useMemo(() => payMachine.withConfig({
     guards: {

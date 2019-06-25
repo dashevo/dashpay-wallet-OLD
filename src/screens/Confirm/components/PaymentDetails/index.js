@@ -15,6 +15,7 @@ import useStyles from './useStyles';
 type Props = {
   dashAmount: number,
   displayName: string,
+  destinationAddress: string,
 };
 
 function PaymentDetails(props: Props) {
