@@ -12,6 +12,7 @@ import posed, { Transition } from 'react-native-pose';
 import useTranslate from 'hooks/Translate';
 import { SCREEN_WIDTH } from 'constants';
 import Swipeable from './components/Swipeable';
+import ProfilePicture from './components/ProfilePicture';
 import Pulse from './components/Pulse';
 import Dots from './components/Dots';
 import payMachine from './useMachine';
@@ -31,7 +32,7 @@ const SlideInOut = posed.View({
     transition: () => ({
       type: 'keyframes',
       values: [-SCREEN_WIDTH, 0],
-      duration: 2000,
+      duration: 1000,
     }),
   },
   exit: {
@@ -39,22 +40,25 @@ const SlideInOut = posed.View({
     transition: () => ({
       type: 'keyframes',
       values: [0, SCREEN_WIDTH],
-      duration: 2000,
+      duration: 1000,
     }),
   },
 });
 
-function SwipeButton({ onRequest, onSuccess, onFailure }: Props) {
+function SwipeButton({
+  onRequest, onSuccess, onFailure, user,
+}: Props) {
   const translate = useTranslate();
-
   const styles = useStyles();
+
+  console.log(user);
 
   const memoMachine = useMemo(() => payMachine.withConfig({
     guards: {
       maxAttempts: ctx => ctx.attempts >= 3,
     },
     delays: {
-      TIMEOUT: 10000,
+      TIMEOUT: 5000,
     },
     actions: {
       animateNextTransition: () => {},
@@ -81,10 +85,7 @@ function SwipeButton({ onRequest, onSuccess, onFailure }: Props) {
             <SlideInOut key="item-1">
               <Swipeable onSwiped={handleSwiped} enabled={state.matches('idle')}>
                 <View style={styles.button}>
-                  <Image
-                    style={styles.image}
-                    source={{ uri: 'https://api.adorable.io/avatars/285/anonymous.png' }}
-                  />
+                  <ProfilePicture user={user} />
                   <View style={styles.col}>
                     <Text style={styles.text}>
                       {translate(state.matches('idle') ? 'Slide to Pay' : 'SENDING')}

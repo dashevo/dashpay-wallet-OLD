@@ -36,7 +36,7 @@ function Confirm(props: ConfirmProps) {
   const styles = useStyles();
 
   const { animatedValue, goBack, params } = navigation;
-  const { onConfirmation, ...rest } = params;
+  const { onConfirmation, user, ...rest } = params;
 
   const overlayStyle = [
     styles.overlay,
@@ -84,7 +84,7 @@ function Confirm(props: ConfirmProps) {
   }
 
   async function handleRequest() {
-    await delay(10000); // Tmp
+    await delay(1000);
     return onConfirmation();
   }
 
@@ -110,6 +110,7 @@ function Confirm(props: ConfirmProps) {
               onRequest={handleRequest}
               onSuccess={handleSuccess}
               onFailure={handleFailure}
+              user={user}
             />
           </View>
           <View style={styles.triangle} />
