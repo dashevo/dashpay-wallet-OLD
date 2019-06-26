@@ -15,10 +15,12 @@ import useStyles from './useStyles';
 type Props = {
   dashAmount: number,
   displayName: string,
+  destinationAddress: string,
 };
 
 function PaymentDetails(props: Props) {
-  const { dashAmount = 100, displayName = 'Anonymous' } = props;
+  const { destinationAddress } = props;
+  const { dashAmount = 100, displayName = destinationAddress } = props;
   const translate = useTranslate();
   const styles = useStyles();
   return (
@@ -35,7 +37,7 @@ function PaymentDetails(props: Props) {
       </View>
       <View style={styles.divider} />
       <View style={styles.row}>
-        <Text style={styles.text}>
+        <Text style={styles.text} numberOfLines={1}>
           {translate('To')}
           {': '}
           {displayName}
