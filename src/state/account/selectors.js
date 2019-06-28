@@ -22,6 +22,6 @@ export const currentUserSelector = createSelector(
   ({ username }) => ({
     username,
     address: username,
-    image: `https://api.adorable.io/avatars/285/${username}.png`,
+    image: 'https://api.adorable.io/avatars/285/DashPay.png',
   }),
 );

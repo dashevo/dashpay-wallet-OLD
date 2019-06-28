@@ -29,22 +29,22 @@ export const sendRequest = address => (dispatch, getState, walletlib) => {
 };
 
 export const getPendingRequests = () => (dispatch, getState, walletlib) => {
-  const {
-    account: { dashPayDap },
-  } = walletlib;
+  // const {
+  //   account: { dashPayDap },
+  // } = walletlib;
   return dispatch({
     types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
-    asyncTask: () => {} // dashPayDap.contact.getAll(), // dashPayDap.contactRequest.getAllPending
+    asyncTask: () => {}, // dashPayDap.contactRequest.getAllPending(),
   });
 };
 
 export const getContacts = () => (dispatch, getState, walletlib) => {
-  const {
-    account: { dashPayDap },
-  } = walletlib;
+  // const {
+  //   account: { dashPayDap },
+  // } = walletlib;
   return dispatch({
     types: CONTACTS_GET_CONTACTS_ASYNC,
-    asyncTask: () => dashPayDap.contact.getAll(),
+    asyncTask: () => {}, // dashPayDap.contact.getAll(),
   });
 };
 

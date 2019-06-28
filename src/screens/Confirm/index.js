@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Animated from 'react-native-reanimated';
 
 // Internal dependencies
+import type { User } from 'state/types';
 import { SCREEN_HEIGHT } from 'constants';
 import BackButton from './components/BackButton';
 import PaymentDetails from './components/PaymentDetails';
@@ -23,6 +24,7 @@ const { interpolate } = Animated;
 
 type ConfirmProps = {
   navigation: Object,
+  currentUser: User,
 };
 
 // Tmp
