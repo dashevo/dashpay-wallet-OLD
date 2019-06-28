@@ -34,7 +34,7 @@ export const getPendingRequests = () => (dispatch, getState, walletlib) => {
   } = walletlib;
   return dispatch({
     types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
-    asyncTask: () => dashPayDap.contactRequest.getAllPending(),
+    asyncTask: () => {} // dashPayDap.contact.getAll(), // dashPayDap.contactRequest.getAllPending
   });
 };
 

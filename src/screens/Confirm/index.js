@@ -16,6 +16,7 @@ import FeeDetails from './components/FeeDetails';
 import ConfirmButton from './components/ConfirmButton';
 import useNavigation from './useNavigation';
 import useStyles from './useStyles';
+import selector from './selectors';
 import actions from './actions';
 
 const { interpolate } = Animated;
@@ -36,7 +37,8 @@ function Confirm(props: ConfirmProps) {
   const styles = useStyles();
 
   const { animatedValue, goBack, params } = navigation;
-  const { onConfirmation, user, ...rest } = params;
+  const { onConfirmation, ...rest } = params;
+  const { currentUser } = props;
 
   const overlayStyle = [
     styles.overlay,
@@ -110,7 +112,7 @@ function Confirm(props: ConfirmProps) {
               onRequest={handleRequest}
               onSuccess={handleSuccess}
               onFailure={handleFailure}
-              user={user}
+              user={currentUser}
             />
           </View>
           <View style={styles.triangle} />
@@ -124,6 +126,6 @@ function Confirm(props: ConfirmProps) {
 }
 
 export default connect(
-  null,
+  selector,
   actions,
 )(Confirm);

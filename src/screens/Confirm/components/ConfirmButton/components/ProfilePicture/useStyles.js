@@ -17,6 +17,10 @@ const styles = () => ({
     width: 50,
   },
   image: {
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 0,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 0,
     height: 50,
     width: 50,
   },
