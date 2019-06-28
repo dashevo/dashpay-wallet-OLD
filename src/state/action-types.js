@@ -4,7 +4,8 @@ const createAsyncStatusConstants = baseConstant => ({
   FAILURE: `${baseConstant}_FAILURE`,
 });
 
-export const FETCH_CURRENT_USER_ASYNC = createAsyncStatusConstants("FETCH_CURRENT_USER")
+export const FETCH_CURRENT_USER_ASYNC = createAsyncStatusConstants('FETCH_CURRENT_USER');
+
 
 export const CREATE_SEND_PAYMENT_TRANSACTION_REQUEST = 'CREATE_SEND_PAYMENT_TRANSACTION_REQUEST';
 export const CREATE_SEND_PAYMENT_TRANSACTION_SUCCESS = 'CREATE_SEND_PAYMENT_TRANSACTION_SUCCESS';
