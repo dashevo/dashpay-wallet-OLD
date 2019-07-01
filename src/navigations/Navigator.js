@@ -10,8 +10,8 @@ import {
 import { createAppContainer, StackRouter, createNavigator } from 'react-navigation';
 import { Transitioner } from 'react-navigation-stack';
 import NavBar from 'components/NavBar';
-import routes from './routes';
 
+import routes from './routes';
 import MainMenu from './MainMenu';
 import { forVertical } from './config';
 
