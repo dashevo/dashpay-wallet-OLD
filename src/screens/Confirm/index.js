@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Animated from 'react-native-reanimated';
 
 // Internal dependencies
+import type { User } from 'state/types';
 import { SCREEN_HEIGHT } from 'constants';
 import BackButton from './components/BackButton';
 import PaymentDetails from './components/PaymentDetails';
@@ -16,12 +17,14 @@ import FeeDetails from './components/FeeDetails';
 import ConfirmButton from './components/ConfirmButton';
 import useNavigation from './useNavigation';
 import useStyles from './useStyles';
+import selector from './selectors';
 import actions from './actions';
 
 const { interpolate } = Animated;
 
 type ConfirmProps = {
   navigation: Object,
+  currentUser: User,
 };
 
 // Tmp
@@ -36,7 +39,8 @@ function Confirm(props: ConfirmProps) {
   const styles = useStyles();
 
   const { animatedValue, goBack, params } = navigation;
-  const { onConfirmation, user, ...rest } = params;
+  const { onConfirmation, ...rest } = params;
+  const { currentUser } = props;
 
   const overlayStyle = [
     styles.overlay,
@@ -110,7 +114,7 @@ function Confirm(props: ConfirmProps) {
               onRequest={handleRequest}
               onSuccess={handleSuccess}
               onFailure={handleFailure}
-              user={user}
+              user={currentUser}
             />
           </View>
           <View style={styles.triangle} />
@@ -124,6 +128,6 @@ function Confirm(props: ConfirmProps) {
 }
 
 export default connect(
-  null,
+  selector,
   actions,
 )(Confirm);

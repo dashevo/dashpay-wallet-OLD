@@ -57,7 +57,7 @@ function SwipeButton({
       maxAttempts: ctx => ctx.attempts >= 3,
     },
     delays: {
-      TIMEOUT: 5000,
+      TIMEOUT: 3500,
     },
     actions: {
       animateNextTransition: () => {},
