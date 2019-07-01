@@ -57,7 +57,7 @@ function SwipeButton({
       maxAttempts: ctx => ctx.attempts >= 3,
     },
     delays: {
-      TIMEOUT: 3500,
+      TIMEOUT: 3000,
     },
     actions: {
       animateNextTransition: () => {},
@@ -102,7 +102,7 @@ function SwipeButton({
           {state.matches({ fulfilled: 'success' }) && (
             <SlideInOut key="item-2">
               <View style={styles.feedback}>
-                <Text style={styles.feedbackText}>{translate('Payment sent')}</Text>
+                <Text style={styles.feedbackText}>{translate('Payment Sent')}</Text>
               </View>
             </SlideInOut>
           )}
