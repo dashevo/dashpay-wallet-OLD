@@ -11,6 +11,7 @@ import transactions from './transactions';
 import contacts from './contacts/reducer';
 import payments from './payments/reducer';
 import profiles from './profiles/reducer';
+import user from './user/reducer';
 
 export default combineReducers({
   camera,
@@ -24,4 +25,5 @@ export default combineReducers({
   contacts,
   payments,
   profiles,
+  user,
 });
