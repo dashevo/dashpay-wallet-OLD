@@ -1,4 +1,12 @@
-import * as ActionsTypes from './constants';
+import {
+  ACCOUNTS_ACCOUNT_CREATED,
+  ACCOUNTS_REGISTER_BUSER_ASYNC,
+  ACCOUNTS_RECEIVE_BALANCE,
+  ACCOUNTS_SET_MNEMONIC,
+  ACCOUNTS_SET_USERNAME,
+  ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC,
+  ACCOUNTS_CHANGE_NETWORK_ASYNC,
+} from 'state/action-types';
 
 // TODO: Code refactoring.
 //
@@ -30,7 +38,7 @@ import * as ActionsTypes from './constants';
 
 export const initialState = {
   network: 'testnet',
-  username: 'dashpayteam',
+  username: 'dashpayteamdev',
   isRegisterRequestSent: false,
   mnemonic: 'light point battle foam find motion true because genre people banana fit',
   unusedAddress: '',
@@ -39,46 +47,46 @@ export const initialState = {
 
 const account = (state = initialState, action) => {
   switch (action.type) {
-    case ActionsTypes.ACCOUNT_CREATED:
-    case ActionsTypes.SET_MNEMONIC:
+    case ACCOUNTS_ACCOUNT_CREATED:
+    case ACCOUNTS_SET_MNEMONIC:
       return {
         ...state,
         mnemonic: action.mnemonic,
       };
-    case ActionsTypes.SET_USERNAME:
+    case ACCOUNTS_SET_USERNAME:
       return {
         ...state,
         username: action.username,
       };
-    case ActionsTypes.RECEIVE_BALANCE:
+    case ACCOUNTS_RECEIVE_BALANCE:
       return {
         ...state,
         balance: action.response,
       };
-    case ActionsTypes.GET_UNUSED_ADDRESS_SUCCESS:
+    case ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC.SUCCESS:
       return {
         ...state,
         unusedAddress: action.response.address,
       };
-    case ActionsTypes.CHANGE_NETWORK_SUCCESS:
+    case ACCOUNTS_CHANGE_NETWORK_ASYNC.SUCCESS:
       return {
         ...state,
         network: action.response.toString(),
       };
-    case ActionsTypes.REGISTER_USERNAME_REQUEST:
+    case ACCOUNTS_REGISTER_BUSER_ASYNC.REQUEST:
       return {
         ...state,
         isRegisterRequestSent: true,
       };
-    case ActionsTypes.REGISTER_USERNAME_SUCCESS:
-      alert('Success');
+    case ACCOUNTS_REGISTER_BUSER_ASYNC.SUCCESS:
+      alert('BUser registration - success');
       return {
         ...state,
         isRegisterRequestSent: false,
         username: action.username,
       };
-    case ActionsTypes.REGISTER_USERNAME_FAILURE:
-      alert(`Error: ${action.error.message}`);
+    case ACCOUNTS_REGISTER_BUSER_ASYNC.FAILURE:
+      alert(`BUser registration - error: ${action.error.message}`);
       return {
         ...state,
         isRegisterRequestSent: false,

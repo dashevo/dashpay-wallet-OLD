@@ -26,12 +26,12 @@ export const sentRequestsSelector = createSelector(
 
 export const receivedRequestsUsernamesSelector = createSelector(
   receivedRequestsSelector,
-  receivedContactRequests => receivedContactRequests.map(({ address }) => address),
+  receivedContactRequests => receivedContactRequests.map(({ userId }) => userId),
 );
 
 export const sentContactRequestsUsernamesSelector = createSelector(
   sentRequestsSelector,
-  sentContactRequests => sentContactRequests.map(({ address }) => address),
+  sentContactRequests => sentContactRequests.map(({ userId }) => userId),
 );
 
 export const contactSelectorFactory = createSelector(

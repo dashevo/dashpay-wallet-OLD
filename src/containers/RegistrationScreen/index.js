@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-native';
-import { NavigationActions, StackActions } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 import { Formik } from 'formik';
 import {
   View,
@@ -27,9 +27,15 @@ class RegistrationScreen extends React.Component<Props> {
   }
 
   handleSubmit(formValues: FormValues) {
-    const { register } = this.props;
+    const { registerBUser, registerProfile } = this.props;
     const { username } = formValues;
-    register(username);
+    const avatar = `https://api.adorable.io/avatars/285/${username}.png`;
+    const bio = `I am ${username}, my bio is pretty awesome`;
+    registerBUser(username).then(() => registerProfile(
+      avatar,
+      bio,
+      username,
+    ));
   }
 
   render() {

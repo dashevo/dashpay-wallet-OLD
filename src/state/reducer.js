@@ -2,7 +2,7 @@
 import { combineReducers } from 'redux';
 import camera from './camera';
 import cameraRoll from './cameraRoll';
-import account from './account';
+import account from './account/reducer';
 import settings from './settings';
 import payment from './payment';
 import alternativeCurrency from './alternativeCurrency/reducer';
