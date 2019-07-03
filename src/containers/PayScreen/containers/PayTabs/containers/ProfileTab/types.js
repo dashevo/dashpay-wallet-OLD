@@ -2,9 +2,8 @@
 import type Navigation from 'types/navigation';
 
 export type State = {
-  address: string,
-  image: string,
-  name: string,
+  username: string,
+  avatarUrl: string,
 };
 
 export type Props = {

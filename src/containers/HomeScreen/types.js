@@ -1,8 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
 export type Props = {
-  
+  user: Object,
+  invalidateAlternativeCurrencyRate: Function,
+  fetchAlternativeCurrencyRateIfNeeded: Function,
 };

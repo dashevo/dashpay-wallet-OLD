@@ -23,7 +23,7 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
             <Avatar sm user={sender} />
           </View>
           <View style={styles.col}>
-            <Text style={styles.title}>{sender.displayName}</Text>
+            <Text style={styles.title}>{sender.username}</Text>
             <Text style={styles.subtitle}>{translate('Requesting Contact')}</Text>
           </View>
         </View>
@@ -35,7 +35,7 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
               <Avatar sm user={receiver} />
             </View>
             <View style={styles.col}>
-              <Text style={styles.title}>{receiver.displayName}</Text>
+              <Text style={styles.title}>{receiver.username}</Text>
               <Text style={styles.subtitle}>{translate('Pending Request')}</Text>
             </View>
           </View>
@@ -55,12 +55,12 @@ function ContactRequestSent({ sender, receiver, timestamp }) {
 ContactRequestSent.propTypes = {
   timestamp: PropTypes.string.isRequired,
   sender: PropTypes.shape({
-    displayName: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
   }).isRequired,
   receiver: PropTypes.shape({
-    displayName: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
   }).isRequired,
 };
 

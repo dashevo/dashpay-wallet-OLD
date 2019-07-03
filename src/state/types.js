@@ -6,8 +6,8 @@
 import { FETCH_CURRENT_USER_ASYNC } from './action-types';
 
 export type User = {
-  displayName?: string,
-  imageURL?: string,
+  username?: string,
+  avatarUrl?: string,
 };
 
 export type Action = {

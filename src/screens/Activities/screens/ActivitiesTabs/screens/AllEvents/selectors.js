@@ -11,44 +11,51 @@ export default createSelector(
   sentRequestsSelector,
   currentUserSelector,
   (receivedContactRequests, sentContactRequests, currentUser) => {
-    const received = receivedContactRequests.map(item => ({
+    const received = receivedContactRequests.map(({
+      userId,
+      username,
+      avatarUrl,
+      status,
+    }) => ({
       type: 'RECEIVED',
 
       // We need a unique identifier to use as a key in the list.
       // This may be the transaction ID. This will be fixed with the redux schema.
-      id: item.address,
+      id: userId,
 
       // this is a tmp solution until we are able to use react-intl with hooks.
       timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
 
-      status: item.status,
+      status,
       sender: {
-        address: item.address,
-        imageURL: item.image,
-        displayName: item.name,
+        avatarUrl,
+        username,
       },
     }));
 
-    const sent = sentContactRequests.map(item => ({
+    const sent = sentContactRequests.map(({
+      userId,
+      username,
+      avatarUrl,
+      status,
+    }) => ({
       type: 'SENT',
 
       // We need a unique identifier to use as a key in the list.
       // This may be the transaction ID. This will be fixed with the redux schema.
-      id: item.address,
+      id: userId,
 
       // this is a tmp solution until we are able to use react-intl with hooks.
       timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
 
-      status: item.status,
+      status,
       sender: {
-        address: currentUser.address,
-        imageURL: currentUser.image,
-        displayName: currentUser.username,
+        avatarUrl: currentUser.avatarUrl,
+        username: currentUser.username,
       },
       receiver: {
-        address: item.address,
-        imageURL: item.image,
-        displayName: item.name,
+        avatarUrl,
+        username,
       },
     }));
 

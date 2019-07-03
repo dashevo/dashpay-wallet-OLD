@@ -1,11 +1,5 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
-import * as React from 'react';
+// @flow
+import React from 'react';
 import {
   FormattedTime,
   FormattedNumber,
@@ -13,23 +7,11 @@ import {
 
 // Internal dependencies
 import Card from 'components/Card';
-import Avatar from 'components/Avatar';
+import Avatar from 'hooks/Avatar';
 import Touchable from 'components/Touchable';
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
-
-function SmallAvatar(props) {
-  return (
-    <Avatar {...props} sm>
-      {({ styles, children }) => (
-        <View style={styles.container}>
-          <View style={styles.body}>{children}</View>
-        </View>
-      )}
-    </Avatar>
-  );
-}
 
 type Props = {
   item: {
@@ -67,17 +49,17 @@ function TransactionCard({ item }: Props) {
               <View style={styles.header}>
                 <View style={styles.row}>
                   <View style={styles.avatar}>
-                    <SmallAvatar name={sender.name} image={sender.image} />
+                    <Avatar user={sender} sm />
                   </View>
                   <View style={styles.metadata}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                       <Text style={styles.title} numberOfLines={1}>
-                        {sender.name}
+                        {sender.username}
                       </Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                       <Text style={styles.subtitle} numberOfLines={1}>
-                        {sender.address}
+                        {sender.username}
                       </Text>
                     </View>
                   </View>
@@ -87,10 +69,7 @@ function TransactionCard({ item }: Props) {
                 <View style={styles.highlighted}>
                   <View style={styles.row}>
                     <View style={styles.avatar}>
-                      <SmallAvatar
-                        name={receiver.name}
-                        image={receiver.image}
-                      />
+                      <Avatar user={receiver} sm />
                     </View>
                     <View style={styles.metadata}>
                       <View style={styles.row}>

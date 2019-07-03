@@ -41,15 +41,15 @@ export default createSelector(
       sender,
       user: {
         // Tmp
-        displayName: receiver.name || recipient,
-        imageURL: receiver.image,
+        username: receiver.username || recipient,
+        avatarUrl: receiver.avatarUrl,
       },
       initialValues: {
         dashAmount,
         fiatAmount,
         recipient,
-        name: '',
-        image: '',
+        username: '',
+        avatarUrl: '',
         ...receiver,
       },
     };

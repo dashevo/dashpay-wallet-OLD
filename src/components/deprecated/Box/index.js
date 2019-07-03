@@ -5,6 +5,6 @@
  */
 import { View } from 'react-native';
 
-View.displayName = 'Box';
+View.username = 'Box';
 
 export default View;

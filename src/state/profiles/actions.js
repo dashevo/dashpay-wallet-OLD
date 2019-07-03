@@ -30,7 +30,7 @@ export const search = (searchString: string) => (
 ) => dispatch({
   searchString,
   types: PROFILES_SEARCH_ASYNC,
-  // TODO: replace when we have displayName
+  // TODO: replace when we have username
   // asyncTask: () => dashPayDap.profile.get(searchString),
   asyncTask: async () => {
     const profiles = await dashPayDap.profile.getAll();

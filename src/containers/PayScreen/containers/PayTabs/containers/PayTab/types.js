@@ -2,7 +2,7 @@
 import type Navigation from 'types/navigation';
 
 interface Profile {
-  image: string,
+  avatarUrl: string,
 }
 
 export type Props = {

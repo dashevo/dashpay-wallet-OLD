@@ -6,18 +6,17 @@ const addressSelector = (state, props) => props.navigation.getParam('recipient',
 export default createSelector(
   addressSelector,
   contactSelectorFactory,
-  (address, contactSelector) => {
-    const contact = contactSelector(address) || {};
-    const { name = '', image = '' } = contact;
+  (username, contactSelector) => {
+    const contact = contactSelector(username) || {};
+    const { avatarUrl = '' } = contact;
     return {
       user: {
-        imageURL: image,
-        displayName: name,
+        avatarUrl,
+        username,
       },
       initialValues: {
-        address,
-        name,
-        image,
+        username,
+        avatarUrl,
       },
     };
   },

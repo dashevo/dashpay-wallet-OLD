@@ -1,60 +1,42 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
+// @flow
 import * as React from 'react';
-import { FormattedDate } from 'react-intl';
-import { FormattedTime } from 'react-intl';
-import { FormattedNumber } from 'react-intl';
+import { FormattedTime, FormattedNumber } from 'react-intl';
 
-// Internal dependencies
 import Card from 'components/Card';
-import Avatar from 'components/Avatar';
+import Avatar from 'hooks/Avatar';
 import Touchable from 'components/Touchable';
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
+import type { Props } from './types';
 
-function SmallAvatar(props) {
-  return (
-    <Avatar {...props} sm>
-      {({ bind, touched, styles, children }) => (
-        <View style={styles.container}>
-          <View style={styles.body}>{children}</View>
-        </View>
-      )}
-    </Avatar>
-  );
-}
-
-function TransactionCard(props) {
-  const { item } = props;
-  const { dashAmount, fiatAmount, receiver, sender, timestamp } = item;
-  const dashSymbol = 'dash';
+const TransactionCard = (props: Props) => {
+  const {
+    item: {
+      dashAmount, fiatAmount, receiver, sender, timestamp,
+    },
+  } = props;
   const fiatSymbol = 'usd';
   return (
     <Card onPress={() => {}}>
-      {({ bind, touched, styles }) => (
+      {({ bind, styles }) => (
         <View style={styles.tmp}>
           <Touchable {...bind}>
             <View style={styles.container}>
               <View style={styles.header}>
                 <View style={styles.row}>
                   <View style={styles.avatar}>
-                    <SmallAvatar name={sender.name} image={sender.image} />
+                    <Avatar user={sender} sm />
                   </View>
                   <View style={styles.metadata}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                       <Text style={styles.title} numberOfLines={1}>
-                        {sender.name}
+                        {sender.username}
                       </Text>
                     </View>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                       <Text style={styles.subtitle} numberOfLines={1}>
-                        {sender.address}
+                        {sender.username}
                       </Text>
                     </View>
                   </View>
@@ -64,10 +46,7 @@ function TransactionCard(props) {
                 <View style={styles.highlighted}>
                   <View style={styles.row}>
                     <View style={styles.avatar}>
-                      <SmallAvatar
-                        name={receiver.name}
-                        image={receiver.image}
-                      />
+                      <Avatar user={receiver} sm />
                     </View>
                     <View style={styles.metadata}>
                       <View style={styles.row}>
@@ -77,7 +56,7 @@ function TransactionCard(props) {
                         </FormattedNumber>
                       </View>
                       <View style={styles.row}>
-                        <Icon style={styles.icon} name={dashSymbol} />
+                        <Icon style={styles.icon} name="dash" />
                         <FormattedNumber value={dashAmount}>
                           {value => <Text style={styles.text}>{value}</Text>}
                         </FormattedNumber>
@@ -91,9 +70,13 @@ function TransactionCard(props) {
                   value={timestamp}
                   year="numeric"
                   month="long"
-                  day="numeric">
+                  day="numeric"
+                >
                   {formattedTime => (
-                    <Text style={styles.small}>Payed | {formattedTime}</Text>
+                    <Text style={styles.small}>
+                      Payed |
+                      {formattedTime}
+                    </Text>
                   )}
                 </FormattedTime>
               </View>
@@ -103,6 +86,6 @@ function TransactionCard(props) {
       )}
     </Card>
   );
-}
+};
 
 export default TransactionCard;

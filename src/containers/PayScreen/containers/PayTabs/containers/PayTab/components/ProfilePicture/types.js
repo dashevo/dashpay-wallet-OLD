@@ -2,5 +2,5 @@
 export type Props = {
   name: ?string,
   recipient: string,
-  image: string,
+  avatarUrl: string,
 }
