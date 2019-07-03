@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import { useMemo } from 'react';
 import { Machine } from 'xstate';
 import { useMachine } from '@xstate/react';
@@ -57,21 +52,21 @@ const machine = Machine({
 // We should soon have 'createUseMachine' custom hook.
 export default (props) => {
   const { user = {} } = props;
-  const { imageURL = '', displayName = '' } = user;
+  const { avatarUrl = '', username = '' } = user;
 
   const memoMachine = useMemo(
     () => machine
       .withConfig({
         guards: {
           hasDisplayName: ctx => !!ctx.letter,
-          hasImage: ctx => !!ctx.imageURL,
+          hasImage: ctx => !!ctx.avatarUrl,
         },
       })
       .withContext({
-        letter: displayName.charAt(0).toUpperCase(),
-        imageURL,
+        letter: username.charAt(0).toUpperCase(),
+        avatarUrl,
       }),
-    [imageURL, displayName],
+    [avatarUrl, username],
   );
 
   return useMachine(memoMachine);

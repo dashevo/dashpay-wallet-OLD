@@ -8,11 +8,11 @@ export default createSelector(
   contactSelectorFactory,
   (recipient, contactSelector) => {
     const contact = contactSelector(recipient) || {};
-    const { name = '', image = '' } = contact;
+    const { username = '', avatarUrl = '' } = contact;
     return {
       recipient,
-      image,
-      name,
+      avatarUrl,
+      username,
     };
   },
 );

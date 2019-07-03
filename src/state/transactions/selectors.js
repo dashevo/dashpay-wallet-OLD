@@ -12,17 +12,17 @@ export const selectTransactions = (state) => {
     }
     // TODO don't assume we receive every TX output
     const dashSat = item.to.reduce((accumulator, { valueSat }) => (accumulator + valueSat), 0);
-    let sender = { name: state.account.username, image: null };
-    let receiver = { name: state.account.username, image: null };
+    let sender = { username: state.account.username, avatarUrl: null };
+    let receiver = { username: state.account.username, avatarUrl: null };
     let typeText = 'OTHER';
     if (item.type === TXTYPES.RECEIVED) { // TODO refer to an imported constant
       typeText = 'RECEIVED';
       const fromAddress = item.from.length > 1 ? 'multiple addresses' : item.from[0].address;
-      sender = { name: 'Unidentified Sender', image: null, address: fromAddress };
+      sender = { username: 'Unidentified Sender', avatarUrl: null, address: fromAddress };
     } else if (item.type === TXTYPES.SENT) { // TODO refer to an imported constant
       typeText = 'PAID';
       const toAddress = item.to.length > 1 ? 'multiple recipients' : item.to[0].address;
-      receiver = { name: 'Unidentified Recipient', image: null, address: toAddress };
+      receiver = { username: 'Unidentified Recipient', avatarUrl: null, address: toAddress };
     }
     const dashAmount = dashSat.toString(10).padStart(9, '0').replace(/(\d{8})$/, '.$1').replace(/\.?0+$/, '');
     const alternativeCurrency = alternativeCurrencySelector(state);

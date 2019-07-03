@@ -37,6 +37,6 @@ export const sentContactRequestsUsernamesSelector = createSelector(
 export const contactSelectorFactory = createSelector(
   contactsSelector,
   items => memoize(
-    (address: string) => items.find(contact => contact.address === address),
+    (username: string) => items.find(contact => contact.username === username),
   ),
 );

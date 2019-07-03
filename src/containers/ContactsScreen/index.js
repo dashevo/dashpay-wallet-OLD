@@ -58,8 +58,6 @@ class ContactsScreen extends React.Component<Props, State> {
     clearFilter();
   }
 
-  keyExtractor = ({ address }) => address;
-
   async handlePress(params: string) {
     const { navigation } = this.props;
     navigation.navigate('PayTabs', params);
@@ -106,7 +104,7 @@ class ContactsScreen extends React.Component<Props, State> {
         renderSectionHeader={this.renderListHeader}
         ListFooterComponent={this.renderListFooter}
         ListEmptyComponent={this.renderListEmpty}
-        keyExtractor={this.keyExtractor}
+        keyExtractor={({ username }) => username}
         sections={contacts}
         renderItem={this.renderItem}
         onScroll={this.scrollSinkY}

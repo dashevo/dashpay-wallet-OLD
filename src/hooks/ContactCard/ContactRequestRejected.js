@@ -22,7 +22,7 @@ function ContactRequestRejected({ sender, timestamp }) {
           <Avatar sm user={sender} />
         </View>
         <View style={styles.center}>
-          <Text style={styles.title}>{sender.displayName}</Text>
+          <Text style={styles.title}>{sender.username}</Text>
           <Text style={styles.subtitle}>{translate('Ignored from contacts')}</Text>
         </View>
       </View>
@@ -51,8 +51,8 @@ function ContactRequestRejected({ sender, timestamp }) {
 ContactRequestRejected.propTypes = {
   timestamp: PropTypes.string.isRequired,
   sender: PropTypes.shape({
-    displayName: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
   }).isRequired,
 };
 

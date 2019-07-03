@@ -6,8 +6,7 @@ import Text from 'components/Text';
 import type { Props } from './types';
 import useStyles from './useStyles';
 
-function ProfilePicture(props: Props) {
-  const { user } = props;
+const ProfilePicture = (({ user }): Props) => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -16,11 +15,11 @@ function ProfilePicture(props: Props) {
       </View>
       <View style={styles.row}>
         <Text style={styles.title} numberOfLines={1}>
-          {user.displayName}
+          {user.username}
         </Text>
       </View>
     </View>
   );
-}
+};
 
 export default ProfilePicture;

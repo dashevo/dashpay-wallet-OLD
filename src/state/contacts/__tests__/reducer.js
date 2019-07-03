@@ -13,13 +13,22 @@ describe('reducer', () => {
     });
 
     it('should handle CONTACTS_GET_CONTACTS_ASYNC.SUCCESS', () => {
+      const userId = 'testUserId';
+      const username = 'testUserName';
+      const avatarUrl = 'https://api.adorable.io/avatars/285/testUserId.png';
       const response = [{
-        $meta: { userId: 'testUserId' },
+        $meta: { userId },
+        buser: { username },
+        avatarUrl,
       }];
-      const payload = { type: CONTACTS_GET_CONTACTS_ASYNC.SUCCESS, response };
+      const payload = {
+        type: CONTACTS_GET_CONTACTS_ASYNC.SUCCESS,
+        response,
+      };
       const expectedState = [{
-        userId: 'testUserId',
-        image: 'https://api.adorable.io/avatars/285/testUserId.png',
+        username,
+        userId,
+        avatarUrl,
       }];
       expect(reducer(undefined, payload).items).toEqual(expectedState);
     });

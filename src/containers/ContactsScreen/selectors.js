@@ -18,9 +18,9 @@ const filterAndSort = (items: Array<any>, filterParams) => {
   if (filterParams.isActive) {
     const query = filterParams.query.toLowerCase();
     filteredItems = filteredItems
-      .filter(item => item.name.toLowerCase().indexOf(query) >= 0);
+      .filter(item => item.username.toLowerCase().indexOf(query) >= 0);
   }
-  return sortBy(filteredItems, 'name');
+  return sortBy(filteredItems, 'username');
 };
 
 export default createSelector(

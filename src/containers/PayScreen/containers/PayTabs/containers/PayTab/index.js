@@ -52,8 +52,8 @@ class PayTab extends React.Component<Props, State> {
       feeFiat: 0.999,
       totalFiat: values.amount,
       destinationAddress: values.recipient,
-      toAvatar: { uri: receiver.image },
-      fromAvatar: { uri: sender.image },
+      toAvatar: { uri: receiver.avatarUrl },
+      fromAvatar: { uri: sender.avatarUrl },
       onConfirmation: () => {
         form.resetForm();
         return createSendPaymentTransaction({

@@ -31,7 +31,7 @@ import {
 // user: {
 //   username: "dashpay-1",
 //   mnemonic: "runway enemy year false false obtain yard dinner",
-//   displayName: "...",
+//   username: "...",
 //   imageUrl: "...",
 //   ...
 // },

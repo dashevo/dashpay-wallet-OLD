@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 type Item = {
-  address: string,
+  username: string,
+  avatarUrl: string,
   type: string,
-  image: ?string,
   timestamp: Date,
 };
 

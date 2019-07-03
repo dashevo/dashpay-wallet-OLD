@@ -1,4 +1,5 @@
 // This file will be splitted in a few components and custom hooks.
+/* eslint-disable */
 
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -279,7 +280,7 @@ function Transition(props) {
   function handleLeave(item) {
     transition.onLeave(item);
     if (item.label === 'Yes') {
-      props.onReject(props.sender.address).then(
+      props.onReject(props.sender.username).then(
         (res) => {
           if (res.type.endsWith('FAILURE')) {
             setFailed(true);
@@ -290,7 +291,7 @@ function Transition(props) {
         },
       );
     } else {
-      props.onAccept(props.sender.address).then(
+      props.onAccept(props.sender.username).then(
         (res) => {
           if (res.type.endsWith('FAILURE')) {
             setFailed(true);
@@ -362,9 +363,9 @@ Transition.propTypes = {
   onReject: PropTypes.func.isRequired,
   onAccept: PropTypes.func.isRequired,
   sender: PropTypes.shape({
-    displayName: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
   }).isRequired,
 };
 

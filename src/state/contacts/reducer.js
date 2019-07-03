@@ -63,9 +63,13 @@ const receivedRequest = (state, action) => {
 
 const profileMapper = ({
   $meta: { userId },
+  buser: { username },
+  avatarUrl,
 }) => ({
   userId,
-  image: `https://api.adorable.io/avatars/285/${userId}.png`,
+  // username: '', // TODO: put bUser username here
+  username,
+  avatarUrl,
 });
 
 const contactRequestMapper = data => ({

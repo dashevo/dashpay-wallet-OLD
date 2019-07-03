@@ -21,21 +21,20 @@ class Item extends React.Component<Props> {
   }
 
   handlePress() {
-    const { onPress, name, address } = this.props;
+    const { onPress, username } = this.props;
     onPress({
-      name,
-      recipient: address,
+      recipient: username,
     });
   }
 
   render(): React.Element<any> {
-    const { name, state, image } = this.props;
+    const { username, state, avatarUrl } = this.props;
     return (
       <TouchableOpacity onPress={this.handlePress}>
         <View style={styles.row}>
-          <Image style={styles.image} source={{ uri: image }} />
+          <Image style={styles.image} source={{ uri: avatarUrl }} />
           <View>
-            <Text style={styles.text}>{name}</Text>
+            <Text style={styles.text}>{username}</Text>
             <Text style={styles.state}>{(state || '').toUpperCase()}</Text>
           </View>
         </View>

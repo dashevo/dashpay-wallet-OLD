@@ -15,23 +15,15 @@ function searchResults(state = {}, action) {
           avatarUrl,
           bUser: { username },
           $meta: { userId },
-        }) => {
-          const name = username;
-          const displayName = name;
-          const address = name;
-          const image = avatarUrl;
-          return {
-            ...results,
-            [name]: {
-              address,
-              userId,
-              image,
-              name,
-              bio,
-              displayName,
-            },
-          };
-        }, state);
+        }) => ({
+          ...results,
+          [username]: {
+            username,
+            userId,
+            avatarUrl,
+            bio,
+          },
+        }), state);
     case PROFILES_REGISTER_ASYNC.SUCCESS:
       alert('Profile registration - success');
       return state;

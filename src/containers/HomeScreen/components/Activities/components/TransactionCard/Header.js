@@ -2,22 +2,22 @@
 import React from 'react';
 import View from 'components/View';
 import Text from 'components/Text';
-import SmallAvatar from './SmallAvatar';
+import Avatar from 'hooks/Avatar';
 import type { ItemWithStylesProps as Props } from './types';
 
 const Header = ({
   type,
-  address,
-  image,
+  username,
+  avatarUrl,
   styles,
 }: Props) => (
   <View style={styles.header}>
     <View style={styles.row}>
-      <SmallAvatar name={address} image={image} />
+      <Avatar user={{ avatarUrl }} sm />
       <View style={styles.metadata}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={styles.title} numberOfLines={1}>
-            {address}
+            {username}
           </Text>
         </View>
         <View style={{ flex: 1, flexDirection: 'row' }}>
