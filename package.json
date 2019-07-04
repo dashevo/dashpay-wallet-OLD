@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@dashevo/dapi-client": "github:dashevo/dapi-client#v0.5.0",
-    "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap#feat/porto-js",
+    "@dashevo/dashpay-dap": "github:dashevo/dashpay-dap",
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib",
     "@xstate/react": "^0.6.1",
     "assert": "^1.1.1",
