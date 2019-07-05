@@ -2,7 +2,7 @@
 import { Wallet } from '@dashevo/wallet-lib';
 import {
   ACCOUNTS_ACCOUNT_CREATED,
-  ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC,
+  ACCOUNTS_GET_UNUSED_ADDRESS,
   ACCOUNTS_CHANGE_NETWORK_ASYNC,
   ACCOUNTS_SET_MNEMONIC,
   ACCOUNTS_SET_USERNAME,
@@ -40,8 +40,8 @@ export const changeNetwork = (networkName: string) => (
 export const getUnusedAddress = (type = 'external') => (
   dispatch, getState, { account },
 ) => dispatch({
-  types: ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC,
-  asyncTask: () => account.getUnusedAddress(type),
+  type: ACCOUNTS_GET_UNUSED_ADDRESS,
+  unusedAddress: async () => account.getUnusedAddress(type),
 });
 
 export const createAccount = () => (dispatch, getState) => {
