@@ -16,7 +16,7 @@ export const register = (
     const buser = await dashPayDap.buser.get(username);
     await buser.synchronize();
     await buser.own(dashPayDap.getBUserSigningPrivateKey());
-    const profile = dashPayDap.profile.create({
+    const profile = await dashPayDap.profile.create({
       avatar,
       bio,
     });
