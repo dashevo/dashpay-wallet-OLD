@@ -2,19 +2,27 @@
  * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
+// External dependencies
 import React from 'react';
-import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 
 // Internal dependencies
 import Avatar from 'hooks/Avatar';
 import useTranslate from 'hooks/Translate';
+import type { User } from 'state/types';
 import Transition from './Transition';
 import useStyles from './useStyles';
 
+type Props = {
+  timestamp: string,
+  onAccept: Function,
+  onReject: Function,
+  sender: User,
+};
+
 function ContactRequestReceived({
   sender, onAccept, onReject, timestamp,
-}) {
+}: Props) {
   const translate = useTranslate();
   const styles = useStyles();
 
@@ -42,15 +50,5 @@ function ContactRequestReceived({
     </View>
   );
 }
-
-ContactRequestReceived.propTypes = {
-  timestamp: PropTypes.string.isRequired,
-  onAccept: PropTypes.func.isRequired,
-  onReject: PropTypes.func.isRequired,
-  sender: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default ContactRequestReceived;

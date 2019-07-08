@@ -16,7 +16,21 @@ import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
 import Activities from 'screens/Activities';
 import Confirm from 'screens/Confirm';
 
+import TransactionCard from 'hooks/TransactionCard';
+import React from 'react';
+
+function TestScreen() {
+  return <TransactionCard />;
+}
+
 const routes = {
+  TestScreen: {
+    screen: TestScreen,
+    navigationOptions: {
+      header: false,
+      title: 'Test Screen',
+    },
+  },
   DeveloperMenuScreen: {
     screen: DeveloperMenuScreen,
     navigationOptions: {
