@@ -1,6 +1,6 @@
 import {
   ACCOUNTS_RECEIVE_BALANCE,
-  ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC,
+  ACCOUNTS_GET_UNUSED_ADDRESS,
 } from 'state/action-types';
 import reducer, { initialState } from 'state/account/reducer';
 
@@ -15,10 +15,10 @@ describe('account reducer', () => {
     expect(reducer(undefined, payload)).toEqual(expectedState);
   });
 
-  it('should handle ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC', () => {
+  it('should handle ACCOUNTS_GET_UNUSED_ADDRESS', () => {
     const payload = {
       response: { address: 'unusedAddress' },
-      type: ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC.SUCCESS,
+      type: ACCOUNTS_GET_UNUSED_ADDRESS,
     };
     const expectedState = { ...initialState, unusedAddress: 'unusedAddress' };
     expect(reducer(undefined, payload)).toEqual(expectedState);

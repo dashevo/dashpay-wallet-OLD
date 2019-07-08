@@ -4,7 +4,7 @@ import {
   ACCOUNTS_RECEIVE_BALANCE,
   ACCOUNTS_SET_MNEMONIC,
   ACCOUNTS_SET_USERNAME,
-  ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC,
+  ACCOUNTS_GET_UNUSED_ADDRESS,
   ACCOUNTS_CHANGE_NETWORK_ASYNC,
 } from 'state/action-types';
 
@@ -63,7 +63,7 @@ const account = (state = initialState, action) => {
         ...state,
         balance: action.response,
       };
-    case ACCOUNTS_GET_UNUSED_ADDRESS_ASYNC.SUCCESS:
+    case ACCOUNTS_GET_UNUSED_ADDRESS:
       return {
         ...state,
         unusedAddress: action.response.address,

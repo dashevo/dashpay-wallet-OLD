@@ -1,14 +1,10 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-export const selectState = state => {
-  const { unusedAddress } = state.account;
-  return {unusedAddress}
+export const selectState = (state) => {
+  const { account: { unusedAddress } } = state;
+  return { unusedAddress };
 };
 
 const selector = createSelector(selectState, obj => obj);
