@@ -35,10 +35,11 @@ export const search = (searchString: string) => (
   asyncTask: async () => {
     const profiles = await dashPayDap.profile.getAll();
     return Promise.all(profiles.map(async (profile) => {
-      const regTxId = profile.$meta.userId;
+      const profileInstance = await profile;
+      const regTxId = profileInstance.$meta.userId;
       const bUser = await dashPayDap.buser.get(regTxId);
       return {
-        ...profile,
+        ...profileInstance,
         bUser,
       };
     }));
