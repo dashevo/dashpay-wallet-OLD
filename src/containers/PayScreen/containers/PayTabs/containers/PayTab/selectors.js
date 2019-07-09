@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { orderBy } from 'lodash';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 import { contactSelectorFactory } from 'state/contacts/selectors';
+import { profilesSelector } from 'state/profiles/selectors';
 
 const recipientSelector = (state, props) => props.navigation.getParam('recipient', '');
 const dashAmountSelector = (state, props) => props.navigation.getParam('amount') || 0;
@@ -10,13 +11,17 @@ const sentPaymentsSelector = state => state.payments.send;
 export default createSelector(
   recipientSelector,
   contactSelectorFactory,
+  profilesSelector,
   alternativeCurrencySelector,
   sentPaymentsSelector,
   dashAmountSelector,
-  (recipient, contactSelector, alternativeCurrency, sentPayments, dashAmount) => {
+  (
+    recipient, contactSelector, { searchResults },
+    alternativeCurrency, sentPayments, dashAmount,
+  ) => {
     let transactions = sentPayments.byRecipients[recipient] || [];
 
-    const receiver = contactSelector(recipient) || {};
+    const receiver = contactSelector(recipient) || searchResults[recipient] || {};
     const sender = contactSelector('yXRAGqEeCuVdL34S6UsBFhnJy7cajNmfvx') || {}; // Tmp
 
     transactions = transactions.map((transactionId) => {

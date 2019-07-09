@@ -7,13 +7,15 @@ import {
   receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
 } from 'state/contacts/selectors';
-import { searchResultsSelector } from 'state/profiles/selectors';
-import {
-  PENDING_CONTACT_REQUEST,
-  SENT_CONTACT_REQUEST,
-} from './constants';
+import { searchResultsSelector as profilesSearchResultsSelector } from 'state/profiles/selectors';
+import type { FilterParams } from 'state/contacts/types';
+import { PROFILE_STATE } from 'state/profiles/constants';
+import type { Profile } from 'state/profiles/types';
+import type { Section } from './types';
 
-const filterAndSort = (items: Array<any>, filterParams) => {
+const filterAndSort = (
+  items: Array<Profile>, filterParams: FilterParams,
+): Array<Profile> => {
   let filteredItems = items;
   if (filterParams.isActive) {
     const query = filterParams.query.toLowerCase();
@@ -23,44 +25,76 @@ const filterAndSort = (items: Array<any>, filterParams) => {
   return sortBy(filteredItems, 'username');
 };
 
-export default createSelector(
-  filterParamsSelector,
+const filteredAndSortedContactsSelector = createSelector(
   contactsSelector,
-  searchResultsSelector,
+  filterParamsSelector,
+  (items: Array<Profile>, filterParams: FilterParams) => filterAndSort(items, filterParams)
+    .map(contact => ({ ...contact, state: PROFILE_STATE.IS_CONTACT })),
+);
+
+const filteredAndSortedContactUsernamesSelector = createSelector(
+  filteredAndSortedContactsSelector,
+  (contacts: Array<Profile>) => contacts.map(({ username }) => username),
+);
+
+const getProfileState = (
+  username: string,
+  receivedContactRequestsUsernames: Array<string>,
+  sentContactRequestsUsernames: Array<string>,
+) => {
+  if (receivedContactRequestsUsernames.includes(username)) {
+    return PROFILE_STATE.REQUEST_RECEIVED;
+  }
+  if (sentContactRequestsUsernames.includes(username)) {
+    return PROFILE_STATE.REQUEST_SENT;
+  }
+  return PROFILE_STATE.UNKNOWN;
+};
+
+const filteredAndSortedProfilesSelector = createSelector(
+  profilesSearchResultsSelector,
+  filterParamsSelector,
+  filteredAndSortedContactUsernamesSelector,
   receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
-  (filterParams: any, contacts: Array<any>,
-    profiles: Array<any>,
-    receivedContactRequestsUsernames: Array<any>,
-    sentContactRequestsUsernames: Array<any>) => {
-    let blockchainProfiles;
+  (
+    profiles: Array<Profile>,
+    filterParams: FilterParams,
+    contactUsernames: Array<string>,
+    receivedContactRequestsUsernames: Array<string>,
+    sentContactRequestsUsernames: Array<string>,
+  ) => {
     if (filterParams.isActive && profiles.length) {
-      blockchainProfiles = filterAndSort(profiles, filterParams);
-      blockchainProfiles.forEach((blockchainProfile) => {
-        const profile = blockchainProfile;
-        if (receivedContactRequestsUsernames.includes(profile.userId)) {
-          profile.state = PENDING_CONTACT_REQUEST;
-        } else if (sentContactRequestsUsernames.includes(profile.userId)) {
-          profile.state = SENT_CONTACT_REQUEST;
-        }
-      });
-    } else {
-      blockchainProfiles = [];
+      return filterAndSort(profiles, filterParams)
+        // .filter(({ username }) => !contactUsernames.includes(username))
+        .map((profile: Profile) => {
+          const { username } = profile;
+          const state = getProfileState(
+            username,
+            receivedContactRequestsUsernames,
+            sentContactRequestsUsernames,
+          );
+          return { ...profile, state };
+        });
     }
-    const lists = [
+    return [];
+  },
+);
+
+export default createSelector(
+  filteredAndSortedContactsSelector,
+  filteredAndSortedProfilesSelector,
+  (contacts: Array<Profile>, profiles: Array<any>) => {
+    const sections = [
       {
         title: 'Blockchain contacts',
-        data: filterAndSort(contacts, filterParams),
+        data: contacts,
       },
       {
         title: 'Blockchain profiles',
-        data: blockchainProfiles,
+        data: profiles,
       },
-    ].filter(contactList => contactList.data.length);
-
-    return {
-      contacts: lists,
-      filterParams,
-    };
+    ].filter(({ data }: Section) => data.length);
+    return { sections };
   },
 );

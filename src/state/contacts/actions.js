@@ -62,10 +62,10 @@ export const getContacts = () => (
   },
 });
 
-export const acceptRequest = senderUserId => (
+export const acceptRequest = senderUsername => (
   dispatch, getState, { account: { dashPayDap } },
 ) => dispatch({
-  userId: senderUserId,
+  username: senderUsername,
   types: CONTACTS_ACCEPT_REQUEST_ASYNC,
   async asyncTask() {
     const { username } = getState().account;
@@ -74,7 +74,7 @@ export const acceptRequest = senderUserId => (
     const pendingContactRequests = await profile.contactRequest.getAllPending();
     const contactRequest = pendingContactRequests
       .received
-      .find(({ sender: { $meta: { userId } } }) => userId === senderUserId);
+      .find(({ sender: { buser } }) => buser.username === senderUsername);
     return profile.contactRequest.accept(contactRequest);
   },
 });

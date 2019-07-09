@@ -1,7 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
+import Profile from 'state/profiles/types';
 
-export type Props = {};
+export type Props = Profile & {
+  onPress: Function,
+};

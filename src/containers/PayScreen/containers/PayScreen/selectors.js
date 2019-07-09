@@ -1,16 +1,9 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// External dependencies
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
   recipient: Yup.string()
     .required('The recipient field is required.')
-    .length(34, 'The recipient field is required.')
+    .length(34, 'The recipient field is required.'),
 });
 
 function selector(state, props) {
@@ -20,7 +13,7 @@ function selector(state, props) {
   const formProps = { validationSchema, initialValues };
 
   return {
-    formProps
+    formProps,
   };
 }
 

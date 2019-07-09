@@ -1,23 +1,24 @@
 import { createSelector } from 'reselect';
 import { contactSelectorFactory } from 'state/contacts/selectors';
+import { profilesSelector } from 'state/profiles/selectors';
 
-const addressSelector = (state, props) => props.navigation.getParam('recipient', '');
+const usernameSelector = (state, props) => props.navigation.getParam('recipient', '');
+const stateSelector = (state, props) => props.navigation.getParam('state', '');
 
 export default createSelector(
-  addressSelector,
+  usernameSelector,
+  stateSelector,
   contactSelectorFactory,
-  (username, contactSelector) => {
-    const contact = contactSelector(username) || {};
-    const { avatarUrl = '' } = contact;
+  profilesSelector,
+  (username, state, contactSelector, { searchResults }) => {
+    const user = contactSelector(username) || searchResults[username] || {};
+    const { avatarUrl = '' } = user;
     return {
       user: {
         avatarUrl,
         username,
       },
-      initialValues: {
-        username,
-        avatarUrl,
-      },
+      state,
     };
   },
 );

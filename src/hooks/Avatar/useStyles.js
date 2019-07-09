@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// Internal dependencies
 import { createUseStyles } from 'hooks/Styles';
 
 const styles = theme => ({
@@ -24,7 +19,6 @@ const styles = theme => ({
   image: {
     borderRadius: theme.avatarBorderRadius,
     height: theme.avatarSize,
-    resizeMode: 'cover',
     width: theme.avatarSize,
   },
   text: {
@@ -51,7 +45,6 @@ const styles = theme => ({
   icon__lg: {
     fontSize: theme.avatarLgFontSize,
   },
-
   container__md: {
     borderRadius: theme.avatarMdBorderRadius,
     height: theme.avatarMdSize,
@@ -68,7 +61,6 @@ const styles = theme => ({
   icon__md: {
     fontSize: theme.avatarMdFontSize,
   },
-
   container__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,

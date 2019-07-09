@@ -97,7 +97,7 @@ class ContactsScreen extends React.Component<Props, State> {
     if (isSearching || isFetchingContacts) {
       return <ActivityIndicatorView />;
     }
-    const { contacts } = this.props;
+    const { sections } = this.props;
     return (
       <Animated.SectionList
         contentContainerStyle={styles.contentContainer}
@@ -105,7 +105,7 @@ class ContactsScreen extends React.Component<Props, State> {
         ListFooterComponent={this.renderListFooter}
         ListEmptyComponent={this.renderListEmpty}
         keyExtractor={({ username }) => username}
-        sections={contacts}
+        sections={sections}
         renderItem={this.renderItem}
         onScroll={this.scrollSinkY}
       />

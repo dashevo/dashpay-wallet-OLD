@@ -13,7 +13,7 @@ function searchResults(state = {}, action) {
         .reduce((results, {
           bio,
           avatarUrl,
-          bUser: { username },
+          buser: { username },
           $meta: { userId },
         }) => ({
           ...results,
