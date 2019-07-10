@@ -8,6 +8,6 @@ import './shim';
 import { name as appName } from './app.json';
 import App from './src';
 
-// addLocaleData([...en, ...de, ...es]);
+addLocaleData([...en, ...de, ...es]);
 
 AppRegistry.registerComponent(appName, () => App);
