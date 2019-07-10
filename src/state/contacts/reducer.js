@@ -61,11 +61,7 @@ const receivedRequest = (state, action) => {
   }
 };
 
-const profileMapper = ({
-  $meta: { userId },
-  buser: { username },
-  avatarUrl,
-}) => ({
+const profileMapper = ({ $meta: { userId }, buser: { username }, avatarUrl }) => ({
   userId,
   // username: '', // TODO: put bUser username here
   username,
@@ -95,9 +91,7 @@ const pendingRequests = (state = { received: [], sent: [] }, action) => {
     case CONTACTS_REJECT_REQUEST_ASYNC.SUCCESS:
       return {
         ...state,
-        received: state
-          .received
-          .filter(request => request.address !== action.contact),
+        received: state.received.filter(request => request.address !== action.contact),
       };
 
     default:

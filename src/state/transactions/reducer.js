@@ -12,8 +12,8 @@ export const initialState = {
   ongoingTransaction: {
     recipient: '',
     amount: 0,
-    currency: 'DASH'
-  }
+    currency: 'DASH',
+  },
 };
 
 const ongoingTransaction = (state, action) => {
@@ -24,7 +24,7 @@ const ongoingTransaction = (state, action) => {
       recipient = recipient.replace('dash:', '');
       return {
         ...state,
-        recipient
+        recipient,
       };
     default:
       return state;
@@ -36,7 +36,7 @@ const transactions = (state = initialState, action) => {
     case GET_TRANSACTIONS_SUCCESS:
       return {
         ...state,
-        history: action.response
+        history: action.response,
       };
 
     case CREATE_PAYMENT_TRANSACTION_SUCCESS:
@@ -45,21 +45,19 @@ const transactions = (state = initialState, action) => {
         ...state,
         history: {
           ...state.history,
-          [action.response.recipient]: (
-            state.history[action.response.recipient] || []
-          ).concat({
+          [action.response.recipient]: (state.history[action.response.recipient] || []).concat({
             recipient: action.response.recipient,
             dashAmount: action.response.dashAmount,
             fiatAmount: action.response.fiatAmount,
-            timestamp
-          })
-        }
+            timestamp,
+          }),
+        },
       };
 
     default:
       return {
         ...state,
-        ongoingTransaction: ongoingTransaction(state.ongoingTransaction, action)
+        ongoingTransaction: ongoingTransaction(state.ongoingTransaction, action),
       };
   }
 };

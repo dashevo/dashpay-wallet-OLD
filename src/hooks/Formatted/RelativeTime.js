@@ -1,9 +1,20 @@
-import React from 'react';
-import { useIntl } from 'react-intl';
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ */
 
-function FormattedDashAmount({ value }) {
-  const { formatRelativeTime } = useIntl();
-  return formatRelativeTime(-20);
+// External dependencies
+import React, { useMemo } from 'react';
+import moment from 'moment';
+
+// Internal dependencies
+import Text from 'hooks/Typography/Text';
+
+function FormattedRelativeTime({ value }) {
+  const formattedRelativeTime = useMemo(
+    () => moment(value).fromNow(),
+    [value]
+  );
+  return <Text>{formattedRelativeTime}</Text>;
 }
 
-export default FormattedDashAmount;
+export default FormattedRelativeTime;

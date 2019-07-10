@@ -11,7 +11,7 @@ function styles() {
       marginBottom: 15,
       backgroundColor: '#fff',
       borderColor: '#fff',
-      borderRadius: 6,
+      borderRadius: 8,
       borderStyle: 'solid',
       borderWidth: 0,
       display: 'flex',
@@ -35,30 +35,38 @@ function styles() {
       alignItems: 'flex-start',
       marginRight: -5,
       marginLeft: -5,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
     },
     col: {
+      justifyContent: 'center',
+      alignItems: 'flex-start',
       paddingLeft: 5,
       paddingRight: 5,
     },
-    // body: {
-    //
-    // },
     body: {
-      backgroundColor: '#EAEBEC',
-      borderColor: '#EAEBEC',
-      borderRadius: 5,
+      padding: 12,
+      flex: 1,
+    },
+    inner: {
+      backgroundColor: '#efefef',
+      borderColor: '#efefef',
+      borderRadius: 7,
       padding: 12,
     },
-    footer: {
-      paddingLeft: 12,
-      paddingRight: 12,
-      paddingBottom: 12,
-      justifyContent: 'center',
-      alignItems: 'center',
+    title: {
+      color: '#333333',
+      fontSize: 14,
+      fontStyle: 'normal',
+      fontWeight: '400',
+      textAlign: 'center',
     },
-    center: {
-      justifyContent: 'center',
-      alignItems: 'center',
+    subtitle: {
+      color: '#666666',
+      fontSize: 13,
+      fontStyle: 'normal',
+      fontWeight: '300',
+      textAlign: 'center',
     },
     underlinedText: {
       fontStyle: 'normal',
@@ -66,19 +74,20 @@ function styles() {
       color: '#999999',
       fontSize: 16,
     },
-
-    footer: {
-      alignItems: 'center',
+    inline: {
       flexDirection: 'row',
-      justifyContent: 'center',
-      padding: 16,
+      alignItems: 'flex-start',
+      marginRight: 0,
+      marginLeft: 0,
     },
-    caption: {
-      color: '#999999',
-      fontSize: 12,
-      fontStyle: 'normal',
-      fontWeight: 'normal',
-      textAlign: 'center',
+    footer: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      paddingLeft: 12,
+      paddingRight: 12,
+      paddingBottom: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     address: {
       color: '#999999',
@@ -87,6 +96,28 @@ function styles() {
       fontWeight: 'normal',
       textAlign: 'center',
       flex: -1,
+    },
+    timestamp: {
+      color: '#999999',
+      fontSize: 12,
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      textAlign: 'center',
+    },
+    icon: {
+      color: '#797979',
+      fontSize: 18,
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      textAlign: 'center',
+      width: 24,
+    },
+    text: {
+      color: '#797979',
+      fontSize: 18,
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      textAlign: 'center',
     },
     divider: {
       alignSelf: 'stretch',

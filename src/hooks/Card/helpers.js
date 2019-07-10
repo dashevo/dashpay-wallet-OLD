@@ -1,5 +1,9 @@
-const RECEIVE = 'RECEIVE';
-const SENT = 'SENT';
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ */
+
+// Internal dependencies
+import TXTYPES from 'constants/txtypes';
 
 export function getTitle(translate, sender) {
   if (sender.displayName) {
@@ -12,7 +16,7 @@ export function getTitle(translate, sender) {
 }
 
 export function getSubtitle(translate, type, receiver) {
-  if (type === RECEIVE) {
+  if (type === TXTYPES.RECEIVED) {
     return translate('Paid Me');
   }
   if (receiver.displayName) {
@@ -24,9 +28,9 @@ export function getSubtitle(translate, type, receiver) {
   return translate('Paid Dash Address');
 }
 
-export function getAddress(translate, type, rest) {
-  if (type === SENT) {
-    return translate('To {{ address }}', rest);
+export function getAddress(translate, type, sender, receiver) {
+  if (type === TXTYPES.SENT) {
+    return translate('To {{ address }}', receiver);
   }
-  return translate('From {{ address }}', rest);
+  return translate('From {{ address }}', sender);
 }

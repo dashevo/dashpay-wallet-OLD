@@ -6,8 +6,8 @@ import { FlatList } from 'react-navigation';
 import View from 'components/View';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import WalletTransactionCard from 'components/TransactionCard';
 import SocialTransactionCard from './components/TransactionCard';
+import TransactionCard from 'hooks/Card/Transaction';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
@@ -32,6 +32,7 @@ const Transactions = (props: Props) => {
         data={activity}
         keyExtractor={(item, index) => `activity-${index}`}
         renderItem={({ item }) => {
+          console.log('__item.data__', item.data);
           switch (item.type) {
             case 'social':
               return (
@@ -42,7 +43,7 @@ const Transactions = (props: Props) => {
                 />
               );
             case 'wallet':
-              return <WalletTransactionCard item={item.data} />;
+              return <TransactionCard {...item.data} />;
             default:
               return null;
           }
@@ -55,10 +56,7 @@ const Transactions = (props: Props) => {
           </View>
         )}
         ListFooterComponent={() => (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigate('ActivityScreen')}
-          >
+          <TouchableOpacity style={styles.button} onPress={() => navigate('ActivityScreen')}>
             <Icon style={styles.buttonIcon} name="activity" />
             <Text style={styles.buttonText}>See All Activity</Text>
           </TouchableOpacity>
