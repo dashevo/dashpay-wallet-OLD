@@ -17,9 +17,7 @@ import actions from './actions';
 
 const logoFile = require('../../assets/images/dash_white_s.png');
 
-const { width: viewportWidth } = Dimensions.get(
-  'window',
-);
+const { width: viewportWidth } = Dimensions.get('window');
 const qrWidth = viewportWidth - 20;
 
 class ReceiveScreen extends React.Component<Props, State> {
@@ -32,8 +30,9 @@ class ReceiveScreen extends React.Component<Props, State> {
     const { unusedAddress } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-
-        <Text selectable style={[styles.text, styles.bold]}>{unusedAddress}</Text>
+        <Text selectable style={[styles.text, styles.bold]}>
+          {unusedAddress}
+        </Text>
         <View style={styles.qrWrapper}>
           <QRCode
             value={`dash:${unusedAddress}`}
@@ -41,12 +40,11 @@ class ReceiveScreen extends React.Component<Props, State> {
             backgroundColor="transparent"
             color="black"
             logo={logoFile}
-            logoSize={qrWidth * 7 / 29}
+            logoSize={(qrWidth * 7) / 29}
             logoMargin={qrWidth / 29}
             logoBackgroundColor="#078be2"
           />
         </View>
-        {/* <CopyAddressButton address={unusedAddress} /> */}
       </SafeAreaView>
     );
   }

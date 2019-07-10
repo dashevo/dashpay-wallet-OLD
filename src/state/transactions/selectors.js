@@ -11,22 +11,30 @@ export const selectTransactions = (state) => {
       return;
     }
     // TODO don't assume we receive every TX output
-    const dashSat = item.to.reduce((accumulator, { valueSat }) => (accumulator + valueSat), 0);
-    let sender = { username: state.account.username, avatarUrl: null };
-    let receiver = { username: state.account.username, avatarUrl: null };
+    const dashSat = item.to.reduce((accumulator, { valueSat }) => accumulator + valueSat, 0);
+    const sender = { address: item.from[0].address };
+    const receiver = { address: item.to[0].address };
+
     let typeText = 'OTHER';
-    if (item.type === TXTYPES.RECEIVED) { // TODO refer to an imported constant
-      typeText = 'RECEIVED';
-      const fromAddress = item.from.length > 1 ? 'multiple addresses' : item.from[0].address;
-      sender = { username: 'Unidentified Sender', avatarUrl: null, address: fromAddress };
-    } else if (item.type === TXTYPES.SENT) { // TODO refer to an imported constant
-      typeText = 'PAID';
-      const toAddress = item.to.length > 1 ? 'multiple recipients' : item.to[0].address;
-      receiver = { username: 'Unidentified Recipient', avatarUrl: null, address: toAddress };
+    if (item.type === TXTYPES.RECEIVED) {
+      // TODO refer to an imported constant
+      typeText = TXTYPES.RECEIVED;
+      receiver.username = state.user.username;
+      receiver.avatarUrl = state.user.avatarUrl;
+    } else if (item.type === TXTYPES.SENT) {
+      // TODO refer to an imported constant
+      typeText = TXTYPES.SENT;
+      sender.username = state.user.username;
+      sender.avatarUrl = state.user.avatarUrl;
     }
-    const dashAmount = dashSat.toString(10).padStart(9, '0').replace(/(\d{8})$/, '.$1').replace(/\.?0+$/, '');
+
+    const dashAmount = dashSat
+      .toString(10)
+      .padStart(9, '0')
+      .replace(/(\d{8})$/, '.$1')
+      .replace(/\.?0+$/, '');
     const alternativeCurrency = alternativeCurrencySelector(state);
-    let fiatAmount = dashSat * alternativeCurrency.rate / 100000000;
+    let fiatAmount = (dashSat * alternativeCurrency.rate) / 100000000;
     const { code } = alternativeCurrency;
     fiatAmount = fiatAmount.toFixed(2).toString(10);
 
@@ -34,14 +42,18 @@ export const selectTransactions = (state) => {
     // unconfirmed txes are missing time field
 
     transactions.push({
-      dashSat,
-      dashAmount,
-      fiatAmount,
-      fiatSymbol: code.toLowerCase(),
+      amount: dashAmount,
+      currency: 'dash',
+      fee: 0,
+      timestamp, // time in seconds, JS time uses milliseconds
+      type: typeText,
       sender,
       receiver,
-      timestamp, // time in seconds, JS time uses milliseconds
-      transactionType: typeText,
+      conversion: {
+        amount: fiatAmount,
+        currency: code.toLowerCase(),
+        rate: 0,
+      },
     });
   });
   return transactions;

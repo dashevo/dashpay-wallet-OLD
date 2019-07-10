@@ -51,6 +51,24 @@ const styles = theme => ({
   icon__lg: {
     fontSize: theme.avatarLgFontSize,
   },
+
+  container__md: {
+    borderRadius: theme.avatarMdBorderRadius,
+    height: theme.avatarMdSize,
+    width: theme.avatarMdSize,
+  },
+  image__md: {
+    borderRadius: theme.avatarMdBorderRadius,
+    height: theme.avatarMdSize,
+    width: theme.avatarMdSize,
+  },
+  text__md: {
+    fontSize: theme.avatarMdFontSize,
+  },
+  icon__md: {
+    fontSize: theme.avatarMdFontSize,
+  },
+
   container__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,
@@ -66,6 +84,26 @@ const styles = theme => ({
   },
   icon__sm: {
     fontSize: theme.avatarSmFontSize,
+  },
+  container__primary: {
+    backgroundColor: '#efefef',
+    borderColor: '#efefef',
+  },
+  text__primary: {
+    color: '#c0c0c0',
+  },
+  icon__primary: {
+    color: '#c0c0c0',
+  },
+  container__secondary: {
+    backgroundColor: '#ffffff',
+    borderColor: '#ffffff',
+  },
+  text__secondary: {
+    color: '#cccccc',
+  },
+  icon__secondary: {
+    color: '#cccccc',
   },
 });
 

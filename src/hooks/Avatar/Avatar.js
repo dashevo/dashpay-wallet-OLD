@@ -4,10 +4,10 @@
 
 // External dependencies
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 
 // Internal dependencies
-import Image from 'hooks/Image';
+// import Image from 'hooks/Image';
 import Icon from 'hooks/Icon';
 import type { User } from 'state/types';
 import useAvatar from './useAvatar';
@@ -22,11 +22,7 @@ const Avatar = React.memo((props: Props) => {
 
   switch (state.value) {
     case 'image':
-      return (
-        <View style={styles.container}>
-          <Image style={styles.image} {...bind} />
-        </View>
-      );
+      return <Image style={styles.image} {...bind} />;
 
     case 'text':
       return (

@@ -63,7 +63,7 @@ export default (props) => {
         },
       })
       .withContext({
-        letter: username.charAt(0).toUpperCase(),
+        letter: (username || '').charAt(0).toUpperCase(),
         avatarUrl,
       }),
     [avatarUrl, username],

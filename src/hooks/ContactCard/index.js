@@ -1,11 +1,22 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ */
+
+// External dependencies
 import React from 'react';
-import PropTypes from 'prop-types';
+
+// Internal dependencies
 import ContactRequestAccepted from './ContactRequestAccepted';
 import ContactRequestReceived from './ContactRequestReceived';
 import ContactRequestRejected from './ContactRequestRejected';
 import ContactRequestSent from './ContactRequestSent';
 
-function ContactCard({ status, type, ...rest }) {
+type Props = {
+  status: string,
+  type: string,
+};
+
+function ContactCard({ status, type, ...rest }: Props) {
   if (status === 'ACCEPTED') {
     return <ContactRequestAccepted {...rest} />;
   }
@@ -24,10 +35,5 @@ function ContactCard({ status, type, ...rest }) {
 
   return null;
 }
-
-ContactCard.propTypes = {
-  status: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
 
 export default ContactCard;
