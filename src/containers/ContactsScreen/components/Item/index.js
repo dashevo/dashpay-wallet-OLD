@@ -1,46 +1,37 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
+import Avatar from 'hooks/Avatar';
 import {
   View,
   TouchableOpacity,
-  Image,
   Text,
 } from 'components';
+import { PROFILE_STATE } from 'state/profiles/constants';
 import type { Props } from './types';
 import styles from './styles';
 
-class Item extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    (this: any).handlePress = this.handlePress.bind(this);
+// TODO: we should agree on translation solution and
+//       start using i18n files
+const t = (state) => {
+  if ([PROFILE_STATE.REQUEST_RECEIVED, PROFILE_STATE.REQUEST_SENT].includes(state)) {
+    return state.replace('_', ' ');
   }
+  return '';
+};
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  handlePress() {
-    const { onPress, username } = this.props;
-    onPress({
-      recipient: username,
-    });
-  }
-
-  render(): React.Element<any> {
-    const { username, state, avatarUrl } = this.props;
-    return (
-      <TouchableOpacity onPress={this.handlePress}>
-        <View style={styles.row}>
-          <Image style={styles.image} source={{ uri: avatarUrl }} />
-          <View>
-            <Text style={styles.text}>{username}</Text>
-            <Text style={styles.state}>{(state || '').toUpperCase()}</Text>
-          </View>
+const Item = (props: Props) => {
+  const { username, state, onPress } = props;
+  return (
+    <TouchableOpacity onPress={() => onPress({ recipient: username, state })}>
+      <View style={styles.row}>
+        <Avatar user={props} md />
+        <View>
+          <Text style={styles.text}>{username}</Text>
+          <Text style={styles.state}>{t(state)}</Text>
         </View>
-      </TouchableOpacity>
-    );
-  }
-}
+      </View>
+    </TouchableOpacity>
+  );
+};
 
-export default Item;
+export default React.memo(Item);

@@ -1,14 +1,10 @@
 // @flow
-
 import * as React from 'react';
 import { SafeAreaView, Dimensions } from 'react-native';
-// import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import QRCode from 'react-native-qrcode-svg';
 
 import { Text, View } from 'components';
-// import { CopyAddressButton } from 'components';
-// import { Avatar } from 'components/avatar';
 
 import styles from './styles';
 import type { Props, State } from './types';

@@ -1,22 +1,16 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
-import * as React from 'react';
-
-// Internal dependencies
+// @flow
+import React from 'react';
 import Avatar from 'hooks/Avatar';
+import type { Profile } from 'state/profiles/types';
 import useStyles from './useStyles';
 
 type Props = {
-  user: Object,
+  user: Profile,
 };
 
-function CoverPhoto(props: Props) {
+const CoverPhoto = ({ user }: Props) => {
   const styles = useStyles();
-  const { user } = props;
   return <Avatar user={user} styles={styles} />;
-}
+};
 
 export default CoverPhoto;

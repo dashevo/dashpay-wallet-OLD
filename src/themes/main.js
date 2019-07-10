@@ -63,9 +63,13 @@ export const avatarLgFontSize = normalize(64);
 export const avatarLgSize = normalize(120);
 
 // Avatar md
-export const avatarMdBorderRadius = normalize(25);
-export const avatarMdFontSize = normalize(25);
-export const avatarMdSize = normalize(50);
+// export const avatarMdBorderRadius = normalize(25);
+// export const avatarMdFontSize = normalize(25);
+// export const avatarMdSize = normalize(50);
+
+export const avatarMdBorderRadius = normalize(32);
+export const avatarMdFontSize = normalize(32);
+export const avatarMdSize = normalize(64);
 
 // Avatar sm
 export const avatarSmBorderRadius = normalize(20);

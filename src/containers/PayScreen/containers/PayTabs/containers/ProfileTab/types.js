@@ -1,12 +1,7 @@
 // @flow
-import type Navigation from 'types/navigation';
-
-export type State = {
-  username: string,
-  avatarUrl: string,
-};
+import type { Profile } from 'state/profiles/types';
 
 export type Props = {
-  navigation: Navigation,
-  initialValues: State,
+  user: Profile,
+  state: ?string,
 };

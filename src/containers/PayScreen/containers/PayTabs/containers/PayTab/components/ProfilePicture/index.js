@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import Avatar from 'hooks/Avatar';
 import View from 'components/View';
 import Text from 'components/Text';

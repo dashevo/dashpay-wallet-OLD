@@ -1,22 +1,16 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
+// @flow
 import React from 'react';
-import { View, Image, Text } from 'react-native';
-
-// Internal dependencies
-// import Image from 'hooks/Image';
+import { View, Text } from 'react-native';
+import Image from 'hooks/Image';
 import Icon from 'hooks/Icon';
-import type { User } from 'state/types';
+import type { Profile } from 'state/profiles/types';
 import useAvatar from './useAvatar';
 
 type Props = {
-  user: User,
+  user: Profile,
 };
 
-const Avatar = React.memo((props: Props) => {
+const Avatar = (props: Props) => {
   const { bind, state, styles } = useAvatar(props);
   const { letter } = state.context;
 
@@ -41,6 +35,6 @@ const Avatar = React.memo((props: Props) => {
     default:
       return null;
   }
-});
+};
 
-export default Avatar;
+export default React.memo(Avatar);

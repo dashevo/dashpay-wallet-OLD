@@ -5,7 +5,7 @@ import {
 } from 'state/action-types';
 
 export const register = (
-  avatar: ?string,
+  avatarUrl: ?string,
   bio: ?string,
   username: string,
 ) => (
@@ -16,8 +16,9 @@ export const register = (
     const buser = await dashPayDap.buser.get(username);
     await buser.synchronize();
     await buser.own(dashPayDap.getBUserSigningPrivateKey());
+    const adorableAvatarUrl = `https://api.adorable.io/avatars/285/${username}.png`;
     const profile = await dashPayDap.profile.create({
-      avatar,
+      avatarUrl: avatarUrl || adorableAvatarUrl,
       bio,
     });
     profile.setOwner(buser);
@@ -33,14 +34,7 @@ export const search = (searchString: string) => (
   // TODO: replace when we have username
   // asyncTask: () => dashPayDap.profile.get(searchString),
   asyncTask: async () => {
-    const profiles = await dashPayDap.profile.getAll();
-    return Promise.all(profiles.map(async (profile) => {
-      const regTxId = profile.$meta.userId;
-      const bUser = await dashPayDap.buser.get(regTxId);
-      return {
-        ...profile,
-        bUser,
-      };
-    }));
+    const getProfiles = await dashPayDap.profile.getAll();
+    return Promise.all(getProfiles);
   },
 });
