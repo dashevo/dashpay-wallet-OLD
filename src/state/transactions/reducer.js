@@ -22,11 +22,9 @@ const ongoingTransaction = (state, action) => {
   switch (action.type) {
     case TRANSACTION_RECIPIENT_SCANNED:
       // Remove prefix from dashaddress if exists.
-      let recipient = action.payload.data || '';
-      recipient = recipient.replace('dash:', '');
       return {
         ...state,
-        recipient,
+        recipient: (action.payload.data || '').replace('dash:', ''),
       };
     default:
       return state;
@@ -42,7 +40,6 @@ const transactions = (state = initialState, action) => {
       };
 
     case CREATE_PAYMENT_TRANSACTION_SUCCESS:
-      const timestamp = new Date().getTime();
       return {
         ...state,
         history: {
@@ -51,7 +48,7 @@ const transactions = (state = initialState, action) => {
             recipient: action.response.recipient,
             dashAmount: action.response.dashAmount,
             fiatAmount: action.response.fiatAmount,
-            timestamp,
+            timestamp: new Date().getTime(),
           }),
         },
       };

@@ -14,10 +14,7 @@ type Props = {
 };
 
 function FormattedRelativeTime({ value }: Props) {
-  const formattedRelativeTime = useMemo(
-    () => moment(value).fromNow(),
-    [value]
-  );
+  const formattedRelativeTime = useMemo(() => moment(value).fromNow(), [value]);
   return <Text>{formattedRelativeTime}</Text>;
 }
 

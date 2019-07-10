@@ -18,13 +18,7 @@ import type { Transaction } from 'state/transactions/types';
 import { getTitle, getSubtitle, getAddress } from './helpers';
 import useStyles from './useStyles';
 
-type Props = {
-  sender: User,
-  receiver: User,
-  transaction: Transaction,
-};
-
-function TransactionCard(props: Props) {
+function TransactionCard(props: Transaction) {
   const translate = useTranslate();
   const styles = useStyles(props);
 

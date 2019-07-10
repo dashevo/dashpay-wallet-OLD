@@ -81,7 +81,6 @@ function styles() {
     },
     footer: {
       flexDirection: 'row',
-      alignItems: 'flex-start',
       paddingLeft: 12,
       paddingRight: 12,
       paddingBottom: 12,
