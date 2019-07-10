@@ -6,8 +6,8 @@ import { FlatList } from 'react-navigation';
 import View from 'components/View';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import SocialTransactionCard from './components/TransactionCard';
 import TransactionCard from 'hooks/Card/Transaction';
+import SocialTransactionCard from './components/TransactionCard';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
@@ -32,7 +32,6 @@ const Transactions = (props: Props) => {
         data={activity}
         keyExtractor={(item, index) => `activity-${index}`}
         renderItem={({ item }) => {
-          console.log('__item.data__', item.data);
           switch (item.type) {
             case 'social':
               return (

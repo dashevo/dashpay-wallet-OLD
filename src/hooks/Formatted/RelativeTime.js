@@ -9,7 +9,11 @@ import moment from 'moment';
 // Internal dependencies
 import Text from 'hooks/Typography/Text';
 
-function FormattedRelativeTime({ value }) {
+type Props = {
+  value: number,
+};
+
+function FormattedRelativeTime({ value }: Props) {
   const formattedRelativeTime = useMemo(
     () => moment(value).fromNow(),
     [value]

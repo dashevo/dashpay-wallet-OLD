@@ -10,13 +10,6 @@ export type User = {
   avatarUrl?: string,
 };
 
-export type Transaction = {
-  address: string,
-  amount: number,
-  timestamp: number,
-  type: string,
-};
-
 export type Action = {
   types: FETCH_CURRENT_USER_ASYNC,
   payload: User,

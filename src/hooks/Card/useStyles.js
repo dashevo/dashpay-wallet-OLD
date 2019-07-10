@@ -32,7 +32,6 @@ function styles() {
     },
     row: {
       flexDirection: 'row',
-      alignItems: 'flex-start',
       marginRight: -5,
       marginLeft: -5,
       justifyContent: 'flex-start',

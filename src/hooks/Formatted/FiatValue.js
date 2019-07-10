@@ -10,9 +10,9 @@ import FormattedNumber from './Number';
 
 type Props = {
   value: number,
-  decimal: string,
-  grouping: string,
-  precision: number,
+  decimal?: string,
+  grouping?: string,
+  precision?: number,
 };
 
 function FormattedFiatValue(props: Props) {

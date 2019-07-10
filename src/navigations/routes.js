@@ -16,16 +16,7 @@ import DeveloperMenuScreen from 'containers/DeveloperMenuScreen';
 import Activities from 'screens/Activities';
 import Confirm from 'screens/Confirm';
 
-import TransactionCard from "hooks/Card/Transaction"
-
 const routes = {
-  // TransactionCard: {
-  //   screen: TransactionCard,
-  //   navigationOptions: {
-  //     header: false,
-  //     title: 'Developer Menu',
-  //   },
-  // },
   DeveloperMenuScreen: {
     screen: DeveloperMenuScreen,
     navigationOptions: {

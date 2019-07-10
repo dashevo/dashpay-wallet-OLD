@@ -69,8 +69,6 @@ const styles = theme => ({
     fontSize: theme.avatarMdFontSize,
   },
 
-
-
   container__sm: {
     borderRadius: theme.avatarSmBorderRadius,
     height: theme.avatarSmSize,
@@ -87,28 +85,25 @@ const styles = theme => ({
   icon__sm: {
     fontSize: theme.avatarSmFontSize,
   },
-
-
   container__primary: {
-    backgroundColor: "#efefef",
-    borderColor: "#efefef",
+    backgroundColor: '#efefef',
+    borderColor: '#efefef',
   },
   text__primary: {
-    color: "#c0c0c0",
+    color: '#c0c0c0',
   },
   icon__primary: {
-    color: "#c0c0c0",
+    color: '#c0c0c0',
   },
-
   container__secondary: {
-    backgroundColor: "#ffffff",
-    borderColor: "#ffffff",
+    backgroundColor: '#ffffff',
+    borderColor: '#ffffff',
   },
   text__secondary: {
-    color: "#cccccc",
+    color: '#cccccc',
   },
   icon__secondary: {
-    color: "#cccccc",
+    color: '#cccccc',
   },
 });
 

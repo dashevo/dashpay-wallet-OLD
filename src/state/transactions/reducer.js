@@ -3,9 +3,11 @@
  *
  * @flow
  */
-import { GET_TRANSACTIONS_SUCCESS } from './constants';
-import { TRANSACTION_RECIPIENT_SCANNED } from './constants';
-import { CREATE_PAYMENT_TRANSACTION_SUCCESS } from './constants';
+import {
+  GET_TRANSACTIONS_SUCCESS,
+  TRANSACTION_RECIPIENT_SCANNED,
+  CREATE_PAYMENT_TRANSACTION_SUCCESS,
+} from './constants';
 
 export const initialState = {
   history: [],

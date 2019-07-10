@@ -12,22 +12,18 @@ export const selectTransactions = (state) => {
     }
     // TODO don't assume we receive every TX output
     const dashSat = item.to.reduce((accumulator, { valueSat }) => accumulator + valueSat, 0);
-
-    const fromAddress = item.from[0].address;
-    const toAddress = item.to[0].address;
-
-    const sender = { address: fromAddress };
-    const receiver = { address: fromAddress };
+    const sender = { address: item.from[0].address };
+    const receiver = { address: item.to[0].address };
 
     let typeText = 'OTHER';
     if (item.type === TXTYPES.RECEIVED) {
       // TODO refer to an imported constant
-      typeText = TXTYPES.RECEIVED
+      typeText = TXTYPES.RECEIVED;
       receiver.username = state.user.username;
       receiver.avatarUrl = state.user.avatarUrl;
     } else if (item.type === TXTYPES.SENT) {
       // TODO refer to an imported constant
-      typeText = TXTYPES.SENT
+      typeText = TXTYPES.SENT;
       sender.username = state.user.username;
       sender.avatarUrl = state.user.avatarUrl;
     }

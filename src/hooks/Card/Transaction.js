@@ -14,7 +14,7 @@ import RelativeTime from 'hooks/Formatted/RelativeTime';
 import Text from 'hooks/Typography/Text';
 import Icon from 'hooks/Icon';
 import useTranslate from 'hooks/Translate';
-import type { User, Transaction } from 'state/types';
+import type { Transaction } from 'state/transactions/types';
 import { getTitle, getSubtitle, getAddress } from './helpers';
 import useStyles from './useStyles';
 
