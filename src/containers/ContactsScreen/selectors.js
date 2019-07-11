@@ -7,7 +7,8 @@ import {
   receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
 } from 'state/contacts/selectors';
-import { searchResultsSelector as profilesSearchResultsSelector } from 'state/profiles/selectors';
+import { profileItemsSelector } from 'state/profiles/selectors';
+import { getCurrentUser } from 'state/user/selectors';
 import type { FilterParams } from 'state/contacts/types';
 import { PROFILE_STATE } from 'state/profiles/constants';
 import type { Profile } from 'state/profiles/types';
@@ -52,12 +53,14 @@ const getProfileState = (
 };
 
 const filteredAndSortedProfilesSelector = createSelector(
-  profilesSearchResultsSelector,
+  getCurrentUser,
+  profileItemsSelector,
   filterParamsSelector,
   filteredAndSortedContactUsernamesSelector,
   receivedRequestsUsernamesSelector,
   sentContactRequestsUsernamesSelector,
   (
+    currentUser: Profile,
     profiles: Array<Profile>,
     filterParams: FilterParams,
     contactUsernames: Array<string>,
@@ -66,7 +69,8 @@ const filteredAndSortedProfilesSelector = createSelector(
   ) => {
     if (filterParams.isActive && profiles.length) {
       return filterAndSort(profiles, filterParams)
-        // .filter(({ username }) => !contactUsernames.includes(username))
+        .filter(({ username }) => !contactUsernames.includes(username)
+          && currentUser.username !== username)
         .map((profile: Profile) => {
           const { username } = profile;
           const state = getProfileState(

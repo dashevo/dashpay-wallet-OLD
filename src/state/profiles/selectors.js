@@ -2,6 +2,10 @@ import { createSelector } from 'reselect';
 
 export const profilesSelector = state => state.profiles;
 
-export const searchResultsSelector = createSelector(
-  profilesSelector, ({ searchResults }) => Object.values(searchResults),
+export const profileItemsSelector = createSelector(
+  profilesSelector, ({ items }) => Object.values(items),
+);
+
+export const currentProfileSelectorFactory = createSelector(
+  profilesSelector, ({ items }) => username => items[username],
 );

@@ -2,6 +2,7 @@
 import {
   PROFILES_REGISTER_ASYNC,
   PROFILES_SEARCH_ASYNC,
+  PROFILES_GET_BY_BUSERNAME_ASYNC,
 } from 'state/action-types';
 
 export const register = (
@@ -26,12 +27,19 @@ export const register = (
   },
 });
 
+export const getByBUsername = (username: string) => (
+  dispatch, getState, { account: { dashPayDap } },
+) => dispatch({
+  types: PROFILES_GET_BY_BUSERNAME_ASYNC,
+  asyncTask: () => dashPayDap.profile.getByBUsername(username),
+});
+
 export const search = (searchString: string) => (
   dispatch, getState, { account: { dashPayDap } },
 ) => dispatch({
   searchString,
   types: PROFILES_SEARCH_ASYNC,
-  // TODO: replace when we have username
+  // TODO: replace when we have search by username
   // asyncTask: () => dashPayDap.profile.get(searchString),
   asyncTask: async () => {
     const getProfiles = await dashPayDap.profile.getAll();
