@@ -1,12 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
+// @flow
 import React from 'react';
 import { View, Text } from 'react-native';
-
-// Internal dependencies
 import Avatar from 'hooks/Avatar';
 import useTranslate from 'hooks/Translate';
 import type { User } from 'state/types';
@@ -30,7 +24,7 @@ function ContactRequestReceived({
     <View style={styles.card}>
       <View style={styles.header}>
         <View style={styles.center}>
-          <Avatar sm user={sender} />
+          <Avatar xs user={sender} />
         </View>
         <View style={styles.center}>
           <Text style={styles.title}>{sender.username}</Text>

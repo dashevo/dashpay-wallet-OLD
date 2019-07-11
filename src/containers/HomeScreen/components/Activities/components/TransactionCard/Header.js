@@ -13,7 +13,7 @@ const Header = ({
 }: Props) => (
   <View style={styles.header}>
     <View style={styles.row}>
-      <Avatar user={{ avatarUrl }} sm />
+      <Avatar xs user={{ avatarUrl }} />
       <View style={styles.metadata}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={styles.title} numberOfLines={1}>

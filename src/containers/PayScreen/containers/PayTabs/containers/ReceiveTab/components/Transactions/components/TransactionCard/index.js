@@ -26,7 +26,7 @@ const TransactionCard = (props: Props) => {
               <View style={styles.header}>
                 <View style={styles.row}>
                   <View style={styles.avatar}>
-                    <Avatar user={sender} sm />
+                    <Avatar xs user={sender} />
                   </View>
                   <View style={styles.metadata}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -46,7 +46,7 @@ const TransactionCard = (props: Props) => {
                 <View style={styles.highlighted}>
                   <View style={styles.row}>
                     <View style={styles.avatar}>
-                      <Avatar user={receiver} sm />
+                      <Avatar xs user={receiver} />
                     </View>
                     <View style={styles.metadata}>
                       <View style={styles.row}>

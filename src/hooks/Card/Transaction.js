@@ -1,12 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
+// @flow
 import React from 'react';
 import { View } from 'react-native';
-
-// Internal dependencies
 import Avatar from 'hooks/Avatar';
 import DashValue from 'hooks/Formatted/DashValue';
 import FiatValue from 'hooks/Formatted/FiatValue';
@@ -38,7 +32,7 @@ function TransactionCard(props: Transaction) {
       <View style={styles.header}>
         <View style={styles.row}>
           <View style={styles.col}>
-            <Avatar user={sender} primary sm />
+            <Avatar xs primary user={sender} />
           </View>
           <View style={styles.col}>
             <Text style={styles.title}>{title}</Text>
@@ -50,7 +44,7 @@ function TransactionCard(props: Transaction) {
         <View style={styles.inner}>
           <View style={styles.row}>
             <View style={styles.col}>
-              <Avatar user={receiver} secondary md />
+              <Avatar sm secondary user={receiver} />
             </View>
             <View style={styles.col}>
               <View style={styles.row}>

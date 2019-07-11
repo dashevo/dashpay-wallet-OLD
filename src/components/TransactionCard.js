@@ -4,8 +4,6 @@ import {
   FormattedTime,
   FormattedNumber,
 } from 'react-intl';
-
-// Internal dependencies
 import Card from 'components/Card';
 import Avatar from 'hooks/Avatar';
 import Touchable from 'components/Touchable';
@@ -49,7 +47,7 @@ function TransactionCard({ item }: Props) {
               <View style={styles.header}>
                 <View style={styles.row}>
                   <View style={styles.avatar}>
-                    <Avatar user={sender} sm />
+                    <Avatar user={sender} xs />
                   </View>
                   <View style={styles.metadata}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -69,7 +67,7 @@ function TransactionCard({ item }: Props) {
                 <View style={styles.highlighted}>
                   <View style={styles.row}>
                     <View style={styles.avatar}>
-                      <Avatar user={receiver} sm />
+                      <Avatar xs user={receiver} />
                     </View>
                     <View style={styles.metadata}>
                       <View style={styles.row}>

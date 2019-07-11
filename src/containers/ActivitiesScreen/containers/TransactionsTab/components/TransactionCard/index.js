@@ -33,7 +33,7 @@ const TransactionCard = ({
               <View style={styles.header}>
                 <View style={styles.row}>
                   <View style={styles.avatar}>
-                    <Avatar user={sender} sm />
+                    <Avatar xs user={sender} />
                   </View>
                   <View style={styles.metadata}>
                     <View style={{ flex: 1, flexDirection: 'row' }}>
