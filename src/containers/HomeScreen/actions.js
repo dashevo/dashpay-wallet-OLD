@@ -1,14 +1,11 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 import { bindActionCreators } from 'redux';
 import { initializeWallet } from 'state/actions';
 import {
   invalidateAlternativeCurrencyRate,
   fetchAlternativeCurrencyRateIfNeeded,
 } from 'state/alternativeCurrency/actions';
+import { getByBUsername } from 'state/profiles/actions';
 
 function actions(dispatch: Function): Object {
   return bindActionCreators(
@@ -16,6 +13,7 @@ function actions(dispatch: Function): Object {
       initializeWallet,
       invalidateAlternativeCurrencyRate,
       fetchAlternativeCurrencyRateIfNeeded,
+      getByBUsername,
     },
     dispatch,
   );

@@ -1,28 +1,35 @@
+// @flow
 import { combineReducers } from 'redux';
 import {
+  PROFILES_GET_BY_BUSERNAME_ASYNC,
   PROFILES_SEARCH_ASYNC,
   PROFILES_REGISTER_ASYNC,
 } from 'state/action-types';
 
-function searchResults(state = {}, action) {
+const profileMapper = ({
+  bio,
+  avatarUrl,
+  buser: { username },
+  $meta: { userId },
+}) => ({
+  [username]: {
+    username,
+    userId,
+    avatarUrl,
+    bio,
+  },
+});
+
+function items(state = {}, action) {
   switch (action.type) {
+    case PROFILES_GET_BY_BUSERNAME_ASYNC.SUCCESS:
     case PROFILES_SEARCH_ASYNC.SUCCESS:
       // TODO: mapping should be refactored/imp when the Schema is stable
       return action
         .response
-        .reduce((results, {
-          bio,
-          avatarUrl,
-          buser: { username },
-          $meta: { userId },
-        }) => ({
+        .reduce((results, profileResponse) => ({
           ...results,
-          [username]: {
-            username,
-            userId,
-            avatarUrl,
-            bio,
-          },
+          ...profileMapper(profileResponse),
         }), state);
     case PROFILES_REGISTER_ASYNC.SUCCESS:
       alert('Profile registration - success');
@@ -36,5 +43,5 @@ function searchResults(state = {}, action) {
 }
 
 export default combineReducers({
-  searchResults,
+  items,
 });

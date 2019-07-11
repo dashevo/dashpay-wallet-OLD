@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-
 import View from 'components/View';
 import NavStatic from 'components/NavStatic';
 import ProgressBar from 'components/ProgressBar';
@@ -32,7 +31,9 @@ const HomeScreen = (props: Props) => {
     user,
     invalidateAlternativeCurrencyRate,
     fetchAlternativeCurrencyRateIfNeeded,
+    getByBUsername,
   } = props;
+  const { username } = user;
   const [progress, setProgress] = useState(0);
   const [complete, setComplete] = useState(false);
 
@@ -45,6 +46,7 @@ const HomeScreen = (props: Props) => {
     if (progress === 0 && event.finished) {
       const { initializeWallet } = props;
       await initializeWallet();
+      await getByBUsername(username);
       setProgress(100);
       return true;
     }

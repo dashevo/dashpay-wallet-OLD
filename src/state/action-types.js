@@ -30,3 +30,4 @@ export const CONTACTS_GET_PENDING_REQUESTS_ASYNC = createAsyncStatusConstants('C
 
 export const PROFILES_REGISTER_ASYNC = createAsyncStatusConstants('PROFILES_REGISTER_ASYNC');
 export const PROFILES_SEARCH_ASYNC = createAsyncStatusConstants('PROFILES_SEARCH_ASYNC');
+export const PROFILES_GET_BY_BUSERNAME_ASYNC = createAsyncStatusConstants('PROFILES_GET_BY_BUSERNAME');
