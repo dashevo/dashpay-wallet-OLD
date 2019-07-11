@@ -77,6 +77,22 @@ const styles = theme => ({
   icon__sm: {
     fontSize: theme.avatarSmFontSize,
   },
+  container__xs: {
+    borderRadius: theme.avatarXsBorderRadius,
+    height: theme.avatarXsSize,
+    width: theme.avatarXsSize,
+  },
+  image__xs: {
+    borderRadius: theme.avatarXsBorderRadius,
+    height: theme.avatarXsSize,
+    width: theme.avatarXsSize,
+  },
+  text__xs: {
+    fontSize: theme.avatarXsFontSize,
+  },
+  icon__xs: {
+    fontSize: theme.avatarXsFontSize,
+  },
   container__primary: {
     backgroundColor: '#efefef',
     borderColor: '#efefef',

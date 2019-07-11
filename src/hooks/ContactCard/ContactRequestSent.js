@@ -1,12 +1,6 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
+// @flow
 import React from 'react';
 import { View, Text } from 'react-native';
-
-// Internal dependencies
 import Avatar from 'hooks/Avatar';
 import useTranslate from 'hooks/Translate';
 import type { User } from 'state/types';
@@ -27,7 +21,7 @@ function ContactRequestSent({ sender, receiver, timestamp }: Props) {
       <View style={styles.header}>
         <View style={styles.row}>
           <View style={styles.col}>
-            <Avatar sm user={sender} />
+            <Avatar xs user={sender} />
           </View>
           <View style={styles.col}>
             <Text style={styles.title}>{sender.username}</Text>
@@ -39,7 +33,7 @@ function ContactRequestSent({ sender, receiver, timestamp }: Props) {
         <View style={styles.underlined}>
           <View style={styles.row}>
             <View style={styles.col}>
-              <Avatar sm user={receiver} />
+              <Avatar xs user={receiver} />
             </View>
             <View style={styles.col}>
               <Text style={styles.title}>{receiver.username}</Text>
