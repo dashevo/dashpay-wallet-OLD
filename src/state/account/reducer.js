@@ -66,7 +66,7 @@ const account = (state = initialState, action) => {
     case ACCOUNTS_GET_UNUSED_ADDRESS:
       return {
         ...state,
-        unusedAddress: action.response.address,
+        unusedAddress: action.unusedAddress,
       };
     case ACCOUNTS_CHANGE_NETWORK_ASYNC.SUCCESS:
       return {

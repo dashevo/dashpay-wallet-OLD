@@ -17,8 +17,8 @@ describe('account reducer', () => {
 
   it('should handle ACCOUNTS_GET_UNUSED_ADDRESS', () => {
     const payload = {
-      response: { address: 'unusedAddress' },
       type: ACCOUNTS_GET_UNUSED_ADDRESS,
+      unusedAddress: 'unusedAddress',
     };
     const expectedState = { ...initialState, unusedAddress: 'unusedAddress' };
     expect(reducer(undefined, payload)).toEqual(expectedState);
