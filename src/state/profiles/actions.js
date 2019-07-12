@@ -5,11 +5,11 @@ import {
   PROFILES_GET_BY_BUSERNAME_ASYNC,
 } from 'state/action-types';
 
-export const register = (
-  avatarUrl: ?string,
-  bio: ?string,
-  username: string,
-) => (
+export const registerProfile = ({
+  avatarUrl,
+  bio,
+  username,
+}) => (
   dispatch, getState, { account: { dashPayDap } },
 ) => dispatch({
   types: PROFILES_REGISTER_ASYNC,

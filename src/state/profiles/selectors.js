@@ -6,6 +6,6 @@ export const profileItemsSelector = createSelector(
   profilesSelector, ({ items }) => Object.values(items),
 );
 
-export const currentProfileSelectorFactory = createSelector(
+export const profileSelectorFactory = createSelector(
   profilesSelector, ({ items }) => username => items[username],
 );

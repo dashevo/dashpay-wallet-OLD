@@ -1,20 +1,28 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import * as React from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import { TouchableOpacity, View, SafeAreaView } from 'react-native';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import Styles from 'components/Styles';
 import { compose } from 'utilities';
+import type { NavigationProps } from 'types/navigation';
 import defaultStyles from './styles';
 
 export const Composed = compose([props => <Styles {...props} styles={defaultStyles} />]);
 
-function NavBar({ scene, navigation, showMenu }) {
+
+type Props = NavigationProps & {
+  showMenu: Function,
+  scene: {
+    descriptor: {
+      options: {
+        title: string,
+      }
+    },
+  },
+};
+
+const NavBar = ({ scene, navigation, showMenu }: Props) => {
   const { options } = scene.descriptor;
   const { title = '' } = options;
   return (
@@ -49,16 +57,6 @@ function NavBar({ scene, navigation, showMenu }) {
       )}
     </Composed>
   );
-}
-
-NavBar.propTypes = {
-  showMenu: PropTypes.func.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-  scene: PropTypes.shape({
-    descriptor: PropTypes.object.isRequired,
-  }).isRequired,
 };
 
 export default NavBar;

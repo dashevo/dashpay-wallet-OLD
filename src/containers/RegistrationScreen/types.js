@@ -5,6 +5,8 @@ export type Props = {
   username: string,
   isSubmitting: boolean,
   navigation: Navigation,
+  registerBUser: Function,
+  registerProfile: Function,
 };
 
 export type FormValues = {

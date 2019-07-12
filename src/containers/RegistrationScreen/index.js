@@ -31,11 +31,12 @@ class RegistrationScreen extends React.Component<Props> {
     const { username } = formValues;
     const avatar = `https://api.adorable.io/avatars/285/${username}.png`;
     const bio = `I am ${username}, my bio is pretty awesome`;
-    registerBUser(username).then(() => registerProfile(
-      avatar,
-      bio,
-      username,
-    ));
+    registerBUser(username)
+      .then(() => setTimeout(() => registerProfile({
+        avatar,
+        bio,
+        username,
+      }), 2000));
   }
 
   render() {
