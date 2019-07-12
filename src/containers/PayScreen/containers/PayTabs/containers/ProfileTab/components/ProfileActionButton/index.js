@@ -20,7 +20,7 @@ const ProfileActionButton = ({
   switch (state) {
     case PROFILE_STATE.REQUEST_RECEIVED:
       label = 'Accept request';
-      action = acceptRequest;
+      action = () => acceptRequest(username).then(() => { alert('Contact request accepted'); });
       break;
     case PROFILE_STATE.REQUEST_SENT:
       label = 'Request sent';
@@ -29,15 +29,13 @@ const ProfileActionButton = ({
       return null;
     default:
       label = 'Send request';
-      action = sendRequest;
+      action = () => sendRequest(username).then(() => { alert('Contact request sent'); });
       break;
   }
 
   const handleSubmit = () => {
     setDisabled(true);
-    if (action) {
-      action(username);
-    }
+    action();
   };
 
   return (
