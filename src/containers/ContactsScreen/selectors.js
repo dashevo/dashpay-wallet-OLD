@@ -8,7 +8,7 @@ import {
   sentContactRequestsUsernamesSelector,
 } from 'state/contacts/selectors';
 import { profileItemsSelector } from 'state/profiles/selectors';
-import { getCurrentUser } from 'state/user/selectors';
+import { currentUserSelector } from 'state/account/selectors';
 import type { FilterParams } from 'state/contacts/types';
 import { PROFILE_STATE } from 'state/profiles/constants';
 import type { Profile } from 'state/profiles/types';
@@ -53,7 +53,7 @@ const getProfileState = (
 };
 
 const filteredAndSortedProfilesSelector = createSelector(
-  getCurrentUser,
+  currentUserSelector,
   profileItemsSelector,
   filterParamsSelector,
   filteredAndSortedContactUsernamesSelector,

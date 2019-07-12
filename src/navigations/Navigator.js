@@ -1,16 +1,12 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Animated, Easing, StyleSheet, View, BackHandler,
 } from 'react-native';
 import { createAppContainer, StackRouter, createNavigator } from 'react-navigation';
 import { Transitioner } from 'react-navigation-stack';
 import NavBar from 'components/NavBar';
-
+import type { NavigationProps } from 'types/navigation';
 import routes from './routes';
 import MainMenu from './MainMenu';
 import { forVertical } from './config';
@@ -34,8 +30,20 @@ const styles = StyleSheet.create({
   },
 });
 
-class CustomNavigationView extends React.Component {
-  constructor(props) {
+type Props = NavigationProps & {
+  descriptors: Object,
+  scene: {
+    descriptor: Object,
+  },
+};
+
+type State = {
+  height: number,
+  active: Boolean,
+};
+
+class CustomNavigationView extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.animatedValue = new Animated.Value(0);
     this.state = {
@@ -190,16 +198,6 @@ class CustomNavigationView extends React.Component {
     );
   }
 }
-
-CustomNavigationView.propTypes = {
-  descriptors: PropTypes.shape({}).isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
-  scene: PropTypes.shape({
-    descriptor: PropTypes.object.isRequired,
-  }).isRequired,
-};
 
 const CustomRouter = StackRouter(routes);
 

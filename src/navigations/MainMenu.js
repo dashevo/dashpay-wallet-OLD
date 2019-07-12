@@ -1,16 +1,16 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { TouchableOpacity } from 'react-native';
 import { FormattedNumber } from 'react-intl';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-
 import View from 'components/View';
 import Text from 'components/Text';
 import Icon from 'components/Icon';
 import { Logo } from 'components';
 import { balanceSelector } from 'state/account/selectors';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
+import type { NavigationProps } from 'types/navigation';
 
 import ParallaxScrollView from './tmp';
 
@@ -98,9 +98,18 @@ const styles = {
   },
 };
 
-function MainMenu({
+type Props = NavigationProps & {
+  balance: number,
+  hideMenu: Function,
+  alternativeCurrency: {
+    code: string,
+    rate: ?number,
+  },
+}
+
+const MainMenu = ({
   alternativeCurrency, balance, hideMenu, navigation,
-}) {
+}: Props) => {
   const newBalance = (balance || 0) / 100000000;
   const { code, rate } = alternativeCurrency;
   const dashAmount = newBalance;
@@ -200,18 +209,6 @@ function MainMenu({
       />
     </View>
   );
-}
-
-MainMenu.propTypes = {
-  balance: PropTypes.number.isRequired,
-  hideMenu: PropTypes.func.isRequired,
-  alternativeCurrency: PropTypes.shape({
-    code: PropTypes.string.isRequired,
-    rate: PropTypes.string.isRequired,
-  }).isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 const selector = createSelector(
