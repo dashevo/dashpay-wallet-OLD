@@ -46,8 +46,17 @@ export const getPendingRequests = () => (
   types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
   asyncTask: async () => {
     const { username } = getState().account;
-    const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
-    return profile.contactRequest.getAllPending();
+    try {
+      const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
+      return profile.contactRequest.getAllPending();
+    } catch (e) {
+      if (e.name === 'BUserNotFoundError') {
+        console.error('BUserNotFound', username);
+      } else {
+        throw new Error(e);
+      }
+      return false;
+    }
   },
 });
 
