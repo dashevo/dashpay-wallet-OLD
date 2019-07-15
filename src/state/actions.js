@@ -27,8 +27,8 @@ export const initializeWallet = () => (dispatch, getState, walletLib) => dispatc
       dispatch({
         type: ACCOUNTS_RECEIVE_BALANCE,
 
-        // getTotalBalance(uncomfirmed = true, returnDuffs = true)
-        response: walletLib.account.getTotalBalance(true, true),
+        // getTotalBalance(returnDuffs = true)
+        response: walletLib.account.getTotalBalance(true),
       });
       dispatch(getTransactionHistory());
     });
