@@ -27,13 +27,13 @@ export const initializeWallet = () => (dispatch, getState, walletLib) => dispatc
       dispatch({
         type: ACCOUNTS_RECEIVE_BALANCE,
 
-        // getBalance(uncomfirmed = true, returnDuffs = true)
-        response: walletLib.account.getBalance(true, true),
+        // getTotalBalance(returnDuffs = true)
+        response: walletLib.account.getTotalBalance(true),
       });
       dispatch(getTransactionHistory());
     });
 
-    const balance = walletLib.account.getBalance();
+    const balance = walletLib.account.getTotalBalance();
     dispatch({
       type: ACCOUNTS_RECEIVE_BALANCE,
       response: balance,
