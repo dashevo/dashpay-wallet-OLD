@@ -10,15 +10,15 @@ export const registerProfile = ({
   bio,
   username,
 }) => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   types: PROFILES_REGISTER_ASYNC,
   asyncTask: async () => {
-    const buser = await dashPayDap.buser.get(username);
+    const buser = await dashPayDpa.buser.get(username);
     await buser.synchronize();
-    await buser.own(dashPayDap.getBUserSigningPrivateKey());
+    await buser.own(dashPayDpa.getBUserSigningPrivateKey());
     const adorableAvatarUrl = `https://api.adorable.io/avatars/285/${username}.png`;
-    const profile = await dashPayDap.profile.create({
+    const profile = await dashPayDpa.profile.create({
       avatarUrl: avatarUrl || adorableAvatarUrl,
       bio,
     });
@@ -28,21 +28,21 @@ export const registerProfile = ({
 });
 
 export const getByBUsername = (username: string) => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   types: PROFILES_GET_BY_BUSERNAME_ASYNC,
-  asyncTask: () => dashPayDap.profile.getByBUsername(username),
+  asyncTask: () => dashPayDpa.profile.getByBUsername(username),
 });
 
 export const search = (searchString: string) => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   searchString,
   types: PROFILES_SEARCH_ASYNC,
   // TODO: replace when we have search by username
-  // asyncTask: () => dashPayDap.profile.get(searchString),
+  // asyncTask: () => dashPayDpa.profile.get(searchString),
   asyncTask: async () => {
-    const getProfiles = await dashPayDap.profile.getAll();
+    const getProfiles = await dashPayDpa.profile.getAll();
     return Promise.all(getProfiles);
   },
 });
