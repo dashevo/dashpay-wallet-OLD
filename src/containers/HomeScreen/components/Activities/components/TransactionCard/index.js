@@ -22,7 +22,7 @@ const TransactionCard = (props: Props) => {
   const performActionFactory = action => () => {
     setIsLoading(true);
     return action(username).then(
-      () => {},
+      () => { Alert.alert('Success'); },
       error => Alert.alert(`Error: ${error.message}`),
     ).finally(() => setIsLoading(false));
   };
