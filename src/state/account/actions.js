@@ -41,7 +41,7 @@ export const getUnusedAddress = (type = 'external') => (
   dispatch, getState, { account },
 ) => dispatch({
   type: ACCOUNTS_GET_UNUSED_ADDRESS,
-  unusedAddress: async () => account.getUnusedAddress(type),
+  unusedAddress: account.getUnusedAddress(type).address,
 });
 
 export const createAccount = () => (dispatch, getState) => {
