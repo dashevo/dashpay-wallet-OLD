@@ -41,7 +41,7 @@ const walletLib = {
 
       walletLib.account = walletLib.wallet.getAccount({ index: accountId });
       walletLib.account.events.on('ready', () => {
-        walletLib.account.dashPayDpa = walletLib.account.getDAP('dashpaydpa');
+        walletLib.account.dashPayDpa = walletLib.account.getDPA('dashpaydpa');
         resolve(true);
       });
     });
