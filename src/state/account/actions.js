@@ -61,6 +61,7 @@ export const createAccount = () => (dispatch, getState) => {
 export const registerBUser = (username: string) => (
   dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
+  username,
   types: ACCOUNTS_REGISTER_BUSER_ASYNC,
   asyncTask: async () => {
     const buser = dashPayDpa.buser.create(username);

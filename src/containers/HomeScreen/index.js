@@ -47,7 +47,7 @@ const HomeScreen = (props: Props) => {
       const { initializeWallet } = props;
       await initializeWallet();
       try {
-      await getByBUsername(username);
+        await getByBUsername(username);
       } catch (e) {
         console.error(e);
         throw e;
