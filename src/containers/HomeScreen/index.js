@@ -46,7 +46,12 @@ const HomeScreen = (props: Props) => {
     if (progress === 0 && event.finished) {
       const { initializeWallet } = props;
       await initializeWallet();
+      try {
       await getByBUsername(username);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
       setProgress(100);
       return true;
     }

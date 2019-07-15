@@ -9,12 +9,17 @@ import {
 } from 'state/action-types';
 
 const getProfileAndBUserByUsername = async (dashPayDpa, username) => {
-  const [profile] = await dashPayDpa.profile.getByBUsername(username);
-  const regTxId = profile.$meta.userId;
-  const bUser = await dashPayDpa.buser.get(regTxId);
-  await bUser.synchronize();
-  profile.setOwner(bUser);
-  return profile;
+  try {
+    const [profile] = await dashPayDpa.profile.getByBUsername(username);
+    const regTxId = profile.$meta.userId;
+    const bUser = await dashPayDpa.buser.get(regTxId);
+    await bUser.synchronize();
+    profile.setOwner(bUser);
+    return profile;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
 };
 
 export const setFilter = filterParams => ({
