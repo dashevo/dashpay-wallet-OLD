@@ -6,7 +6,7 @@ import {
 } from 'redux';
 import { Wallet } from '@dashevo/wallet-lib';
 import DAPIClient from '@dashevo/dapi-client';
-import DashPayDAP from '@dashevo/dashpay-dap';
+import DashPayDPA from '@dashevo/dashpay-dpa';
 import reducer from './reducer';
 import middleware from './middleware';
 
@@ -29,7 +29,7 @@ const walletLib = {
     const accountId = opts.accountId || 0;
 
     return new Promise((resolve) => {
-      const dpd = new DashPayDAP({ username });
+      const dpd = new DashPayDPA({ username });
 
       walletLib.wallet = new Wallet({
         network,
@@ -41,7 +41,7 @@ const walletLib = {
 
       walletLib.account = walletLib.wallet.getAccount({ index: accountId });
       walletLib.account.events.on('ready', () => {
-        walletLib.account.dashPayDap = walletLib.account.getDAP('dashpaydap');
+        walletLib.account.dashPayDpa = walletLib.account.getDAP('dashpaydpa');
         resolve(true);
       });
     });

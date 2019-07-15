@@ -8,10 +8,10 @@ import {
   CONTACTS_GET_PENDING_REQUESTS_ASYNC,
 } from 'state/action-types';
 
-const getProfileAndBUserByUsername = async (dashPayDap, username) => {
-  const [profile] = await dashPayDap.profile.getByBUsername(username);
+const getProfileAndBUserByUsername = async (dashPayDpa, username) => {
+  const [profile] = await dashPayDpa.profile.getByBUsername(username);
   const regTxId = profile.$meta.userId;
-  const bUser = await dashPayDap.buser.get(regTxId);
+  const bUser = await dashPayDpa.buser.get(regTxId);
   await bUser.synchronize();
   profile.setOwner(bUser);
   return profile;
@@ -27,50 +27,50 @@ export const clearFilter = () => ({
 });
 
 export const sendRequest = address => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   address,
   types: CONTACTS_SEND_REQUEST_ASYNC,
   asyncTask: async () => {
     const { username } = getState().account;
-    const sender = await getProfileAndBUserByUsername(dashPayDap, username);
-    sender.buser.own(dashPayDap.getBUserSigningPrivateKey());
-    const receiver = await getProfileAndBUserByUsername(dashPayDap, address);
+    const sender = await getProfileAndBUserByUsername(dashPayDpa, username);
+    sender.buser.own(dashPayDpa.getBUserSigningPrivateKey());
+    const receiver = await getProfileAndBUserByUsername(dashPayDpa, address);
     return sender.contactRequest.create({ receiver }).send();
   },
 });
 
 export const getPendingRequests = () => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
   asyncTask: async () => {
     const { username } = getState().account;
-    const profile = await getProfileAndBUserByUsername(dashPayDap, username);
+    const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
     return profile.contactRequest.getAllPending();
   },
 });
 
 export const getContacts = () => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   types: CONTACTS_GET_CONTACTS_ASYNC,
   asyncTask: async () => {
     const { username } = getState().account;
-    const profile = await getProfileAndBUserByUsername(dashPayDap, username);
+    const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
     return profile.contact.getAll();
   },
 });
 
 export const acceptRequest = senderUsername => (
-  dispatch, getState, { account: { dashPayDap } },
+  dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   username: senderUsername,
   types: CONTACTS_ACCEPT_REQUEST_ASYNC,
   async asyncTask() {
     const { username } = getState().account;
-    const profile = await getProfileAndBUserByUsername(dashPayDap, username);
-    profile.buser.own(dashPayDap.getBUserSigningPrivateKey());
+    const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
+    profile.buser.own(dashPayDpa.getBUserSigningPrivateKey());
     const pendingContactRequests = await profile.contactRequest.getAllPending();
     const contactRequest = pendingContactRequests
       .received
