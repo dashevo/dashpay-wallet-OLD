@@ -6,6 +6,7 @@ import {
   ACCOUNTS_SET_USERNAME,
   ACCOUNTS_GET_UNUSED_ADDRESS,
   ACCOUNTS_CHANGE_NETWORK_ASYNC,
+  ACCOUNTS_SET_DPA_INITIALIZED,
 } from 'state/action-types';
 
 // TODO: Code refactoring.
@@ -43,6 +44,7 @@ export const initialState = {
   mnemonic: 'light point battle foam find motion true because genre people banana fit',
   unusedAddress: '',
   balance: 0,
+  dpaIsInitialized: false,
 };
 
 const account = (state = initialState, action) => {
@@ -92,6 +94,12 @@ const account = (state = initialState, action) => {
         isRegisterRequestSent: false,
         username: undefined,
       };
+    case ACCOUNTS_SET_DPA_INITIALIZED:
+      return {
+        ...state,
+        dpaIsInitialized: true,
+      };
+
     default:
       return state;
   }

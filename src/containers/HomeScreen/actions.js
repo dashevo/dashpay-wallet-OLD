@@ -6,6 +6,7 @@ import {
   fetchAlternativeCurrencyRateIfNeeded,
 } from 'state/alternativeCurrency/actions';
 import { getByBUsername } from 'state/profiles/actions';
+import { setDpaInitialized } from 'state/account/actions';
 
 function actions(dispatch: Function): Object {
   return bindActionCreators(
@@ -14,6 +15,7 @@ function actions(dispatch: Function): Object {
       invalidateAlternativeCurrencyRate,
       fetchAlternativeCurrencyRateIfNeeded,
       getByBUsername,
+      setDpaInitialized,
     },
     dispatch,
   );

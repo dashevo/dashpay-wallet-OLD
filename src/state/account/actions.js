@@ -7,6 +7,7 @@ import {
   ACCOUNTS_SET_MNEMONIC,
   ACCOUNTS_SET_USERNAME,
   ACCOUNTS_REGISTER_BUSER_ASYNC,
+  ACCOUNTS_SET_DPA_INITIALIZED,
 } from 'state/action-types';
 
 /**
@@ -79,4 +80,8 @@ export const setMnemonic = (mnemonic: string) => ({
 export const setUsername = (username: string) => ({
   type: ACCOUNTS_SET_USERNAME,
   username,
+});
+
+export const setDpaInitialized = () => ({
+  type: ACCOUNTS_SET_DPA_INITIALIZED,
 });

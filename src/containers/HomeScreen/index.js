@@ -32,6 +32,7 @@ const HomeScreen = (props: Props) => {
     invalidateAlternativeCurrencyRate,
     fetchAlternativeCurrencyRateIfNeeded,
     getByBUsername,
+    setDpaInitialized,
   } = props;
   const { username } = user;
   const [progress, setProgress] = useState(0);
@@ -46,6 +47,7 @@ const HomeScreen = (props: Props) => {
     if (progress === 0 && event.finished) {
       const { initializeWallet } = props;
       await initializeWallet();
+      setDpaInitialized();
       try {
         await getByBUsername(username);
       } catch (e) {

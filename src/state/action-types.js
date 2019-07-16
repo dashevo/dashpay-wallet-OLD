@@ -5,6 +5,7 @@ const createAsyncStatusConstants = baseConstant => ({
 });
 
 export const FETCH_CURRENT_USER_ASYNC = createAsyncStatusConstants('FETCH_CURRENT_USER_ASYNC');
+export const ACCOUNTS_SET_DPA_INITIALIZED = 'ACCOUNTS_SET_DPA_INITIALIZED';
 export const ACCOUNTS_ACCOUNT_CREATED = 'ACCOUNTS_ACCOUNT_CREATED';
 export const ACCOUNTS_RECEIVE_BALANCE = 'ACCOUNTS_RECEIVE_BALANCE';
 export const ACCOUNTS_REGISTER_BUSER_ASYNC = createAsyncStatusConstants('ACCOUNTS_REGISTER_BUSER_ASYNC');
