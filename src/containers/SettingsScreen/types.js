@@ -1,10 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-import type { Element } from 'react';
-export type ReactElement = Element<*>;
+// @flow
+import type { NavigationProps } from 'types/navigation';
 
-export type Props = {};
-export type State = {};
+export type Props = NavigationProps & {
+  balanceVisible: Boolean,
+  changeBalanceVisible: Function,
+};
