@@ -1,25 +1,24 @@
 // @flow
 import React from 'react';
-import Avatar from 'components/Avatar';
+import Avatar from 'hooks/Avatar';
 import View from 'components/View';
 import Text from 'components/Text';
-import type { Props } from './types';
+import type { Profile } from 'state/profiles/types';
+import useStyles from './useStyles';
 
-const ProfilePic = (props: Props) => (
-  <Avatar {...props} theme="red" tmp>
-    {({ children, styles }) => (
-      <View style={styles.col}>
-        <View style={styles.center}>
-          <View style={styles.container}>
-            <View style={styles.body}>{children}</View>
-          </View>
-        </View>
-        <View style={styles.center}>
-          <Text style={styles.title}>{props.username}</Text>
-        </View>
+const ProfilePic = (user: Profile) => {
+  const styles = useStyles();
+  const { username } = user;
+  return (
+    <View style={styles.center}>
+      <View style={styles.row}>
+        <Avatar user={user} lg />
       </View>
-    )}
-  </Avatar>
-);
+      <View>
+        <Text style={styles.username}>{username}</Text>
+      </View>
+    </View>
+  );
+};
 
 export default ProfilePic;
