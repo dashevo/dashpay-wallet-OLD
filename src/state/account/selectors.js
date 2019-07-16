@@ -25,3 +25,8 @@ export const currentUserSelector = createSelector(
     avatarUrl: `https://api.adorable.io/avatars/285/${username}.png`,
   }),
 );
+
+export const dpaIsInitializedSelector = createSelector(
+  accountSelector,
+  ({ dpaIsInitialized }) => dpaIsInitialized,
+);

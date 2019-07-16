@@ -9,12 +9,17 @@ import {
 } from 'state/action-types';
 
 const getProfileAndBUserByUsername = async (dashPayDpa, username) => {
-  const [profile] = await dashPayDpa.profile.getByBUsername(username);
-  const regTxId = profile.$meta.userId;
-  const bUser = await dashPayDpa.buser.get(regTxId);
-  await bUser.synchronize();
-  profile.setOwner(bUser);
-  return profile;
+  try {
+    const [profile] = await dashPayDpa.profile.getByBUsername(username);
+    const regTxId = profile.$meta.userId;
+    const bUser = await dashPayDpa.buser.get(regTxId);
+    await bUser.synchronize();
+    profile.setOwner(bUser);
+    return profile;
+  } catch (e) {
+    console.error(e);
+    return e;
+  }
 };
 
 export const setFilter = filterParams => ({
@@ -46,8 +51,17 @@ export const getPendingRequests = () => (
   types: CONTACTS_GET_PENDING_REQUESTS_ASYNC,
   asyncTask: async () => {
     const { username } = getState().account;
-    const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
-    return profile.contactRequest.getAllPending();
+    try {
+      const profile = await getProfileAndBUserByUsername(dashPayDpa, username);
+      return profile.contactRequest.getAllPending();
+    } catch (e) {
+      if (e.name === 'BUserNotFoundError') {
+        console.error('BUserNotFound', username);
+      } else {
+        throw new Error(e);
+      }
+      return false;
+    }
   },
 });
 

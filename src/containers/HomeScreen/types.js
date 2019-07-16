@@ -4,4 +4,5 @@ export type Props = {
   invalidateAlternativeCurrencyRate: Function,
   fetchAlternativeCurrencyRateIfNeeded: Function,
   getByBUsername: Function,
+  setDpaInitialized: Function,
 };
