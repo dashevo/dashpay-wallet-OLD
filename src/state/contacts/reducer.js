@@ -80,8 +80,22 @@ const pendingRequests = (state = { received: [], sent: [] }, action) => {
       return {
         ...state,
         type: 'pending',
-        received: action.response.received.map(({ sender }) => contactRequestMapper(sender)),
-        sent: action.response.sent.map(({ receiver }) => contactRequestMapper(receiver)),
+        received: [
+          ...state.received,
+          ...action.response.received
+            .map(({ sender }) => contactRequestMapper(sender))
+            .filter(receivedItem => !state.received.some(
+              ({ username }) => username === receivedItem.username,
+            )),
+        ],
+        sent: [
+          ...state.sent,
+          ...action.response.sent
+            .map(({ receiver }) => contactRequestMapper(receiver))
+            .filter(sentItem => !state.sent.some(
+              ({ username }) => username === sentItem.username,
+            )),
+        ],
       };
     case CONTACTS_GET_PENDING_REQUESTS_ASYNC.FAILURE:
       alert(`Pending request failure - error: ${action.error.message}`);
