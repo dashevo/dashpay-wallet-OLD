@@ -10,7 +10,7 @@
     "flow": "flow"
   },
   "dependencies": {
-    "@dashevo/dapi-client": "github:dashevo/dapi-client#v0.5.0",
+    "@dashevo/dapi-client": "https://github.com/dashevo/dapi-client.git#temp/exclusion",
     "@dashevo/dashpay-dpa": "github:dashevo/dashpay-dpa",
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib",
     "@xstate/react": "^0.6.1",
