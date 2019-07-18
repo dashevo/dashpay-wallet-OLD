@@ -41,61 +41,43 @@ const HomeScreen = (props: Props) => {
   useEffect(() => {
     invalidateAlternativeCurrencyRate();
     fetchAlternativeCurrencyRateIfNeeded();
-  });
+  }, []);
 
   const handleAnimationEnd = async (event) => {
     if (progress === 0 && event.finished) {
-      const { initializeWallet } = props;
-      await initializeWallet();
-      setDpaInitialized();
       try {
+        const { initializeWallet } = props;
+        await initializeWallet();
         await getByBUsername(username);
-      } catch (e) {
-        console.error(e);
-        throw e;
+        return true;
+      } finally {
+        setDpaInitialized();
+        setProgress(100);
       }
-      setProgress(100);
-      return true;
     }
     return false;
   };
 
   const renderNavBar = () => (
-    <FadeIn
-      inputRange={[0, 1.75, 2]}
-      outputRange={[0, 0, 1]}
-      style={styles.navBar}
-    >
+    <FadeIn inputRange={[0, 1.75, 2]} outputRange={[0, 0, 1]} style={styles.navBar}>
       <NavStatic {...props} />
     </FadeIn>
   );
 
   const renderProgressBar = () => (
-    <FadeIn
-      inputRange={[0.5, 1, 1.5]}
-      outputRange={[0, 1, 0]}
-    >
-      <ProgressBar
-        onComplete={() => setComplete(true)}
-        value={progress}
-      />
+    <FadeIn inputRange={[0.5, 1, 1.5]} outputRange={[0, 1, 0]}>
+      <ProgressBar onComplete={() => setComplete(true)} value={progress} />
     </FadeIn>
   );
 
   const renderProfilePic = () => (
-    <FadeIn
-      inputRange={[0, 1.5, 1.75]}
-      outputRange={[0, 0, 1]}
-    >
+    <FadeIn inputRange={[0, 1.5, 1.75]} outputRange={[0, 0, 1]}>
       <ProfilePic {...user} />
     </FadeIn>
   );
 
   const renderIconBar = () => (
-    <FadeIn
-      inputRange={[0, 1.75, 2]}
-      outputRange={[0, 0, 1]}
-    >
+    <FadeIn inputRange={[0, 1.75, 2]} outputRange={[0, 0, 1]}>
       <IconBar {...props} />
     </FadeIn>
   );
@@ -130,17 +112,14 @@ const HomeScreen = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <SpringProvider
-        toValue={complete ? 2 : 1}
-        onAnimationEnd={handleAnimationEnd}
-      >
-        <ParallaxScrollView
-          renderHeader={renderHeader}
-          renderBody={renderBody}
-        />
+      <SpringProvider toValue={complete ? 2 : 1} onAnimationEnd={handleAnimationEnd}>
+        <ParallaxScrollView renderHeader={renderHeader} renderBody={renderBody} />
       </SpringProvider>
     </View>
   );
 };
 
-export default connect(selector, actions)(HomeScreen);
+export default connect(
+  selector,
+  actions,
+)(HomeScreen);
