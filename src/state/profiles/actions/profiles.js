@@ -38,19 +38,21 @@ export const registerProfile = ({
   },
 });
 
-export const getByBUsername = (username: string) => (dispatch, getState, walletLib) => dispatch({
-  types: PROFILES_GET_BY_BUSERNAME_ASYNC,
-  asyncTask: async () => {
-    try {
-      const {
-        account: { dashPayDpa },
-      } = walletLib;
-      return await dashPayDpa.profile.getByBUsername(username);
-    } catch (error) {
-      throw new Error(error);
-    }
-  },
-});
+export const getByBUsername = (username: string) => {
+  return (dispatch, getState, walletLib) => dispatch({
+    types: PROFILES_GET_BY_BUSERNAME_ASYNC,
+    asyncTask: async () => {
+      try {
+        const {
+          account: { dashPayDpa },
+        } = walletLib;
+        return await dashPayDpa.profile.getByBUsername(username);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  });
+};
 
 export const searchProfiles = (searchString: string) => (
   dispatch, getState, { account: { dashPayDpa } },
