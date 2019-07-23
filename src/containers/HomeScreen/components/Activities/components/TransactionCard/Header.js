@@ -3,12 +3,20 @@ import React from 'react';
 import View from 'components/View';
 import Text from 'components/Text';
 import Avatar from 'hooks/Avatar';
-import type { ItemWithStylesProps as Props } from './types';
+import { PROFILE_STATES } from 'state/profiles/constants';
+import type { Profile } from 'state/profiles/types';
+
+type Props = {
+  item: Profile,
+  styles: Object,
+};
 
 const Header = ({
-  type,
-  username,
-  avatarUrl,
+  item: {
+    state,
+    username,
+    avatarUrl,
+  },
   styles,
 }: Props) => (
   <View style={styles.header}>
@@ -22,7 +30,7 @@ const Header = ({
         </View>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <Text style={styles.subtitle} numberOfLines={1}>
-            {type === 'accepted' ? 'Added to Contacts' : 'Wants to be a Contact'}
+            {state === PROFILE_STATES.CONTACT ? 'Added to Contacts' : 'Wants to be a Contact'}
           </Text>
         </View>
       </View>

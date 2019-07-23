@@ -1,17 +1,21 @@
 import { createSelector } from 'reselect';
 import moment from 'moment';
 import {
-  receivedRequestsSelector,
-  sentRequestsSelector,
-} from 'state/contacts/selectors';
+  receivedContactRequestProfilesSelector,
+  sentContactRequestProfilesSelector,
+} from 'state/profiles/selectors';
 import { currentUserSelector } from 'state/account/selectors';
 
 export default createSelector(
-  receivedRequestsSelector,
-  sentRequestsSelector,
+  receivedContactRequestProfilesSelector,
+  sentContactRequestProfilesSelector,
   currentUserSelector,
-  (receivedContactRequests, sentContactRequests, currentUser) => {
-    const received = receivedContactRequests.map(({
+  (
+    receivedContactRequestProfiles,
+    sentContactRequestProfiles,
+    currentUser,
+  ) => {
+    const received = receivedContactRequestProfiles.map(({
       userId,
       username,
       avatarUrl,
@@ -33,7 +37,7 @@ export default createSelector(
       },
     }));
 
-    const sent = sentContactRequests.map(({
+    const sent = sentContactRequestProfiles.map(({
       userId,
       username,
       avatarUrl,

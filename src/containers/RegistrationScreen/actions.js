@@ -1,4 +1,3 @@
-// @flow
 import { bindActionCreators } from 'redux';
 import { registerBUser } from 'state/account/actions';
 import { registerProfile } from 'state/profiles/actions';

@@ -1,20 +1,15 @@
+// @flow
 import { StyleSheet } from 'react-native';
+import type { Profile } from 'state/profiles/types';
 
-type Item = {
-  username: string,
-  avatarUrl: string,
-  type: string,
-  timestamp: Date,
-};
-
-type Styles = {
+export type Styles = {
   styles: StyleSheet.Styles,
 }
 
 export type Props = {
-  item: Item,
-  acceptRequest: ?Function,
-  rejectRequest: ?Function,
+  item: Profile,
+  acceptContactRequest: ?Function,
+  rejectContactRequest: ?Function,
 };
 
-export type ItemWithStylesProps = Item & Styles;
+export type ItemWithStylesProps = Profile & Styles;

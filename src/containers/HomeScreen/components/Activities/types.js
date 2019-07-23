@@ -1,10 +1,9 @@
 // @flow
-import type Navigation from 'types/navigation';
+import type { NavigationProps } from 'types/navigation';
 
-export type Props = {
-  getPendingRequests: Function,
-  acceptRequest: Function,
-  rejectRequest: Function,
+export type Props = NavigationProps & {
+  getPendingContactRequests: Function,
+  acceptContactRequest: Function,
+  rejectContactRequest: Function,
   activity: Array,
-  navigation: Navigation,
 }

@@ -1,8 +1,11 @@
 import { bindActionCreators } from 'redux';
-import { acceptRequest, sendRequest } from 'state/contacts/actions';
+import {
+  acceptContactRequest,
+  sendContactRequest,
+} from 'state/profiles/actions';
 
-function actions(dispatch) {
-  return bindActionCreators({ sendRequest, acceptRequest }, dispatch);
-}
+const actions = dispatch => bindActionCreators({
+  sendContactRequest, acceptContactRequest,
+}, dispatch);
 
 export default actions;

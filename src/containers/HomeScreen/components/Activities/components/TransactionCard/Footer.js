@@ -3,10 +3,11 @@ import React from 'react';
 import View from 'components/View';
 import Text from 'components/Text';
 import { FormattedTime } from 'react-intl';
+import { PROFILE_STATES } from 'state/profiles/constants';
 import type { ItemWithStylesProps as Props } from './types';
 
 const Footer = ({
-  type,
+  state,
   timestamp,
   styles,
 }: Props) => (
@@ -19,7 +20,7 @@ const Footer = ({
     >
       {formattedTime => (
         <Text style={styles.small}>
-          {type === 'accepted' ? 'ADDED' : 'RECEIVED'}
+          {state === PROFILE_STATES.CONTACT ? 'ADDED' : 'RECEIVED'}
           |
           {formattedTime}
         </Text>

@@ -1,27 +1,25 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-// Internal dependencies
 import ContactList from 'hooks/ContactList';
+// @flow
 import ContactItem from './ContactItem';
 import selectors from './selectors';
 import actions from './actions';
 
-function AllEvents(props) {
+type Props = {
+  acceptContactRequest: Function,
+  rejectContactRequest: Function,
+}
+
+const AllEvents = (props: Props) => {
   const keyExtractor = item => item.id;
 
   const renderItem = useCallback(
     ({ item }) => (
       <ContactItem
         {...item}
-        onAccept={props.acceptRequest}
-        onReject={props.rejectRequest}
+        onAccept={props.acceptContactRequest}
+        onReject={props.rejectContactRequest}
       />
     ),
     [],
@@ -36,11 +34,6 @@ function AllEvents(props) {
       renderItem={renderItem}
     />
   );
-}
-
-AllEvents.propTypes = {
-  acceptRequest: PropTypes.func.isRequired,
-  rejectRequest: PropTypes.func.isRequired,
 };
 
 export default connect(

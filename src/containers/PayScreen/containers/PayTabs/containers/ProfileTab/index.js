@@ -4,28 +4,29 @@ import { connect } from 'react-redux';
 import ScrollView from 'components/ScrollView';
 import View from 'components/View';
 import Text from 'components/Text';
+import type { Profile } from 'state/profiles/types';
 import CoverPhoto from './components/CoverPhoto';
 import ProfileActionButton from './components/ProfileActionButton';
 import selector from './selectors';
 import useStyles from './useStyles';
-import type { Props } from './types';
 
-const ProfileTab = ({ user, state }: Props) => {
+const ProfileTab = (props: Profile) => {
   const styles = useStyles();
+  const { username, state } = props;
   return (
     <ScrollView style={styles.container}>
-      <CoverPhoto user={user} />
+      <CoverPhoto {...props} />
       <View style={styles.row}>
         <View style={styles.container}>
           <View style={[styles.row, styles.center, styles.usernameRow]}>
             <Text style={styles.username}>
-              {user.username}
+              {username}
             </Text>
           </View>
         </View>
       </View>
       <View style={styles.row}>
-        <ProfileActionButton username={user.username} state={state} />
+        <ProfileActionButton username={username} state={state} />
       </View>
     </ScrollView>
   );

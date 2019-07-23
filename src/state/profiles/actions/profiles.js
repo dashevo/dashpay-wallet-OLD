@@ -1,15 +1,27 @@
 // @flow
 import {
+  PROFILES_SET_FILTER,
+  PROFILES_CLEAR_FILTER,
   PROFILES_REGISTER_ASYNC,
   PROFILES_SEARCH_ASYNC,
   PROFILES_GET_BY_BUSERNAME_ASYNC,
 } from 'state/action-types';
+import type { Profile, FilterParams } from 'state/profiles/types';
+
+export const setFilter = (filterParams: FilterParams) => ({
+  type: PROFILES_SET_FILTER,
+  filterParams,
+});
+
+export const clearFilter = () => ({
+  type: PROFILES_CLEAR_FILTER,
+});
 
 export const registerProfile = ({
   avatarUrl,
   bio,
   username,
-}) => (
+}: Profile) => (
   dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   types: PROFILES_REGISTER_ASYNC,
@@ -17,9 +29,8 @@ export const registerProfile = ({
     const buser = await dashPayDpa.buser.get(username);
     await buser.synchronize();
     await buser.own(dashPayDpa.getBUserSigningPrivateKey());
-    const adorableAvatarUrl = `https://api.adorable.io/avatars/285/${username}.png`;
     const profile = await dashPayDpa.profile.create({
-      avatarUrl: avatarUrl || adorableAvatarUrl,
+      avatarUrl,
       bio,
     });
     profile.setOwner(buser);
@@ -34,7 +45,7 @@ export const getByBUsername = (username: string) => (
   asyncTask: () => dashPayDpa.profile.getByBUsername(username),
 });
 
-export const search = (searchString: string) => (
+export const searchProfiles = (searchString: string) => (
   dispatch, getState, { account: { dashPayDpa } },
 ) => dispatch({
   searchString,

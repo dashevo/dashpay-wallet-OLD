@@ -1,14 +1,19 @@
 import { createSelector } from 'reselect';
-import { receivedRequestsSelector } from 'state/contacts/selectors';
+import {
+  contactProfilesSelector,
+  receivedContactRequestProfilesSelector,
+} from 'state/profiles/selectors';
 import { selectTransactions } from 'state/transactions';
 
-export default createSelector(
+const selectors = createSelector(
   selectTransactions,
-  receivedRequestsSelector,
-  (transactions, receivedContactRequests) => {
+  receivedContactRequestProfilesSelector,
+  contactProfilesSelector,
+  (transactions, receivedContactRequestProfiles, contactProfiles) => {
     const activity = [
       ...transactions.map(data => ({ type: 'wallet', data })),
-      ...receivedContactRequests.map(data => ({ type: 'social', data })),
+      ...receivedContactRequestProfiles.map(data => ({ type: 'social', data })),
+      ...contactProfiles.map(data => ({ type: 'social', data })),
     ].sort((a, b) => b.data.timestamp - a.data.timestamp);
 
     return {
@@ -16,3 +21,5 @@ export default createSelector(
     };
   },
 );
+
+export default selectors;

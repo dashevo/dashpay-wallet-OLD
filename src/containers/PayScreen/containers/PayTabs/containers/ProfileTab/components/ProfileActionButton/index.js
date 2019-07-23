@@ -1,35 +1,43 @@
 // @flow
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import Text from 'components/Text';
 import Button from 'components/Button';
-import { PROFILE_STATE } from 'state/profiles/constants';
+import { PROFILE_STATES } from 'state/profiles/constants';
 import actions from './actions';
 import type { Props } from './types';
 
 const ProfileActionButton = ({
   username,
   state,
-  sendRequest,
-  acceptRequest,
+  sendContactRequest,
+  acceptContactRequest,
 }: Props) => {
-  const [disabled, setDisabled] = useState(state === PROFILE_STATE.REQUEST_SENT);
+  const [disabled, setDisabled] = useState(state === PROFILE_STATES.REQUEST_SENT);
   let action;
   let label;
   switch (state) {
-    case PROFILE_STATE.REQUEST_RECEIVED:
+    case PROFILE_STATES.REQUEST_RECEIVED:
       label = 'Accept request';
-      action = () => acceptRequest(username).then(() => { alert('Contact request accepted'); });
+      action = () => acceptContactRequest(username)
+        .then(
+          () => Alert.alert('Contact request accepted'),
+          error => Alert.alert(`Error: ${error.message}`),
+        );
       break;
-    case PROFILE_STATE.REQUEST_SENT:
+    case PROFILE_STATES.REQUEST_SENT:
       label = 'Request sent';
       break;
-    case PROFILE_STATE.IS_CONTACT:
+    case PROFILE_STATES.CONTACT:
       return null;
     default:
       label = 'Send request';
-      action = () => sendRequest(username).then(() => { alert('Contact request sent'); });
+      action = () => sendContactRequest(username)
+        .then(
+          () => Alert.alert('Contact request sent'),
+          error => Alert.alert(`Error: ${error.message}`),
+        );
       break;
   }
 
@@ -41,7 +49,7 @@ const ProfileActionButton = ({
   return (
     <Button disabled={disabled} onPress={handleSubmit}>
       {({ bind, styles }) => (
-        <TouchableOpacity style={styles.container} {...bind}>
+        <TouchableOpacity disabled={disabled} style={styles.container} {...bind}>
           <Text style={styles.text}>{label}</Text>
         </TouchableOpacity>
       )}
@@ -49,7 +57,4 @@ const ProfileActionButton = ({
   );
 };
 
-export default connect(
-  null,
-  actions,
-)(ProfileActionButton);
+export default connect(null, actions)(ProfileActionButton);
