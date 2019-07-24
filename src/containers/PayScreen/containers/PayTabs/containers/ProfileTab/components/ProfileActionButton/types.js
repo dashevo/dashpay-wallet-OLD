@@ -2,5 +2,6 @@
 import type { Profile } from 'state/profiles/types';
 
 export type Props = Profile & {
-  sendRequest: (username: string) => Promise<any>,
+  sendContactRequest: (username: string) => Promise<any>,
+  acceptContactRequest: (username: string) => Promise<any>,
 };

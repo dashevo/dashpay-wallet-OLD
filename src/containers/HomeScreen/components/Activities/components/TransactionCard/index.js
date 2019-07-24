@@ -4,6 +4,7 @@ import { Alert } from 'react-native';
 import Card from 'components/Card';
 import Touchable from 'components/Touchable';
 import View from 'components/View';
+import { PROFILE_STATES } from 'state/profiles/constants';
 import Header from './Header';
 import ActionsBody from './ActionsBody';
 import Footer from './Footer';
@@ -13,11 +14,11 @@ import type { Props } from './types';
 const TransactionCard = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const {
-    acceptRequest,
-    rejectRequest,
+    acceptContactRequest,
+    rejectContactRequest,
     item,
   } = props;
-  const { username, status } = item;
+  const { username, state } = item;
 
   const performActionFactory = action => () => {
     setIsLoading(true);
@@ -27,7 +28,7 @@ const TransactionCard = (props: Props) => {
     ).finally(() => setIsLoading(false));
   };
 
-  const handlePressAccept = performActionFactory(acceptRequest);
+  const handlePressAccept = performActionFactory(acceptContactRequest);
 
   const handlePressReject = () => {
     Alert.alert(
@@ -40,7 +41,7 @@ const TransactionCard = (props: Props) => {
         },
         {
           text: 'Yes',
-          onPress: performActionFactory(rejectRequest),
+          onPress: performActionFactory(rejectContactRequest),
         },
       ],
       { cancelable: false },
@@ -53,8 +54,8 @@ const TransactionCard = (props: Props) => {
         <View style={styles.tmp}>
           <Touchable {...bind}>
             <View style={styles.container}>
-              <Header {...item} styles={styles} />
-              {status === 'PENDING' && (
+              <Header item={item} styles={styles} />
+              {state !== PROFILE_STATES.CONTACT && (
                 <ActionsBody
                   {...item}
                   handlePressAccept={handlePressAccept}

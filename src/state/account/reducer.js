@@ -40,7 +40,6 @@ import {
 export const initialState = {
   network: 'testnet',
   username: 'dashpayteamdev',
-  isRegisterRequestSent: false,
   mnemonic: 'light point battle foam find motion true because genre people banana fit',
   unusedAddress: '',
   balance: 0,
@@ -75,23 +74,14 @@ const account = (state = initialState, action) => {
         ...state,
         network: action.response.toString(),
       };
-    case ACCOUNTS_REGISTER_BUSER_ASYNC.REQUEST:
-      return {
-        ...state,
-        isRegisterRequestSent: true,
-      };
     case ACCOUNTS_REGISTER_BUSER_ASYNC.SUCCESS:
-      alert('BUser registration - success');
       return {
         ...state,
-        isRegisterRequestSent: false,
         username: action.username,
       };
     case ACCOUNTS_REGISTER_BUSER_ASYNC.FAILURE:
-      alert(`BUser registration - error: ${action.error.message}`);
       return {
         ...state,
-        isRegisterRequestSent: false,
         username: undefined,
       };
     case ACCOUNTS_SET_DPA_INITIALIZED:

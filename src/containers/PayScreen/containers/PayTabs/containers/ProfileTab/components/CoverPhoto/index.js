@@ -4,13 +4,6 @@ import Avatar from 'hooks/Avatar';
 import type { Profile } from 'state/profiles/types';
 import useStyles from './useStyles';
 
-type Props = {
-  user: Profile,
-};
-
-const CoverPhoto = ({ user }: Props) => {
-  const styles = useStyles();
-  return <Avatar user={user} styles={styles} />;
-};
+const CoverPhoto = (props: Profile) => <Avatar user={props} styles={useStyles()} />;
 
 export default CoverPhoto;

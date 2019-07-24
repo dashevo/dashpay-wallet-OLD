@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { FormattedTime, FormattedNumber } from 'react-intl';
-
 import Card from 'components/Card';
 import Avatar from 'hooks/Avatar';
 import Touchable from 'components/Touchable';

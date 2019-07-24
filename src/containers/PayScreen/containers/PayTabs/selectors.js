@@ -1,18 +1,18 @@
 import { createSelector } from 'reselect';
-import { contactSelectorFactory } from 'state/contacts/selectors';
+import { profileSelectorFactory } from 'state/profiles/selectors';
 
 const recipientSelector = (state, props) => props.navigation.getParam('recipient', '');
 
-export default createSelector(
+const selectors = createSelector(
   recipientSelector,
-  contactSelectorFactory,
-  (recipient, contactSelector) => {
-    const contact = contactSelector(recipient) || {};
-    const { username = '', avatarUrl = '' } = contact;
+  profileSelectorFactory,
+  (recipient, profileSelector) => {
+    const profile = profileSelector(recipient) || {};
     return {
-      recipient,
-      avatarUrl,
-      username,
+      ...profile,
+      recipient, // TODO: check if we need recipient field
     };
   },
 );
+
+export default selectors;

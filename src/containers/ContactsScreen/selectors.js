@@ -1,104 +1,64 @@
 // @flow
 import { createSelector } from 'reselect';
-import { sortBy } from 'lodash';
 import {
   filterParamsSelector,
-  contactsSelector,
-  receivedRequestsUsernamesSelector,
-  sentContactRequestsUsernamesSelector,
-} from 'state/contacts/selectors';
-import { profileItemsSelector } from 'state/profiles/selectors';
+  profileItemsSelector,
+} from 'state/profiles/selectors';
 import { currentUserSelector } from 'state/account/selectors';
-import type { FilterParams } from 'state/contacts/types';
-import { PROFILE_STATE } from 'state/profiles/constants';
-import type { Profile } from 'state/profiles/types';
+import type { FilterParams, Profile } from 'state/profiles/types';
+import { PROFILE_STATES } from 'state/profiles/constants';
 import type { Section } from './types';
-
-const filterAndSort = (
-  items: Array<Profile>, filterParams: FilterParams,
-): Array<Profile> => {
-  let filteredItems = items;
-  if (filterParams.isActive) {
-    const query = filterParams.query.toLowerCase();
-    filteredItems = filteredItems
-      .filter(item => item.username.toLowerCase().indexOf(query) >= 0);
-  }
-  return sortBy(filteredItems, 'username');
-};
-
-const filteredAndSortedContactsSelector = createSelector(
-  contactsSelector,
-  filterParamsSelector,
-  (items: Array<Profile>, filterParams: FilterParams) => filterAndSort(items, filterParams)
-    .map(contact => ({ ...contact, state: PROFILE_STATE.IS_CONTACT })),
-);
-
-const filteredAndSortedContactUsernamesSelector = createSelector(
-  filteredAndSortedContactsSelector,
-  (contacts: Array<Profile>) => contacts.map(({ username }) => username),
-);
-
-const getProfileState = (
-  username: string,
-  receivedContactRequestsUsernames: Array<string>,
-  sentContactRequestsUsernames: Array<string>,
-) => {
-  if (receivedContactRequestsUsernames.includes(username)) {
-    return PROFILE_STATE.REQUEST_RECEIVED;
-  }
-  if (sentContactRequestsUsernames.includes(username)) {
-    return PROFILE_STATE.REQUEST_SENT;
-  }
-  return PROFILE_STATE.UNKNOWN;
-};
 
 const filteredAndSortedProfilesSelector = createSelector(
   currentUserSelector,
-  profileItemsSelector,
   filterParamsSelector,
-  filteredAndSortedContactUsernamesSelector,
-  receivedRequestsUsernamesSelector,
-  sentContactRequestsUsernamesSelector,
+  profileItemsSelector,
   (
     currentUser: Profile,
-    profiles: Array<Profile>,
     filterParams: FilterParams,
-    contactUsernames: Array<string>,
-    receivedContactRequestsUsernames: Array<string>,
-    sentContactRequestsUsernames: Array<string>,
+    items: Array<Profile>,
   ) => {
-    if (filterParams.isActive && profiles.length) {
-      return filterAndSort(profiles, filterParams)
-        .filter(({ username }) => !contactUsernames.includes(username)
-          && currentUser.username !== username)
-        .map((profile: Profile) => {
-          const { username } = profile;
-          const state = getProfileState(
-            username,
-            receivedContactRequestsUsernames,
-            sentContactRequestsUsernames,
-          );
-          return { ...profile, state };
-        });
+    let result = items.filter(({ username }) => username !== currentUser.username);
+    if (filterParams.isActive) {
+      const query = filterParams.query.toLowerCase();
+      result = result
+        .filter(item => item.username.toLowerCase().indexOf(query) >= 0);
+    } else {
+      result = result.filter(({ state }) => state === PROFILE_STATES.CONTACT);
     }
-    return [];
+    return result.sort((a: Profile, b: Profile) => a.username.localeCompare(b.username));
   },
 );
 
-export default createSelector(
-  filteredAndSortedContactsSelector,
+const contactProfilesSelector = createSelector(
   filteredAndSortedProfilesSelector,
-  (contacts: Array<Profile>, profiles: Array<any>) => {
+  items => items.filter(({ state }) => state === PROFILE_STATES.CONTACT),
+);
+
+const blockchainProfilesSelector = createSelector(
+  filteredAndSortedProfilesSelector,
+  items => items.filter(({ state }) => state !== PROFILE_STATES.CONTACT),
+);
+
+const selectors = createSelector(
+  contactProfilesSelector,
+  blockchainProfilesSelector,
+  (
+    contactProfiles: Array<Profile>,
+    blockchainProfiles: Array<Profile>,
+  ) => {
     const sections = [
       {
         title: 'Blockchain contacts',
-        data: contacts,
+        data: contactProfiles,
       },
       {
         title: 'Blockchain profiles',
-        data: profiles,
+        data: blockchainProfiles,
       },
     ].filter(({ data }: Section) => data.length);
     return { sections };
   },
 );
+
+export default selectors;

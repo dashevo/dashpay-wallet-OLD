@@ -1,9 +1,15 @@
+// @flow
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import View from 'components/View';
 import Text from 'components/Text';
 import Button from 'components/Button';
-import type { ItemWithStylesProps as Props } from './types';
+
+type Props = {
+  handlePressAccept: Function,
+  handlePressReject: Function,
+  styles: Object,
+};
 
 const ActionsBody = ({
   handlePressAccept,

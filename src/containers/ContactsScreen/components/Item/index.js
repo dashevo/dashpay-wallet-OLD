@@ -6,14 +6,14 @@ import {
   TouchableOpacity,
   Text,
 } from 'components';
-import { PROFILE_STATE } from 'state/profiles/constants';
+import { PROFILE_STATES } from 'state/profiles/constants';
 import type { Props } from './types';
 import styles from './styles';
 
 // TODO: we should agree on translation solution and
 //       start using i18n files
 const t = (state) => {
-  if ([PROFILE_STATE.REQUEST_RECEIVED, PROFILE_STATE.REQUEST_SENT].includes(state)) {
+  if ([PROFILE_STATES.REQUEST_RECEIVED, PROFILE_STATES.REQUEST_SENT].includes(state)) {
     return state.replace('_', ' ');
   }
   return '';

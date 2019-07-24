@@ -1,24 +1,11 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import { bindActionCreators } from 'redux';
-
-// Internal dependencies
 import {
-  acceptRequest,
-  rejectRequest,
-} from 'state/contacts/actions';
+  acceptContactRequest,
+  rejectContactRequest,
+} from 'state/profiles/actions';
 
-function actions(dispatch) {
-  return bindActionCreators(
-    {
-      acceptRequest,
-      rejectRequest,
-    },
-    dispatch,
-  );
-}
+const actions = dispatch => bindActionCreators({
+  acceptContactRequest, rejectContactRequest,
+}, dispatch);
 
 export default actions;
