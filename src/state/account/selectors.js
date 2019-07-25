@@ -21,8 +21,6 @@ export const currentUserSelector = createSelector(
   accountSelector,
   ({ username }) => ({
     username,
-    // TODO: avatarUrl should be fetched from DAPI
-    avatarUrl: `https://api.adorable.io/avatars/285/${username}.png`,
   }),
 );
 

@@ -5,9 +5,10 @@ import { profileSelectorFactory } from 'state/profiles/selectors';
 export default createSelector(
   currentUserSelector,
   profileSelectorFactory,
-  (cachedUser, currentProfileSelector) => {
+  (cachedUser, profileSelector) => {
     const { username } = cachedUser;
-    const user = currentProfileSelector(username) || cachedUser;
+    const user = profileSelector(username) || cachedUser;
+    console.log(username, user);
     return {
       user,
     };

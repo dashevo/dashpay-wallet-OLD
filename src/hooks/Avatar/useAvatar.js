@@ -1,6 +1,7 @@
 import actions from './actions';
 import useStyles from './useStyles';
 import useMachine from './useMachine';
+import { useEffect } from 'react';
 
 function useAvatar(props) {
   const source = { uri: props.user.avatarUrl };
@@ -14,6 +15,8 @@ function useAvatar(props) {
       dispatch(actions.imageError());
     },
   };
+
+  useEffect(() => dispatch(actions.reset()), [props.user.avatarUrl]);
 
   return {
     bind,
