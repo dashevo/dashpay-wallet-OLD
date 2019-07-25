@@ -94,10 +94,11 @@ class ContactsScreen extends React.Component<Props, State> {
 
   renderBody() {
     const { isSearching, isFetchingContacts } = this.state;
-    if (isSearching || isFetchingContacts) {
+    const { sections } = this.props;
+    const isActiveRequest = isSearching || isFetchingContacts;
+    if (isActiveRequest && sections.length === 0) {
       return <ActivityIndicatorView />;
     }
-    const { sections } = this.props;
     return (
       <Animated.SectionList
         contentContainerStyle={styles.contentContainer}
