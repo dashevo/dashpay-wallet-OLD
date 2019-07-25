@@ -49,11 +49,11 @@ export const borderWidth = StyleSheet.hairlineWidth;
 // Avatar
 //
 // =============================================================================
-export const avatarBackgroundColor = primary;
-export const avatarBorderColor = primary;
+export const avatarBackgroundColor = '#efefef';
+export const avatarBorderColor = '#efefef';
 export const avatarBorderRadius = normalize(60);
 export const avatarBorderWidth = 0;
-export const avatarColor = white;
+export const avatarColor = '#c0c0c0';
 export const avatarFontSize = normalize(64);
 export const avatarSize = normalize(120);
 

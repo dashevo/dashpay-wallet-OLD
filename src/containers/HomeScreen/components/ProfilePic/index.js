@@ -9,11 +9,10 @@ import useStyles from './useStyles';
 const ProfilePic = (user: Profile) => {
   const styles = useStyles();
   const { username } = user;
-  console.log('In profile', user);
   return (
     <View style={styles.center}>
       <View style={styles.row}>
-        <Avatar user={user} lg />
+        <Avatar user={user} inverse lg />
       </View>
       <View>
         <Text style={styles.username}>{username}</Text>

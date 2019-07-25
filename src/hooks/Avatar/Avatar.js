@@ -37,4 +37,4 @@ const Avatar = (props: Props) => {
   }
 };
 
-export default React.memo(Avatar);
+export default Avatar;

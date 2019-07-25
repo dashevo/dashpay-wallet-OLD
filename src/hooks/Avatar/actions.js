@@ -11,9 +11,10 @@ const actions = {
       payload,
     };
   },
-  reset() {
+  reset(payload) {
     return {
       type: RESET,
+      payload,
     };
   },
 };

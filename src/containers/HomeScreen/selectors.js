@@ -8,7 +8,6 @@ export default createSelector(
   (cachedUser, profileSelector) => {
     const { username } = cachedUser;
     const user = profileSelector(username) || cachedUser;
-    console.log(username, user);
     return {
       user,
     };
