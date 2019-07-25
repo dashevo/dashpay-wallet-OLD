@@ -5,4 +5,5 @@ export type Props = {
   fetchAlternativeCurrencyRateIfNeeded: Function,
   getByBUsername: Function,
   setDpaInitialized: Function,
+  initializeWallet: Function,
 };

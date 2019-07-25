@@ -16,7 +16,7 @@ export const initializeWallet = () => (dispatch, getState, walletLib) => dispatc
     const {
       mnemonic, username, network, transport,
     } = state.account;
-    await walletLib.initializeWallet({
+    await walletLib.initialize({
       mnemonic,
       username,
       network,
