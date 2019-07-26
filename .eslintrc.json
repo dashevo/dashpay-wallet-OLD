@@ -17,8 +17,10 @@
     "import/prefer-default-export": ["off"]
   },
   "globals": {
+    "node": true,
     "fetch": true,
-    "alert": true
+    "alert": true,
+    "__DEV__": true
   },
   "settings": {
     "import/resolver": {

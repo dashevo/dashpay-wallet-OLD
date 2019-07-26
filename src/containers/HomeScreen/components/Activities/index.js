@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { FlatList } from 'react-navigation';
@@ -15,16 +15,11 @@ import type { Props } from './types';
 
 const Transactions = (props: Props) => {
   const {
-    getPendingContactRequests,
     acceptContactRequest,
     rejectContactRequest,
     activity,
     navigation,
   } = props;
-
-  useEffect(() => {
-    getPendingContactRequests();
-  }, []);
 
   return (
     <View style={{ flex: 1 }}>

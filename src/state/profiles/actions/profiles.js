@@ -21,11 +21,9 @@ export const registerProfile = ({
   avatarUrl,
   bio,
   username,
-}: Profile) => (
-  dispatch, getState, { account: { dashPayDpa } },
-) => dispatch({
+}: Profile) => dispatch => dispatch({
   types: PROFILES_REGISTER_ASYNC,
-  asyncTask: async () => {
+  dpaTask: async ({ dashPayDpa }) => {
     const buser = await dashPayDpa.buser.get(username);
     await buser.synchronize();
     await buser.own(dashPayDpa.getBUserSigningPrivateKey());
@@ -38,21 +36,17 @@ export const registerProfile = ({
   },
 });
 
-export const getByBUsername = (username: string) => (
-  dispatch, getState, { account: { dashPayDpa } },
-) => dispatch({
+export const getByBUsername = (username: string) => dispatch => dispatch({
   types: PROFILES_GET_BY_BUSERNAME_ASYNC,
-  asyncTask: () => dashPayDpa.profile.getByBUsername(username),
+  dpaTask: ({ dashPayDpa }) => dashPayDpa.profile.getByBUsername(username),
 });
 
-export const searchProfiles = (searchString: string) => (
-  dispatch, getState, { account: { dashPayDpa } },
-) => dispatch({
+export const searchProfiles = (searchString: string) => dispatch => dispatch({
   searchString,
   types: PROFILES_SEARCH_ASYNC,
   // TODO: replace when we have search by username
   // asyncTask: () => dashPayDpa.profile.get(searchString),
-  asyncTask: async () => {
+  dpaTask: async ({ dashPayDpa }) => {
     const getProfiles = await dashPayDpa.profile.getAll();
     return Promise.all(getProfiles);
   },
