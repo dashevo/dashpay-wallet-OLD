@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-// Internal dependencies
 import PayTab from '../containers/PayTab';
 import ReceiveTab from '../containers/ReceiveTab';
 import ProfileTab from '../containers/ProfileTab';
