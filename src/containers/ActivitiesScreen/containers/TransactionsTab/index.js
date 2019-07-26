@@ -1,22 +1,20 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
 // External dependencies
-// External dependencies
 import * as React from 'react';
-import { SectionList } from 'react-native';
+import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 
 // Internal dependencies
 import View from 'components/View';
 import Text from 'components/Text';
+import TransactionCard from 'components/TransactionCard';
+
+// Local dependencies
 import selectors from './selectors';
 import styles from './styles';
 
-type Props = {};
+type Props = { transactions: object[] };
 type State = {};
 
 class TransactionsTab extends React.Component<Props, State> {
@@ -24,7 +22,7 @@ class TransactionsTab extends React.Component<Props, State> {
     super(props);
 
     (this: any).handleViewableItemsChanged = this.handleViewableItemsChanged.bind(
-      this
+      this,
     );
     (this: any).renderSectionHeader = this.renderSectionHeader.bind(this);
     (this: any).keyExtractor = this.keyExtractor.bind(this);
@@ -33,46 +31,22 @@ class TransactionsTab extends React.Component<Props, State> {
     this.state = {};
   }
 
-  keyExtractor(item, index) {
-    return item + index;
-  }
-
-  handleViewableItemsChanged(info) {}
-
-  renderSectionHeader(info) {
-    return (
-      <View style={styles.titleWrapper}>
-        <Text style={styles.title}>{info.section.title}</Text>
-      </View>
-    );
-  }
-
-  renderItem(props) {
-    return <Text>{props.item.name}</Text>;
-  }
-
-  ListHeaderComponent = () => {
-    return <Text>{'ListHeaderComponent'}</Text>;
-  };
-
   render() {
     const { transactions } = this.props;
-    const sections = [
-      {
-        title: 'Title1',
-        data: transactions
-      }
-    ];
+
     return (
-      <SectionList
-        ListHeaderComponent={this.ListHeaderComponent}
-        onViewableItemsChanged={this.handleViewableItemsChanged}
-        renderSectionHeader={this.renderSectionHeader}
-        stickySectionHeadersEnabled={true}
-        keyExtractor={this.keyExtractor}
-        renderItem={this.renderItem}
-        sections={sections}
-        style={styles.container}
+      <FlatList
+        data={transactions}
+        keyExtractor={(item, index) => `activity-${index}`}
+        renderItem={({ item }) => <TransactionCard {...item.data} />
+        }
+        contentContainerStyle={styles.contentContainerStyle}
+        style={{ flex: 1 }}
+        ListEmptyComponent={() => (
+          <View style={styles.container}>
+            <Text style={styles.text}>No transactions</Text>
+          </View>
+        )}
       />
     );
   }

@@ -1,15 +1,10 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 import { createSelector } from 'reselect';
-import { orderBy } from 'lodash';
 
-function mapStateToProps(state, props) {
-  return {
-    transactions: []
-  };
-}
+import { selectTransactions } from 'state/transactions/selectors';
 
-export default mapStateToProps;
+const selectors = createSelector(
+  selectTransactions,
+);
+
+export default selectors;
