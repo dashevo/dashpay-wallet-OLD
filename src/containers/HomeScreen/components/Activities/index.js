@@ -19,7 +19,7 @@ const Transactions = (props: Props) => {
     acceptContactRequest,
     rejectContactRequest,
     activity,
-    navigation: navigate,
+    navigation,
   } = props;
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Transactions = (props: Props) => {
           </View>
         )}
         ListFooterComponent={() => (
-          <TouchableOpacity style={styles.button} onPress={() => navigate('ActivityScreen')}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Activities')}>
             <Icon style={styles.buttonIcon} name="activity" />
             <Text style={styles.buttonText}>See All Activity</Text>
           </TouchableOpacity>

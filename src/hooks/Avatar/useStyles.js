@@ -93,24 +93,14 @@ const styles = theme => ({
   icon__xs: {
     fontSize: theme.avatarXsFontSize,
   },
-  container__primary: {
-    backgroundColor: '#efefef',
-    borderColor: '#efefef',
-  },
-  text__primary: {
-    color: '#c0c0c0',
-  },
-  icon__primary: {
-    color: '#c0c0c0',
-  },
-  container__secondary: {
+  container__inverse: {
     backgroundColor: '#ffffff',
     borderColor: '#ffffff',
   },
-  text__secondary: {
+  text__inverse: {
     color: '#cccccc',
   },
-  icon__secondary: {
+  icon__inverse: {
     color: '#cccccc',
   },
 });

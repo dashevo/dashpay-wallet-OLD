@@ -1,6 +1,18 @@
 import { useMemo } from 'react';
-import { Machine } from 'xstate';
+import { Machine, assign } from 'xstate';
 import { useMachine } from '@xstate/react';
+
+// We should soon have 'createUseMachine' custom hook.
+// Work in progress working to simplify this file
+const setUser = assign((context, event) => {
+  const { avatarUrl = '', username = '' } = event.payload;
+  const letter = username.charAt(0).toUpperCase();
+
+  return {
+    avatarUrl,
+    letter,
+  };
+});
 
 const machine = Machine({
   id: 'avatar',
@@ -25,6 +37,10 @@ const machine = Machine({
     },
     image: {
       on: {
+        RESET: {
+          target: 'idle',
+          actions: setUser,
+        },
         FAILURE: [
           {
             target: 'text',
@@ -37,22 +53,28 @@ const machine = Machine({
       },
     },
     text: {
-      RESET: {
-        target: 'idle',
+      on: {
+        RESET: {
+          target: 'idle',
+          actions: setUser,
+        },
       },
     },
     icon: {
-      RESET: {
-        target: 'idle',
+      on: {
+        RESET: {
+          target: 'idle',
+          actions: setUser,
+        },
       },
     },
   },
 });
 
-// We should soon have 'createUseMachine' custom hook.
 export default (props) => {
   const { user = {} } = props;
   const { avatarUrl = '', username = '' } = user;
+  const letter = username.charAt(0).toUpperCase();
 
   const memoMachine = useMemo(
     () => machine
@@ -63,10 +85,10 @@ export default (props) => {
         },
       })
       .withContext({
-        letter: (username || '').charAt(0).toUpperCase(),
         avatarUrl,
+        letter,
       }),
-    [avatarUrl, username],
+    [],
   );
 
   return useMachine(memoMachine);

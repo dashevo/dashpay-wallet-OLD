@@ -32,7 +32,7 @@ function TransactionCard(props: Transaction) {
       <View style={styles.header}>
         <View style={styles.row}>
           <View style={styles.col}>
-            <Avatar xs primary user={sender} />
+            <Avatar user={sender} xs />
           </View>
           <View style={styles.col}>
             <Text style={styles.title}>{title}</Text>
@@ -44,7 +44,7 @@ function TransactionCard(props: Transaction) {
         <View style={styles.inner}>
           <View style={styles.row}>
             <View style={styles.col}>
-              <Avatar sm secondary user={receiver} />
+              <Avatar user={receiver} sm inverse />
             </View>
             <View style={styles.col}>
               <View style={styles.row}>
