@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "postinstall": "rn-nodeify --install fs,path,process,crypto,stream,events,vm,assert,url --hack",
     "test": "jest",
-    "lint": "eslint",
+    "lint": "eslint src __tests__ __mocks__",
     "flow": "flow"
   },
   "dependencies": {

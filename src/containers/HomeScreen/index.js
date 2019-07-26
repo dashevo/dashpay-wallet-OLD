@@ -48,10 +48,10 @@ const HomeScreen = (props: Props) => {
       try {
         const { initializeWallet } = props;
         await initializeWallet();
+        setDpaInitialized();
         getByBUsername(username);
         return true;
       } finally {
-        setDpaInitialized();
         setProgress(100);
       }
     }
