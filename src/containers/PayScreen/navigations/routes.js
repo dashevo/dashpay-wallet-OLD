@@ -1,7 +1,7 @@
 // @flow
 import type { NavigationProps } from 'types/navigation';
 import PayScreen from '../containers/PayScreen';
-import PayTabs from '../containers/PayTabs';
+import { PayTabs, ProfileTabs } from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
 import PaymentConfirmationScreen from '../containers/PaymentConfirmationScreen';
 
@@ -27,6 +27,9 @@ const routes = {
         title,
       };
     },
+  },
+  ProfileTabs: {
+    screen: ProfileTabs,
   },
   ScannerScreen: {
     screen: ScannerScreen,

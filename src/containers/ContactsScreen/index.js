@@ -60,8 +60,7 @@ class ContactsScreen extends React.Component<Props, State> {
 
   async handlePress(params: string) {
     const { navigation } = this.props;
-    navigation.navigate('ProfileTab', params);
-
+    navigation.navigate('ProfileTabs', params);
     await InteractionManager.runAfterInteractions();
     if (this.searchBox.current.resetForm) {
       this.searchBox.current.setFieldValue('query', '');

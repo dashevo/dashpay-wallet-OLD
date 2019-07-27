@@ -41,10 +41,9 @@ class PayTab extends React.Component<Props, State> {
 
   onSubmit = (values, form) => {
     const {
-      navigation, createSendPaymentTransaction, receiver, sender, user,
+      navigation, createSendPaymentTransaction, receiver, sender,
     } = this.props;
     navigation.navigate('Confirm', {
-      user,
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,

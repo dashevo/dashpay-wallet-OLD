@@ -1,12 +1,18 @@
 import { createSelector } from 'reselect';
 import { profileSelectorFactory } from 'state/profiles/selectors';
 
-const usernameSelector = (state, props) => props.navigation.getParam('recipient', '');
+const recipientSelector = (state, props) => props.navigation.getParam('recipient', '');
 
 const selectors = createSelector(
-  usernameSelector,
+  recipientSelector,
   profileSelectorFactory,
-  (username, profileSelector) => profileSelector(username) || {},
+  (recipient, profileSelector) => {
+    const profile = profileSelector(recipient) || {};
+    return {
+      profile,
+      recipient,
+    };
+  },
 );
 
 export default selectors;

@@ -10,12 +10,16 @@ import ProfileActionButton from './components/ProfileActionButton';
 import selector from './selectors';
 import useStyles from './useStyles';
 
-const ProfileTab = (props: Profile) => {
+type Props = {
+  profile: Profile,
+};
+
+const ProfileTab = ({ profile }: Props) => {
   const styles = useStyles();
-  const { username, state } = props;
+  const { username, state } = profile;
   return (
     <ScrollView style={styles.container}>
-      <CoverPhoto {...props} />
+      <CoverPhoto {...profile} />
       <View style={styles.row}>
         <View style={styles.container}>
           <View style={[styles.row, styles.center, styles.usernameRow]}>
