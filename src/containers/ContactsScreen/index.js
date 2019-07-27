@@ -60,7 +60,7 @@ class ContactsScreen extends React.Component<Props, State> {
 
   async handlePress(params: string) {
     const { navigation } = this.props;
-    navigation.navigate('PayTabs', params);
+    navigation.navigate('ProfileTab', params);
 
     await InteractionManager.runAfterInteractions();
     if (this.searchBox.current.resetForm) {
