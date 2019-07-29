@@ -20,7 +20,6 @@ let composeEnhancers = compose;
 
 /* eslint-disable */
 if (__DEV__ && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
-  console.log('lala')
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 }
 /* eslint-enable */

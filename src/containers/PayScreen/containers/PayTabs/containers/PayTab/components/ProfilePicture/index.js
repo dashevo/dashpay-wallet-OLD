@@ -6,16 +6,17 @@ import Text from 'components/Text';
 import type { Props } from './types';
 import useStyles from './useStyles';
 
-const ProfilePicture = (({ user }): Props) => {
+const ProfilePicture = (({ receiver }): Props) => {
   const styles = useStyles();
+  const { username } = receiver;
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Avatar user={user} lg />
+        <Avatar user={receiver} lg />
       </View>
       <View style={styles.row}>
         <Text style={styles.title} numberOfLines={1}>
-          {user.username}
+          {username}
         </Text>
       </View>
     </View>

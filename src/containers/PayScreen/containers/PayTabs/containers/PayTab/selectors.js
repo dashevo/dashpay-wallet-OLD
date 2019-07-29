@@ -17,9 +17,9 @@ export default createSelector(
     recipient, profileSelector,
     alternativeCurrency, sentPayments, dashAmount,
   ) => {
+    const receiver = profileSelector(recipient) || {};
     let transactions = sentPayments.byRecipients[recipient] || [];
 
-    const receiver = profileSelector(recipient) || {};
     const sender = {}; // Tmp
 
     transactions = transactions.map((transactionId) => {
@@ -42,11 +42,6 @@ export default createSelector(
       transactions,
       receiver,
       sender,
-      user: {
-        // Tmp
-        username: receiver.username || recipient,
-        avatarUrl: receiver.avatarUrl,
-      },
       initialValues: {
         dashAmount,
         fiatAmount,
