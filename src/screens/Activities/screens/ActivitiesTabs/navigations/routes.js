@@ -4,6 +4,7 @@
 
 // Internal dependencies
 import AllEvents from '../screens/AllEvents';
+import Transactions from '../screens/Transactions';
 import Contacts from '../screens/Contacts';
 
 const routes = {
@@ -14,7 +15,7 @@ const routes = {
     },
   },
   Transactions: {
-    screen: () => null,
+    screen: Transactions,
     navigationOptions: {
       title: 'Transactions',
     },
