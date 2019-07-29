@@ -59,12 +59,10 @@ export const createAccount = () => (dispatch, getState) => {
   });
 };
 
-export const registerBUser = (username: string) => (
-  dispatch, getState, { account: { dashPayDpa } },
-) => dispatch({
+export const registerBUser = (username: string) => dispatch => dispatch({
   username,
   types: ACCOUNTS_REGISTER_BUSER_ASYNC,
-  asyncTask: async () => {
+  dpaTask: async ({ dashPayDpa }) => {
     const buser = dashPayDpa.buser.create(username);
     buser.own(dashPayDpa.getBUserSigningPrivateKey());
     await buser.synchronize();
