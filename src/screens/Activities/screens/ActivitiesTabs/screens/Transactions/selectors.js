@@ -1,7 +1,7 @@
+import { createStructuredSelector } from 'reselect';
+
 import { selectTransactions } from 'state/transactions';
 
-const selectors = state => ({
-  transactions: selectTransactions(state),
+export default createStructuredSelector({
+  transactions: selectTransactions,
 });
-
-export default selectors;
