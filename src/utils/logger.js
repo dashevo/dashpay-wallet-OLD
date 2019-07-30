@@ -2,9 +2,9 @@
 //       we need something more serious
 
 const logger = {
-  error: error => __DEV__ && console.warn(error),
-  warn: error => __DEV__ && console.warn(error),
-  debug: message => __DEV__ && console.debug(message),
+  error: (...args) => __DEV__ && console.warn(...args),
+  warn: (...args) => __DEV__ && console.warn(...args),
+  debug: (...args) => __DEV__ && console.debug(...args),
 };
 
 export default logger;

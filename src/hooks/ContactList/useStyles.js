@@ -13,10 +13,7 @@ const styles = () => ({
   header: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 64,
-    paddingBottom: 64,
-    paddingLeft: 32,
-    paddingRight: 32,
+    padding: 32,
   },
   circle: {
     alignItems: 'center',

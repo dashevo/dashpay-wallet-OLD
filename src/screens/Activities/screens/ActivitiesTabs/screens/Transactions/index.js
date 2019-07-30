@@ -7,45 +7,53 @@ import { FlatList } from 'react-navigation';
 import TransactionCard from 'hooks/Card/Transaction';
 import TXTYPES from 'constants/txtypes';
 import RadioRow from 'components/RadioRow';
+import Icon from 'hooks/Icon';
 
 import selectors from './selectors';
 import styles from './styles';
 
 type Props = {
-  transactions: object[],
+  transactions: Array<object>,
 }
 type ItemProps = {
   item: object,
 }
 
 const FILTERS = {
-  ALL: [TXTYPES.SENT, TXTYPES.RECEIVED],
-  SENT: [TXTYPES.SENT],
-  RECEIVED: [TXTYPES.RECEIVED],
+  ALL: { title: 'All Transactions', types: [TXTYPES.SENT, TXTYPES.RECEIVED] },
+  SENT: { title: 'Paid Transactions', types: [TXTYPES.SENT] },
+  RECEIVED: { title: 'Received Transactions', types: [TXTYPES.RECEIVED] },
 };
 
 const Transactions = ({ transactions }: Props) => {
   const [filter, setFilter] = useState(FILTERS.ALL);
 
   const filteredTransactions = useMemo(
-    () => transactions.filter(({ type }) => filter.includes(type)),
+    () => transactions.filter(({ type }) => filter.types.includes(type)),
     [transactions, filter],
   );
-  console.log(filter, filteredTransactions);
 
   const renderItem = ({ item }: ItemProps) => <TransactionCard {...item} />;
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={filteredTransactions}
-        keyExtractor={(item, index) => `transaction-${index}`}
+        keyExtractor={({ txid }) => `transactioncard-${txid}`}
         renderItem={renderItem}
         contentContainerStyle={styles.contentContainerStyle}
-        style={{ flex: 1 }}
+        style={{ flex: 1, padding: 0, margin: 0 }}
         ListEmptyComponent={() => (
           <View style={styles.container}>
             <Text style={styles.text}>No transactions</Text>
+          </View>
+        )}
+        ListHeaderComponent={(
+          <View style={styles.header}>
+            <View style={styles.circle}>
+              <Icon style={styles.icon} name="squiggle" />
+            </View>
+            <Text style={styles.title}>{filter.title}</Text>
           </View>
         )}
       />
@@ -55,8 +63,8 @@ const Transactions = ({ transactions }: Props) => {
           { value: 'Paid', key: FILTERS.SENT },
           { value: 'Received', key: FILTERS.RECEIVED },
         ]}
-        currentOption="Show All"
-        action={(key) => { setFilter(key); console.log('New key', key); }}
+        initialOption="Show All"
+        action={key => setFilter(key)}
       />
     </View>
   );

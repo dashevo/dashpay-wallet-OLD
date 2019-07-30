@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ThemedButton } from 'components';
@@ -8,30 +8,36 @@ import { THEMES } from 'constants';
 const styles = StyleSheet.create({
   buttonRow: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 4,
+    paddingHorizontal: 12,
   },
 });
 
 type Props = {
   options: array,
-  currentOption: any,
+  initialOption: any,
   action: Function,
 }
 
-const RadioRow = ({ options, currentOption, action }: Props) => (
-  <View style={[styles.buttonRow]}>
-    {
-      options.map(
-        option => (
-          <ThemedButton
-            key={option.key}
-            title={option.value}
-            onPress={action(option.key)}
-            theme={option.key === currentOption ? THEMES.light : THEMES.vivid}
-          />
-        ),
-      )
-    }
-  </View>
-);
+const RadioRow = ({ options, initialOption, action }: Props) => {
+  const [selected, setSelected] = useState(initialOption);
+  return (
+    <View style={[styles.buttonRow]}>
+      {
+        options.map(
+          option => (
+            <ThemedButton
+              key={`radioOption-${option.value}`}
+              title={option.value}
+              onPress={() => { setSelected(option.value); action(option.key); }}
+              theme={option.value !== selected ? THEMES.light : THEMES.vivid}
+            />
+          ),
+        )
+      }
+    </View>
+  );
+};
 
 export default RadioRow;

@@ -42,6 +42,7 @@ export const selectTransactions = (state) => {
     // unconfirmed txes are missing time field
 
     transactions.push({
+      txid: item.txid,
       amount: dashAmount,
       currency: 'dash',
       fee: 0,

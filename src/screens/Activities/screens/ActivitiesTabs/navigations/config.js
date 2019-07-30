@@ -10,6 +10,7 @@ const config = {
     upperCaseLabel: false,
     labelStyle: {
       fontSize: 16,
+      marginHorizontal: 2,
     },
     indicatorStyle: {
       backgroundColor: 'white',
