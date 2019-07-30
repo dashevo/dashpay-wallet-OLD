@@ -31,12 +31,6 @@ const dpaTaskMiddlewareFactory = walletLib => store => next => (action) => {
 
   const { username } = currentUserSelector(store.getState());
 
-  if (!username) {
-    const usernameError = new DpaTaskError('Username is not set');
-    next(actionWith({ type: failureType, usernameError }));
-    return Promise.reject(usernameError);
-  }
-
   if (!walletLib.account || !walletLib.account.getDPA('dashpaydpa')) {
     const dpaNotInitializedError = new DpaTaskError('DPA is not initialized');
     next(actionWith({ type: failureType, dpaNotInitializedError }));
