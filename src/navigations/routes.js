@@ -73,7 +73,7 @@ const routes = {
       title: 'Contact',
     },
   },
-  SendScreen: {
+  PayScreen: {
     screen: PayScreen,
     navigationOptions: {
       header: false,
