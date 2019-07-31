@@ -1,3 +1,3 @@
-import PayScreen from './navigations';
+import PayToAddressScreen from './navigations';
 
-export default PayScreen;
+export default PayToAddressScreen;

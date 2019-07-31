@@ -13,7 +13,7 @@ import defaults from './defaults';
 import styles from './styles';
 import type { Props, State } from './types';
 
-class PayScreen extends React.Component<Props, State> {
+class PayToAddressScreen extends React.Component<Props, State> {
   static defaultProps = defaults;
 
   constructor(props: Props) {
@@ -69,4 +69,4 @@ class PayScreen extends React.Component<Props, State> {
   }
 }
 
-export default connect(selector)(PayScreen);
+export default connect(selector)(PayToAddressScreen);
