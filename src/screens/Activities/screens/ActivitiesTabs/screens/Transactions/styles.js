@@ -1,14 +1,18 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
+// @flow
 
-// Internal dependencies
-import { makeStyles } from 'hooks/Styles';
+import { StyleSheet } from 'react-native';
 
-const styles = () => ({
+const styles = StyleSheet.create({
+  contentContainerStyle: {
+    flexGrow: 1,
+    padding: 12,
+    backgroundColor: '#EFEFEF',
+  },
   container: {
-    backgroundColor: '#F0F4F5',
     flex: 1,
+  },
+  text: {
+    fontSize: 16,
   },
   header: {
     alignItems: 'center',
@@ -32,18 +36,6 @@ const styles = () => ({
     fontSize: 16,
     marginTop: 16,
   },
-  content: {
-    flexGrow: 1,
-    padding: 16,
-  },
-  emptyList: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  emptyMessage: {
-    fontSize: 16,
-  },
 });
 
-export default makeStyles(styles);
+export default styles;

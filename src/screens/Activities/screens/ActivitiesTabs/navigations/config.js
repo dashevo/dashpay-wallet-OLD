@@ -1,22 +1,23 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-import TabBar from 'navigations/TabBar';
-
 const config = {
   mode: 'card',
   cardStyle: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   containerStyle: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
-  tabBarComponent: TabBar,
   tabBarOptions: {
     upperCaseLabel: false,
-    showIcon: false,
-    scrollEnabled: false,
+    labelStyle: {
+      fontSize: 16,
+      marginHorizontal: 2,
+    },
+    indicatorStyle: {
+      backgroundColor: 'white',
+    },
+    style: {
+      backgroundColor: '#088BE2',
+    },
   },
 };
 
