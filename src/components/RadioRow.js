@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ThemedButton } from 'components';
@@ -14,10 +14,15 @@ const styles = StyleSheet.create({
   },
 });
 
+type Option = {
+  key: Object,
+  value: string,
+}
+
 type Props = {
-  options: array,
-  initialOption: any,
-  action: Function,
+  options: Array<Option>,
+  initialOption: string,
+  action: (option: Option) => any,
 }
 
 const RadioRow = ({ options, initialOption, action }: Props) => {
@@ -40,4 +45,4 @@ const RadioRow = ({ options, initialOption, action }: Props) => {
   );
 };
 
-export default RadioRow;
+export default memo(RadioRow);

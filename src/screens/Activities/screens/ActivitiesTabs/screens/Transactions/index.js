@@ -13,10 +13,10 @@ import selectors from './selectors';
 import styles from './styles';
 
 type Props = {
-  transactions: Array<object>,
+  transactions: Array<Object>,
 }
 type ItemProps = {
-  item: object,
+  item: Object,
 }
 
 const FILTERS = {
@@ -24,6 +24,12 @@ const FILTERS = {
   SENT: { title: 'Paid Transactions', types: [TXTYPES.SENT] },
   RECEIVED: { title: 'Received Transactions', types: [TXTYPES.RECEIVED] },
 };
+
+const EmptyList = () => (
+  <View style={styles.container}>
+    <Text style={styles.text}>No transactions</Text>
+  </View>
+);
 
 const Transactions = ({ transactions }: Props) => {
   const [filter, setFilter] = useState(FILTERS.ALL);
@@ -43,11 +49,7 @@ const Transactions = ({ transactions }: Props) => {
         renderItem={renderItem}
         contentContainerStyle={styles.contentContainerStyle}
         style={{ flex: 1, padding: 0, margin: 0 }}
-        ListEmptyComponent={() => (
-          <View style={styles.container}>
-            <Text style={styles.text}>No transactions</Text>
-          </View>
-        )}
+        ListEmptyComponent={EmptyList}
         ListHeaderComponent={(
           <View style={styles.header}>
             <View style={styles.circle}>
@@ -70,6 +72,4 @@ const Transactions = ({ transactions }: Props) => {
   );
 };
 
-export default connect(
-  selectors,
-)(Transactions);
+export default connect(selectors)(Transactions);
