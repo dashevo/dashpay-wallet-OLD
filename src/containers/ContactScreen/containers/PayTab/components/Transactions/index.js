@@ -1,8 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
 // External dependencies
 import * as React from 'react';
@@ -11,15 +7,18 @@ import { FlatList } from 'react-navigation';
 // Internal dependencies
 import TransactionCard from './components/TransactionCard';
 
-function Transactions(props) {
+type Props = { data: object };
+
+function Transactions(props: Props) {
+  const { data } = props;
   return (
     <FlatList
-      data={props.data}
+      data={data}
       style={{ flex: 1 }}
       keyExtractor={(item, index) => `pay-${index}`}
-      renderItem={props => <TransactionCard {...props} />}
+      renderItem={item => <TransactionCard {...item} />}
     />
   );
 }
 
-export default Transactions
+export default Transactions;

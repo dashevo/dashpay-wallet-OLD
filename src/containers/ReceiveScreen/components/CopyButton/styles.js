@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
 const styles = (theme: Object): Object => ({
-  ['container']: {
+  container: {
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: theme.btnContainerBackgroundColor,
@@ -16,12 +12,12 @@ const styles = (theme: Object): Object => ({
     justifyContent: 'center',
     paddingLeft: 15,
     paddingRight: 15,
-    position: 'relative'
+    position: 'relative',
   },
-  ['text']: {
+  text: {
     color: theme.btnTextColor,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });
 
 export default styles;

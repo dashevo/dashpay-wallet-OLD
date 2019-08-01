@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
 const styles = (theme: Object): Object => ({
-  ['container']: {
+  container: {
     alignItems: 'center',
     backgroundColor: theme.fieldInputBackgroundColor,
     borderColor: theme.fieldInputBorderColor,
@@ -15,15 +11,15 @@ const styles = (theme: Object): Object => ({
     flexGrow: 1,
     flexShrink: 0,
     justifyContent: 'flex-start',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
-  ['body']: {
+  body: {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
-  ['right']: {
+  right: {
     alignItems: 'center',
     bottom: 0,
     justifyContent: 'center',
@@ -31,9 +27,9 @@ const styles = (theme: Object): Object => ({
     paddingRight: 4,
     position: 'absolute',
     right: 0,
-    top: 0
+    top: 0,
   },
-  ['input']: {
+  input: {
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     borderRadius: 24,
@@ -48,8 +44,8 @@ const styles = (theme: Object): Object => ({
     paddingLeft: 6,
     paddingRight: 6,
     paddingTop: 12,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default styles;

@@ -1,27 +1,21 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
-// External dependencies
 import * as React from 'react';
 
-// Internal dependencies
 import Field from 'components/Field';
 import View from 'components/View';
-import Text from 'components/Text';
 import Input from 'components/Input';
+
 import PasteButton from './components/PasteButton';
 import defaultProps from './defaults';
-import styles from './styles';
+import fieldStyles from './styles';
 import type { Props } from './types';
 
 let dismissPasteConfirmation = null;
 
 function RecipientField(props: Props): React.Element<any> {
   return (
-    <Field {...props} styles={styles}>
+    <Field {...props} styles={fieldStyles}>
       {({ input, form, styles }) => {
         const { name, value } = input;
         const { showPasteConfirmation } = form.state;
@@ -29,19 +23,19 @@ function RecipientField(props: Props): React.Element<any> {
         const confirm = showPasteConfirmation && value;
         const show = showPasteConfirmation || !value;
 
-        function handlePaste(value: string) {
+        function handlePaste(pastedValue: string) {
           form.setFieldTouched(name);
-          form.setFieldValue(name, value);
+          form.setFieldValue(name, pastedValue);
 
           form.setFieldFocus(name);
           form.setState({
-            showPasteConfirmation: true
+            showPasteConfirmation: true,
           });
 
           clearTimeout(dismissPasteConfirmation);
           dismissPasteConfirmation = setTimeout(() => {
             form.setState({
-              showPasteConfirmation: false
+              showPasteConfirmation: false,
             });
           }, 4000);
         }

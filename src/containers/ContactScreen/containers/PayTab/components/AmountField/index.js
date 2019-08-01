@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import Field from 'components/Field';
 import View from 'components/View';

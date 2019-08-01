@@ -1,12 +1,8 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
-function mapStateToProps(state, props) {
+function mapStateToProps() {
   return {
-    transactions: {}
+    transactions: {},
   };
 }
 

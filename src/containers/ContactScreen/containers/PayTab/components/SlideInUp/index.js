@@ -1,17 +1,21 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
+
 import * as React from 'react';
 import { Animated } from 'react-native';
 
-class SlideInUp extends React.PureComponent {
+type Props = {
+  style: array,
+  fromValue: number,
+  toValue: number,
+  duration?: number,
+};
+
+class SlideInUp extends React.PureComponent<Props> {
   static defaultProps = {
-    duration: 400
+    duration: 400,
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.animatedValue = new Animated.Value(0);
   }
@@ -20,32 +24,33 @@ class SlideInUp extends React.PureComponent {
     Animated.timing(this.animatedValue, {
       ...this.props,
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.toValue !== this.props.toValue) {
+    const { toValue } = this.props;
+    if (prevProps.toValue !== toValue) {
       Animated.timing(this.animatedValue, {
         ...this.props,
         toValue: 1,
-        useNativeDriver: true
+        useNativeDriver: true,
       }).start();
     }
   }
 
   render() {
-    const style = this.props.style;
+    const { style, fromValue } = this.props;
     const animatedStyle = {
       opacity: this.animatedValue,
       transform: [
         {
           translateY: this.animatedValue.interpolate({
-            outputRange: [this.props.fromValue, 0],
-            inputRange: [0, 1]
-          })
-        }
-      ]
+            outputRange: [fromValue, 0],
+            inputRange: [0, 1],
+          }),
+        },
+      ],
     };
     return <Animated.View {...this.props} style={[style, animatedStyle]} />;
   }

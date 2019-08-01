@@ -1,3 +1,4 @@
+// @flow
 import { bindActionCreators } from 'redux';
 import { fetchAlternativeCurrencyRateIfNeeded } from 'state/alternativeCurrency/actions';
 import { createSendPaymentTransaction } from 'state/payments/send/actions';

@@ -1,46 +1,50 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
-// External dependencies
 import * as React from 'react';
 import { Clipboard, TouchableOpacity } from 'react-native';
 
+import { Button, SlideInRight, Text } from 'components';
 
-// Internal dependencies
-import { Button } from 'components';
-import { SlideInRight } from 'components';
-import { Text } from 'components';
-import styles from './styles';
+import buttonStyles from './styles';
 
-type Props = {};
+type Props = {
+  confirm: boolean,
+  show: boolean,
+  data: string,
+  onCopy: Function,
+  onError: Function,
+};
 
 function CopyButton(props: Props): React.Element<any> {
-  const children = props.confirm ? 'Copied!' : 'Copy';
-  const toValue = props.show ? 0 : 100;
-  const data = props.data || null;
+  const {
+    confirm,
+    show,
+    data = null,
+    onCopy,
+    onError,
+  } = props;
+  const children = confirm ? 'Copied!' : 'Copy';
+  const toValue = show ? 0 : 100;
 
-  async function handlePress(event: Object) {
+  async function handlePress() {
     try {
       if (!data) {
         throw new Error('Expected a data to copy!');
       }
       const value = await Clipboard.setString(data);
-      if (props.onCopy) {
-        props.onCopy(value);
+      if (onCopy) {
+        onCopy(value);
       }
     } catch (error) {
-      if (props.onError) {
-        props.onError(error);
+      if (onError) {
+        onError(error);
       }
     }
   }
 
   return (
-    <Button onPress={handlePress} styles={styles} {...props}>
-      {({ bind, styles, touched }) => (
+    <Button onPress={handlePress} styles={buttonStyles} {...props}>
+      {({ bind, styles }) => (
         <SlideInRight toValue={toValue}>
           <TouchableOpacity style={styles.container} {...bind}>
             <Text style={styles.text}>{children}</Text>

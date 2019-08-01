@@ -1,40 +1,45 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
-// External dependencies
 import * as React from 'react';
-import { Clipboard } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+import { Clipboard, TouchableOpacity } from 'react-native';
 
-// Internal dependencies
-import { Button } from 'components';
-import { SlideInRight } from 'components';
-import { Touchable } from 'components';
-import { View } from 'components';
-import { Text } from 'components';
-import styles from './styles';
+import {
+  Button,
+  SlideInRight,
+  Text,
+} from 'components';
 
-type Props = {};
+import buttonStyles from './styles';
+
+type Props = {
+  confirm: boolean,
+  show: boolean,
+  onPaste: Function,
+  onError: Function,
+};
 
 function PasteButton(props: Props): React.Element<any> {
-  const children = props.confirm ? 'Pasted!' : 'Paste';
-  const toValue = props.show ? 0 : 100;
+  const {
+    confirm,
+    show,
+    onPaste,
+    onError,
+  } = props;
+  const children = confirm ? 'Pasted!' : 'Paste';
+  const toValue = show ? 0 : 100;
 
-  async function handlePress(event: Object) {
+  async function handlePress() {
     try {
       const value = await Clipboard.getString();
-      props.onPaste(value);
+      onPaste(value);
     } catch (error) {
-      props.onError(error);
+      onError(error);
     }
   }
 
   return (
-    <Button onPress={handlePress} styles={styles} {...props}>
-      {({ bind, styles, touched }) => (
+    <Button onPress={handlePress} styles={buttonStyles} {...props}>
+      {({ bind, styles }) => (
         <SlideInRight toValue={toValue}>
           <TouchableOpacity style={styles.container} {...bind}>
             <Text style={styles.text}>{children}</Text>

@@ -10,7 +10,6 @@ import styles from './styles';
 import type { Props, State } from './types';
 import selector from './selectors';
 import actions from './actions';
-
 import CopyButton from './components/CopyButton';
 
 const logoFile = require('../../assets/images/dash_white_s.png');

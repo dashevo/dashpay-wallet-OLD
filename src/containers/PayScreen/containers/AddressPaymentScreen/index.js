@@ -1,12 +1,13 @@
 // @flow
+
 import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+
 import Form from 'components/Form';
-import Button from 'components/Button';
 import View from 'components/View';
 import Text from 'components/Text';
 import AutoSubmit from 'components/AutoSubmit';
+
 import RecipientField from './components/RecipientField';
 import selector from './selectors';
 import defaults from './defaults';

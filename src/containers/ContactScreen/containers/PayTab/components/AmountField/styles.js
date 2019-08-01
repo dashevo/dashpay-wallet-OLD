@@ -1,11 +1,7 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
+// @flow
 
 const styles = (theme: Object): Object => ({
-  ['container']: {
+  container: {
     alignItems: 'center',
     backgroundColor: theme.fieldContainerBackgroundColor,
     borderColor: theme.fieldContainerBorderColor,
@@ -19,7 +15,7 @@ const styles = (theme: Object): Object => ({
     position: 'relative',
     paddingBottom: 1,
   },
-  ['separator']: {
+  separator: {
     backgroundColor: theme.fieldSeparatorBackgroundColor,
     borderColor: theme.fieldSeparatorBorderColor,
     height: 1,
@@ -28,19 +24,19 @@ const styles = (theme: Object): Object => ({
     left: 0,
     right: 0,
   },
-  ['body']: {
+  body: {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
-  ['right']: {
+  right: {
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 6,
-    paddingRight: 6
+    paddingRight: 6,
   },
-  ['input']: {
+  input: {
     backgroundColor: theme.fieldInputBackgroundColor,
     borderColor: theme.fieldInputBorderColor,
     borderRadius: 24,
@@ -55,20 +51,20 @@ const styles = (theme: Object): Object => ({
     paddingLeft: 6,
     paddingRight: 6,
     paddingTop: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   },
-  ['text']: {
+  text: {
     color: theme.fieldIconColor,
     fontSize: 14,
     fontWeight: '500',
-    lineHeight: 20
+    lineHeight: 20,
   },
-  ['icon']: {
+  icon: {
     color: theme.fieldIconColor,
     fontSize: 14,
     fontWeight: '500',
-    lineHeight: 20
-  }
+    lineHeight: 20,
+  },
 });
 
 export default styles;
