@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import  React from 'react';
 import {
   Animated, Easing, StyleSheet, View, BackHandler,
 } from 'react-native';

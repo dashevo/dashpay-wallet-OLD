@@ -68,10 +68,6 @@ const routes = {
   },
   ContactScreen: {
     screen: ContactScreen,
-    navigationOptions: {
-      header: false,
-      title: 'Contact',
-    },
   },
   PayScreen: {
     screen: PayScreen,

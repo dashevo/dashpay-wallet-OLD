@@ -30,7 +30,7 @@ class ScannerScreen extends React.Component<Props> {
     const { address, amount } = parseDashAddress(data);
     if (address) {
       const { navigation } = this.props;
-      navigation.replace('PayTabs', { recipient: address, amount });
+      navigation.replace('ContactScreen', { recipient: address, amount });
     }
   }
 
