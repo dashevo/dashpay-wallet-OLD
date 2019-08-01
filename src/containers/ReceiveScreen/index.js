@@ -11,6 +11,8 @@ import type { Props, State } from './types';
 import selector from './selectors';
 import actions from './actions';
 
+import CopyButton from './components/CopyButton';
+
 const logoFile = require('../../assets/images/dash_white_s.png');
 
 const { width: viewportWidth } = Dimensions.get('window');
@@ -22,13 +24,17 @@ class ReceiveScreen extends React.Component<Props, State> {
     getUnusedAddress();
   }
 
+  writeAddressToClipboard = async () => {
+    const { unusedAddress } = this.props;
+    await Clipboard.setString(unusedAddress);
+    alert('Address copied!');
+  };
+
   render(): React.Element<any> {
     const { unusedAddress } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        <Text selectable style={[styles.text, styles.bold]}>
-          {unusedAddress}
-        </Text>
+
         <View style={styles.qrWrapper}>
           <QRCode
             value={`dash:${unusedAddress}`}
@@ -41,10 +47,17 @@ class ReceiveScreen extends React.Component<Props, State> {
             logoBackgroundColor="#078be2"
           />
         </View>
+        <View>
+          <Text selectable style={[styles.text, styles.bold]}>
+            {unusedAddress}
+          </Text>
+          <CopyButton data={unusedAddress} />
+        </View>
       </SafeAreaView>
     );
   }
 }
+
 export default connect(
   selector,
   actions,
