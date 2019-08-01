@@ -40,19 +40,19 @@ const routes = {
   ContactsPaymentTab: {
     screen: ContactsPaymentScreen,
     navigationOptions: {
-      tabBarLabel: 'Pay to contact',
+      tabBarLabel: 'Contacts',
     },
   },
   AddressPaymentTab: {
     screen: AddressPaymentScreen,
     navigationOptions: {
-      tabBarLabel: 'Pay to address',
+      tabBarLabel: 'Address',
     },
   },
   QRCodePaymentTab: {
     screen: ScannerScreen,
     navigationOptions: {
-      tabBarLabel: 'Pay to QRCode',
+      tabBarLabel: 'QRCode',
     },
   },
 };
