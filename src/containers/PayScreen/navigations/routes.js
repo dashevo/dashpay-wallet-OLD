@@ -1,20 +1,14 @@
 // @flow
 import type { NavigationProps } from 'types/navigation';
-import PayToAddressScreen from '../containers/PayToAddressScreen';
+import AddressPaymentScreen from '../containers/AddressPaymentScreen';
 import { PayTabs, ProfileTabs } from '../containers/PayTabs';
 import ScannerScreen from '../containers/ScannerScreen';
 import PaymentConfirmationScreen from '../containers/PaymentConfirmationScreen';
+import ContactsPaymentScreen from '../containers/ContactsPaymentScreen';
 
 const MAX_TITLE_LENGTH = 15;
 
 const routes = {
-  PayToAddressScreen: {
-    screen: PayToAddressScreen,
-    navigationOptions: {
-      title: 'Pay to address',
-      params: null,
-    },
-  },
   PayTabs: {
     screen: PayTabs,
     navigationOptions: (props: NavigationProps) => {
@@ -41,6 +35,24 @@ const routes = {
     screen: PaymentConfirmationScreen,
     navigationOptions: {
       header: null,
+    },
+  },
+  ContactsPaymentTab: {
+    screen: ContactsPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Pay to contact',
+    },
+  },
+  AddressPaymentTab: {
+    screen: AddressPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Pay to address',
+    },
+  },
+  QRCodePaymentTab: {
+    screen: ScannerScreen,
+    navigationOptions: {
+      tabBarLabel: 'Pay to QRCode',
     },
   },
 };

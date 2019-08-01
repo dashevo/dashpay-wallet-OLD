@@ -29,7 +29,7 @@ function IconBar(props: Props) {
       <IconButton
         icon="pay"
         text="Pay"
-        action={() => props.navigation.navigate('PayToAddressScreen')}
+        action={() => props.navigation.navigate('PayScreen')}
       />
       <IconButton
         icon="receive"
