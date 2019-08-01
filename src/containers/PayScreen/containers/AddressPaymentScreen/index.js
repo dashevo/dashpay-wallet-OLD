@@ -13,12 +13,11 @@ import defaults from './defaults';
 import styles from './styles';
 import type { Props, State } from './types';
 
-class PayToAddressScreen extends React.Component<Props, State> {
+class AddressPaymentScreen extends React.Component<Props, State> {
   static defaultProps = defaults;
 
   constructor(props: Props) {
     super(props);
-    this.navigateToScanner = this.navigateToScanner.bind(this);
     const onSubmit = this.handleSubmit.bind(this);
     this.state = {
       ...props.formProps,
@@ -31,10 +30,6 @@ class PayToAddressScreen extends React.Component<Props, State> {
     navigation.replace('PayTabs', values);
   }
 
-  navigateToScanner() {
-    const { navigation } = this.props;
-    navigation.replace('ScannerScreen');
-  }
 
   render(): React.Element<any> {
     return (
@@ -50,18 +45,6 @@ class PayToAddressScreen extends React.Component<Props, State> {
             <View style={styles.row}>
               <AutoSubmit />
             </View>
-            <View style={styles.row}>
-              <Button primary full sm>
-                {({ styles }) => (
-                  <TouchableOpacity
-                    style={styles.container}
-                    onPress={this.navigateToScanner}
-                  >
-                    <Text style={styles.text}>Scan QR code</Text>
-                  </TouchableOpacity>
-                )}
-              </Button>
-            </View>
           </View>
         </View>
       </Form>
@@ -69,4 +52,4 @@ class PayToAddressScreen extends React.Component<Props, State> {
   }
 }
 
-export default connect(selector)(PayToAddressScreen);
+export default connect(selector)(AddressPaymentScreen);
