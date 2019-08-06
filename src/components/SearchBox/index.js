@@ -11,12 +11,12 @@ import type { Props } from './types';
 import styles from './styles';
 
 function SearchBox(props: Props): React.Element<any> {
-  const { searchBox } = props;
+  const { searchBox, style } = props;
   return (
     <Form {...props} ref={searchBox}>
       <AutoSubmit />
       <View style={styles.row}>
-        <QueryField />
+        <QueryField style={style} />
       </View>
     </Form>
   );

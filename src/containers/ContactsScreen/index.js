@@ -20,8 +20,8 @@ import {
   ListFooter,
   ListHeader,
   Item,
-  SearchBox,
 } from './components';
+import { SearchBox } from '../../components';
 
 class ContactsScreen extends React.Component<Props, State> {
   constructor(props: Props) {

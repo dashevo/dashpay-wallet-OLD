@@ -5,8 +5,8 @@ import config from './navigations/config';
 
 const navigatorRoutes = {
   ContactsPaymentTab: routes.ContactsPaymentTab,
-  AddressPaymentTab: routes.AddressPaymentTab,
   QRCodePaymentTab: routes.QRCodePaymentTab,
+  AddressPaymentTab: routes.AddressPaymentTab,
 };
 const PayScreenNavigationContainer = (createMaterialTopTabNavigator(navigatorRoutes, {
   ...config,

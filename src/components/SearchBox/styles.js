@@ -8,15 +8,14 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  ['input']: {
+  row: {
+    alignItems: 'center',
     backgroundColor: '#fff',
-    borderColor: '#fff',
-    borderWidth: 0,
-    flex: 1,
-    height: 50,
-    paddingBottom: 0,
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 0,
-  }
+    borderBottomColor: '#e0e0e0',
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    flexGrow: 1,
+    flexShrink: 0,
+    position: 'relative',
+  },
 });

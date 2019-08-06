@@ -14,6 +14,17 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  contentContainer: {
+    paddingBottom: 15,
+    paddingTop: 200,
+    flexGrow: 1,
+  },
+  mostFrequentBody: {
+
+  },
+  contactBody: {
+
+  },
 });
 
 export default createUseStyles(styles);
