@@ -8,7 +8,7 @@ import Input from 'components/Input';
 
 import PasteButton from './components/PasteButton';
 import defaultProps from './defaults';
-import fieldStyles from './styles';
+import { fieldStyles } from './styles';
 import type { Props } from './types';
 
 let dismissPasteConfirmation = null;
@@ -48,7 +48,7 @@ function RecipientField(props: Props): React.Element<any> {
         return (
           <View style={styles.container}>
             <View style={styles.body}>
-              <Input style={styles.input} {...input} />
+              <Input {...input} />
             </View>
             <View style={styles.right}>
               <PasteButton

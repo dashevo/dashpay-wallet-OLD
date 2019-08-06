@@ -64,7 +64,6 @@ class ContactsPaymentTab extends React.Component<Props, State> {
 
   renderContactsBody() {
     const { sections } = this.props;
-    console.log(sections);
     return (
       <Animated.SectionList
         contentContainerStyle={styles.contentContainer}

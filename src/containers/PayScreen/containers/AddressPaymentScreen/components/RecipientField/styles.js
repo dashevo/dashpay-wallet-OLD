@@ -1,11 +1,13 @@
 // @flow
 
-const styles = (theme: Object): Object => ({
+export const fieldStyles = (theme: Object): Object => ({
+  // This is the outside of the input
   container: {
     alignItems: 'center',
-    backgroundColor: theme.fieldInputBackgroundColor,
+    backgroundColor: '#ffffff',
+    // backgroundColor: theme.fieldInputBackgroundColor,
     borderColor: theme.fieldInputBorderColor,
-    borderRadius: 25,
+    borderRadius: 6,
     borderWidth: 1,
     flexDirection: 'row',
     flexGrow: 1,
@@ -19,6 +21,15 @@ const styles = (theme: Object): Object => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
+  dash: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
   right: {
     alignItems: 'center',
     bottom: 0,
@@ -30,22 +41,17 @@ const styles = (theme: Object): Object => ({
     top: 0,
   },
   input: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#ffffff',
     borderColor: 'transparent',
-    borderRadius: 24,
+    borderRadius: 1,
     borderWidth: 0,
     color: theme.fieldInputColor,
     flex: 1,
     fontSize: 16,
     fontWeight: '400',
-    height: 50,
-    lineHeight: 24,
-    paddingBottom: 12,
+    height: 40,
+    lineHeight: 20,
     paddingLeft: 6,
-    paddingRight: 6,
-    paddingTop: 12,
     textAlign: 'center',
   },
 });
-
-export default styles;

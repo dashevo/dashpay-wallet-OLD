@@ -19,7 +19,6 @@ const filteredAndSortedProfilesSelector = createSelector(
     items: Array<Profile>,
   ) => {
     let result = items.filter(({ username }) => username !== currentUser.username);
-    console.log('res', result);
     if (filterParams.isActive) {
       const query = filterParams.query.toLowerCase();
       result = result
