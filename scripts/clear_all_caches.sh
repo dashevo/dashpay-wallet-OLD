@@ -4,4 +4,3 @@ watchman watch-del-all
 watchman shutdown-server
 rm -rf /tmp/metro-cache*
 rm -rf /tmp/haste-map-metro-*
-npm install
