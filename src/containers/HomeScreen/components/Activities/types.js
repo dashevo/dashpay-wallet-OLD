@@ -6,3 +6,10 @@ export type Props = NavigationProps & {
   rejectContactRequest: Function,
   activity: Array,
 }
+
+export type RenderItemProps = {
+  item: {
+    type: string,
+    data: object,
+  }
+};
