@@ -7,11 +7,13 @@ import View from 'components/View';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
 import TransactionCard from 'hooks/Card/Transaction';
+
 import SocialTransactionCard from './components/TransactionCard';
 import selector from './selectors';
 import actions from './actions';
 import styles from './styles';
-import type { Props } from './types';
+import type { Props, RenderItemProps } from './types';
+
 
 const Transactions = (props: Props) => {
   const {
@@ -21,27 +23,33 @@ const Transactions = (props: Props) => {
     navigation,
   } = props;
 
+  const renderItem = ({ item: { type, data } }: RenderItemProps) => {
+    switch (type) {
+      case 'social':
+        return (
+          <SocialTransactionCard
+            acceptContactRequest={acceptContactRequest}
+            rejectContactRequest={rejectContactRequest}
+            item={data}
+          />
+        );
+      case 'wallet':
+        return <TransactionCard {...data} />;
+      default:
+        return null;
+    }
+  };
+
+  const keyExtractor = ({ type, data }) => (
+    type === 'social' ? `${data.username}${data.state}` : data.txid
+  );
+
   return (
     <View style={{ flex: 1 }}>
       <FlatList
         data={activity}
-        keyExtractor={(item, index) => `activity-${index}`}
-        renderItem={({ item }) => {
-          switch (item.type) {
-            case 'social':
-              return (
-                <SocialTransactionCard
-                  acceptContactRequest={acceptContactRequest}
-                  rejectContactRequest={rejectContactRequest}
-                  item={item.data}
-                />
-              );
-            case 'wallet':
-              return <TransactionCard {...item.data} />;
-            default:
-              return null;
-          }
-        }}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
         contentContainerStyle={styles.contentContainerStyle}
         style={{ flex: 1 }}
         ListEmptyComponent={() => (
