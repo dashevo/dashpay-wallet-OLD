@@ -1,11 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- */
-
-// External dependencies
 import { StyleSheet } from 'react-native';
-
-// Internal dependencies
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'constants';
 
 const DEVICE_SCALE = SCREEN_WIDTH / 375;
@@ -140,3 +133,12 @@ export const tabBarIndicatorWidth = '50%';
 
 // Tab Container
 export const tabContainerBackgroundColor = gray100;
+
+// Button
+//
+// =============================================================================
+
+export const buttonPaddingVerticalBase = normalize(10);
+export const buttonPaddingHorizontalBase = normalize(10);
+export const buttonPaddingHorizontalLarge = normalize(50);
+export const buttonBorderRadiusBase = normalize(5);
