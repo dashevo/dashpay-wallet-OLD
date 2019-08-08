@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "plugins": [
     "jest",
-    "flowtype"
+    "flowtype",
+    "react-hooks"
   ],
   "extends": [
     "airbnb",
@@ -14,7 +15,9 @@
   },
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
-    "import/prefer-default-export": ["off"]
+    "import/prefer-default-export": ["off"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   },
   "globals": {
     "node": "readonly",

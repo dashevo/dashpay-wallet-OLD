@@ -1,18 +1,8 @@
 // @flow
 import type { NavigationProps } from 'types/navigation';
-
-export type ProfileForm = {
-  username: string,
-  bio: string,
-  avatarUrl: string,
-}
+import type { Profile } from 'state/profiles/types';
 
 export type Props = NavigationProps & {
-  username: string,
   registerBUser: (username: string) => Promise<any>,
-  registerProfile: (profile: ProfileForm) => Promise<any>,
-};
-
-export type FormValues = {
-  username: string,
+  registerProfile: (profile: Profile) => Promise<any>,
 };
