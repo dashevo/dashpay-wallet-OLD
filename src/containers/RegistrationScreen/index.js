@@ -1,21 +1,22 @@
 // @flow
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Alert, Button } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import { Formik } from 'formik';
 import {
+  Alert,
+  Button,
   View,
   Text,
-  Input,
-} from 'components';
+} from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import { Formik, Field } from 'formik';
+import type { Profile } from 'state/profiles/types';
+import { sample } from 'lodash';
+import Avatar from 'hooks/Avatar';
+import InputField from './InputField';
 import schema from './schema';
-import styles from './styles';
-import type {
-  FormValues,
-  Props,
-} from './types';
-import selector from './selector';
+import useStyles from './useStyles';
+import type { Props } from './types';
+import peopleMock from './peopleMock';
 import actions from './actions';
 
 const RegistrationScreen = ({
@@ -31,14 +32,13 @@ const RegistrationScreen = ({
     ),
   );
 
-  const handleSubmitForm = ({ username }: FormValues) => {
+  const handleSubmitForm = (props: Profile) => {
     setIsSubmitting(true);
-    const avatarUrl = `https://api.adorable.io/avatars/285/${username}.png`;
-    const bio = `I am ${username}, my bio is pretty awesome`;
+    const { username } = props;
     registerBUser(username)
       .then(() => {
         Alert.alert('BUser registration - success');
-        registerProfileDelayed({ avatarUrl, bio, username })
+        registerProfileDelayed(props)
           .then(
             () => Alert.alert('Profile registration - success'),
             error => Alert.alert(`Profile registration error: ${error.message}`),
@@ -50,44 +50,30 @@ const RegistrationScreen = ({
 
   const goHome = () => navigation.reset([NavigationActions.navigate({ routeName: 'HomeScreen' })]);
 
+
+  const styles = useStyles();
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
+      <View style={styles.block}>
         <Text style={styles.header}>Registration</Text>
       </View>
       <Formik
+        initialValues={sample(peopleMock)}
         onSubmit={handleSubmitForm}
         validationSchema={schema}
       >
         {({
           values,
           handleSubmit,
-          handleChange,
-          touched,
-          errors,
-          setFieldTouched,
           isValid,
         }) => (
           <View>
-            <View style={styles.row}>
-              <Input
-                style={styles.input}
-                value={values.username}
-                onChangeText={handleChange('username')}
-                onBlur={() => setFieldTouched('username')}
-                placeholder="Username"
-                autoCapitalize="none"
-                autoCorrect={false}
-                textAlign="center"
-                editable={!isSubmitting}
-              />
+            <View style={styles.block}>
+              <Avatar user={values} />
             </View>
-            <View style={styles.row}>
-              <Text style={[styles.text, styles.validationError]}>
-                {touched ? errors.username : ''}
-              </Text>
-            </View>
-            <View style={styles.row}>
+            <Field style={styles.block} name="username" placeholder="Username" component={InputField} />
+            <Field style={styles.block} name="avatarUrl" placeholder="Avatar url" component={InputField} />
+            <View style={styles.block}>
               <Button
                 style={styles.button}
                 title="Submit"
@@ -96,18 +82,13 @@ const RegistrationScreen = ({
                 loading={isSubmitting}
                 loadingProps={{ size: 'large', color: 'white' }}
               />
+              <Button title="Go home" onPress={goHome} />
             </View>
           </View>
         )}
       </Formik>
-
-      <Button
-        style={styles.row}
-        title="Go home"
-        onPress={goHome}
-      />
     </View>
   );
 };
 
-export default connect(selector, actions)(RegistrationScreen);
+export default connect(null, actions)(RegistrationScreen);
