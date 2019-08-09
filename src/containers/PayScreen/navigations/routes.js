@@ -1,36 +1,10 @@
 // @flow
-import type { NavigationProps } from 'types/navigation';
-import PayScreen from '../containers/PayScreen';
-import { PayTabs, ProfileTabs } from '../containers/PayTabs';
+import AddressPaymentScreen from '../containers/AddressPaymentScreen';
 import ScannerScreen from '../containers/ScannerScreen';
 import PaymentConfirmationScreen from '../containers/PaymentConfirmationScreen';
-
-const MAX_TITLE_LENGTH = 15;
+import ContactsPaymentScreen from '../containers/ContactsPaymentScreen';
 
 const routes = {
-  PayScreen: {
-    screen: PayScreen,
-    navigationOptions: {
-      title: 'Pay at the address',
-      params: null,
-    },
-  },
-  PayTabs: {
-    screen: PayTabs,
-    navigationOptions: (props: NavigationProps) => {
-      const { getParam } = props.navigation;
-      let title = getParam('name', getParam('username'));
-      if (title && title.length > MAX_TITLE_LENGTH) {
-        title = `${title.substr(0, MAX_TITLE_LENGTH)}...`;
-      }
-      return {
-        title,
-      };
-    },
-  },
-  ProfileTabs: {
-    screen: ProfileTabs,
-  },
   ScannerScreen: {
     screen: ScannerScreen,
     navigationOptions: {
@@ -41,6 +15,24 @@ const routes = {
     screen: PaymentConfirmationScreen,
     navigationOptions: {
       header: null,
+    },
+  },
+  ContactsPaymentTab: {
+    screen: ContactsPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Contacts',
+    },
+  },
+  AddressPaymentTab: {
+    screen: AddressPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Address',
+    },
+  },
+  QRCodePaymentTab: {
+    screen: ScannerScreen,
+    navigationOptions: {
+      tabBarLabel: 'QRCode',
     },
   },
 };

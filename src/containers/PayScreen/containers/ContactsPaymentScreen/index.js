@@ -1,38 +1,28 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Animated,
-  InteractionManager,
-} from 'react-native';
-import {
-  Image,
-  View,
-} from 'components';
-import ListEmpty from 'hooks/ContactList/ListEmpty';
+import ScrollView from 'components/ScrollView';
+import View from 'components/View';
+import SearchBox from 'components/SearchBox';
 import ActivityIndicatorView from 'hooks/ActivityIndicatorView';
-import dashLogo from 'assets/flags/dash.png';
-import actions from './actions';
+
+import ListEmpty from 'hooks/ContactList/ListEmpty';
+
+import { Animated } from 'react-native';
 import selector from './selectors';
 import styles from './styles';
-import type { Props, State } from './types';
-import {
-  ListFooter,
-  ListHeader,
-  Item,
-} from './components';
-import { SearchBox } from '../../components';
+import type { Props, State } from '../../../ContactsScreen/types';
+import actions from './actions';
+import { Item, ListHeader, ListFooter } from '../../../ContactsScreen/components';
 
-class ContactsScreen extends React.Component<Props, State> {
+
+class ContactsPaymentTab extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     (this: any).renderItem = this.renderItem.bind(this);
     (this: any).renderListHeader = this.renderListHeader.bind(this);
     (this: any).renderListFooter = this.renderListFooter.bind(this);
     (this: any).renderListEmpty = this.renderListEmpty.bind(this);
-
-    (this: any).handlePress = this.handlePress.bind(this);
-    (this: any).handleSubmit = this.handleSubmit.bind(this);
 
     (this: any).searchBox = React.createRef();
 
@@ -58,25 +48,6 @@ class ContactsScreen extends React.Component<Props, State> {
     clearFilter();
   }
 
-  async handlePress(params: string) {
-    const { navigation } = this.props;
-    navigation.navigate('ContactScreen', params);
-    await InteractionManager.runAfterInteractions();
-    if (this.searchBox.current.resetForm) {
-      this.searchBox.current.setFieldValue('query', '');
-      this.searchBox.current.submitForm();
-    }
-  }
-
-  handleSubmit(values: Object) {
-    const { setFilter, searchProfiles } = this.props;
-    const query = values.query.trim();
-    this.setState({ isSearching: true });
-    setFilter({ query });
-    searchProfiles(query)
-      .finally(() => this.setState({ isSearching: false }));
-  }
-
   renderListFooter() {
     return <ListFooter {...this.props} />;
   }
@@ -91,13 +62,8 @@ class ContactsScreen extends React.Component<Props, State> {
     return <ListEmpty {...this.props} />;
   }
 
-  renderBody() {
-    const { isSearching, isFetchingContacts } = this.state;
+  renderContactsBody() {
     const { sections } = this.props;
-    const isActiveRequest = isSearching || isFetchingContacts;
-    if (isActiveRequest && sections.length === 0) {
-      return <ActivityIndicatorView />;
-    }
     return (
       <Animated.SectionList
         contentContainerStyle={styles.contentContainer}
@@ -113,6 +79,17 @@ class ContactsScreen extends React.Component<Props, State> {
   }
 
   render() {
+    const searchBoxStyles = {
+      marginTop: 16,
+      marginBottom: 16,
+      marginRight: 16,
+      marginLeft: 28,
+      backgroundColor: '#ffffff',
+      borderRadius: 8,
+      borderWidth: 1,
+      borderColor: '#d9d9d9',
+      borderStyle: 'solid',
+    };
     const animatedStyle = {
       transform: [
         {
@@ -125,32 +102,38 @@ class ContactsScreen extends React.Component<Props, State> {
         },
       ],
     };
+    // FIXME : Hooks can only be called inside the body of a function component error
+    const checkIsActiveRequest = () => {
+      const { isSearching, isFetchingContacts } = this.state;
+      const { sections } = this.props;
+      const isActiveRequest = isSearching || isFetchingContacts;
+      return isActiveRequest && sections.length === 0;
+    };
+    if (checkIsActiveRequest()) {
+      return <ActivityIndicatorView />;
+    }
     return (
-      <View style={styles.container}>
-        <View style={styles.body}>
-          {this.renderBody()}
-        </View>
-        <Animated.View style={[styles.header, animatedStyle]}>
-          <View style={[styles.row, styles.first]}>
-            <Image
-              style={styles.dash}
-              source={dashLogo}
-            />
-          </View>
-          <View style={[styles.row, styles.second]}>
-            <SearchBox
-              {...this.props}
-              searchBox={this.searchBox}
-              onSubmit={this.handleSubmit}
-            />
-          </View>
-        </Animated.View>
+      <View style={styles.row}>
+        <SearchBox
+          placeholder="Search by username or alias"
+          style={searchBoxStyles}
+          searchBox={this.searchBox}
+        />
+        <ScrollView style={styles.container}>
+          <Animated.View style={[styles.header, animatedStyle]}>
+            <View style={styles.contactBody}>
+              {this.renderContactsBody()}
+            </View>
+          </Animated.View>
+        </ScrollView>
       </View>
+
     );
   }
 }
 
+
 export default connect(
   selector,
   actions,
-)(ContactsScreen);
+)(ContactsPaymentTab);

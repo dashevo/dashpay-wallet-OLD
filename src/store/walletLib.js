@@ -30,6 +30,7 @@ const walletLib = {
         network,
         mnemonic,
         plugins: [dpd],
+        // offlineMode: true,
         allowSensitiveOperations: true,
         transport,
       });
