@@ -20,10 +20,11 @@
     "react-hooks/exhaustive-deps": "error"
   },
   "globals": {
-    "node": true,
-    "fetch": true,
-    "alert": true,
-    "__DEV__": true
+    "node": "readonly",
+    "fetch": "readonly",
+    "alert": "readonly",
+    "__DEV__": "readonly",
+    "Clipboard": "readonly"
   },
   "settings": {
     "import/resolver": {

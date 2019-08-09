@@ -10,17 +10,26 @@ import * as React from 'react';
 // Internal dependencies
 import View from 'components/View';
 import { IconButton } from 'components';
+import type { Props } from './types';
 
-function IconBar(props) {
-  const { icon } = props;
-  const { name } = props;
+const styles = {
+  buttonGroup: {
+    flexDirection: 'row',
+    marginTop: 32,
+    marginBottom: 0,
+  },
+};
+
+function IconBar(props: Props) {
+  // const { icon } = props;
+  // const { name } = props;
 
   return (
     <View style={styles.buttonGroup}>
       <IconButton
         icon="pay"
         text="Pay"
-        action={() => props.navigation.navigate('SendScreen')}
+        action={() => props.navigation.navigate('PayScreen')}
       />
       <IconButton
         icon="receive"
@@ -36,12 +45,5 @@ function IconBar(props) {
   );
 }
 
-const styles = {
-  ['buttonGroup']: {
-    flexDirection: 'row',
-    marginTop: 32,
-    marginBottom: 0
-  }
-};
 
 export default IconBar;

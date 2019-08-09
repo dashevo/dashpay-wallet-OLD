@@ -5,12 +5,12 @@
  */
 import { StyleSheet } from 'react-native';
 import { COLORS } from 'constants';
-import { LENGTHS } from 'constants';
+
 // import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   backdrop: {
-    backgroundColor: COLORS.blueDark + '7F', //TODO this will break if colors are expressed differently
+    backgroundColor: `${COLORS.blueDark}7F`, // TODO this will break if colors are expressed differently
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     height: '100%',
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    backgroundColor: COLORS.white,
+    backgroundColor: '#f5f5f5',
     justifyContent: 'center',
     paddingTop: 30,
     borderTopLeftRadius: 10,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    borderRadius: 33,// 50 / 2 + 8
+    borderRadius: 33, // 50 / 2 + 8
     padding: 8,
     backgroundColor: '#0000003F',
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   swipeText: {
     color: COLORS.white,
     marginVertical: 'auto',
-  }
+  },
 });
 
 export default styles;
