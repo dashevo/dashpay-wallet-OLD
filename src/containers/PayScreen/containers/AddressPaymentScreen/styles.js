@@ -20,6 +20,15 @@ const styles = StyleSheet.create({
     marginBottom: 32,
     textAlign: 'center',
   },
+  dashLogo: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
   row: {
     height: 60,
   },

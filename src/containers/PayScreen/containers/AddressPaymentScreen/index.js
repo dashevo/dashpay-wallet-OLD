@@ -42,7 +42,7 @@ class AddressPaymentScreen extends React.Component<Props, State> {
         <View style={styles.container}>
           <View style={styles.body}>
             <Image
-              style={styles.dash}
+              style={styles.dashLogo}
               source={dashLogo}
             />
             <View style={styles.row}>
