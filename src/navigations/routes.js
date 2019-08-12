@@ -68,11 +68,15 @@ const routes = {
   },
   ContactScreen: {
     screen: ContactScreen,
+    navigationOptions: {
+      header: true,
+      title: 'Contact',
+    },
   },
   PayScreen: {
     screen: PayScreen,
     navigationOptions: {
-      header: false,
+      header: true,
       title: 'Pay',
     },
   },

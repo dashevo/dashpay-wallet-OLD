@@ -1,12 +1,34 @@
-import { createMaterialTopTabNavigator } from 'react-navigation';
-import routes from './navigations/routes';
-import config from './navigations/config';
+import useTopTabNavigator from 'hooks/topTabNavigator/useTopTabNavigator';
 
-const ContactScreenNavigationContainer = (createMaterialTopTabNavigator(routes, {
-  ...config,
+import PayTab from './containers/PayTab';
+import ReceiveTab from './containers/ReceiveTab';
+import ProfileTab from './containers/ProfileTab';
+
+const routes = {
+  PayTab: {
+    screen: PayTab,
+    navigationOptions: {
+      tabBarLabel: 'Pay',
+    },
+  },
+  ReceiveTab: {
+    screen: ReceiveTab,
+    navigationOptions: {
+      tabBarLabel: 'Receive',
+    },
+  },
+  ProfileTab: {
+    screen: ProfileTab,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+    },
+  },
+};
+
+const ContactScreenNavigationContainer = useTopTabNavigator(routes, {
   initialRouteName: 'ProfileTab',
-}));
+});
 
-export const PayTabs = createMaterialTopTabNavigator(routes, config);
+export const PayTabs = useTopTabNavigator(routes);
 
 export default ContactScreenNavigationContainer;
