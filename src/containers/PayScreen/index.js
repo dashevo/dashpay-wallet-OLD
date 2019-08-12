@@ -1,16 +1,32 @@
 // @flow
-import { createMaterialTopTabNavigator } from 'react-navigation';
-import routes from './navigations/routes';
-import config from './navigations/config';
+import useTopTabNavigator from 'hooks/topTabNavigator/useTopTabNavigator';
+import AddressPaymentScreen from './containers/AddressPaymentScreen';
+import ScannerScreen from './containers/ScannerScreen';
+import ContactsPaymentScreen from './containers/ContactsPaymentScreen';
 
-const navigatorRoutes = {
-  ContactsPaymentTab: routes.ContactsPaymentTab,
-  QRCodePaymentTab: routes.QRCodePaymentTab,
-  AddressPaymentTab: routes.AddressPaymentTab,
+const routes = {
+  ContactsPaymentTab: {
+    screen: ContactsPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Contacts',
+    },
+  },
+  QRCodePaymentTab: {
+    screen: ScannerScreen,
+    navigationOptions: {
+      tabBarLabel: 'QRCode',
+    },
+  },
+  AddressPaymentTab: {
+    screen: AddressPaymentScreen,
+    navigationOptions: {
+      tabBarLabel: 'Address',
+    },
+  },
 };
-const PayScreenNavigationContainer = (createMaterialTopTabNavigator(navigatorRoutes, {
-  ...config,
+
+const PayScreenNavigationContainer = useTopTabNavigator(routes, {
   initialRouteName: 'AddressPaymentTab',
-}));
+});
 
 export default PayScreenNavigationContainer;
