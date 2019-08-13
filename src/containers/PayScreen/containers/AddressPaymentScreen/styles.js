@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     borderColor: '#fff',
     flex: 1,
+    flexDirection: 'column',
   },
   body: {
     paddingBottom: 64,
@@ -14,20 +15,23 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#222222',
-    fontSize: 32,
+    fontSize: 24,
     fontStyle: 'normal',
     fontWeight: '400',
     marginBottom: 32,
     textAlign: 'center',
   },
+  logoWrapper: {
+    alignItems: 'center',
+    marginBottom: 24,
+  },
   dashLogo: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    position: 'relative',
+    width: 68,
+    height: 68,
+    borderRadius: 34,
+    backgroundColor: '#999999',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column',
   },
   row: {
     height: 60,

@@ -10,7 +10,7 @@ import Image from 'react-native-fast-image';
 
 import AutoSubmit from 'components/AutoSubmit';
 
-import dashLogo from 'assets/flags/dash.png';
+import dashLogo from 'assets/images/dash_white_s.png';
 import RecipientField from './components/RecipientField';
 import selector from './selectors';
 import defaults from './defaults';
@@ -41,10 +41,12 @@ class AddressPaymentScreen extends React.Component<Props, State> {
       <Form {...this.state}>
         <View style={styles.container}>
           <View style={styles.body}>
-            <Image
-              style={styles.dashLogo}
-              source={dashLogo}
-            />
+            <View style={styles.logoWrapper}>
+              <Image
+                style={styles.dashLogo}
+                source={dashLogo}
+              />
+            </View>
             <View style={styles.row}>
               <Text style={styles.title}>Pay Address</Text>
             </View>
