@@ -32,9 +32,8 @@ class AddressPaymentScreen extends React.Component<Props, State> {
 
   handleSubmit(values: Object) {
     const { navigation } = this.props;
-    navigation.replace('ContactScreen', values);
+    navigation.replace('PayTab', values);
   }
-
 
   render(): React.Element<any> {
     return (

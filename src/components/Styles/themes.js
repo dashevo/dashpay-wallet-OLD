@@ -1,9 +1,3 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
 // Registration of the theme should be done through a static method.
 // The code below should be refactored.
 export default {
@@ -37,7 +31,7 @@ export default {
     navbarContainerBackgroundColor: '#088BE2',
     navbarContainerBorderColor: '#088BE2',
     navbarContainerBorderWidth: 0,
-    navbarContainerHeight: 56,
+    navbarContainerHeight: 76,
     navbarIconColor: '#fff',
     navbarIconFontSize: 16,
     navbarIconFontWeight: '500',
@@ -49,7 +43,7 @@ export default {
     navbarTitleColor: '#fff',
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
-    navbarTitleLineHeight: 19
+    navbarTitleLineHeight: 19,
   },
   dark: {
     avatarContainerBackgroundColor: '#7c55fb',
@@ -81,7 +75,7 @@ export default {
     navbarContainerBackgroundColor: '#7c55fb',
     navbarContainerBorderColor: '#7c55fb',
     navbarContainerBorderWidth: 0,
-    navbarContainerHeight: 56,
+    navbarContainerHeight: 76,
     navbarIconColor: '#fff',
     navbarIconFontSize: 16,
     navbarIconFontWeight: '500',
@@ -93,7 +87,7 @@ export default {
     navbarTitleColor: '#fff',
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
-    navbarTitleLineHeight: 19
+    navbarTitleLineHeight: 19,
   },
   red: {
     avatarContainerBackgroundColor: '#C92C2D',
@@ -125,7 +119,7 @@ export default {
     navbarContainerBackgroundColor: '#C92C2D',
     navbarContainerBorderColor: '#C92C2D',
     navbarContainerBorderWidth: 0,
-    navbarContainerHeight: 56,
+    navbarContainerHeight: 76,
     navbarIconColor: '#fff',
     navbarIconFontSize: 16,
     navbarIconFontWeight: '500',
@@ -137,6 +131,6 @@ export default {
     navbarTitleColor: '#fff',
     navbarTitleFontSize: 17,
     navbarTitleFontWeight: '500',
-    navbarTitleLineHeight: 19
-  }
+    navbarTitleLineHeight: 19,
+  },
 };

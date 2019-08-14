@@ -1,5 +1,6 @@
 import React from 'react';
-import { StoreProvider, LanguageProvider } from 'containers';
+import { Provider as StoreProvider } from 'react-redux';
+import { LanguageProvider } from 'containers';
 import { ThemeProvider } from 'hooks/Theme';
 import { Navigator } from 'navigations';
 import translations from 'translations';

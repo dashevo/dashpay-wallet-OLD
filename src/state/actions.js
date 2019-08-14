@@ -1,5 +1,5 @@
 // @flow
-import { getTransactionHistory } from 'state/transactions';
+import { getTransactionHistory } from 'state/transactions/actions';
 import { EVENTS } from '@dashevo/wallet-lib';
 import { ACCOUNTS_RECEIVE_BALANCE } from 'state/action-types';
 

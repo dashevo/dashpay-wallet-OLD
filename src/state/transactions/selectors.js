@@ -70,5 +70,3 @@ export const selectTransactions = createSelector(
     return transactions;
   },
 );
-
-export const selectOngoingTransaction = state => state.transactions.ongoingTransaction;

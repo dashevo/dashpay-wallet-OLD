@@ -1,4 +1,3 @@
-export * from './StoreProvider';
 export * from './LanguageProvider';
 
 export { default as ContactScreen } from './ContactScreen';
