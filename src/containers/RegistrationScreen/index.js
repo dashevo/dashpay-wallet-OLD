@@ -50,7 +50,7 @@ const RegistrationScreen = ({
 
   const goHome = () => navigation.reset([NavigationActions.navigate({ routeName: 'HomeScreen' })]);
 
-
+  const initialValues = sample(peopleMock);
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -58,7 +58,8 @@ const RegistrationScreen = ({
         <Text style={styles.header}>Registration</Text>
       </View>
       <Formik
-        initialValues={sample(peopleMock)}
+        initialValues={initialValues}
+        isInitialValid={schema.isValidSync(initialValues)}
         onSubmit={handleSubmitForm}
         validationSchema={schema}
       >
