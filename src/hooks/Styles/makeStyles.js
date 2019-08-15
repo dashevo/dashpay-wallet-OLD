@@ -1,10 +1,13 @@
 /**
- * Copyright (c) 2017-present, Elephant, Inc.
- *
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
  */
 
+// /////////////////////////////////////////////////////////////////////////////
+// This file is still in progress.                                            //
+// /////////////////////////////////////////////////////////////////////////////
+
 // External dependencies
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import {
   transform, reduce, every, isArray, mergeWith,
@@ -25,7 +28,7 @@ function customizer(objValue, srcValue) {
 // This is temp solution for no-param-reassign error.
 // https://github.com/airbnb/javascript/issues/1342
 /* eslint no-param-reassign: "error" */
-function makeStyles(componentStyles) {
+function makeStyles(componentStyles, animatedStyles = () => ({})) {
   const allStyles = {};
   const transformedStyles = {};
 
@@ -54,8 +57,14 @@ function makeStyles(componentStyles) {
   const useStyles = (props = {}) => {
     const { theme } = useTheme();
     const { styles } = props;
-    const [groupedStyles] = useState(() => {
-      const tmpStyles = reduce(
+    const allAnimatedStyles = useMemo(
+      () => animatedStyles(props),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [],
+    );
+
+    const [groupedStyles, setGroupedStyles] = useState(() => {
+      let tmpStyles = reduce(
         transformedStyles[theme],
         (result, value) => {
           const { block, styleId, ...requredProps } = value;
@@ -77,38 +86,45 @@ function makeStyles(componentStyles) {
       );
 
       if (styles) {
-        return mergeWith({}, tmpStyles, styles, customizer);
+        tmpStyles = mergeWith({}, tmpStyles, styles, customizer);
       }
 
       return tmpStyles;
     });
 
-    // useEffect(
-    //   () => {
-    //     const newGroupedStyles = reduce(
-    //       transformedStyles[theme],
-    //       (result, value) => {
-    //         const { block, styleId, ...requredProps } = value;
-    //         const propIsTrue = propKey => props[propKey] === true;
-    //         const hasRequredProps = every(requredProps, propIsTrue);
-    //
-    //         if (!hasRequredProps) {
-    //           return result;
-    //         }
-    //
-    //         if (!result[block]) {
-    //           result[block] = [];
-    //         }
-    //
-    //         result[block].push(styleId);
-    //         return result;
-    //       },
-    //       {},
-    //     );
-    //     setGroupedStyles(newGroupedStyles);
-    //   },
-    //   [props.active],
-    // );
+    useEffect(() => {
+      let newGroupedStyles = reduce(
+        transformedStyles[theme],
+        (result, value) => {
+          const { block, styleId, ...requredProps } = value;
+          const propIsTrue = propKey => props[propKey] === true;
+          const hasRequredProps = every(requredProps, propIsTrue);
+
+          if (!hasRequredProps) {
+            return result;
+          }
+
+          if (!result[block]) {
+            result[block] = [];
+          }
+
+          result[block].push(styleId);
+          return result;
+        },
+        {},
+      );
+
+      if (styles) {
+        newGroupedStyles = mergeWith({}, newGroupedStyles, styles, customizer);
+      }
+
+      if (allAnimatedStyles) {
+        newGroupedStyles = mergeWith({}, newGroupedStyles, allAnimatedStyles, customizer);
+      }
+
+      setGroupedStyles(newGroupedStyles);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.active]);
 
     return groupedStyles;
   };

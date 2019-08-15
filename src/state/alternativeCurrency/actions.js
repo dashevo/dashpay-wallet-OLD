@@ -66,6 +66,7 @@ const CASA_STRATEGY = {
   getRate: getCasaVesRate,
 };
 
+/* eslint-disable consistent-return */
 async function getRate(code) {
   const strategies = DEFAULT_STRATEGIES;
   if (code === 'VES') {
