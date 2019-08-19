@@ -1,5 +1,7 @@
 // @flow
 import { createSelector } from 'reselect';
+import { usernameSelector } from 'state/account/selectors';
+import { profileSelectorFactory } from 'state/profiles/selectors';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 import TXTYPES from 'constants/txtypes';
 
@@ -7,15 +9,18 @@ export const selectRequests = state => state.contacts.blockchain.requests;
 
 const historySelector = state => state.transactions.history;
 
-// TODO: this needs to be refactored
-const userSelector = ({ user }) => user;
+const currentUserSelector = createSelector(
+  usernameSelector,
+  profileSelectorFactory,
+  (username, profileSelector) => profileSelector(username) || {},
+);
 
 // TODO: this needs to be refactored
 export const selectTransactions = createSelector(
   historySelector,
-  userSelector,
+  currentUserSelector,
   alternativeCurrencySelector,
-  (history: Array<Object>, user: Object, alternativeCurrency) => {
+  (history: Object[], user: Object, alternativeCurrency) => {
     const transactions = [];
     history.forEach((item) => {
       if (item.type === TXTYPES.MOVED) {
