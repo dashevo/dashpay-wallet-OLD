@@ -29,6 +29,9 @@ function touched(state = {}, action) {
     case SET_ERRORS:
       return Object.assign({}, state, mapValues(action.payload, () => true));
 
+    case 'SET':
+      return Object.assign({}, state, mapValues(action.payload.values, () => true));
+
     case RESET:
       return {};
 
@@ -44,6 +47,9 @@ function values(state = {}, action) {
 
     case RESET:
       return action.payload;
+
+    case 'SET':
+      return Object.assign({}, state, action.payload.values);
 
     default:
       return state;
@@ -61,6 +67,9 @@ function errors(state = {}, action) {
     case RESET:
       return {};
 
+    case 'SET':
+      return Object.assign({}, state, action.payload.errors);
+
     case VALIDATE_FAILURE:
       return action.payload;
 
@@ -77,6 +86,25 @@ function focused(state = '', action) {
     case RESET:
       return '';
 
+    case 'SET':
+      return action.payload.focused;
+
+    default:
+      return state;
+  }
+}
+
+function status(state = '', action) {
+  switch (action.type) {
+    case 'SET_STATUS':
+      return Object.assign({}, state, action.payload);
+
+    case 'SET':
+      return Object.assign({}, state, action.payload.state);
+
+    case RESET:
+      return {};
+
     default:
       return state;
   }
@@ -87,6 +115,7 @@ function isDirty(state = false, action) {
     case SET_TOUCHED:
     case SET_VALUES:
     case SET_ERRORS:
+    case 'SET':
       return true;
 
     default:
@@ -140,4 +169,5 @@ export default combineReducers({
   isValidating,
   isValid,
   isSubmitting,
+  status,
 });

@@ -1,0 +1,19 @@
+/**
+ * Copyright (c) 2014-present, Dash Core Group, Inc.
+ */
+
+import { bindActionCreators } from 'redux';
+import { fetchAlternativeCurrencyRateIfNeeded } from 'state/alternativeCurrency/actions';
+import { createSendPaymentTransaction } from 'state/payments/send/actions';
+
+function actions(dispatch: Function): Object {
+  return bindActionCreators(
+    {
+      fetchAlternativeCurrencyRateIfNeeded,
+      createSendPaymentTransaction,
+    },
+    dispatch,
+  );
+}
+
+export default actions;

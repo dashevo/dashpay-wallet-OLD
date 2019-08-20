@@ -7,6 +7,7 @@ import themes from 'themes';
 import store from 'store';
 
 import DapiPoll from 'components/DapiPoll';
+import PortalProvider from 'hooks/Portal/PortalProvider';
 
 function App(props) {
   return (
@@ -14,7 +15,9 @@ function App(props) {
       <DapiPoll />
       <LanguageProvider translations={translations}>
         <ThemeProvider themes={themes}>
-          <Navigator {...props} />
+          <PortalProvider>
+            <Navigator {...props} />
+          </PortalProvider>
         </ThemeProvider>
       </LanguageProvider>
     </StoreProvider>

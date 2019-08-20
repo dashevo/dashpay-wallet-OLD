@@ -6,14 +6,14 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "postinstall": "rn-nodeify --install fs,path,process,crypto,stream,events,vm,assert,url --hack",
     "test": "jest",
-    "lint": "eslint src __tests__ __mocks__",
+    "lint": "eslint src/state/alternativeCurrency/actions.js",
     "flow": "flow"
   },
   "dependencies": {
     "@dashevo/dapi-client": "https://github.com/dashevo/dapi-client.git#temp/exclusion",
     "@dashevo/dashpay-dpa": "github:dashevo/dashpay-dpa",
     "@dashevo/wallet-lib": "github:dashevo/wallet-lib",
-    "@xstate/react": "^0.6.1",
+    "@xstate/react": "^0.7.0",
     "assert": "^1.1.1",
     "asyncstorage-down": "^4.1.2",
     "crypto": "^1.0.1",
@@ -38,7 +38,7 @@
     "react-native-pose": "^0.9.1",
     "react-native-qrcode-svg": "^5.1.2",
     "react-native-randombytes": "^3.5.2",
-    "react-native-reanimated": "^1.0.1",
+    "react-native-reanimated": "^1.2.0",
     "react-native-svg": "^9.3.3",
     "react-native-vector-icons": "^6.4.1",
     "react-navigation": "^3.4.1",
@@ -55,7 +55,7 @@
     "string_decoder": "^1.2.0",
     "url": "^0.10.3",
     "vm-browserify": "0.0.4",
-    "xstate": "^4.6.1",
+    "xstate": "^4.6.7",
     "yup": "^0.27.0"
   },
   "devDependencies": {

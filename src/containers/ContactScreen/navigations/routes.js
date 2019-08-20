@@ -1,6 +1,7 @@
-import PayTab from '../containers/PayTab';
+import PayTab from 'screens/Pay';
 import ReceiveTab from '../containers/ReceiveTab';
 import ProfileTab from '../containers/ProfileTab';
+
 
 const routes = {
   PayTab: {

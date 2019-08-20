@@ -31,28 +31,33 @@ const options = {
 function useForm(props) {
   const { initialState = {} } = props;
 
-  const [state, dispatch] = useReducer(reducers, initialState);
+  const [current, dispatch] = useReducer(reducers, {
+    state: props.state || {},
+    values: props.values || {},
+    errors: props.errors || {},
+  });
   const isMounted = useMounted(false);
+  const { validationSchema, updater = obj => obj } = props;
 
   const {
     touched = {},
     values = {},
     errors = {},
-    focused = undefined,
+    state = {},
+    focused = props.focused,
     isDirty = false,
     isSubmitting = false,
     isValid = false,
     isValidating = false,
-  } = state;
+  } = current;
 
-  async function validate() {
+  async function validate(tmp = values) {
     try {
       dispatch({
         type: VALIDATE_REQUEST,
       });
 
-      const schema = props.validationSchema(values);
-      const response = await schema.validate(values, options);
+      const response = await validationSchema.validate(tmp, options);
 
       dispatch({
         type: VALIDATE_SUCCESS,
@@ -69,12 +74,11 @@ function useForm(props) {
     }
   }
 
-  useEffect(
-    () => {
-      if (!isSubmitting && isMounted) validate();
-    },
-    [values],
-  );
+  useEffect(() => {
+    if (!isSubmitting && isMounted) validate();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
 
   function setValues(data) {
     dispatch({
@@ -90,6 +94,13 @@ function useForm(props) {
     });
   }
 
+  function setState(payload) {
+    dispatch({
+      type: 'SET_STATUS',
+      payload,
+    });
+  }
+
   function setTouched(data) {
     dispatch({
       type: SET_TOUCHED,
@@ -101,6 +112,13 @@ function useForm(props) {
     dispatch({
       type: SET_FOCUSED,
       payload: data,
+    });
+  }
+
+  function set(payload) {
+    dispatch({
+      type: 'SET',
+      payload: updater(payload, current),
     });
   }
 
@@ -131,10 +149,13 @@ function useForm(props) {
   }
 
   return {
+    set,
+    validate,
     touched,
     values,
     errors,
     focused,
+    state,
     isDirty,
     isSubmitting,
     isValid,
@@ -144,6 +165,7 @@ function useForm(props) {
     setValues,
     setErrors,
     setFocused,
+    setState,
     submit,
   };
 }
