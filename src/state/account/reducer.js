@@ -9,38 +9,12 @@ import {
   ACCOUNTS_SET_DPA_INITIALIZED,
 } from 'state/action-types';
 
-// TODO: Code refactoring.
-//
-// Here we shuld keep all the accounts that the user has used, in this way we can
-// create the list to switch between accounts. When we reset the redux state to
-// switch between accounts this should not reflect here, otherwise we will lose
-// the list to switch between accounts. This reducer shuld be array.
-//
-// Note: not sure about their names `accounts` and `user`.
-//
-// accounts: [{
-//   username: "dashpay-1",
-//   mnemonic: "runway enemy year false false obtain yard dinner"
-// }, {
-//   username: "dashpay-2",
-//   mnemonic: "rib report nominee swap kitchen duty airport"
-// }]
-//
-//
-// Here we will keep all data for current account
-//
-// user: {
-//   username: "dashpay-1",
-//   mnemonic: "runway enemy year false false obtain yard dinner",
-//   username: "...",
-//   imageUrl: "...",
-//   ...
-// },
-
 export const initialState = {
   network: 'testnet',
-  username: 'dashpayteamdev',
-  mnemonic: 'light point battle foam find motion true because genre people banana fit',
+  username: 'demo-user-1',
+  mnemonic: 'hobby reduce charge steak bulk clean turn strategy damage ball junior ginger',
+  // username: 'demo-user-2',
+  // mnemonic: 'hockey sorry record kite half diary gloom supply favorite essence load fan',
   unusedAddress: '',
   balance: 0,
   dpaIsInitialized: false,

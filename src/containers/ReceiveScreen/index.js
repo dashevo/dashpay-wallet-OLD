@@ -12,10 +12,10 @@ import selector from './selectors';
 import actions from './actions';
 import CopyButton from './components/CopyButton';
 
-const logoFile = require('../../assets/images/dash_white_s.png');
+const logoFile = require('assets/images/icon.png');
 
 const { width: viewportWidth } = Dimensions.get('window');
-const qrWidth = viewportWidth - 20;
+const qrWidth = viewportWidth - 64;
 
 class ReceiveScreen extends React.Component<Props, State> {
   componentDidMount() {
@@ -26,7 +26,6 @@ class ReceiveScreen extends React.Component<Props, State> {
   writeAddressToClipboard = async () => {
     const { unusedAddress } = this.props;
     await Clipboard.setString(unusedAddress);
-    alert('Address copied!');
   };
 
   render(): React.Element<any> {

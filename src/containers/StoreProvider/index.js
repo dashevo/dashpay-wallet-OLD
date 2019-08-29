@@ -5,5 +5,5 @@
  */
 import { Provider } from 'react-redux';
 
-// TODO: Save and load the Redux state.
-export { Provider as StoreProvider };
+// TODO: persist and rehydrate a redux store.
+export default Provider;

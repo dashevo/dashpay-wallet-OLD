@@ -39,7 +39,6 @@ export { default as IconButton } from './deprecated/IconButton';
 export { default as LabeledSwitch } from './deprecated/LabeledSwitch';
 export { default as Logo } from './deprecated/Logo';
 export { default as Input } from './Input';
-export { default as Avatar } from './deprecated/Avatar';
 
 const containerStyles = theme => ({
   container: {

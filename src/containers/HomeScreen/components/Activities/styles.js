@@ -7,33 +7,34 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  ['contentContainerStyle']: {
+  contentContainerStyle: {
     flexGrow: 1,
-    padding: 24
+    padding: 24,
   },
-  ['container']: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1
+    flex: 1,
   },
-  ['text']: {
-    fontSize: 16
+  text: {
+    fontSize: 16,
+    color: '#fff',
   },
-  ['button']: {
+  button: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16
+    padding: 16,
   },
-  ['buttonIcon']: {
+  buttonIcon: {
     fontSize: 21,
-    color: '#fff'
+    color: '#fff',
   },
-  ['buttonText']: {
+  buttonText: {
     fontSize: 16,
     color: '#fff',
-    marginLeft: 12
-  }
+    marginLeft: 12,
+  },
 });
 
 export default styles;

@@ -2,10 +2,14 @@ import { createSelector } from 'reselect';
 import { orderBy } from 'lodash';
 import { alternativeCurrencySelector } from 'state/alternativeCurrency/selectors';
 import { profileSelectorFactory } from 'state/profiles/selectors';
+import { currentUserSelector } from 'state/account/selectors';
+
+import TXTYPES from 'constants/txtypes';
 
 const recipientSelector = (state, props) => props.navigation.getParam('recipient', '');
 const dashAmountSelector = (state, props) => props.navigation.getParam('amount') || 0;
 const sentPaymentsSelector = state => state.payments.send;
+
 
 export default createSelector(
   recipientSelector,
@@ -13,23 +17,32 @@ export default createSelector(
   alternativeCurrencySelector,
   sentPaymentsSelector,
   dashAmountSelector,
-  (
-    recipient, profileSelector,
-    alternativeCurrency, sentPayments, dashAmount,
-  ) => {
-    const receiver = profileSelector(recipient) || {};
+  currentUserSelector,
+  (recipient, profileSelector, alternativeCurrency, sentPayments, dashAmount, cachedUser) => {
     let transactions = sentPayments.byRecipients[recipient] || [];
+    const { username } = cachedUser;
 
-    const sender = {}; // Tmp
+    const receiver = profileSelector(recipient) || { address: recipient };
+    const sender = profileSelector(username) || cachedUser;
+
 
     transactions = transactions.map((transactionId) => {
       const transaction = sentPayments.items[transactionId];
+
       return {
-        dashAmount: transaction.dashAmount,
-        fiatAmount: transaction.fiatAmount,
+        transactionId,
+        amount: transaction.dashAmount,
+        currency: 'dash',
+        fee: 0,
         timestamp: transaction.timestamp,
-        receiver,
+        type: TXTYPES.SENT,
         sender,
+        receiver,
+        conversion: {
+          amount: transaction.fiatAmount,
+          currency: 'usd',
+          rate: 0,
+        },
       };
     });
 
@@ -42,6 +55,11 @@ export default createSelector(
       transactions,
       receiver,
       sender,
+      user: {
+        // Tmp
+        username: receiver.username || recipient,
+        avatarUrl: receiver.avatarUrl,
+      },
       initialValues: {
         dashAmount,
         fiatAmount,
