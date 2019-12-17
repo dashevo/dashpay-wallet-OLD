@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.com/dashevo/dashpay-wallet.svg?token=UzYXxxa3Wnmm1sy8HJPN&branch=master)](https://travis-ci.com/dashevo/dashpay-wallet)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+*Note: This is a prototype wallet which was developed on the React Native platform for the DashPay Wallet application for Dash Platform. No future development is being done on this repository, as this work has been absorbed by the native wallets. It is left here as an example / historical artifact.* **It is likely that this project will not work as-is, and the newer Platform dependencies will need to be updated.**
+
 ## Setup:
 Install NodeJS, Android Studio, Java SDK 8 and Python 2.
 
