@@ -1,26 +1,16 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
-import {
-  Animated,
-  InteractionManager,
-} from 'react-native';
-import {
-  Image,
-  View,
-} from 'components';
+import { Animated, InteractionManager } from 'react-native';
+import { View } from 'components';
 import ListEmpty from 'hooks/ContactList/ListEmpty';
 import ActivityIndicatorView from 'hooks/ActivityIndicatorView';
-import dashLogo from 'assets/flags/dash.png';
+import DashIcon from 'hooks/Icon/DashIcon';
 import actions from './actions';
 import selector from './selectors';
 import styles from './styles';
 import type { Props, State } from './types';
-import {
-  ListFooter,
-  ListHeader,
-  Item,
-} from './components';
+import { ListFooter, ListHeader, Item } from './components';
 import { SearchBox } from '../../components';
 
 class ContactsScreen extends React.Component<Props, State> {
@@ -37,10 +27,9 @@ class ContactsScreen extends React.Component<Props, State> {
     (this: any).searchBox = React.createRef();
 
     this.scrollPos = new Animated.Value(0);
-    this.scrollSinkY = Animated.event(
-      [{ nativeEvent: { contentOffset: { y: this.scrollPos } } }],
-      { useNativeDriver: true },
-    );
+    this.scrollSinkY = Animated.event([{ nativeEvent: { contentOffset: { y: this.scrollPos } } }], {
+      useNativeDriver: true,
+    });
     this.state = {
       isSearching: false,
       isFetchingContacts: true,
@@ -49,8 +38,7 @@ class ContactsScreen extends React.Component<Props, State> {
 
   componentDidMount() {
     const { getContacts } = this.props;
-    getContacts()
-      .finally(() => this.setState({ isFetchingContacts: false }));
+    getContacts().finally(() => this.setState({ isFetchingContacts: false }));
   }
 
   componentWillUnmount() {
@@ -73,8 +61,7 @@ class ContactsScreen extends React.Component<Props, State> {
     const query = values.query.trim();
     this.setState({ isSearching: true });
     setFilter({ query });
-    searchProfiles(query)
-      .finally(() => this.setState({ isSearching: false }));
+    searchProfiles(query).finally(() => this.setState({ isSearching: false }));
   }
 
   renderListFooter() {
@@ -85,7 +72,7 @@ class ContactsScreen extends React.Component<Props, State> {
     return <Item {...item} onPress={this.handlePress} />;
   }
 
-  renderListHeader = props => (<ListHeader {...props} />);
+  renderListHeader = props => <ListHeader {...props} />;
 
   renderListEmpty() {
     return <ListEmpty {...this.props} />;
@@ -127,22 +114,13 @@ class ContactsScreen extends React.Component<Props, State> {
     };
     return (
       <View style={styles.container}>
-        <View style={styles.body}>
-          {this.renderBody()}
-        </View>
+        <View style={styles.body}>{this.renderBody()}</View>
         <Animated.View style={[styles.header, animatedStyle]}>
           <View style={[styles.row, styles.first]}>
-            <Image
-              style={styles.dash}
-              source={dashLogo}
-            />
+            <DashIcon style={styles.dashIcon} />
           </View>
           <View style={[styles.row, styles.second]}>
-            <SearchBox
-              {...this.props}
-              searchBox={this.searchBox}
-              onSubmit={this.handleSubmit}
-            />
+            <SearchBox {...this.props} searchBox={this.searchBox} onSubmit={this.handleSubmit} />
           </View>
         </Animated.View>
       </View>

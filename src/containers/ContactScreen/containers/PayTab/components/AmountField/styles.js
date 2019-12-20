@@ -3,8 +3,8 @@
 const styles = (theme: Object): Object => ({
   container: {
     alignItems: 'center',
-    backgroundColor: theme.fieldContainerBackgroundColor,
-    borderColor: theme.fieldContainerBorderColor,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     borderRadius: 0,
     borderWidth: 0,
     flexDirection: 'row',
@@ -37,8 +37,8 @@ const styles = (theme: Object): Object => ({
     paddingRight: 6,
   },
   input: {
-    backgroundColor: theme.fieldInputBackgroundColor,
-    borderColor: theme.fieldInputBorderColor,
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
     borderRadius: 24,
     borderWidth: 0,
     color: theme.fieldInputColor,

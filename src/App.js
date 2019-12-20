@@ -1,10 +1,11 @@
 import React from 'react';
-import { StoreProvider, LanguageProvider } from 'containers';
-import { ThemeProvider } from 'hooks/Theme';
-import { Navigator } from 'navigations';
+import StoreProvider from 'containers/StoreProvider';
+import LanguageProvider from 'containers/LanguageProvider';
+import ThemeProvider from 'hooks/Theme/Theme';
+import Navigator from 'navigations/Navigator';
 import translations from 'translations';
 import themes from 'themes';
-import store from 'store';
+import store from 'state';
 
 import DapiPoll from 'components/DapiPoll';
 

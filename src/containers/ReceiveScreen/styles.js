@@ -4,27 +4,27 @@
  * @flow
  */
 import { StyleSheet } from 'react-native';
-import { THEMES } from 'constants';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: THEMES.vivid.background,
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
+    padding: 32,
   },
   text: {
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-  bold:{
-    fontWeight: 'bold'
+  bold: {
+    fontWeight: 'bold',
   },
   qrWrapper: {
     backgroundColor: 'white',
     width: '100%',
     paddingVertical: 10,
     alignItems: 'center',
-  }
+  },
 });
 
 export default styles;

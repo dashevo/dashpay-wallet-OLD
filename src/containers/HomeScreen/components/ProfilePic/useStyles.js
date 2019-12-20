@@ -1,13 +1,13 @@
 import { createUseStyles } from 'hooks/Styles';
 
-const styles = theme => ({
+const styles = () => ({
   center: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   username: {
-    fontSize: theme.fontSizeLg,
-    color: theme.white,
+    fontSize: 21,
+    color: '#fff',
   },
   row: {
     marginBottom: 16,

@@ -9,6 +9,7 @@ import SlideInUp from './components/SlideInUp';
 import ProfilePicture from './components/ProfilePicture';
 import AmountField from './components/AmountField';
 import Transactions from './components/Transactions';
+import SubmitButton from './components/SubmitButton';
 import defaults from './defaults';
 import selector from './selectors';
 import actions from './actions';
@@ -43,7 +44,7 @@ class PayTab extends React.Component<Props, State> {
     const {
       navigation, createSendPaymentTransaction, receiver, sender,
     } = this.props;
-    navigation.navigate('Confirm', {
+    navigation.navigate('ConfirmScreen', {
       fiatSymbol: 'usd',
       dashAmount: values.dashAmount,
       fiatAmount: values.fiatAmount,
@@ -79,6 +80,9 @@ class PayTab extends React.Component<Props, State> {
               </View>
               <View style={styles.row}>
                 <AmountField />
+              </View>
+              <View style={styles.row}>
+                <SubmitButton />
               </View>
               <View style={styles.transactionRow}>
                 <Transactions data={transactions} />

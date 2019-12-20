@@ -8,6 +8,7 @@ import {
   ALTERNATIVE_CURRENCY_RATE_LIFESPAN,
 } from './constants';
 
+/* eslint-disable consistent-return */
 function shouldFetchRate({ isFetching, didInvalidate, rateUpdatedAt }) {
   if (isFetching) {
     return false;
@@ -19,34 +20,46 @@ function shouldFetchRate({ isFetching, didInvalidate, rateUpdatedAt }) {
 }
 
 async function getSparkRate(currencyCode) {
-  const response = await fetch(`https://api.get-spark.com/${currencyCode}`);
-  if (!response.ok) {
-    throw Error(response.statusText);
-  } else {
-    const json = await response.json();
-    return json[currencyCode];
+  try {
+    const response = await fetch(`https://api.get-spark.com/${currencyCode}`);
+    if (!response.ok) {
+      throw Error(response.statusText);
+    } else {
+      const json = await response.json();
+      return json[currencyCode];
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 
 async function getCryptoCompareRate(currencyCode) {
-  const response = await fetch(
-    `https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`,
-  );
-  if (!response.ok) {
-    throw Error(response.statusText);
-  } else {
-    const json = await response.json();
-    return json[currencyCode];
+  try {
+    const response = await fetch(
+      `https://min-api.cryptocompare.com/data/price?fsym=DASH&tsyms=${currencyCode}`,
+    );
+    if (!response.ok) {
+      throw Error(response.statusText);
+    } else {
+      const json = await response.json();
+      return json[currencyCode];
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 
 async function getCasaVesRate() {
-  const response = await fetch('https://dash.casa/api/?cur=VES');
-  if (!response.ok) {
-    throw Error(response.statusText);
-  } else {
-    const json = await response.json();
-    return json.dashrate;
+  try {
+    const response = await fetch('https://dash.casa/api/?cur=VES');
+    if (!response.ok) {
+      throw Error(response.statusText);
+    } else {
+      const json = await response.json();
+      return json.dashrate;
+    }
+  } catch (e) {
+    console.log(e);
   }
 }
 
