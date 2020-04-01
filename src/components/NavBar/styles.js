@@ -1,10 +1,4 @@
-/**
- * Copyright (c) 2014-present, Dash Core Group, Inc.
- *
- * @flow
- */
-
-const styles = (theme: Object): Object => ({
+const styles = theme => ({
   container: {
     flexDirection: 'row',
     justifyContent: 'flex-start',

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+// @flow
+import React, {
+  useCallback, useMemo, useEffect, useState,
+} from 'react';
 import {
-  Alert,
   Animated,
-  Dimensions,
   Text,
   TouchableOpacity,
   View,
@@ -11,9 +12,11 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { RNCamera } from 'react-native-camera';
 import { sampleSize } from 'lodash';
+import { SCREEN_WIDTH } from 'constants';
+import type { NavigationProps } from 'types/navigation';
+import parseDashString from 'utils/parseDashString';
 import useStyles from './useStyles';
 
-const SCREEN_WIDTH = Math.round(Dimensions.get('window').width);
 const INITIAL_CAM_AREA_MARGIN = Math.round(SCREEN_WIDTH / 10);
 const FINAL_CAM_AREA_MARGIN = Math.round(INITIAL_CAM_AREA_MARGIN / 2);
 const INITIAL_CAM_AREA_HEIGHT = Math.round(SCREEN_WIDTH / 2);
@@ -24,44 +27,45 @@ const colors = sampleSize([
   '#3C473D', '#504B43', '#6B4A3A',
 ], 3);
 
-const ScannerScreen = () => {
+const ScannerScreen = ({ navigation }: NavigationProps) => {
   const styles = useStyles();
-  const [cameraIsInitialized, setCameraIsInitialized] = useState(false);
-  const containerHeight = new Animated.Value(INITIAL_CAM_AREA_HEIGHT);
-  const containerMargin = new Animated.Value(INITIAL_CAM_AREA_MARGIN);
-  const buttonOpacity = new Animated.Value(1);
-  const initLayerOpacity = new Animated.Value(1);
+  const [cameraVisible, setCameraVisible] = useState(false);
+  const showCamera = useCallback(() => setCameraVisible(true), []);
+  const containerHeight = useMemo(() => new Animated.Value(INITIAL_CAM_AREA_HEIGHT), []);
+  const containerMargin = useMemo(() => new Animated.Value(INITIAL_CAM_AREA_MARGIN), []);
+  const buttonOpacity = useMemo(() => new Animated.Value(1), []);
+  const initLayerOpacity = useMemo(() => new Animated.Value(1), []);
 
   useEffect(() => {
-    if (!cameraIsInitialized) {
+    if (!cameraVisible) {
       return;
     }
-    const SPRING_CONFIG = {
-      useNativeDriver: true,
-    };
     Animated.parallel([
       Animated.spring(containerHeight, {
         toValue: FINAL_CAM_AREA_HEIGHT,
-      }, SPRING_CONFIG),
+      }),
       Animated.spring(containerMargin, {
         toValue: FINAL_CAM_AREA_MARGIN,
-      }, SPRING_CONFIG),
+      }),
       Animated.spring(buttonOpacity, {
+        useNativeDriver: true,
         toValue: 0,
-      }, SPRING_CONFIG),
+      }),
       Animated.sequence([
         Animated.delay(500),
         Animated.spring(initLayerOpacity, {
+          useNativeDriver: true,
           toValue: 0,
-        }, SPRING_CONFIG),
+        }),
       ]),
     ]).start();
-  });
+  }, [cameraVisible, buttonOpacity, initLayerOpacity, containerHeight, containerMargin]);
 
-  const onBarCodeRead = ({ data }) => {
-    setCameraIsInitialized(false);
-    Alert.alert(data);
-  };
+  const onBarCodeRead = useCallback(({ data }) => {
+    setCameraVisible(false);
+    const { address, amount } = parseDashString(data);
+    navigation.replace('PayTab', { recipient: address, amount });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -84,7 +88,7 @@ const ScannerScreen = () => {
               styles.row, styles.centerItemsContainer, { opacity: buttonOpacity },
             ]}
             >
-              <TouchableOpacity style={styles.button} onPress={() => setCameraIsInitialized(true)}>
+              <TouchableOpacity style={styles.button} onPress={showCamera}>
                 <Text style={styles.buttonText}>TAP TO SCAN</Text>
               </TouchableOpacity>
             </Animated.View>
@@ -96,7 +100,7 @@ const ScannerScreen = () => {
           </Animated.View>
         </LinearGradient>
       </Animated.View>
-      {cameraIsInitialized && (
+      {cameraVisible && (
         <RNCamera
           captureAudio={false}
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}

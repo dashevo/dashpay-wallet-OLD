@@ -5,8 +5,9 @@ import {
   SettingsLanguageScreen,
   SettingsAlternativeCurrencyScreen,
   ContactsScreen,
-  ContactScreen,
 } from 'containers';
+import ContactScreen from 'containers/ContactScreen';
+import PayTab from 'containers/ContactScreen/containers/PayTab';
 import HomeScreen from 'containers/HomeScreen';
 import RegistrationScreen from 'containers/RegistrationScreen';
 import PayScreen from 'containers/PayScreen';
@@ -71,6 +72,13 @@ const routes = {
     navigationOptions: {
       header: true,
       title: 'Contact',
+    },
+  },
+  PayTab: {
+    screen: PayTab,
+    navigationOptions: {
+      header: true,
+      title: 'Pay',
     },
   },
   PayScreen: {

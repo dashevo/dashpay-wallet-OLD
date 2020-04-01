@@ -1,8 +1,8 @@
 // @flow
 import useTopTabNavigator from 'hooks/topTabNavigator/useTopTabNavigator';
-import AddressPaymentScreen from './containers/AddressPaymentScreen';
-import ScannerScreen from './containers/ScannerScreen';
 import ContactsPaymentScreen from './containers/ContactsPaymentScreen';
+import ScannerScreen from './containers/ScannerScreen';
+import AddressPaymentScreen from './containers/AddressPaymentScreen';
 
 const routes = {
   ContactsPaymentTab: {
@@ -26,7 +26,6 @@ const routes = {
 };
 
 const PayScreenNavigationContainer = useTopTabNavigator(routes, {
-  initialRouteName: 'AddressPaymentTab',
 });
 
 export default PayScreenNavigationContainer;

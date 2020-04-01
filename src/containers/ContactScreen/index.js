@@ -29,6 +29,4 @@ const ContactScreenNavigationContainer = useTopTabNavigator(routes, {
   initialRouteName: 'ProfileTab',
 });
 
-export const PayTabs = useTopTabNavigator(routes);
-
 export default ContactScreenNavigationContainer;

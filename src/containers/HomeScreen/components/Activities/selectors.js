@@ -3,7 +3,7 @@ import {
   contactProfilesSelector,
   receivedContactRequestProfilesSelector,
 } from 'state/profiles/selectors';
-import { selectTransactions } from 'state/transactions';
+import { selectTransactions } from 'state/transactions/selectors';
 
 const selectors = createSelector(
   selectTransactions,

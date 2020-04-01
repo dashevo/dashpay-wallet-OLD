@@ -7,7 +7,7 @@ import settings from './settings';
 import payment from './payment';
 import alternativeCurrency from './alternativeCurrency/reducer';
 import language from './language';
-import transactions from './transactions';
+import transactions from './transactions/reducer';
 import payments from './payments/reducer';
 import profiles from './profiles/reducer';
 import user from './user/reducer';
