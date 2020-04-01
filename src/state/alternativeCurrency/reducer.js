@@ -1,8 +1,9 @@
 import {
-  CHANGE_ALTERNATIVE_CURRENCY,
-  ALTERNATIVE_CURRENCY_RATE_REQUEST,
-  ALTERNATIVE_CURRENCY_RATE_SUCCESS,
-  INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
+  ALTERNATIVE_CURRENCY_GET_RATE_ASYNC,
+  ALTERNATIVE_CURRENCY_INVALIDATE_RATE,
+  ALTERNATIVE_CURRENCY_SET_CURRENCY,
+} from 'state/action-types';
+import {
   DEFAULT_ALTERNATIVE_CURRENCY,
 } from './constants';
 
@@ -10,13 +11,13 @@ export const initialState = DEFAULT_ALTERNATIVE_CURRENCY;
 
 const alternativeCurrency = (state = initialState, action) => {
   switch (action.type) {
-    case INVALIDATE_ALTERNATIVE_CURRENCY_RATE:
+    case ALTERNATIVE_CURRENCY_INVALIDATE_RATE:
       return {
         ...state,
         didInvalidate: true,
       };
 
-    case CHANGE_ALTERNATIVE_CURRENCY:
+    case ALTERNATIVE_CURRENCY_SET_CURRENCY:
       return {
         ...initialState,
         code: action.code,
@@ -24,14 +25,14 @@ const alternativeCurrency = (state = initialState, action) => {
         symbol: action.symbol,
       };
 
-    case ALTERNATIVE_CURRENCY_RATE_REQUEST:
+    case ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.REQUEST:
       return {
         ...state,
         isFetching: true,
         rateUpdatedAt: undefined,
       };
 
-    case ALTERNATIVE_CURRENCY_RATE_SUCCESS:
+    case ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.SUCCESS:
       return {
         ...state,
         rate: action.rate,

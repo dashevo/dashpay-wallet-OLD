@@ -1,9 +1,8 @@
 import {
-  CHANGE_ALTERNATIVE_CURRENCY,
-  INVALIDATE_ALTERNATIVE_CURRENCY_RATE,
-  ALTERNATIVE_CURRENCY_RATE_REQUEST,
-  ALTERNATIVE_CURRENCY_RATE_SUCCESS,
-} from 'state/alternativeCurrency/constants';
+  ALTERNATIVE_CURRENCY_SET_CURRENCY,
+  ALTERNATIVE_CURRENCY_INVALIDATE_RATE,
+  ALTERNATIVE_CURRENCY_GET_RATE_ASYNC,
+} from 'state/action-types';
 import reducer from 'state/alternativeCurrency/reducer';
 import mockDate from 'mockdate';
 
@@ -20,16 +19,16 @@ describe('alternativeCurrency reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle INVALIDATE_ALTERNATIVE_CURRENCY_RATE', () => {
+  it('should handle ALTERNATIVE_CURRENCY_INVALIDATE_RATE', () => {
     const state = { didInvalidate: false };
-    const payload = { type: INVALIDATE_ALTERNATIVE_CURRENCY_RATE };
+    const payload = { type: ALTERNATIVE_CURRENCY_INVALIDATE_RATE };
     const expectedState = { didInvalidate: true };
     expect(reducer(state, payload)).toEqual(expectedState);
   });
 
-  it('should handle CHANGE_ALTERNATIVE_CURRENCY', () => {
+  it('should handle ALTERNATIVE_CURRENCY_SET_CURRENCY', () => {
     const alternativeCurrency = { code: 'EUR', name: 'Euro', symbol: '€' };
-    const payload = { ...alternativeCurrency, type: CHANGE_ALTERNATIVE_CURRENCY };
+    const payload = { ...alternativeCurrency, type: ALTERNATIVE_CURRENCY_SET_CURRENCY };
     const expectedState = {
       ...initialState,
       ...alternativeCurrency,
@@ -38,17 +37,17 @@ describe('alternativeCurrency reducer', () => {
     expect(reducer(undefined, payload)).toEqual(expectedState);
   });
 
-  it('should handle ALTERNATIVE_CURRENCY_RATE_REQUEST', () => {
-    const payload = { type: ALTERNATIVE_CURRENCY_RATE_REQUEST };
+  it('should handle ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.REQUEST', () => {
+    const payload = { type: ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.REQUEST };
     const expectedState = { ...initialState, isFetching: true };
     expect(reducer(undefined, payload)).toEqual(expectedState);
     mockDate.reset();
   });
 
-  it('should handle ALTERNATIVE_CURRENCY_RATE_SUCCESS', () => {
+  it('should handle ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.SUCCESS', () => {
     const rate = 2000;
     const payload = {
-      type: ALTERNATIVE_CURRENCY_RATE_SUCCESS,
+      type: ALTERNATIVE_CURRENCY_GET_RATE_ASYNC.SUCCESS,
       rate,
     };
     const now = Date.now();
