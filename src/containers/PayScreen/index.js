@@ -26,7 +26,7 @@ const routes = {
 };
 
 const PayScreenNavigationContainer = useTopTabNavigator(routes, {
-  initialRouteName: 'AddressPaymentTab',
+  initialRouteName: 'ContactsPaymentTab',
 });
 
 export default PayScreenNavigationContainer;
